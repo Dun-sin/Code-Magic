@@ -30,9 +30,7 @@ FilePond.registerPlugin(
 	FilePondPluginImageTransform,
 );
 
-const pond = FilePond.create(imageElement, {
-	imagePreviewMaxHeight: 400,
-});
+const pond = FilePond.create(imageElement);
 
 buttonElement.addEventListener('click', () => {
 	console.log(textInput?.value);
