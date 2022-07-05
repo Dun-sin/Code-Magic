@@ -27,13 +27,22 @@ const getImageButtonElement = <HTMLInputElement>(
 );
 
 // File Pond Element & Options
-
+let imageSRC: string;
 const imageEntryElement = <HTMLInputElement>(
 	document.getElementById(`${'pic-text'}-file`)
 );
 
 FilePond.create(imageEntryElement, {
 	imagePreviewMinHeight: 400,
+
+	onpreparefile: (fileItem, output) => {
+		// create a new image object
+		const img = new Image();
+
+		// set the image source to the output of the Image Transform plugin
+		img.src = URL.createObjectURL(output);
+		imageSRC = img.src;
+	},
 });
 
 getImageButtonElement.addEventListener('click', () => {
