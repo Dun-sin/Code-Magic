@@ -166,5 +166,4 @@ textarea:focus {
 	width: 140px;
 	border: 1px solid var(--text-color);
 	cursor: pointer;
-	margin-top: 1rem;
 }
