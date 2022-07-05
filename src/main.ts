@@ -1,4 +1,5 @@
 import * as FilePond from 'filepond';
+import 'filepond/dist/filepond.min.css';
 
 let attributeValue: string | null;
 
@@ -15,8 +16,8 @@ const buttonElement = <HTMLInputElement>(
 const imageElement = <HTMLInputElement>(
 	document.getElementById(`${'pic-text'}-file`)
 );
+
 const pond = FilePond.create(imageElement);
-console.log(pond);
 
 buttonElement.addEventListener('click', () => {
 	console.log(textInput?.value);
