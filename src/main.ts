@@ -1,6 +1,13 @@
 import * as FilePond from 'filepond';
 import 'filepond/dist/filepond.min.css';
 
+// File Pond Plugins
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginImageResize from 'filepond-plugin-image-resize';
+import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
+
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+
 let attributeValue: string | null;
 
 const generators = document.querySelectorAll('[data-gen]');
@@ -15,6 +22,12 @@ const buttonElement = <HTMLInputElement>(
 // File Pond
 const imageElement = <HTMLInputElement>(
 	document.getElementById(`${'pic-text'}-file`)
+);
+
+FilePond.registerPlugin(
+	FilePondPluginImagePreview,
+	FilePondPluginImageResize,
+	FilePondPluginImageTransform,
 );
 
 const pond = FilePond.create(imageElement);
