@@ -4,7 +4,7 @@
 	--secondary-color: #e07a5f;
 	--modal-container-height: 100vh;
 	--modal-container-width: 100vw;
-	--modal-height: calc(var(--modal-container-height) - 10vh);
+	--modal-height: calc(var(--modal-container-height) - 30vh);
 	--modal-width: calc(var(--modal-container-width) - 40vw);
 }
 
