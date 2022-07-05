@@ -19,20 +19,23 @@ let attributeValue: string | null;
 // Elements
 const generators = document.querySelectorAll('[data-gen]');
 // const countElement = document.querySelector('.count > span');
-const textInputElement = <HTMLInputElement>(
+const getTextInputElement = <HTMLInputElement>(
 	document.getElementById(`${'pic-text'}-text`)
 );
 const getImageButtonElement = <HTMLInputElement>(
 	document.querySelector(`[data-button = ${'pic-text'}]`)
 );
+const getOutputElement: HTMLElement | null = document.querySelector(
+	`[data-model=${'pic-text'}] > .output`,
+);
 
 // File Pond Element & Options
 let imageSRC: string;
-const imageEntryElement = <HTMLInputElement>(
+const getImageEntryElement = <HTMLInputElement>(
 	document.getElementById(`${'pic-text'}-file`)
 );
 
-FilePond.create(imageEntryElement, {
+FilePond.create(getImageEntryElement, {
 	imagePreviewMinHeight: 400,
 
 	onpreparefile: (fileItem, output) => {
@@ -46,7 +49,11 @@ FilePond.create(imageEntryElement, {
 });
 
 getImageButtonElement.addEventListener('click', () => {
-	console.log(textInputElement?.value);
+	if (getOutputElement === null) {
+		return;
+	}
+	getOutputElement.style.backgroundImage = 'url(imageSRC)';
+	console.log(getTextInputElement?.value);
 });
 
 generators.forEach((generator) => {
