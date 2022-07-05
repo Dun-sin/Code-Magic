@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- CSS -->
+		<link rel="stylesheet" href="./src/style.css" />
+		<link
+			href="https://unpkg.com/filepond@^4/dist/filepond.css"
+			rel="stylesheet"
+		/>
+
+		<!-- Scripts -->
+		<script src="./src/main.js" defer></script>
+
+		<title>Trick Generator</title>
+	</head>
+	<body>
+		<nav>
+			<h1 id="head">Trick Generator</h1>
+			<div>
+				<ul></ul>
+			</div>
+			<div class="menu">
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</nav>
+
+		<main>
+			<div class="generator" data-gen="pic-text">
+				<img
+					src="https://user-images.githubusercontent.com/78784850/177135924-aec3794a-8bd8-48ec-bd5a-4aee074c7a16.png"
+					alt="Picture-Text Generator"
+					loading="lazy"
+				/>
+				<h2>Picture-Text generator</h2>
+			</div>
+			<div class="modal-container">
+				<div class="closed generator-modal" data-model="pic-text">
+					<div class="input">
+						<div>
+							<label for="pic-text-text"
+								>Enter Text to use for image(optional):
+							</label>
+							<textarea id="pic-text-text"></textarea>
+							<p class="count"><span>0</span>/400</p>
+						</div>
+
+						<label for="pic-text-file">Choose an image</label>
+						<input type="file" id="pic-text-file" required />
+						<div class="btn" data-button="pic-text">Get image</div>
+					</div>
+					<div class="output"></div>
+				</div>
+			</div>
+		</main>
+
+		<footer>
+			<p>
+				Made with 💘 by
+				<a href="https://twitter.com/DunsinWebDev" target="_blank">Dunsin</a>
+			</p>
+		</footer>
+
+		<script>
+			var exports = {};
+		</script>
+	</body>
+</html>
