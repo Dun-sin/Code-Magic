@@ -4,7 +4,7 @@
 	--secondary-color: #e07a5f;
 	--modal-container-height: 100vh;
 	--modal-container-width: 100vw;
-	--modal-height: calc(var(--modal-container-height) - 50vh);
+	--modal-height: calc(var(--modal-container-height) - 10vh);
 	--modal-width: calc(var(--modal-container-width) - 40vw);
 }
 
@@ -147,8 +147,8 @@ textarea:focus {
 	border-radius: 3px;
 	resize: none;
 	background-color: transparent;
-	height: calc(var(--modal-height) / 3);
-	width: calc(var(--modal-width) / 2);
+	height: calc(var(--modal-height) / 4);
+	width: calc(var(--modal-width) / 3);
 }
 
 .count {
