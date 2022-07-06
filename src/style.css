@@ -115,6 +115,7 @@ footer {
 	background-color: var(--primary-color);
 	padding: 1rem;
 	display: flex;
+	justify-content: space-between;
 	border-radius: 4px;
 }
 
@@ -167,4 +168,14 @@ textarea:focus {
 	border: 1px solid var(--text-color);
 	cursor: pointer;
 	margin-top: 1rem;
+}
+
+.output {
+	height: 400px;
+	width: 300px;
+	padding: -10px;
+}
+
+.output > img {
+	width: 300px;
 }
