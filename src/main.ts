@@ -52,7 +52,13 @@ getImageButtonElement.addEventListener('click', () => {
 	if (getOutputElement === null) {
 		return;
 	}
-	getOutputElement.style.backgroundImage = 'url(imageSRC)';
+	getOutputElement.style.background = `url(${imageSRC}) center no-repeat`;
+	getOutputElement.style.backgroundSize = '300px';
+	getOutputElement.style.backgroundClip = 'text';
+	getOutputElement.style.webkitBackgroundClip = 'text';
+	getOutputElement.style.webkitTextFillColor = 'rgba(255, 255, 255, 0.1)';
+	getOutputElement.innerText = `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae placeat odit porro sint illo deserunt totam reiciendis voluptatibus qui dolores. Veritatis beatae eius minima aliquid blanditiis earum delectus itaque natus?Quisquam nihil hic tempora reprehenderit eum quam, illo voluptatem ex tenetur, cumque accusamus ipsum ad necessitatibus nobis, fuga voluptatum mollitia. Provident quas nam vero in, officiis explicabo est neque optio!Voluptas aperiam libero excepturi saepe praesentium! Quasi provident sapiente saepe, harum voluptate voluptatem incidunt animi nesciunt quis nam exercitationem at maiores dignissimos hic consequatur, et accusantium tempore natus enim fugiat.Aspernatur id atque accusantium ad delectus, praesentium minima voluptas iure quos repellat quo quaerat doloribus libero expedita, nisi ex nobis earum.
+	   `;
 	console.log(getTextInputElement?.value);
 });
 
