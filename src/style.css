@@ -1,10 +1,17 @@
 :root {
+	/* Colors */
 	--primary-color: #735ce5;
 	--text-color: #edf2f4;
-	--secondary-color: #e07a5f;
+	--secondary-color: #eae5ff;
+
+	/* Heights */
+	--generator-height: 14rem;
 	--modal-container-height: 100vh;
-	--modal-container-width: 100vw;
 	--modal-height: calc(var(--modal-container-height) - 30vh);
+
+	/* Widths */
+	--generator-width: 12rem;
+	--modal-container-width: 100vw;
 	--modal-width: calc(var(--modal-container-width) - 40vw);
 }
 
@@ -17,24 +24,32 @@ body {
 }
 
 body {
+	font-family: 'Exo 2', 'Courier New', Courier, monospace;
 	overflow-y: hidden;
 	background-color: var(--primary-color);
 	color: var(--text-color);
 	height: 100vh;
-	padding: 1.5rem 4rem 0 4rem;
 }
 
 nav {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	font-size: 1.5rem;
+	font-size: 1rem;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	padding: 1.5rem 4rem 0.5rem 4rem;
 }
 
 nav h1 {
-	background: -webkit-linear-gradient(left, #c6dcf5, #878f97);
+	background: linear-gradient(
+		90.3deg,
+		#ffffff 47.88%,
+		#aca1e5 74.32%,
+		#bfb8e5 99.74%
+	);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
+	background-clip: text;
 	cursor: pointer;
 }
 
@@ -46,18 +61,18 @@ nav h1 {
 	width: 1.6rem;
 	margin-bottom: 5px;
 	height: 2.5px;
-	background-color: var(--text-color);
+	background-color: var(--secondary-color);
 }
 
 main {
 	margin-top: 3rem;
+	padding: 0 4rem 0 4rem;
 }
 
+/* Generator Card */
 .generator {
-	height: 16rem;
-	width: 14rem;
-	padding: 0.4rem 0 1rem 0;
-	border: 0.5px solid var(--text-color);
+	height: var(--generator-height);
+	width: var(--generator-width);
 	border-radius: 10px;
 	text-align: center;
 	font-size: 1rem;
@@ -71,12 +86,36 @@ main {
 }
 
 .generator:hover {
-	box-shadow: #c6dcf5 1px 1px 5px;
-	transform: scale(1.02);
+	box-shadow: var(--secondary-color) -2.5px 2.5px 2px;
 }
 
-.generator img {
-	width: 13rem;
+.generator > img {
+	width: var(--generator-width);
+	height: calc(var(--generator-height) / 1.4);
+	border-radius: 10px 10px 0 0;
+}
+
+.generator > div {
+	height: calc(var(--generator-height) / 2.8);
+	width: var(--generator-width);
+	background: rgba(149, 128, 255, 1);
+	border-radius: 0 0 10px 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	padding: 0.5rem 0 1rem 0;
+}
+
+.generator h2 {
+	font-size: 1.2rem;
+}
+
+.generator > div img {
+	height: 30px;
+	width: 30px;
+	position: relative;
+	margin-left: auto;
+	margin-right: 1rem;
 }
 
 a {
@@ -93,6 +132,7 @@ footer {
 }
 
 /* Generator Modal */
+
 .modal-container {
 	position: absolute;
 	height: 100vh;
