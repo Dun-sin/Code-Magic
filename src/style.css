@@ -24,10 +24,9 @@
 
 body {
 	font-family: 'Exo 2', 'Courier New', Courier, monospace;
-	overflow-y: hidden;
 	background-color: var(--primary-color);
 	color: var(--text-color);
-	height: 100vh;
+	overflow-x: hidden;
 }
 
 nav {
@@ -130,12 +129,12 @@ main {
 	margin: auto;
 	background-color: #1d2a3a48;
 
-	display: grid;
+	display: none;
 	place-items: center;
 }
 
 .generator-modal {
-	width: calc(var(--modal-width) / 1.4);
+	width: calc(var(--modal-width) / 1.2);
 	border: 1px solid var(--text-color);
 	padding: 1rem;
 	display: flex;
@@ -167,6 +166,7 @@ main {
 .modal-main-content {
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
 	justify-content: space-between;
 }
 
@@ -205,7 +205,7 @@ textarea:focus {
 	resize: none;
 	background-color: transparent;
 	height: 100px;
-	width: 280px;
+	width: 300px;
 	overflow-y: hidden;
 }
 
@@ -225,19 +225,19 @@ textarea::placeholder {
 	border-radius: 5px;
 	display: grid;
 	place-items: center;
-	width: 140px;
+	width: 300px;
 	border: 1px solid var(--text-color);
 	cursor: pointer;
 	margin-top: 1rem;
 }
 
 .output {
-	width: 300px;
+	width: 400px;
 	height: 300px;
 }
 
 .output > img {
-	width: 300px;
+	width: 400px;
 }
 
 /* FOOTER SECTION */
