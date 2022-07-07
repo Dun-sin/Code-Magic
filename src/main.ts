@@ -36,7 +36,7 @@ const getImageEntryElement = <HTMLInputElement>(
 );
 
 FilePond.create(getImageEntryElement, {
-	imagePreviewMinHeight: 400,
+	imagePreviewMaxHeight: 200,
 
 	onpreparefile: (fileItem, output) => {
 		// create a new image object
