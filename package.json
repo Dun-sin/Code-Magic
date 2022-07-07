@@ -15,6 +15,7 @@
 		"filepond": "^4.30.4",
 		"filepond-plugin-image-preview": "^4.6.11",
 		"filepond-plugin-image-resize": "^2.0.10",
-		"filepond-plugin-image-transform": "^3.8.7"
+		"filepond-plugin-image-transform": "^3.8.7",
+		"html-to-image": "^1.9.0"
 	}
 }
