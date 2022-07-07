@@ -118,19 +118,6 @@ main {
 	margin-right: 1rem;
 }
 
-a {
-	color: var(--text-color);
-}
-
-footer {
-	width: 97.6vw;
-	display: flex;
-	justify-content: center;
-	position: absolute;
-	bottom: 1rem;
-	font-size: 1.5rem;
-}
-
 /* Generator Modal */
 
 .modal-container {
@@ -220,4 +207,20 @@ textarea:focus {
 
 .output > img {
 	width: 300px;
+}
+
+/* FOOTER SECTION */
+
+footer {
+	width: 97.6vw;
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	bottom: 1rem;
+	font-size: 1.5rem;
+	color: #04001a;
+}
+
+a {
+	color: var(--text-color);
 }
