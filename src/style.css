@@ -81,7 +81,7 @@ main {
 	justify-content: space-between;
 	align-items: center;
 	cursor: pointer;
-	transition: all 250ms ease-in-out;
+	transition: all 200ms ease-in-out;
 	background-color: var(--secondary-color);
 }
 
