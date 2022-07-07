@@ -166,6 +166,7 @@ main {
 
 .modal-main-content {
 	display: flex;
+	flex-direction: row;
 	justify-content: space-between;
 }
 
@@ -231,9 +232,8 @@ textarea::placeholder {
 }
 
 .output {
-	height: 150px;
 	width: 300px;
-	padding: -10px;
+	height: 400px;
 }
 
 .output > img {
