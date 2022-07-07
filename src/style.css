@@ -233,7 +233,7 @@ textarea::placeholder {
 
 .output {
 	width: 300px;
-	height: 400px;
+	height: 300px;
 }
 
 .output > img {

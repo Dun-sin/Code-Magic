@@ -15,6 +15,7 @@ FilePond.registerPlugin(
 );
 
 let attributeValue: string | null;
+let isOpen: boolean;
 
 // Elements
 const generators = document.querySelectorAll('[data-gen]');
@@ -27,6 +28,10 @@ const getImageButtonElement = <HTMLInputElement>(
 );
 const getOutputElement: HTMLElement | null = document.querySelector(
 	`[data-model=${'pic-text'}]  .output`,
+);
+const closeModalElement = document.getElementById('close-modal');
+const modalContainerElement = <HTMLElement>(
+	document.querySelector('.modal-container')
 );
 
 // File Pond Element & Options
@@ -64,6 +69,8 @@ getImageButtonElement.addEventListener('click', () => {
 
 generators.forEach((generator) => {
 	generator?.addEventListener('click', () => {
+		isOpen = true;
+		isVisible(isOpen);
 		attributeValue = generator.getAttribute('data-gen');
 		if (attributeValue === null) {
 			return;
@@ -72,3 +79,17 @@ generators.forEach((generator) => {
 		}
 	});
 });
+
+closeModalElement?.addEventListener('click', () => {
+	isOpen = false;
+
+	isVisible(isOpen);
+});
+
+function isVisible(isOpen: boolean) {
+	if (isOpen) {
+		modalContainerElement.style.display = 'grid';
+	} else {
+		modalContainerElement.style.display = 'none';
+	}
+}
