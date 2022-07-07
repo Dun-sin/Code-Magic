@@ -7,17 +7,16 @@
 	/* Heights */
 	--generator-height: 14rem;
 	--modal-container-height: 100vh;
-	--modal-height: calc(var(--modal-container-height) - 30vh);
 
 	/* Widths */
 	--generator-width: 12rem;
 	--modal-container-width: 100vw;
-	--modal-width: calc(var(--modal-container-width) - 40vw);
+	--modal-width: calc(var(--modal-container-width) - 20vw);
 }
 
 *,
-html,
-body {
+*::after,
+*::before {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
@@ -131,21 +130,43 @@ main {
 	margin: auto;
 	background-color: #1d2a3a48;
 
-	/* display: grid;
+	display: grid;
 	place-items: center;
-   */
-	display: none;
 }
 
 .generator-modal {
-	height: var(--modal-height);
-	width: var(--modal-width);
+	width: calc(var(--modal-width) / 1.4);
 	border: 1px solid var(--text-color);
-	background-color: var(--primary-color);
 	padding: 1rem;
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
-	border-radius: 4px;
+	background: #6d57d9;
+	border: 1px solid rgba(191, 178, 255, 0.3);
+	border-radius: 10px;
+}
+
+.modal-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+}
+
+.modal-header p {
+	font-weight: 600;
+	text-decoration: underline;
+}
+
+.modal-header img {
+	height: 20px;
+	width: 20px;
+	cursor: pointer;
+}
+
+.modal-main-content {
+	display: flex;
+	justify-content: space-between;
 }
 
 /* inputs */
@@ -154,6 +175,11 @@ main {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
+	width: 300px;
+}
+
+.input > div {
+	position: relative;
 }
 
 .input label {
@@ -177,14 +203,19 @@ textarea:focus {
 	border-radius: 3px;
 	resize: none;
 	background-color: transparent;
-	height: calc(var(--modal-height) / 4);
-	width: calc(var(--modal-width) / 3);
+	height: 100px;
+	width: 280px;
+	overflow-y: hidden;
+}
+
+textarea::placeholder {
+	color: rgba(255, 255, 255, 0.6);
 }
 
 .count {
 	position: absolute;
-	right: 0;
-	bottom: -1.5rem;
+	right: 24px;
+	bottom: 2px;
 	color: rgba(255, 255, 255, 0.461);
 }
 
@@ -200,7 +231,7 @@ textarea:focus {
 }
 
 .output {
-	height: 400px;
+	height: 150px;
 	width: 300px;
 	padding: -10px;
 }

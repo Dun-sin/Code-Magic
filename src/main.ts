@@ -26,7 +26,7 @@ const getImageButtonElement = <HTMLInputElement>(
 	document.querySelector(`[data-button = ${'pic-text'}]`)
 );
 const getOutputElement: HTMLElement | null = document.querySelector(
-	`[data-model=${'pic-text'}] > .output`,
+	`[data-model=${'pic-text'}]  .output`,
 );
 
 // File Pond Element & Options

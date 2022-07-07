@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="./src/style.css" />
 
 		<!-- Scripts -->
-		<script type="module" src="./src/main.ts" defer></script>
+		<script src="./src/main.ts" defer></script>
 
 		<title>Trick Generator</title>
 	</head>
@@ -40,20 +40,24 @@
 			</div>
 			<div class="modal-container">
 				<div class="closed generator-modal" data-model="pic-text">
-					<div class="input">
-						<div>
-							<label for="pic-text-text"
-								>Enter Text to use for image(optional):
-							</label>
-							<textarea id="pic-text-text"></textarea>
-							<p class="count"><span>0</span>/400</p>
-						</div>
-
-						<label for="pic-text-file">Choose an image</label>
-						<input type="file" id="pic-text-file" required />
-						<div class="btn" data-button="pic-text">Get image</div>
+					<div class="modal-header">
+						<p>Pic-Text Generator</p>
+						<img src="./assets/close-square-fill.svg" alt="close button" />
 					</div>
-					<div class="output"></div>
+					<div class="model-main-content">
+						<div class="input">
+							<div>
+								<textarea
+									id="pic-text-text"
+									placeholder="Enter the text you want(Optional)"
+								></textarea>
+								<p class="count"><span>0</span>/400</p>
+							</div>
+							<input type="file" id="pic-text-file" required />
+							<div class="btn" data-button="pic-text">Get image</div>
+						</div>
+						<div class="output"></div>
+					</div>
 				</div>
 			</div>
 		</main>
