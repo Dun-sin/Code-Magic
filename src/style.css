@@ -1,5 +1,5 @@
 :root {
-	--primary-color: #3d405b;
+	--primary-color: #735ce5;
 	--text-color: #edf2f4;
 	--secondary-color: #e07a5f;
 	--modal-container-height: 100vh;
@@ -21,7 +21,7 @@ body {
 	background-color: var(--primary-color);
 	color: var(--text-color);
 	height: 100vh;
-	padding: 1.5rem 2rem 0 2rem;
+	padding: 1.5rem 4rem 0 4rem;
 }
 
 nav {
@@ -104,8 +104,10 @@ footer {
 	margin: auto;
 	background-color: #1d2a3a48;
 
-	display: grid;
+	/* display: grid;
 	place-items: center;
+   */
+	display: none;
 }
 
 .generator-modal {
