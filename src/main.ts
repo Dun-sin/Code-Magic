@@ -16,8 +16,7 @@ FilePond.registerPlugin(
 
 let attributeValue: string | null = null;
 let isOpen: boolean;
-let imageText = `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae placeat odit porro sint illo deserunt totam reiciendis voluptatibus qui dolores. Veritatis beatae eius minima aliquid blanditiis earum delectus itaque natus?Quisquam nihil hic tempora reprehenderit eum quam, illo voluptatem ex tenetur, cumque accusamus ipsum ad necessitatibus nobis, fuga voluptatum mollitia. Provident quas nam vero in, officiis explicabo est neque optio!Voluptas aperiam libero excepturi saepe praesentium! Quasi provident sapiente saepe, harum voluptate voluptatem incidunt animi nesciunt quis nam exercitationem at maiores dignissimos hic consequatur, et accusantium tempore natus enim fugiat.Aspernatur id atque accusantium ad delectus, praesentium minima voluptas iure quos repellat quo quaerat doloribus libero expedita, nisi ex nobis earum.
-	   `;
+let imageText = `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae placeat odit porro sint illo deserunt totam reiciendis voluptatibus qui dolores. Veritatis beatae eius minima aliquid blanditiis earum delectus itaque natus?Quisquam nihil hic tempora reprehenderit eum quam, illo voluptatem ex tenetur, cumque accusamus ipsum ad necessitatibus nobis, fuga voluptatum mollitia. Provident quas nam vero in, officiis explicabo est neque optio!Voluptas aperiam libero excepturi saepe praesentium! Quasi provident sapiente saepe, harum voluptate voluptatem incidunt animi nesciunt quis nam exercitationem at maiores dignissimos hic consequatur, et accusantium tempore natus enim fugiat.Aspernatur id atque accusantium ad delectus, praesentium minima voluptas iure quos repellat quo quaerat doloribus libero expedita, nisi`;
 
 // Elements
 const generators = document.querySelectorAll('[data-gen]');
