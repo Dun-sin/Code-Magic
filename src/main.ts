@@ -82,15 +82,16 @@ function checkingIfGeneratorExists(attribute: string | null) {
 			// set the image source to the output of the Image Transform plugin
 			img.src = URL.createObjectURL(output);
 			imageSRC = img.src;
+			console.log(fileItem);
 		},
 	});
 
-	const getDownloadImage = <HTMLElement>(
-		document.querySelector(`[data-download=${attribute}-image]`)
-	);
-	const getDownloadSvg = <HTMLElement>(
-		document.querySelector(`[data-download=${attribute}-svg]`)
-	);
+	// 	const getDownloadImage = <HTMLElement>(
+	// 		document.querySelector(`[data-download=${attribute}-image]`)
+	// 	);
+	// 	const getDownloadSvg = <HTMLElement>(
+	// 		document.querySelector(`[data-download=${attribute}-svg]`)
+	// 	);
 }
 
 closeModalElement?.addEventListener('click', () => {
