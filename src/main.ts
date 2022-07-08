@@ -47,13 +47,13 @@ function checkingIfGeneratorExists(attribute: string | null) {
 	if (attribute === null) return;
 
 	const getTextInputElement = <HTMLInputElement>(
-		document.getElementById(`${attributeValue}-text`)
+		document.getElementById(`${attribute}-text`)
 	);
 	const getImageButtonElement = <HTMLInputElement>(
-		document.querySelector(`[data-button = ${attributeValue}]`)
+		document.querySelector(`[data-button = ${attribute}]`)
 	);
-	const getOutputElement: HTMLElement | null = document.querySelector(
-		`[data-model=${attributeValue}]  .output`,
+	const getOutputElement = <HTMLElement>(
+		document.querySelector(`[data-model=${attribute}]  .output`)
 	);
 
 	getImageButtonElement.addEventListener('click', () => {
@@ -70,7 +70,7 @@ function checkingIfGeneratorExists(attribute: string | null) {
 	});
 
 	const getImageEntryElement = <HTMLInputElement>(
-		document.getElementById(`${attributeValue}-file`)
+		document.getElementById(`${attribute}-file`)
 	);
 
 	FilePond.create(getImageEntryElement, {
@@ -85,6 +85,13 @@ function checkingIfGeneratorExists(attribute: string | null) {
 			imageSRC = img.src;
 		},
 	});
+
+	const getDownloadImage = <HTMLElement>(
+		document.querySelector(`[data-download=${attribute}-image]`)
+	);
+	const getDownloadSvg = <HTMLElement>(
+		document.querySelector(`[data-download=${attribute}-svg]`)
+	);
 }
 
 closeModalElement?.addEventListener('click', () => {
