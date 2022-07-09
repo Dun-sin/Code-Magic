@@ -39,16 +39,16 @@
 				</div>
 			</div>
 			<div class="modal-container">
-				<div class="closed generator-modal" data-model="pic-text">
+				<div class="generator-modal">
 					<div class="modal-header">
-						<p>Pic-Text Generator</p>
+						<p id="heading-text-modal"></p>
 						<img
 							src="./assets/close-square-fill.svg"
 							alt="close button"
 							id="close-modal"
 						/>
 					</div>
-					<div class="modal-main-content">
+					<div class="modal-main-content" data-model="pic-text">
 						<div class="input">
 							<div>
 								<textarea
@@ -63,11 +63,14 @@
 						<div class="download-output">
 							<div class="output"></div>
 							<div class="download-btn">
-								<button class="btn" data-download="pic-text-image">
+								<!-- <button class="btn" data-download="pic-text-image">
 									Download Image
 								</button>
 								<button class="btn" data-download="pic-text-svg">
 									Download Svg
+								</button> -->
+								<button class="btn" data-download="pic-text-code">
+									Get Code
 								</button>
 							</div>
 						</div>
