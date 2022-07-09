@@ -51,7 +51,7 @@ function checkingIfGeneratorExists(attribute: string | null): void {
 
 	generatorsFunction(attribute);
 	getImageFile(attribute);
-	downloadImage(attribute);
+	// downloadImage(attribute);
 	changeHeaderText(attribute);
 }
 
@@ -133,15 +133,15 @@ function getImageFile(attribute: string): void {
 	});
 }
 
-function downloadImage(attribute: string): void {
-	// const getDownloadImage = <HTMLElement>(
-	// 	document.querySelector(`[data-download=${attribute}-image]`)
-	// );
-	// 	const getDownloadSvg = <HTMLElement>(
-	// 		document.querySelector(`[data-download=${attribute}-svg]`)
-	// 	);
-	// getDownloadImage.addEventListener('click', () => {});
-}
+// function downloadImage(attribute: string): void {
+// 	// const getDownloadImage = <HTMLElement>(
+// 	// 	document.querySelector(`[data-download=${attribute}-image]`)
+// 	// );
+// 	// 	const getDownloadSvg = <HTMLElement>(
+// 	// 		document.querySelector(`[data-download=${attribute}-svg]`)
+// 	// 	);
+// 	// getDownloadImage.addEventListener('click', () => {});
+// }
 
 function countForText(inputElement: HTMLInputElement): void {
 	const countElement = <HTMLElement>document.querySelector('.count > span');
