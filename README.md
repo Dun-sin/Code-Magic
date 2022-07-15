@@ -6,6 +6,29 @@ A website to help you get simple tricks you can use in your applications with ht
 - HTML
 - CSS
 
+ <table>
+	 <tbody>
+  <tr>
+   <td align="Center" width="25%"> 
+ <a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML5" target="_blank" rel="noreferrer"><img src="https://cdn.svgporn.com/logos/html-5.svg" width="36" height="36" alt="HTML" /></a>
+    <br>HTML
+    </td>   
+   
+   <td align="Center" width="25%">
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noreferrer"><img src="https://cdn.svgporn.com/logos/css-3.svg" width="36" height="36" alt="CSS" /></a>
+	<br>CSS
+    </td> 
+  <td align="Center" width="25%">
+	  <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"><img src="https://img.icons8.com/color/144/000000/typescript.png" width="36" height="36" alt="Typescript" /></a>
+	<br>Typescript
+    </td>   
+	  </tr>
+</tbody>
+  </table>
+	
+<br>
+    
+
 ## 🧑🏾‍💻 Demo
 Check out the website: [Trick Generator](https://trick-generator.vercel.app/)
 
