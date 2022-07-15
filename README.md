@@ -15,8 +15,8 @@ A website to help you get simple tricks you can use in your applications with ht
     </td>   
    
    <td align="Center" width="25%">
-        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noreferrer"><img src="https://cdn.svgporn.com/logos/css-3.svg" width="36" height="36" alt="Javascript" /></a>
-	<br>JavaScript
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noreferrer"><img src="https://cdn.svgporn.com/logos/css-3.svg" width="36" height="36" alt="CSS" /></a>
+	<br>CSS
     </td> 
   <td align="Center" width="25%">
 	  <a href="https://nodejs.org/en/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/nodejs-colored.svg" width="36" height="36" alt="NodeJS" /></a>
