@@ -2,10 +2,6 @@
 A website to help you get simple tricks you can use in your applications with html and css
 
 ### ⚒️ Languages / Tools
-- TypeScript
-- HTML
-- CSS
-
  <table>
 	 <tbody>
   <tr>
