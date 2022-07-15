@@ -19,7 +19,7 @@ A website to help you get simple tricks you can use in your applications with ht
 	<br>CSS
     </td> 
   <td align="Center" width="25%">
-	  <a href="https://nodejs.org/en/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/nodejs-colored.svg" width="36" height="36" alt="NodeJS" /></a>
+	  <a href="https://nodejs.org/en/" target="_blank" rel="noreferrer"><img src="https://iconscout.com/contributors/icon-mafia" width="36" height="36" alt="NodeJS" /></a>
 	<br>NodeJS
     </td>   
 	  </tr>
