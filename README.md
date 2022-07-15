@@ -19,8 +19,8 @@ A website to help you get simple tricks you can use in your applications with ht
 	<br>CSS
     </td> 
   <td align="Center" width="25%">
-	  <a href="https://nodejs.org/en/" target="_blank" rel="noreferrer"><img src="https://img.icons8.com/color/96/000000/typescript.png" width="36" height="36" alt="NodeJS" /></a>
-	<br>NodeJS
+	  <a href="https://nodejs.org/en/" target="_blank" rel="noreferrer"><img src="https://img.icons8.com/color/144/000000/typescript.png" width="36" height="36" alt="Typescript" /></a>
+	<br>Typescript
     </td>   
 	  </tr>
 </tbody>
