@@ -15,7 +15,7 @@ A website to help you get simple tricks you can use in your applications with ht
     </td>   
    
    <td align="Center" width="25%">
-        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noreferrer"><img src=""https://cdn.svgporn.com/logos/css-3.svg" width="36" height="36" alt="Javascript" /></a>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noreferrer"><img src="https://cdn.svgporn.com/logos/css-3.svg" width="36" height="36" alt="Javascript" /></a>
 	<br>JavaScript
     </td> 
   <td align="Center" width="25%">
