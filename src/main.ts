@@ -32,7 +32,15 @@ closeModalElement?.addEventListener('click', ():void => {
 	isOpen = false;
 
 	isVisible(isOpen);
+
+	const getImageEntryElement = <HTMLInputElement>(
+		document.getElementById(`pic-text-file`)
+	);
+	getImageEntryElement.setAttribute('value', '');
+	getImageEntryElement.setAttribute('src','')
+	FilePond.destroy(getImageEntryElement);
 });
+
 // adding an event listeners to all generators card
 generators.forEach((generator) => {
 	generator?.addEventListener('click', (): void => {
@@ -83,7 +91,6 @@ function generatorsFunction(attribute: string): void {
 
 	countForText(getTextInputElement);
 	getPicTextResult(attribute, getOutputElement, getTextInputElement.value);
-	copyCodeToClipboard(attribute, getOutputElement);
 }
 
 function getPicTextResult(
@@ -98,25 +105,30 @@ function getPicTextResult(
 	);
 
 	getImageButtonElement.addEventListener('click', (): void => {
-		if (outputNode === null) {
-			return;
-		}
-		outputNode.style.background = `url(${imageSRC}) center no-repeat`;
-		outputNode.style.backgroundSize = '400px';
-		outputNode.style.backgroundClip = 'text';
-		outputNode.style.webkitBackgroundClip = 'text';
-		outputNode.style.webkitTextFillColor = 'rgba(255, 255, 255, 0.1)';
-		if (text !== '') {
-			imageText = text;
-		}
-		outputNode.innerText = imageText;
+		generatorsFunction(attribute);
+		copyCodeToClipboard(attribute, outputNode);
 	});
+
+	if (outputNode === null) {
+		return;
+	}
+	outputNode.style.background = `url(${imageSRC}) center no-repeat`;
+	outputNode.style.backgroundSize = '400px';
+	outputNode.style.backgroundClip = 'text';
+	outputNode.style.webkitBackgroundClip = 'text';
+	outputNode.style.webkitTextFillColor = 'rgba(255, 255, 255, 0.1)';
+	if (text !== '') {
+		imageText = text;
+	}
+	outputNode.innerText = imageText;
 }
 
 function getImageFile(attribute: string): void {
 	const getImageEntryElement = <HTMLInputElement>(
 		document.getElementById(`${attribute}-file`)
 	);
+
+	console.log(getImageEntryElement)	
 
 	FilePond.create(getImageEntryElement, {
 		imagePreviewMaxHeight: 200,
@@ -157,7 +169,7 @@ function copyCodeToClipboard(
 	const copyCodeButton = <HTMLElement>(
 		document.querySelector(`[data-download=${attribute}-code]`)
 	);
-	copyCodeButton.addEventListener('click', (): void => {
+	copyCodeButton.addEventListener('click', ():void => {
 		let codeToCopy: string = `
       div {
         background-position: ${outputElement.style.backgroundPosition};
@@ -168,7 +180,15 @@ function copyCodeToClipboard(
         -webkit-text-fill-color: ${outputElement.style.webkitTextFillColor};
       }
     `;
-		navigator.clipboard.writeText(codeToCopy);
-		alert('copied to clipboard');
+		//navigator.clipboard.writeText(codeToCopy);
+		// Copy to clipboard formerly had issues, code to fix issue below
+		const permissionName = "clipboard-write" as PermissionName
+		navigator.permissions.query({name: permissionName}).then(result => {
+			if (result.state === "granted" || result.state === "prompt") {
+				navigator.clipboard.writeText(codeToCopy).then(()=>{
+					alert('copied to clipboard');
+				}).catch(()=> alert('error copying to clipboard'));
+			}
+		})
 	});
 }
