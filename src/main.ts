@@ -28,14 +28,14 @@ const modalContainerElement = <HTMLElement>(
 );
 
 // Close button for modals
-closeModalElement?.addEventListener('click', () => {
+closeModalElement?.addEventListener('click', ():void => {
 	isOpen = false;
 
 	isVisible(isOpen);
 });
 // adding an event listeners to all generators card
 generators.forEach((generator) => {
-	generator?.addEventListener('click', () => {
+	generator?.addEventListener('click', (): void => {
 		isOpen = true;
 		isVisible(isOpen);
 		const checking = generator.getAttribute('data-gen');
@@ -97,7 +97,7 @@ function getPicTextResult(
 		document.querySelector(`[data-button = ${attribute}]`)
 	);
 
-	getImageButtonElement.addEventListener('click', () => {
+	getImageButtonElement.addEventListener('click', (): void => {
 		if (outputNode === null) {
 			return;
 		}
@@ -121,7 +121,7 @@ function getImageFile(attribute: string): void {
 	FilePond.create(getImageEntryElement, {
 		imagePreviewMaxHeight: 200,
 
-		onpreparefile: (fileItem, output) => {
+		onpreparefile: (fileItem, output): void => {
 			// create a new image object
 			const img = new Image();
 
@@ -145,7 +145,7 @@ function getImageFile(attribute: string): void {
 
 function countForText(inputElement: HTMLInputElement): void {
 	const countElement = <HTMLElement>document.querySelector('.count > span');
-	inputElement.addEventListener('keydown', () => {
+	inputElement.addEventListener('keydown', (): void => {
 		countElement.innerText = `${inputElement.value.length + 1}`;
 	});
 }
@@ -157,7 +157,7 @@ function copyCodeToClipboard(
 	const copyCodeButton = <HTMLElement>(
 		document.querySelector(`[data-download=${attribute}-code]`)
 	);
-	copyCodeButton.addEventListener('click', () => {
+	copyCodeButton.addEventListener('click', (): void => {
 		let codeToCopy: string = `
       div {
         background-position: ${outputElement.style.backgroundPosition};
