@@ -28,7 +28,7 @@ const modalContainerElement = <HTMLElement>(
 );
 
 // Close button for modals
-closeModalElement?.addEventListener('click', ():void => {
+closeModalElement?.addEventListener('click', (): void => {
 	isOpen = false;
 
 	isVisible(isOpen);
@@ -37,7 +37,7 @@ closeModalElement?.addEventListener('click', ():void => {
 		document.getElementById(`pic-text-file`)
 	);
 	getImageEntryElement.setAttribute('value', '');
-	getImageEntryElement.setAttribute('src','')
+	getImageEntryElement.setAttribute('src', '');
 	FilePond.destroy(getImageEntryElement);
 });
 
@@ -54,6 +54,12 @@ generators.forEach((generator) => {
 	});
 });
 
+/**
+ * @function checkingIfGeneratorExists
+ * @summary Check if the attribute value exists
+ * @param {string | null} attribute - The attribute name of the generator element
+ * @return {void} nothing
+ */
 function checkingIfGeneratorExists(attribute: string | null): void {
 	if (attribute === null) return;
 
@@ -63,6 +69,12 @@ function checkingIfGeneratorExists(attribute: string | null): void {
 	changeHeaderText(attribute);
 }
 
+/**
+ * @function changeHeaderText
+ * @summary Change the header text of the generator based on the attribute value
+ * @param {string} attriute - The attribute name of the generator element
+ * @return {void} nothing
+ */
 function changeHeaderText(attriute: string): void {
 	const modalHeaderTextElement = <HTMLElement>(
 		document.getElementById('heading-text-modal')
@@ -72,7 +84,13 @@ function changeHeaderText(attriute: string): void {
 	modalHeaderTextElement.innerText = `${attriute} Generator`;
 }
 
-function isVisible(isOpen: boolean) {
+/**
+ * @function isVisible
+ * @summary uses the value of isOpen to change the visibility of the modal
+ * @param isOpen {boolean} - the variable for if the modal is open or closed
+ * @return {void} nothing
+ */
+function isVisible(isOpen: boolean): void {
 	if (isOpen) {
 		modalContainerElement.style.display = 'grid';
 	} else {
@@ -80,6 +98,11 @@ function isVisible(isOpen: boolean) {
 	}
 }
 
+/**
+ * @function generatorsFunction
+ * @summary a function with the collection of functions for generators
+ * @param {string} attribute - The attribute name of the generator element
+ */
 function generatorsFunction(attribute: string): void {
 	const getTextInputElement = <HTMLInputElement>(
 		document.getElementById(`${attribute}-text`)
@@ -93,6 +116,14 @@ function generatorsFunction(attribute: string): void {
 	getPicTextResult(attribute, getOutputElement, getTextInputElement.value);
 }
 
+/**
+ * @function getPicTextResult
+ * @summary Sets the image and the text(if any) to the output element
+ * @param attribute - The attribute name of the generator element
+ * @param outputNode - The output element to display
+ * @param text - The text to display on the image
+ * @return {void} nothing
+ */
 function getPicTextResult(
 	attribute: string,
 	outputNode: HTMLElement,
@@ -123,12 +154,18 @@ function getPicTextResult(
 	outputNode.innerText = imageText;
 }
 
+/**
+ * @function getImageFile
+ * @summary Gets the image file and set the image to the imageSRC
+ * @param attribute {string} The attribute name of the generator element
+ * @return {void} nothing
+ */
 function getImageFile(attribute: string): void {
 	const getImageEntryElement = <HTMLInputElement>(
 		document.getElementById(`${attribute}-file`)
 	);
 
-	console.log(getImageEntryElement)	
+	console.log(getImageEntryElement);
 
 	FilePond.create(getImageEntryElement, {
 		imagePreviewMaxHeight: 200,
@@ -155,6 +192,12 @@ function getImageFile(attribute: string): void {
 // 	// getDownloadImage.addEventListener('click', () => {});
 // }
 
+/**
+ * @function countForText
+ * @summary Counts the number of text in the input element
+ * @param inputElement {HTMLInputElement} - The input element that holds the text
+ * @return {void} Nothing
+ */
 function countForText(inputElement: HTMLInputElement): void {
 	const countElement = <HTMLElement>document.querySelector('.count > span');
 	inputElement.addEventListener('keydown', (): void => {
@@ -162,6 +205,13 @@ function countForText(inputElement: HTMLInputElement): void {
 	});
 }
 
+/**
+ * @function copyCodeToClipboard
+ * @summary Allows you to copy to clipboard
+ * @param {string} attribute - The attribute name of the generator element
+ * @param {HTMLElement} outputElement - Element to copy the element from
+ * @return {void} Nothing
+ */
 function copyCodeToClipboard(
 	attribute: string,
 	outputElement: HTMLElement,
@@ -169,7 +219,7 @@ function copyCodeToClipboard(
 	const copyCodeButton = <HTMLElement>(
 		document.querySelector(`[data-download=${attribute}-code]`)
 	);
-	copyCodeButton.addEventListener('click', ():void => {
+	copyCodeButton.addEventListener('click', (): void => {
 		let codeToCopy: string = `
       div {
         background-position: ${outputElement.style.backgroundPosition};
@@ -182,13 +232,16 @@ function copyCodeToClipboard(
     `;
 		//navigator.clipboard.writeText(codeToCopy);
 		// Copy to clipboard formerly had issues, code to fix issue below
-		const permissionName = "clipboard-write" as PermissionName
-		navigator.permissions.query({name: permissionName}).then(result => {
-			if (result.state === "granted" || result.state === "prompt") {
-				navigator.clipboard.writeText(codeToCopy).then(()=>{
-					alert('copied to clipboard');
-				}).catch(()=> alert('error copying to clipboard'));
+		const permissionName = 'clipboard-write' as PermissionName;
+		navigator.permissions.query({ name: permissionName }).then((result) => {
+			if (result.state === 'granted' || result.state === 'prompt') {
+				navigator.clipboard
+					.writeText(codeToCopy)
+					.then(() => {
+						alert('copied to clipboard');
+					})
+					.catch(() => alert('error copying to clipboard'));
 			}
-		})
+		});
 	});
 }
