@@ -11,7 +11,7 @@
 	/* Widths */
 	--generator-width: 12rem;
 	--modal-container-width: 100vw;
-	--modal-width: calc(var(--modal-container-width) - 20vw);
+	--modal-width: calc(var(--modal-container-width) - 30vw);
 }
 
 *,
