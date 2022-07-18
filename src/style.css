@@ -246,8 +246,6 @@ footer {
 	width: 97.6vw;
 	display: flex;
 	justify-content: center;
-	position: absolute;
-	bottom: 1rem;
 	font-size: 1.5rem;
 	color: #04001a;
 }
