@@ -133,6 +133,7 @@ main {
 
 	display: none;
 	place-items: center;
+	padding: 2rem;
 }
 
 .modal-generator {
@@ -226,11 +227,10 @@ textarea::placeholder {
 }
 
 .btn {
-	height: 25px;
+	height: 40px;
 	border-radius: 5px;
 	display: grid;
 	place-items: center;
-	width: 300px;
 	border: 1px solid var(--text-color);
 	cursor: pointer;
 	margin-top: 1rem;
@@ -239,7 +239,8 @@ textarea::placeholder {
 .output {
 	width: var(--output-width);
 	height: 300px;
-	background-color: #000;
+	word-wrap: break-word;
+	margin-bottom: 5rem;
 }
 
 .download-btn .btn {
@@ -249,7 +250,6 @@ textarea::placeholder {
 /* FOOTER SECTION */
 
 footer {
-	width: 97.6vw;
 	display: flex;
 	justify-content: center;
 	font-size: 1.5rem;

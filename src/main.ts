@@ -165,8 +165,6 @@ function getImageFile(attribute: string): void {
 		document.getElementById(`${attribute}-file`)
 	);
 
-	console.log(getImageEntryElement);
-
 	FilePond.create(getImageEntryElement, {
 		imagePreviewMaxHeight: 200,
 
