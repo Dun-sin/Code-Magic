@@ -144,7 +144,7 @@ function getPicTextResult(
 		return;
 	}
 	outputNode.style.background = `url(${imageSRC}) center no-repeat`;
-	outputNode.style.backgroundSize = '400px';
+	outputNode.style.backgroundSize = 'var(--output-width)';
 	outputNode.style.backgroundClip = 'text';
 	outputNode.style.webkitBackgroundClip = 'text';
 	outputNode.style.webkitTextFillColor = 'rgba(255, 255, 255, 0.1)';
