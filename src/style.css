@@ -254,7 +254,7 @@ footer {
 	justify-content: center;
 	font-size: 1.5rem;
 	position: fixed;
-	bottom: 0;
+	bottom: 1rem;
 	width: 100%;
 	color: #04001a;
 	z-index: -10;

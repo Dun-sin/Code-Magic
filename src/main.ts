@@ -72,16 +72,17 @@ function checkingIfGeneratorExists(attribute: string | null): void {
 /**
  * @function changeHeaderText
  * @summary Change the header text of the generator based on the attribute value
- * @param {string} attriute - The attribute name of the generator element
+ * @param {string} attribute - The attribute name of the generator element
  * @return {void} nothing
  */
-function changeHeaderText(attriute: string): void {
+function changeHeaderText(attribute: string): void {
+	console.log(attribute);
 	const modalHeaderTextElement = <HTMLElement>(
 		document.getElementById('heading-text-modal')
 	);
 
-	attriute = attriute.charAt(0).toUpperCase() + attriute.slice(1);
-	modalHeaderTextElement.innerText = `${attriute} Generator`;
+	attribute = attribute.charAt(0).toUpperCase() + attribute.slice(1);
+	modalHeaderTextElement.innerText = `${attribute} Generator`;
 }
 
 /**
