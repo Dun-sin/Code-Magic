@@ -247,6 +247,9 @@ footer {
 	display: flex;
 	justify-content: center;
 	font-size: 1.5rem;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
 	color: #04001a;
 }
 
