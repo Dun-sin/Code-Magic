@@ -12,6 +12,8 @@
 	--generator-width: 12rem;
 	--modal-container-width: 100vw;
 	--modal-width: calc(var(--modal-container-width) - 30vw);
+	--input-width: 300px;
+	--output-width: 400px;
 }
 
 *,
@@ -175,7 +177,7 @@ main {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
-	width: 300px;
+	width: var(--input-width);
 }
 
 .input > div {
@@ -193,6 +195,10 @@ main {
 	position: relative;
 }
 
+.input > .btn {
+	width: var(--input-width);
+}
+
 textarea,
 textarea:focus {
 	padding: 5px;
@@ -204,7 +210,7 @@ textarea:focus {
 	resize: none;
 	background-color: transparent;
 	height: 100px;
-	width: 300px;
+	width: var(--input-width);
 	overflow-y: hidden;
 }
 
@@ -231,7 +237,7 @@ textarea::placeholder {
 }
 
 .output {
-	width: 400px;
+	width: var(--output-width);
 	height: 300px;
 	background-color: #000;
 }
