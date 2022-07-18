@@ -254,15 +254,30 @@ a {
 	color: var(--text-color);
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1300px) and (min-width: 1009px) {
 	:root {
-		--modal-width: var(--modal-container-width) - 32vw;
+		--modal-width: calc(var(--modal-container-width) - 20vw);
 	}
 }
 
 @media screen and (max-width: 1010px) {
+	:root {
+		--input-width: 100%;
+		--modal-width: calc(var(--modal-container-width) - 10vw);
+	}
+
 	.modal-main-content {
 		flex-direction: column;
 		align-items: center;
+	}
+
+	.input {
+		padding: 2rem;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	:root {
+		--output-width: 300px;
 	}
 }
