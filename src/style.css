@@ -133,7 +133,7 @@ main {
 	place-items: center;
 }
 
-.generator-modal {
+.modal-generator {
 	width: calc(var(--modal-width) / 1.2);
 	border: 1px solid var(--text-color);
 	padding: 1rem;
@@ -254,4 +254,17 @@ footer {
 
 a {
 	color: var(--text-color);
+}
+
+@media screen and (max-width: 1300px) {
+	:root {
+		--modal-width: var(--modal-container-width) - 32vw;
+	}
+}
+
+@media screen and (max-width: 1010px) {
+	.modal-main-content {
+		flex-direction: column;
+		align-items: center;
+	}
 }
