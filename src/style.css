@@ -236,8 +236,8 @@ textarea::placeholder {
 	background-color: #000;
 }
 
-.output > img {
-	width: 400px;
+.download-btn .btn {
+	width: 100%;
 }
 
 /* FOOTER SECTION */
