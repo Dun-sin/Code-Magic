@@ -15,18 +15,24 @@ FilePond.registerPlugin(
 	FilePondPluginImageTransform
 );
 
-// Variables
+/**
+ * All Variables
+ */
 let attributeValue: string | null = null;
 let isOpen: boolean;
 // File Pond Element & Options
 let imageSRC: string;
-
 // Elements
 const generators = document.querySelectorAll('[data-gen]');
 const closeModalElement = document.getElementById('close-modal');
 const modalContainerElement = <HTMLElement>(
 	document.querySelector('.modal-container')
 );
+
+/**
+ * All types
+ */
+type Display = 'grid' | 'flex' | 'none';
 
 // Close button for modals
 closeModalElement?.addEventListener('click', (): void => {
@@ -40,6 +46,9 @@ closeModalElement?.addEventListener('click', (): void => {
 	getImageEntryElement.setAttribute('value', '');
 	getImageEntryElement.setAttribute('src', '');
 	FilePond.destroy(getImageEntryElement);
+
+	if (attributeValue === null) return;
+	removeOrAddGeneratorContent(attributeValue, 'none');
 });
 
 // adding an event listeners to all generators card
@@ -105,31 +114,47 @@ function isVisible(isOpen: boolean): void {
  * @param {string} attribute - The attribute name of the generator element
  */
 function generatorsFunction(attribute: string): void {
+	removeOrAddGeneratorContent(attribute, 'flex');
 	switch (attribute) {
 		case 'pic-text':
-			picTextGeneratorFunction(attribute);
+			picTextGenerator(attribute);
+			break;
+		case 'gradient-text':
+			gradientTextGenerator(attribute);
 			break;
 	}
 }
 
+function removeOrAddGeneratorContent(
+	attribute: string,
+	display: Display,
+): void {
+	const generator = <HTMLElement>(
+		document.querySelector(`[data-modal = ${attribute}]`)
+	);
+	generator.style.display = `${display}`;
+}
+
 /**
- * @function picTextGeneratorFunction
+ * @function picTextGenerator
  * @summary function for all the functions of the pic-text generator
  * @param attribute - The attribute name of the generator element
  * @return {void} Nothing
  */
-function picTextGeneratorFunction(attribute: string): void {
+function picTextGenerator(attribute: string): void {
 	const getTextInputElement = <HTMLInputElement>(
 		document.getElementById(`${attribute}-text`)
 	);
 
 	const getOutputElement = <HTMLElement>(
-		document.querySelector(`[data-model=${attribute}]  .output`)
+		document.querySelector(`[data-modal=${attribute}]  .output`)
 	);
 
 	countForText(getTextInputElement);
 	getPicTextResult(attribute, getOutputElement, getTextInputElement.value);
 }
+
+function gradientTextGenerator(attribute: string): void {}
 
 /**
  * @function getPicTextResult
@@ -254,7 +279,13 @@ function copyCodeToClipboard(
 		document.querySelector(`[data-download=${attribute}-code]`)
 	);
 	copyCodeButton.addEventListener('click', (): void => {
-		let codeToCopy: string = `
+		actOnGenerator();
+	});
+
+	function actOnGenerator() {
+		switch (attribute) {
+			case 'pic-text':
+				let codeToCopy: string = `
       div {
         background-position: ${outputElement.style.backgroundPosition};
         background-size: ${outputElement.style.backgroundSize};
@@ -264,18 +295,20 @@ function copyCodeToClipboard(
         -webkit-text-fill-color: ${outputElement.style.webkitTextFillColor};
       }
     `;
-		//navigator.clipboard.writeText(codeToCopy);
-		// Copy to clipboard formerly had issues, code to fix issue below
-		const permissionName = 'clipboard-write' as PermissionName;
-		navigator.permissions.query({ name: permissionName }).then(result => {
-			if (result.state === 'granted' || result.state === 'prompt') {
-				navigator.clipboard
-					.writeText(codeToCopy)
-					.then(() => {
-						alert('copied to clipboard');
-					})
-					.catch(() => alert('error copying to clipboard'));
-			}
-		});
-	});
+				const permissionName = 'clipboard-write' as PermissionName;
+				navigator.permissions.query({ name: permissionName }).then((result) => {
+					if (result.state === 'granted' || result.state === 'prompt') {
+						navigator.clipboard
+							.writeText(codeToCopy)
+							.then(() => {
+								alert('copied to clipboard');
+							})
+							.catch(() => alert('error copying to clipboard'));
+					}
+				});
+				break;
+			case 'gradient-text':
+				break;
+		}
+	}
 }

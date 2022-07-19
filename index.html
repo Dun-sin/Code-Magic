@@ -27,17 +27,38 @@
 		</nav>
 
 		<main>
-			<div class="generator" data-gen="pic-text">
-				<img
-					src="https://user-images.githubusercontent.com/78784850/177135924-aec3794a-8bd8-48ec-bd5a-4aee074c7a16.png"
-					alt="Picture-Text Generator"
-					loading="lazy"
-				/>
-				<div>
-					<h2>Pic-Text generator</h2>
-					<img src="./assets/bi_arrow-right-square-fill.svg" alt="Right Icon" />
+			<!-- Generator Card -->
+			<div class="generators">
+				<div class="generator" data-gen="pic-text">
+					<img
+						src="https://user-images.githubusercontent.com/78784850/177135924-aec3794a-8bd8-48ec-bd5a-4aee074c7a16.png"
+						alt="Picture-Text Generator"
+						loading="lazy"
+					/>
+					<div>
+						<h2>Pic-Text generator</h2>
+						<img
+							src="./assets/bi_arrow-right-square-fill.svg"
+							alt="Right Icon"
+						/>
+					</div>
+				</div>
+				<div class="generator" data-gen="gradient-text">
+					<img
+						src="https://user-images.githubusercontent.com/78784850/179534667-c5de2a54-5eee-49d3-a7b6-6404e1cde5de.png"
+						alt="Gradient Text Generator"
+						loading="lazy"
+					/>
+					<div>
+						<h2>Gradient Text Generator</h2>
+						<img
+							src="./assets/bi_arrow-right-square-fill.svg"
+							alt="Right Icon"
+						/>
+					</div>
 				</div>
 			</div>
+			<!-- Modal -->
 			<div class="modal-container">
 				<div class="modal-generator">
 					<div class="modal-header">
@@ -48,12 +69,13 @@
 							id="close-modal"
 						/>
 					</div>
-					<div class="modal-main-content" data-model="pic-text">
+					<div class="modal-main-content" data-modal="pic-text">
 						<div class="input">
 							<div>
 								<textarea
 									id="pic-text-text"
 									placeholder="Enter the text you want(Optional)"
+									class="input-bar"
 								></textarea>
 								<p class="count"><span>0</span>/400</p>
 							</div>
@@ -70,6 +92,30 @@
 									Download Svg
 								</button>
 								<button class="btn" data-download="pic-text-code">
+									Get Code
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="modal-main-content" data-modal="gradient-text">
+						<div class="input">
+							<input
+								type="text"
+								id="gradient-text"
+								placeholder="Enter the text"
+							/>
+							<div class="btn" data-button="gradient-text">Get Text</div>
+						</div>
+						<div class="download-output">
+							<div class="output"></div>
+							<div class="download-btn">
+								<!-- <button class="btn" data-download="pic-text-image">
+									Download Image
+								</button>
+								<button class="btn" data-download="pic-text-svg">
+									Download Svg
+								</button> -->
+								<button class="btn" data-download="gradient-text-code">
 									Get Code
 								</button>
 							</div>
