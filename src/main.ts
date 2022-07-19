@@ -21,7 +21,6 @@ let attributeValue: string | null = null;
 let isOpen: boolean;
 // File Pond Element & Options
 let imageSRC: string;
-
 // Elements
 const generators = document.querySelectorAll('[data-gen]');
 const closeModalElement = document.getElementById('close-modal');
@@ -114,6 +113,7 @@ function isVisible(isOpen: boolean): void {
  * @param {string} attribute - The attribute name of the generator element
  */
 function generatorsFunction(attribute: string): void {
+	removeOrAddGeneratorContent(attribute, 'flex');
 	switch (attribute) {
 		case 'pic-text':
 			picTextGenerator(attribute);
@@ -153,7 +153,7 @@ function picTextGenerator(attribute: string): void {
 	getPicTextResult(attribute, getOutputElement, getTextInputElement.value);
 }
 
-function gradientTextGenerator(attribute: string) {}
+function gradientTextGenerator(attribute: string): void {}
 
 /**
  * @function getPicTextResult
@@ -257,7 +257,13 @@ function copyCodeToClipboard(
 		document.querySelector(`[data-download=${attribute}-code]`)
 	);
 	copyCodeButton.addEventListener('click', (): void => {
-		let codeToCopy: string = `
+		actOnGenerator();
+	});
+
+	function actOnGenerator() {
+		switch (attribute) {
+			case 'pic-text':
+				let codeToCopy: string = `
       div {
         background-position: ${outputElement.style.backgroundPosition};
         background-size: ${outputElement.style.backgroundSize};
@@ -267,18 +273,20 @@ function copyCodeToClipboard(
         -webkit-text-fill-color: ${outputElement.style.webkitTextFillColor};
       }
     `;
-		//navigator.clipboard.writeText(codeToCopy);
-		// Copy to clipboard formerly had issues, code to fix issue below
-		const permissionName = 'clipboard-write' as PermissionName;
-		navigator.permissions.query({ name: permissionName }).then((result) => {
-			if (result.state === 'granted' || result.state === 'prompt') {
-				navigator.clipboard
-					.writeText(codeToCopy)
-					.then(() => {
-						alert('copied to clipboard');
-					})
-					.catch(() => alert('error copying to clipboard'));
-			}
-		});
-	});
+				const permissionName = 'clipboard-write' as PermissionName;
+				navigator.permissions.query({ name: permissionName }).then((result) => {
+					if (result.state === 'granted' || result.state === 'prompt') {
+						navigator.clipboard
+							.writeText(codeToCopy)
+							.then(() => {
+								alert('copied to clipboard');
+							})
+							.catch(() => alert('error copying to clipboard'));
+					}
+				});
+				break;
+			case 'gradient-text':
+				break;
+		}
+	}
 }

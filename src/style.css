@@ -175,6 +175,7 @@ main {
 	display: none;
 	flex-direction: row;
 	flex-wrap: wrap;
+	align-items: center;
 	justify-content: space-between;
 }
 
@@ -206,23 +207,29 @@ main {
 	width: var(--input-width);
 }
 
+input[type='text'],
 textarea,
 textarea:focus {
-	padding: 5px;
+	height: 30px;
 	outline: none;
+	padding: 5px;
 	caret-color: var(--text-color);
 	color: var(--text-color);
+	background: transparent;
 	border: 0.5px solid var(--text-color);
 	border-radius: 3px;
+}
+
+input::placeholder {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+textarea,
+textarea:focus {
 	resize: none;
-	background-color: transparent;
 	height: 100px;
 	width: var(--input-width);
 	overflow-y: hidden;
-}
-
-textarea::placeholder {
-	color: rgba(255, 255, 255, 0.6);
 }
 
 .count {
