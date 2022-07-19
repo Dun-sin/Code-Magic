@@ -72,16 +72,16 @@ function checkingIfGeneratorExists(attribute: string | null): void {
 /**
  * @function changeHeaderText
  * @summary Change the header text of the generator based on the attribute value
- * @param {string} attriute - The attribute name of the generator element
+ * @param {string} attribute - The attribute name of the generator element
  * @return {void} nothing
  */
-function changeHeaderText(attriute: string): void {
+function changeHeaderText(attribute: string): void {
 	const modalHeaderTextElement = <HTMLElement>(
 		document.getElementById('heading-text-modal')
 	);
 
-	attriute = attriute.charAt(0).toUpperCase() + attriute.slice(1);
-	modalHeaderTextElement.innerText = `${attriute} Generator`;
+	attribute = attribute.charAt(0).toUpperCase() + attribute.slice(1);
+	modalHeaderTextElement.innerText = `${attribute} Generator`;
 }
 
 /**
@@ -104,6 +104,20 @@ function isVisible(isOpen: boolean): void {
  * @param {string} attribute - The attribute name of the generator element
  */
 function generatorsFunction(attribute: string): void {
+	switch (attribute) {
+		case 'pic-text':
+			picTextGeneratorFunction(attribute);
+			break;
+	}
+}
+
+/**
+ * @function picTextGeneratorFunction
+ * @summary function for all the functions of the pic-text generator
+ * @param attribute - The attribute name of the generator element
+ * @return {void} Nothing
+ */
+function picTextGeneratorFunction(attribute: string): void {
 	const getTextInputElement = <HTMLInputElement>(
 		document.getElementById(`${attribute}-text`)
 	);
