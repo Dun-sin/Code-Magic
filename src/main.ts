@@ -1,3 +1,4 @@
+import domtoimage from 'dom-to-image';
 import * as FilePond from 'filepond';
 import 'filepond/dist/filepond.min.css';
 
@@ -11,7 +12,7 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 FilePond.registerPlugin(
 	FilePondPluginImagePreview,
 	FilePondPluginImageResize,
-	FilePondPluginImageTransform,
+	FilePondPluginImageTransform
 );
 
 // Variables
@@ -42,7 +43,7 @@ closeModalElement?.addEventListener('click', (): void => {
 });
 
 // adding an event listeners to all generators card
-generators.forEach((generator) => {
+generators.forEach(generator => {
 	generator?.addEventListener('click', (): void => {
 		isOpen = true;
 		isVisible(isOpen);
@@ -65,7 +66,7 @@ function checkingIfGeneratorExists(attribute: string | null): void {
 
 	generatorsFunction(attribute);
 	getImageFile(attribute);
-	// downloadImage(attribute);
+	downloadImage(attribute);
 	changeHeaderText(attribute);
 }
 
@@ -141,7 +142,7 @@ function picTextGeneratorFunction(attribute: string): void {
 function getPicTextResult(
 	attribute: string,
 	outputNode: HTMLElement,
-	text: string,
+	text: string
 ): void {
 	let imageText: string = `########################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################`;
 
@@ -194,15 +195,36 @@ function getImageFile(attribute: string): void {
 	});
 }
 
-// function downloadImage(attribute: string): void {
-// 	// const getDownloadImage = <HTMLElement>(
-// 	// 	document.querySelector(`[data-download=${attribute}-image]`)
-// 	// );
-// 	// 	const getDownloadSvg = <HTMLElement>(
-// 	// 		document.querySelector(`[data-download=${attribute}-svg]`)
-// 	// 	);
-// 	// getDownloadImage.addEventListener('click', () => {});
-// }
+function downloadImage(attribute: string): void {
+	const outputImage = <HTMLElement>document.querySelector('.output');
+	const getDownloadJpg = <HTMLElement>(
+		document.querySelector(`[data-download=${attribute}-jpg]`)
+	);
+	const getDownloadSvg = <HTMLElement>(
+		document.querySelector(`[data-download=${attribute}-svg]`)
+	);
+
+	getDownloadJpg.addEventListener('click', () => {
+		domtoimage.toJpeg(outputImage, { quality: 0.95 }).then(dataUrl => {
+			const link = createDownloadLink('pic-text.jpeg', dataUrl);
+			link.click();
+		});
+	});
+
+	getDownloadSvg.addEventListener('click', () => {
+		domtoimage.toSvg(outputImage).then(dataUrl => {
+			const link = createDownloadLink('pic-text.svg', dataUrl);
+			link.click();
+		});
+	});
+}
+
+function createDownloadLink(fileName: string, url: string) {
+	const link = document.createElement('a');
+	link.download = fileName;
+	link.href = url;
+	return link;
+}
 
 /**
  * @function countForText
@@ -226,7 +248,7 @@ function countForText(inputElement: HTMLInputElement): void {
  */
 function copyCodeToClipboard(
 	attribute: string,
-	outputElement: HTMLElement,
+	outputElement: HTMLElement
 ): void {
 	const copyCodeButton = <HTMLElement>(
 		document.querySelector(`[data-download=${attribute}-code]`)
@@ -245,7 +267,7 @@ function copyCodeToClipboard(
 		//navigator.clipboard.writeText(codeToCopy);
 		// Copy to clipboard formerly had issues, code to fix issue below
 		const permissionName = 'clipboard-write' as PermissionName;
-		navigator.permissions.query({ name: permissionName }).then((result) => {
+		navigator.permissions.query({ name: permissionName }).then(result => {
 			if (result.state === 'granted' || result.state === 'prompt') {
 				navigator.clipboard
 					.writeText(codeToCopy)
