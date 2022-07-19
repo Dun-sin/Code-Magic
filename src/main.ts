@@ -14,7 +14,9 @@ FilePond.registerPlugin(
 	FilePondPluginImageTransform,
 );
 
-// Variables
+/**
+ * All Variables
+ */
 let attributeValue: string | null = null;
 let isOpen: boolean;
 // File Pond Element & Options
@@ -26,6 +28,11 @@ const closeModalElement = document.getElementById('close-modal');
 const modalContainerElement = <HTMLElement>(
 	document.querySelector('.modal-container')
 );
+
+/**
+ * All types
+ */
+type Display = 'grid' | 'flex' | 'none';
 
 // Close button for modals
 closeModalElement?.addEventListener('click', (): void => {
@@ -39,6 +46,9 @@ closeModalElement?.addEventListener('click', (): void => {
 	getImageEntryElement.setAttribute('value', '');
 	getImageEntryElement.setAttribute('src', '');
 	FilePond.destroy(getImageEntryElement);
+
+	if (attributeValue === null) return;
+	removeOrAddGeneratorContent(attributeValue, 'none');
 });
 
 // adding an event listeners to all generators card
@@ -114,6 +124,16 @@ function generatorsFunction(attribute: string): void {
 	}
 }
 
+function removeOrAddGeneratorContent(
+	attribute: string,
+	display: Display,
+): void {
+	const generator = <HTMLElement>(
+		document.querySelector(`[data-modal = ${attribute}]`)
+	);
+	generator.style.display = `${display}`;
+}
+
 /**
  * @function picTextGenerator
  * @summary function for all the functions of the pic-text generator
@@ -126,7 +146,7 @@ function picTextGenerator(attribute: string): void {
 	);
 
 	const getOutputElement = <HTMLElement>(
-		document.querySelector(`[data-model=${attribute}]  .output`)
+		document.querySelector(`[data-modal=${attribute}]  .output`)
 	);
 
 	countForText(getTextInputElement);
