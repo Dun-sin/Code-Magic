@@ -172,7 +172,7 @@ main {
 }
 
 .modal-main-content {
-	display: flex;
+	display: none;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: space-between;
