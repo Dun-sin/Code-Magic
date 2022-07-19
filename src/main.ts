@@ -115,12 +115,12 @@ function generatorsFunction(attribute: string): void {
 }
 
 /**
- * @function picTextGeneratorFunction
+ * @function picTextGenerator
  * @summary function for all the functions of the pic-text generator
  * @param attribute - The attribute name of the generator element
  * @return {void} Nothing
  */
-function picTextGeneratorFunction(attribute: string): void {
+function picTextGenerator(attribute: string): void {
 	const getTextInputElement = <HTMLInputElement>(
 		document.getElementById(`${attribute}-text`)
 	);
@@ -132,6 +132,8 @@ function picTextGeneratorFunction(attribute: string): void {
 	countForText(getTextInputElement);
 	getPicTextResult(attribute, getOutputElement, getTextInputElement.value);
 }
+
+function gradientTextGenerator(attribute: string) {}
 
 /**
  * @function getPicTextResult
