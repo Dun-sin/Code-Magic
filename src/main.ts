@@ -106,7 +106,10 @@ function isVisible(isOpen: boolean): void {
 function generatorsFunction(attribute: string): void {
 	switch (attribute) {
 		case 'pic-text':
-			picTextGeneratorFunction(attribute);
+			picTextGenerator(attribute);
+			break;
+		case 'gradient-text':
+			gradientTextGenerator(attribute);
 			break;
 	}
 }
