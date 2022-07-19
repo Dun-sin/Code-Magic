@@ -76,7 +76,6 @@ function checkingIfGeneratorExists(attribute: string | null): void {
  * @return {void} nothing
  */
 function changeHeaderText(attribute: string): void {
-	console.log(attribute);
 	const modalHeaderTextElement = <HTMLElement>(
 		document.getElementById('heading-text-modal')
 	);
@@ -105,6 +104,20 @@ function isVisible(isOpen: boolean): void {
  * @param {string} attribute - The attribute name of the generator element
  */
 function generatorsFunction(attribute: string): void {
+	switch (attribute) {
+		case 'pic-text':
+			picTextGeneratorFunction(attribute);
+			break;
+	}
+}
+
+/**
+ * @function picTextGeneratorFunction
+ * @summary function for all the functions of the pic-text generator
+ * @param attribute - The attribute name of the generator element
+ * @return {void} Nothing
+ */
+function picTextGeneratorFunction(attribute: string): void {
 	const getTextInputElement = <HTMLInputElement>(
 		document.getElementById(`${attribute}-text`)
 	);
