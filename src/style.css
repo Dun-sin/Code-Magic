@@ -28,7 +28,7 @@ body {
 	font-family: 'Exo 2', 'Courier New', Courier, monospace;
 	background-color: var(--primary-color);
 	color: var(--text-color);
-	overflow-x: hidden;
+	overflow-x: hidden ;
 }
 
 nav {
@@ -57,22 +57,16 @@ nav h1 {
 	cursor: pointer;
 }
 
-.menu div {
-	width: 1.6rem;
-	margin-bottom: 5px;
-	height: 2.5px;
-	background-color: var(--secondary-color);
-}
-
 main {
 	margin-top: 3rem;
-	padding: 0 4rem 0 4rem;
+	padding: 0 2rem 0 4rem;
 }
 
 /* Generator Card */
 
 .generators {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .generator {
@@ -89,6 +83,7 @@ main {
 	transition: all 200ms ease-in-out;
 	background-color: var(--secondary-color);
 	margin-right: 2rem;
+	margin-bottom: 2rem;
 }
 
 .generator:hover {
@@ -302,5 +297,27 @@ a {
 @media screen and (max-width: 650px) {
 	:root {
 		--output-width: 300px;
+
+		/*Changing generator's height and width on mobile devices */
+
+		--generator-height: 16rem;
+		--generator-width: 14rem;
 	}
+	/* changing footer so that i does not overlap with other components */
+	footer{
+		position: static;
+		margin-bottom: 0.5rem;
+		margin-top: 1rem;
+	}
+
+	/* changing hamburger menu in desktop view, since you don't need it */
+	
+	.menu div {
+		width: 1.6rem;
+		margin-bottom: 5px;
+		height: 2.5px;
+		background-color: var(--secondary-color);
+	}
+
 }
+
