@@ -28,7 +28,7 @@ body {
 	font-family: 'Exo 2', 'Courier New', Courier, monospace;
 	background-color: var(--primary-color);
 	color: var(--text-color);
-	overflow-x: hidden ;
+	overflow-x: hidden;
 }
 
 nav {
@@ -41,12 +41,10 @@ nav {
 }
 
 nav h1 {
-	background: linear-gradient(
-		90.3deg,
-		#ffffff 47.88%,
-		#aca1e5 74.32%,
-		#bfb8e5 99.74%
-	);
+	background: linear-gradient(90.3deg,
+			#ffffff 47.88%,
+			#aca1e5 74.32%,
+			#bfb8e5 99.74%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
@@ -90,13 +88,13 @@ main {
 	box-shadow: var(--secondary-color) -2.5px 2.5px 2px;
 }
 
-.generator > img {
+.generator>img {
 	width: var(--generator-width);
 	height: calc(var(--generator-height) / 1.4);
 	border-radius: 10px 10px 0 0;
 }
 
-.generator > div {
+.generator>div {
 	height: calc(var(--generator-height) / 2.8);
 	width: var(--generator-width);
 	background: rgba(149, 128, 255, 1);
@@ -111,7 +109,7 @@ main {
 	font-size: 1.2rem;
 }
 
-.generator > div img {
+.generator>div img {
 	height: 30px;
 	width: 30px;
 	position: relative;
@@ -131,7 +129,6 @@ main {
 	bottom: 0;
 	margin: auto;
 	background-color: #1d2a3a48;
-
 	display: none;
 	place-items: center;
 	padding: 2rem;
@@ -181,9 +178,10 @@ main {
 	flex-direction: column;
 	flex-wrap: wrap;
 	width: var(--input-width);
+
 }
 
-.input > div {
+.input>div {
 	position: relative;
 }
 
@@ -191,14 +189,14 @@ main {
 	font-size: 1.2rem;
 }
 
-.input > div:first-of-type {
+.input>div:first-of-type {
 	margin-bottom: 1rem;
 	display: flex;
 	flex-direction: column;
 	position: relative;
 }
 
-.input > .btn {
+.input>.btn {
 	width: var(--input-width);
 }
 
@@ -303,15 +301,16 @@ a {
 		--generator-height: 16rem;
 		--generator-width: 14rem;
 	}
+
 	/* changing footer so that i does not overlap with other components */
-	footer{
+	footer {
 		position: static;
 		margin-bottom: 0.5rem;
 		margin-top: 1rem;
 	}
 
 	/* changing hamburger menu in desktop view, since you don't need it */
-	
+
 	.menu div {
 		width: 1.6rem;
 		margin-bottom: 5px;
@@ -319,5 +318,12 @@ a {
 		background-color: var(--secondary-color);
 	}
 
-}
+	.modal-container {
+		padding: 1rem;
+	}
 
+	.modal-generator {
+		width: calc(var(--modal-width));
+		margin-top: 3rem;
+	}
+}
