@@ -213,7 +213,7 @@ textarea:focus {
 	border-radius: 3px;
 }
 
-input::placeholder {
+::placeholder {
 	color: rgba(255, 255, 255, 0.6);
 }
 
