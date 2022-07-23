@@ -12,7 +12,7 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 FilePond.registerPlugin(
 	FilePondPluginImagePreview,
 	FilePondPluginImageResize,
-	FilePondPluginImageTransform
+	FilePondPluginImageTransform,
 );
 
 /**
@@ -52,7 +52,7 @@ closeModalElement?.addEventListener('click', (): void => {
 });
 
 // adding an event listeners to all generators card
-generators.forEach(generator => {
+generators.forEach((generator) => {
 	generator?.addEventListener('click', (): void => {
 		isOpen = true;
 		isVisible(isOpen);
@@ -229,9 +229,9 @@ function getGradientTextResult(text: string, outputElement: HTMLElement): void {
 function getPicTextResult(
 	attribute: string,
 	outputNode: HTMLElement,
-	text: string
+	text: string,
 ): void {
-	let imageText: string = `########################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################`;
+	let imageText: string = `################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################`;
 
 	const getImageButtonElement = <HTMLInputElement>(
 		document.querySelector(`[data-button = ${attribute}]`)
@@ -292,14 +292,14 @@ function downloadImage(attribute: string): void {
 	);
 
 	getDownloadJpg.addEventListener('click', () => {
-		domtoimage.toJpeg(outputImage, { quality: 0.95 }).then(dataUrl => {
+		domtoimage.toJpeg(outputImage, { quality: 0.95 }).then((dataUrl) => {
 			const link = createDownloadLink('pic-text.jpeg', dataUrl);
 			link.click();
 		});
 	});
 
 	getDownloadSvg.addEventListener('click', () => {
-		domtoimage.toSvg(outputImage).then(dataUrl => {
+		domtoimage.toSvg(outputImage).then((dataUrl) => {
 			const link = createDownloadLink('pic-text.svg', dataUrl);
 			link.click();
 		});
@@ -335,7 +335,7 @@ function countForText(inputElement: HTMLInputElement): void {
  */
 function copyCodeToClipboard(
 	attribute: string,
-	outputElement: HTMLElement
+	outputElement: HTMLElement,
 ): void {
 	const copyCodeButton = <HTMLElement>(
 		document.querySelector(`[data-download=${attribute}-code]`)
