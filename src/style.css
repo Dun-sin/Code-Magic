@@ -246,16 +246,19 @@ textarea:focus {
 	place-items: center;
 	border: 1px solid var(--text-color);
 	cursor: pointer;
-	margin-top: 1rem;
+	margin-top: 0.2rem;
 }
 
 .output {
 	width: var(--output-width);
 	height: 300px;
 	word-wrap: break-word;
-	margin-bottom: 5rem;
+	margin-bottom: 1rem;
 }
 
+.download-output > p {
+	font-size: 0.7rem;
+}
 .download-btn .btn {
 	width: 100%;
 }
