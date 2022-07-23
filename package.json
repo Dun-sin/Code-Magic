@@ -1,22 +1,22 @@
 {
-	"name": "trick-generator",
-	"private": true,
-	"version": "0.0.0",
-	"scripts": {
-		"dev": "vite",
-		"build": "tsc && vite build",
-		"preview": "vite preview"
-	},
-	"devDependencies": {
-		"@types/dom-to-image": "^2.6.4",
-		"typescript": "^4.5.4",
-		"vite": "^2.9.9"
-	},
-	"dependencies": {
-		"dom-to-image": "^2.6.0",
-		"filepond": "^4.30.4",
-		"filepond-plugin-image-preview": "^4.6.11",
-		"filepond-plugin-image-resize": "^2.0.10",
-		"filepond-plugin-image-transform": "^3.8.7"
-	}
+  "name": "trick-generator",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/dom-to-image": "^2.6.4",
+    "typescript": "^4.5.4",
+    "vite": "^2.9.9"
+  },
+  "dependencies": {
+    "dom-to-image": "^2.6.0",
+    "filepond": "^4.30.4",
+    "filepond-plugin-image-preview": "^4.6.11",
+    "filepond-plugin-image-resize": "^2.0.10",
+    "filepond-plugin-image-transform": "^3.8.7"
+  }
 }
