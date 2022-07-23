@@ -90,6 +90,7 @@ main {
 	transition: all 200ms ease-in-out;
 	background-color: var(--secondary-color);
 	margin-right: 2rem;
+	margin-bottom: .7rem;
 }
 
 .generator:hover {
