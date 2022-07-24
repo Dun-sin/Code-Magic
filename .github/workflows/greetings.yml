@@ -16,7 +16,7 @@ jobs:
         pr-message: "Congratualations on creating your first pull request on this project🥂🥳 I hope you continue to make this project better[Automated]"
     - uses: kyoncy/issue-comment-actions@v1
       with:
-        repo-token: ${{ secrets.GENERAL_TOKEN }}
+        token: ${{ secrets.GENERAL_TOKEN }}
         message: "Thanks for creating this issue, make sure to wait till you are allowed to work on this before you do and when you are allowed to, don't forget to mention this issue in your pull request[Automated]"
     - uses: github-actions-up-and-running/pr-comment@v1.0.1
       with:
