@@ -20,10 +20,6 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-    - uses: github-actions-up-and-running/pr-comment@v1.0.1
-      with:
-        repo-token: ${{ secrets.GENERAL_TOKEN }}
-        message: "Thanks for proposing to make changes to this project, your code will be reviewed soon"
     - uses: ben-z/actions-comment-on-issue@1.0.2
       with:
         message: "Thanks for creating this issue, make sure to wait till you are allowed to work on this before you do and when you are allowed to, don't forget to mention this issue in your pull request[Automated]"
