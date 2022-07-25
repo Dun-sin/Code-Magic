@@ -14,16 +14,24 @@ jobs:
         repo-token: ${{ secrets.GENERAL_TOKEN }}
         issue-message: "Wow, you just created your first issue on this project, that's so cool. Make sure to wait till you are allowed to work on this before you do and when you are allowed to, don't forget to mention this issue in your pull request[Automated]"
         pr-message: "Congratualations on creating your first pull request on this project🥂🥳 I hope you continue to make this project better[Automated]" 
-  issues-pr-comments:
+  issues-comments:
     runs-on: ubuntu-latest
     permissions:
       issues: write
-      pull-requests: write
     steps:
     - uses: ben-z/actions-comment-on-issue@1.0.2
       with:
         message: "Thanks for creating this issue, make sure to wait till you are allowed to work on this before you do and when you are allowed to, don't forget to mention this issue in your pull request[Automated]"
         GITHUB_TOKEN: ${{ secrets.GENERAL_TOKEN }}
+    - uses: JoseThen/comment-pr@v1.1.1
+      with:
+        comment: "Thanks for proposing to make changes to this project, your code will be reviewed soon"
+        GITHUB_TOKEN: ${{ secrets.GENERAL_TOKEN }}
+  pr-comments:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
     - uses: JoseThen/comment-pr@v1.1.1
       with:
         comment: "Thanks for proposing to make changes to this project, your code will be reviewed soon"
