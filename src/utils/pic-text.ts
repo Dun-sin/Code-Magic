@@ -101,6 +101,7 @@ export function getImageFile(attribute: string): void {
 			// set the image source to the output of the Image Transform plugin
 			img.src = URL.createObjectURL(output);
 			imageSRC = img.src;
+                        console.log(fileItem)
 		},
 	});
 }
