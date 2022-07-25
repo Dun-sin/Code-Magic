@@ -24,6 +24,12 @@ jobs:
       with:
         message: "Thanks for creating this issue, make sure to wait till you are allowed to work on this before you do and when you are allowed to, don't forget to mention this issue in your pull request[Automated]"
         GITHUB_TOKEN: ${{ secrets.GENERAL_TOKEN }}
+    - uses: JoseThen/comment-pr@v1.1.1
+      with:
+        comment: "Thanks for proposing to make changes to this project, your code will be reviewed soon"
+        GITHUB_TOKEN: ${{ secrets.GENERAL_TOKEN }}
+
+
 
 
         
