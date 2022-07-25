@@ -273,7 +273,7 @@ footer {
 	align-items: center;
 	justify-content: center;
 	font-size: 1.5rem;
-	position: fixed;
+	position: absolute;
 	bottom: 1rem;
 	width: 100%;
 	color: #04001a;
@@ -310,4 +310,30 @@ a {
 	:root {
 		--output-width: 300px;
 	}
+}
+
+@media screen and (max-width: 425px) {
+    footer {
+        position: static;
+    }
+    .download-btn .btn {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .download-btn .btn {
+        width: 68%;
+    }
+    .input {
+        position: relative;
+        padding-right: 50px;
+    }
+    input[type='text'],
+    textarea,
+    textarea:focus {
+        height: 30px;
+        width: 120px;
+        text-align: center;
+    }
 }
