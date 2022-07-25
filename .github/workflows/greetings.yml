@@ -21,7 +21,7 @@ jobs:
     steps:
     - name: checking
       run: |
-        echo '${{ github.context.repo.owner }} ${{ github.event.issue.user.login }}'
+        echo '${{ github.repository_owner }} ${{ github.event.issue.user.login }}'
     - uses: ben-z/actions-comment-on-issue@1.0.2
       with:
         message: "Thank you for creating this issue. Wait until you are allowed to work on this before you start, and do not forget to include this issue in your pull request[Automated]."
