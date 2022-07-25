@@ -15,6 +15,7 @@ jobs:
         issue-message: "Wow, you just created your first issue on this project, that's so cool. Make sure to wait till you are allowed to work on this before you do and when you are allowed to, don't forget to mention this issue in your pull request[Automated]"
         pr-message: "Congratualations on creating your first pull request on this project🥂🥳 I hope you continue to make this project better[Automated]" 
   issues-comments:
+    if: ${{ github.repository_owner != github.event.issue.user.login }}
     runs-on: ubuntu-latest
     permissions:
       issues: write
