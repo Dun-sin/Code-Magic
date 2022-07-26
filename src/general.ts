@@ -60,13 +60,25 @@ export function countForText(inputElement: HTMLInputElement): void {
 	});
 }
 
-export function downloadJPG(outputImage: HTMLElement): void {
-	domtoimage.toJpeg(outputImage, { quality: 0.95 }).then((dataUrl) => {
+/**
+ * @function downloadPNG
+ * @summary Download the element in image type extension of png
+ * @param outputImage {HTMLElement} - element to convert to an image
+ * @return {void} Nothing
+ */
+export function downloadPNG(outputImage: HTMLElement): void {
+	domtoimage.toPng(outputImage, { quality: 0.95 }).then((dataUrl) => {
 		const link = createDownloadLink('pic-text.jpeg', dataUrl);
 		link.click();
 	});
 }
 
+/**
+ * @function downloadSVG
+ * @summary Download the element in image type extension of svg
+ * @param outputImage {HTMLElement} - element to convert to an svg
+ * @return {void} Nothing
+ */
 export function downloadSVG(outputImage: HTMLElement): void {
 	domtoimage.toSvg(outputImage).then((dataUrl) => {
 		const link = createDownloadLink('pic-text.svg', dataUrl);
@@ -74,6 +86,12 @@ export function downloadSVG(outputImage: HTMLElement): void {
 	});
 }
 
+/**
+ * @function getCopyCodeButton
+ * @summary Get the button element for copying code to clipboard
+ * @param attribute {string} - The attribute name of the generator element
+ * @return {HTMLElement} The type of the button Element
+ */
 export function getCopyCodeButton(attribute: string): HTMLElement {
 	const buttonElement = <HTMLElement>(
 		document.querySelector(`[data-download = ${attribute}-code]`)
@@ -82,14 +100,26 @@ export function getCopyCodeButton(attribute: string): HTMLElement {
 	return buttonElement;
 }
 
-export function getJPGButton(attribute: string): HTMLElement {
-	const getDownloadJPG = <HTMLElement>(
-		document.querySelector(`[data-download=${attribute}-jpg]`)
+/**
+ * @function getPNGButton
+ * @summary Get the button element for downloading in image form
+ * @param attribute {string} - The attribute name of the generator element
+ * @return {HTMLElement} The type of the button Element
+ */
+export function getPNGButton(attribute: string): HTMLElement {
+	const getDownloadPNG = <HTMLElement>(
+		document.querySelector(`[data-download=${attribute}-PNG]`)
 	);
 
-	return getDownloadJPG;
+	return getDownloadPNG;
 }
 
+/**
+ * @function getSVGButton
+ * @summary Get the button element for downloading in svg format
+ * @param attribute {string} - The attribute name of the generator element
+ * @return {HTMLElement} The type of the button Element
+ */
 export function getSVGButton(attribute: string): HTMLElement {
 	const getDownloadSVG = <HTMLElement>(
 		document.querySelector(`[data-download=${attribute}-svg]`)
