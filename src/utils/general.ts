@@ -54,27 +54,18 @@ export function countForText(inputElement: HTMLInputElement): void {
 	});
 }
 
-export function downloadImage(attribute: string): void {
-	const outputImage = <HTMLElement>document.querySelector('.output');
-	const getDownloadJpg = <HTMLElement>(
-		document.querySelector(`[data-download=${attribute}-jpg]`)
-	);
-	const getDownloadSvg = <HTMLElement>(
-		document.querySelector(`[data-download=${attribute}-svg]`)
-	);
-
-	getDownloadJpg.addEventListener('click', () => {
-		domtoimage.toJpeg(outputImage, { quality: 0.95 }).then((dataUrl) => {
-			const link = createDownloadLink('pic-text.jpeg', dataUrl);
-			link.click();
-		});
+export function downloadJPG(outputImage: HTMLElement): void {
+	domtoimage.toJpeg(outputImage, { quality: 0.95 }).then((dataUrl) => {
+		const link = createDownloadLink('pic-text.jpeg', dataUrl);
+		link.click();
 	});
+}
 
-	getDownloadSvg.addEventListener('click', () => {
-		domtoimage.toSvg(outputImage).then((dataUrl) => {
-			const link = createDownloadLink('pic-text.svg', dataUrl);
-			link.click();
-		});
+export function downloadSVG(outputImage: HTMLElement): void {
+	domtoimage.toSvg(outputImage).then((dataUrl) => {
+		const link = createDownloadLink('pic-text.svg', dataUrl);
+		link.click();
+	});
 	});
 }
 
