@@ -126,3 +126,33 @@ function removeOrAddGeneratorContent(
 	);
 	generator.style.display = `${display}`;
 }
+
+// Close button for modals
+closeModalElement?.addEventListener('click', (): void => {
+	isOpen = false;
+
+	isVisible(isOpen);
+
+	const getImageEntryElement = <HTMLInputElement>(
+		document.getElementById(`pic-text-file`)
+	);
+	getImageEntryElement.setAttribute('value', '');
+	getImageEntryElement.setAttribute('src', '');
+	FilePond.destroy(getImageEntryElement);
+
+	if (attributeValue === null) return;
+	removeOrAddGeneratorContent(attributeValue, 'none');
+});
+
+// adding an event listeners to all generators card
+generators.forEach((generator) => {
+	generator?.addEventListener('click', (): void => {
+		isOpen = true;
+		isVisible(isOpen);
+		const checking = generator.getAttribute('data-gen');
+		if (checking === null) return;
+
+		attributeValue = checking;
+		checkingIfGeneratorExists(attributeValue);
+	});
+});
