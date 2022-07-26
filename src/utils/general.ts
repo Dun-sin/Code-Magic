@@ -35,6 +35,12 @@ export function copyCodeToClipboard(
     `;
 				break;
 			case 'gradient-text':
+				codeToCopy = `
+        p{
+          ${outputElement.children[0].attributes[0].value}
+        }
+        `;
+
 				break;
 		}
 		copy(codeToCopy);

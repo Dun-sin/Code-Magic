@@ -1,4 +1,4 @@
-import { copyCodeToClipboard } from './general';
+import { copyCodeToClipboard, getCopyCodeButton } from './general';
 
 /**
  * @function gradientTextGenerator
@@ -52,6 +52,11 @@ function getGradientTextResult(
 		wordElement.style.webkitTextFillColor = 'transparent';
 		outputElement.appendChild(wordElement);
 	};
+
+	const getCodeButtonElement = getCopyCodeButton(attribute);
+	getCodeButtonElement.addEventListener('click', () => {
+		copyCodeToClipboard(attribute, outputElement);
+	});
 
 	if (outputElement.childElementCount >= 1) {
 		outputElement.innerHTML = '';
