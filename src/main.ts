@@ -1,7 +1,6 @@
 // Generator Modules
 import { picTextGenerator } from './utils/pic-text';
 import { gradientTextGenerator } from './utils/gradient-text';
-import { downloadImage } from './utils/general';
 
 import * as FilePond from 'filepond';
 
@@ -61,9 +60,8 @@ generators.forEach((generator) => {
 function checkingIfGeneratorExists(attribute: string | null): void {
 	if (attribute === null) return;
 
-	generatorsFunction(attribute);
-	downloadImage(attribute);
 	changeHeaderText(attribute);
+	generatorsFunction(attribute);
 }
 
 /**

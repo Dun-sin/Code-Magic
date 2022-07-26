@@ -1,4 +1,4 @@
-import { copyCodeToClipboard, countForText } from './general';
+import * as utils from './general';
 
 import * as FilePond from 'filepond';
 import 'filepond/dist/filepond.min.css';
@@ -34,7 +34,7 @@ export function picTextGenerator(attribute: string): void {
 		document.querySelector(`[data-modal=${attribute}]  .output`)
 	);
 
-	countForText(getTextInputElement);
+	utils.countForText(getTextInputElement);
 	getPicTextResult(attribute, getOutputElement, getTextInputElement.value);
 }
 
@@ -56,18 +56,28 @@ function getPicTextResult(
 	const getImageButtonElement = <HTMLInputElement>(
 		document.querySelector(`[data-button = ${attribute}]`)
 	);
-
-	getImageButtonElement.addEventListener('click', (): void => {
-		console.log(imageSRC);
-		setOnClick();
-		copyCodeToClipboard(attribute, outputNode);
-	});
+	const getCodeButtonElement = utils.getCopyCodeButton(attribute);
+	const getJPGButtonElement = utils.getJPGButton(attribute);
+	const getSVGButtonElement = utils.getSVGButton(attribute);
 
 	if (outputNode === null) {
 		return;
 	}
 
-	const setOnClick = () => {
+	getImageButtonElement.addEventListener('click', (): void => {
+		setOnClick();
+	});
+	getJPGButtonElement.addEventListener('click', () => {
+		utils.downloadJPG(outputNode);
+	});
+	getSVGButtonElement.addEventListener('click', () => {
+		utils.downloadSVG(outputNode);
+	});
+	getCodeButtonElement.addEventListener('click', () => {
+		utils.copyCodeToClipboard(attribute, outputNode);
+	});
+
+	function setOnClick() {
 		outputNode.style.background = `url(${imageSRC}) center no-repeat`;
 		outputNode.style.backgroundSize = 'var(--output-width)';
 		outputNode.style.backgroundClip = 'text';
@@ -77,7 +87,7 @@ function getPicTextResult(
 			imageText = text;
 		}
 		outputNode.innerText = imageText;
-	};
+	}
 }
 
 /**
@@ -101,7 +111,7 @@ export function getImageFile(attribute: string): void {
 			// set the image source to the output of the Image Transform plugin
 			img.src = URL.createObjectURL(output);
 			imageSRC = img.src;
-                        console.log(fileItem)
+			console.log(fileItem);
 		},
 	});
 }
