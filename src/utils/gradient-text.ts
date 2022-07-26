@@ -1,3 +1,5 @@
+import { copyCodeToClipboard } from './general';
+
 /**
  * @function gradientTextGenerator
  * @summary handles functionality of the gradient text generator

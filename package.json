@@ -6,7 +6,7 @@
 		"dev": "vite",
 		"build": "tsc && vite build",
 		"preview": "vite preview",
-    "test": "jest src/__tests__/ --coverage"
+		"test": "jest src/__tests__/ --coverage"
 	},
 	"devDependencies": {
 		"@types/dom-to-image": "^2.6.4",
@@ -14,6 +14,7 @@
 		"vite": "^2.9.9"
 	},
 	"dependencies": {
+		"copy-to-clipboard": "^3.3.1",
 		"dom-to-image": "^2.6.0",
 		"filepond": "^4.30.4",
 		"filepond-plugin-image-preview": "^4.6.11",

@@ -1,4 +1,6 @@
 import domtoimage from 'dom-to-image';
+import copy from 'copy-to-clipboard';
+
 /**
  * @function copyCodeToClipboard
  * @summary Allows you to copy to clipboard
@@ -18,9 +20,10 @@ export function copyCodeToClipboard(
 	});
 
 	function actOnGenerator() {
+		let codeToCopy: string = '';
 		switch (attribute) {
 			case 'pic-text':
-				let codeToCopy: string = `
+				codeToCopy = `
       div {
         background-position: ${outputElement.style.backgroundPosition};
         background-size: ${outputElement.style.backgroundSize};
@@ -30,21 +33,11 @@ export function copyCodeToClipboard(
         -webkit-text-fill-color: ${outputElement.style.webkitTextFillColor};
       }
     `;
-				const permissionName = 'clipboard-write' as PermissionName;
-				navigator.permissions.query({ name: permissionName }).then((result) => {
-					if (result.state === 'granted' || result.state === 'prompt') {
-						navigator.clipboard
-							.writeText(codeToCopy)
-							.then(() => {
-								alert('copied to clipboard');
-							})
-							.catch(() => alert('error copying to clipboard'));
-					}
-				});
 				break;
 			case 'gradient-text':
 				break;
 		}
+		copy(codeToCopy);
 	}
 }
 
