@@ -66,7 +66,30 @@ export function downloadSVG(outputImage: HTMLElement): void {
 		const link = createDownloadLink('pic-text.svg', dataUrl);
 		link.click();
 	});
-	});
+}
+
+export function getCopyCodeButton(attribute: string): HTMLElement {
+	const buttonElement = <HTMLElement>(
+		document.querySelector(`[data-download = ${attribute}-code]`)
+	);
+
+	return buttonElement;
+}
+
+export function getJPGButton(attribute: string): HTMLElement {
+	const getDownloadJPG = <HTMLElement>(
+		document.querySelector(`[data-download=${attribute}-jpg]`)
+	);
+
+	return getDownloadJPG;
+}
+
+export function getSVGButton(attribute: string): HTMLElement {
+	const getDownloadSVG = <HTMLElement>(
+		document.querySelector(`[data-download=${attribute}-svg]`)
+	);
+
+	return getDownloadSVG;
 }
 
 function createDownloadLink(fileName: string, url: string) {
