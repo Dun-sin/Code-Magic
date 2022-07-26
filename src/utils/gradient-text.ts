@@ -24,7 +24,7 @@ export function gradientTextGenerator(attribute: string): void {
 	getOutputButton?.addEventListener('click', () => {
 		if (getInputElement.value.length === 0) return;
 
-		getGradientTextResult(getInputElement.value, getOutputElement);
+		getGradientTextResult(attribute, getInputElement.value, getOutputElement);
 		getInputElement.value = '';
 	});
 }
@@ -36,7 +36,11 @@ export function gradientTextGenerator(attribute: string): void {
  * @param {HTMLElement} outputElement - Elements that shows the result
  * @return {void} nothing
  */
-function getGradientTextResult(text: string, outputElement: HTMLElement): void {
+function getGradientTextResult(
+	attribute: string,
+	text: string,
+	outputElement: HTMLElement,
+): void {
 	const createTextElement = () => {
 		const wordElement = document.createElement('p');
 		wordElement.innerText = text;
