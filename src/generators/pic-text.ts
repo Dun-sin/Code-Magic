@@ -57,7 +57,7 @@ function getPicTextResult(
 		document.querySelector(`[data-button = ${attribute}]`)
 	);
 	const getCodeButtonElement = utils.getCopyCodeButton(attribute);
-	const getJPGButtonElement = utils.getJPGButton(attribute);
+	const getPNGButtonElement = utils.getPNGButton(attribute);
 	const getSVGButtonElement = utils.getSVGButton(attribute);
 
 	if (outputNode === null) {
@@ -67,8 +67,8 @@ function getPicTextResult(
 	getImageButtonElement.addEventListener('click', (): void => {
 		setOnClick();
 	});
-	getJPGButtonElement.addEventListener('click', () => {
-		utils.downloadJPG(outputNode);
+	getPNGButtonElement.addEventListener('click', () => {
+		utils.downloadPNG(outputNode);
 	});
 	getSVGButtonElement.addEventListener('click', () => {
 		utils.downloadSVG(outputNode);
