@@ -1,4 +1,4 @@
-import { copyCodeToClipboard, getCopyCodeButton } from './general';
+import { copyCodeToClipboard, getCopyCodeButton } from '../general';
 
 /**
  * @function gradientTextGenerator

@@ -1,6 +1,6 @@
 // Generator Modules
-import { picTextGenerator } from './utils/pic-text';
-import { gradientTextGenerator } from './utils/gradient-text';
+import { picTextGenerator } from './generators/pic-text';
+import { gradientTextGenerator } from './generators/gradient-text';
 
 import * as FilePond from 'filepond';
 
