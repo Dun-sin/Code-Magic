@@ -1,4 +1,4 @@
-import { copyCodeToClipboard, getCopyCodeButton } from '../general';
+import * as utils from '../general';
 
 /**
  * @function gradientTextGenerator
@@ -53,10 +53,9 @@ function getGradientTextResult(
 		outputElement.appendChild(wordElement);
 	};
 
-	const getCodeButtonElement = getCopyCodeButton(attribute);
-	getCodeButtonElement.addEventListener('click', () => {
-		copyCodeToClipboard(attribute, outputElement);
-	});
+	const getCodeButtonElement = utils.getCopyCodeButton(attribute);
+	const getPNGButtonElement = utils.getPNGButton(attribute);
+	const getSVGButtonElement = utils.getSVGButton(attribute);
 
 	if (outputElement.childElementCount >= 1) {
 		outputElement.innerHTML = '';
@@ -64,4 +63,16 @@ function getGradientTextResult(
 	} else {
 		createTextElement();
 	}
+
+	getPNGButtonElement.addEventListener('click', () => {
+		utils.downloadPNG(attribute, outputElement);
+	});
+
+	getSVGButtonElement.addEventListener('click', () => {
+		utils.downloadSVG(attribute, outputElement);
+	});
+
+	getCodeButtonElement.addEventListener('click', () => {
+		utils.copyCodeToClipboard(attribute, outputElement);
+	});
 }
