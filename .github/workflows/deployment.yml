@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          tsc && vite build
+          tsc && npm run build
 
       - uses: amondnet/vercel-action@v20 #deploy
         with:
