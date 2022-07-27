@@ -1,7 +1,9 @@
 ## trick-generator
+
 A website to help you get simple tricks you can use in your applications with html and css
 
 ### ⚒️ Languages / Tools
+
  <table>
 	 <tbody>
   <tr>
@@ -23,9 +25,9 @@ A website to help you get simple tricks you can use in your applications with ht
   </table>
 	
 <br>
-    
 
 ## 🧑🏾‍💻 Demo
+
 Check out the website: [Trick Generator](https://trick-generator.vercel.app/)
 
 ## 👇🏽 Prerequisites
@@ -49,6 +51,7 @@ git clone https://github.com/<your-github-username>/trick-generator
 ```bash
 cd trick-generator
 ```
+
 4. Install dependencies with npm install
 
 ```bash
@@ -60,6 +63,33 @@ npm install
 ```bash
 npm run dev
 ```
+
+## 🥂 After making a change
+
+1. Create a new branch
+
+```bash
+git checkout -b YourBranchName
+```
+
+2. Add it to staging area
+
+> NOTE: don't commit the package.json
+
+```bash
+git add .
+```
+
+3. Commit your changes with
+
+```bash
+git cz
+```
+
+4. Push your changes
+   ```bash
+   git push
+   ```
 
 ## 👩🏽‍💻 Contributing
 
