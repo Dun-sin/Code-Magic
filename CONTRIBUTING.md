@@ -66,7 +66,7 @@ git merge upstream/main
 ⚠️ Make sure not to commit package.json or package-lock.json file
 
 ```bash
-git commit -m "<your_commit_message>"
+git cz
 ```
 
 9. Push your local commits to the remote repository:
