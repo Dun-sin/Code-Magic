@@ -97,8 +97,7 @@ function removeOrAddGeneratorContent(
 	generator.style.display = `${display}`;
 }
 
-// Close button for modals
-closeModalElement?.addEventListener('click', (): void => {
+function closeModalFunction() {
 	isOpen = false;
 
 	isVisible(isOpen);
@@ -112,6 +111,17 @@ closeModalElement?.addEventListener('click', (): void => {
 
 	if (attributeValue === null) return;
 	removeOrAddGeneratorContent(attributeValue, 'none');
+}
+
+// Close button for modals
+closeModalElement?.addEventListener('click', (): void => {
+	closeModalFunction();
+});
+
+document?.addEventListener('keydown', (e) => {
+	if (e.key === 'Escape') {
+		closeModalFunction();
+	}
 });
 
 // adding an event listeners to all generators card
