@@ -10,6 +10,8 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"esModuleInterop": true,
+		"strictFunctionTypes": false,
+		"allowUnreachableCode": false,
 		"noEmit": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
