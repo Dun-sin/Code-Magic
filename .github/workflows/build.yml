@@ -12,4 +12,4 @@ jobs:
       - name: install dependencies
         run: npm install
       - name: run build
-        run: tsc && vite build
+        run: tsc && npm run build
