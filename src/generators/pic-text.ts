@@ -68,10 +68,10 @@ function getPicTextResult(
 		setOnClick();
 	});
 	getPNGButtonElement.addEventListener('click', () => {
-		utils.downloadPNG(outputNode);
+		utils.downloadPNG(attribute, outputNode);
 	});
 	getSVGButtonElement.addEventListener('click', () => {
-		utils.downloadSVG(outputNode);
+		utils.downloadSVG(attribute, outputNode);
 	});
 	getCodeButtonElement.addEventListener('click', () => {
 		utils.copyCodeToClipboard(attribute, outputNode);
