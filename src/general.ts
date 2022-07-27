@@ -66,9 +66,9 @@ export function countForText(inputElement: HTMLInputElement): void {
  * @param outputImage {HTMLElement} - element to convert to an image
  * @return {void} Nothing
  */
-export function downloadPNG(outputImage: HTMLElement): void {
+export function downloadPNG(attribute: string, outputImage: HTMLElement): void {
 	domtoimage.toPng(outputImage, { quality: 0.95 }).then((dataUrl) => {
-		const link = createDownloadLink('pic-text.jpeg', dataUrl);
+		const link = createDownloadLink(`${attribute}.png`, dataUrl);
 		link.click();
 	});
 }
@@ -79,9 +79,9 @@ export function downloadPNG(outputImage: HTMLElement): void {
  * @param outputImage {HTMLElement} - element to convert to an svg
  * @return {void} Nothing
  */
-export function downloadSVG(outputImage: HTMLElement): void {
+export function downloadSVG(attribute: string, outputImage: HTMLElement): void {
 	domtoimage.toSvg(outputImage).then((dataUrl) => {
-		const link = createDownloadLink('pic-text.svg', dataUrl);
+		const link = createDownloadLink(`${attribute}.svg`, dataUrl);
 		link.click();
 	});
 }
