@@ -3,6 +3,7 @@ import { picTextGenerator } from './generators/pic-text';
 import { gradientTextGenerator } from './generators/gradient-text';
 
 import * as FilePond from 'filepond';
+import { gradientBorderGenerator } from './generators/gradient-border';
 
 /**
  * All Variables
@@ -72,10 +73,13 @@ function generatorsFunction(attribute: string): void {
 	removeOrAddGeneratorContent(attribute, 'flex');
 	switch (attribute) {
 		case 'pic-text':
-			picTextGenerator(attribute);
+			picTextGenerator();
 			break;
 		case 'gradient-text':
-			gradientTextGenerator(attribute);
+			gradientTextGenerator();
+			break;
+		case 'gradient-border':
+			gradientBorderGenerator();
 			break;
 	}
 }
