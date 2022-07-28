@@ -92,13 +92,8 @@ export function downloadSVG(attribute: string, outputImage: HTMLElement): void {
  * @param attribute {string} - The attribute name of the generator element
  * @return {HTMLElement} The type of the button Element
  */
-export function getCopyCodeButton(attribute: string): HTMLElement {
-	const buttonElement = <HTMLElement>(
-		document.querySelector(`[data-download = ${attribute}-code]`)
-	);
-
-	return buttonElement;
-}
+export const getCopyCodeButton = (attribute: string): HTMLElement =>
+	<HTMLElement>document.querySelector(`[data-download = ${attribute}-code]`);
 
 /**
  * @function getPNGButton
@@ -106,13 +101,8 @@ export function getCopyCodeButton(attribute: string): HTMLElement {
  * @param attribute {string} - The attribute name of the generator element
  * @return {HTMLElement} The type of the button Element
  */
-export function getPNGButton(attribute: string): HTMLElement {
-	const getDownloadPNG = <HTMLElement>(
-		document.querySelector(`[data-download=${attribute}-PNG]`)
-	);
-
-	return getDownloadPNG;
-}
+export const getPNGButton = (attribute: string): HTMLElement =>
+	<HTMLElement>document.querySelector(`[data-download=${attribute}-PNG]`);
 
 /**
  * @function getSVGButton
@@ -120,43 +110,21 @@ export function getPNGButton(attribute: string): HTMLElement {
  * @param attribute {string} - The attribute name of the generator element
  * @return {HTMLElement} The type of the button Element
  */
-export function getSVGButton(attribute: string): HTMLElement {
-	const getDownloadSVG = <HTMLElement>(
-		document.querySelector(`[data-download=${attribute}-svg]`)
-	);
+export const getSVGButton = (attribute: string): HTMLElement =>
+	<HTMLElement>document.querySelector(`[data-download=${attribute}-svg]`);
 
-	return getDownloadSVG;
-}
+export const getResultButton = (attribute: string): HTMLElement =>
+	<HTMLElement>document.querySelector(`[data-button = ${attribute}]`);
 
-export function getResultButton(attribute: string): HTMLElement {
-	const getOutputButton = <HTMLElement>(
-		document.querySelector(`[data-button = ${attribute}]`)
-	);
+export const getColorInput1 = (attribute: string): HTMLInputElement =>
+	<HTMLInputElement>document.getElementById(`${attribute}-color1`);
 
-	return getOutputButton;
-}
+export const getColorInput2 = (attribute: string): HTMLInputElement =>
+	<HTMLInputElement>document.getElementById(`${attribute}-color2`);
 
-export function getColorInput1(attribute: string): HTMLInputElement {
-	const colorElement = <HTMLInputElement>(
-		document.getElementById(`${attribute}-color1`)
-	);
-	return colorElement;
-}
+export const getOutput = (attribute: string): HTMLElement =>
+	<HTMLElement>document.querySelector(`[data-modal = ${attribute}] .output`);
 
-export function getColorInput2(attribute: string): HTMLInputElement {
-	const colorElement = <HTMLInputElement>(
-		document.getElementById(`${attribute}-color2`)
-	);
-	return colorElement;
-}
-
-export function getOutput(attribute: string): HTMLElement {
-	const outputElement = <HTMLElement>(
-		document.querySelector(`[data-modal = ${attribute}] .output`)
-	);
-
-	return outputElement;
-}
 function createDownloadLink(fileName: string, url: string) {
 	const link = document.createElement('a');
 	link.download = fileName;
