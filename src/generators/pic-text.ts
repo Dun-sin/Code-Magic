@@ -24,15 +24,14 @@ let imageSRC: string;
  * @param attribute - The attribute name of the generator element
  * @return {void} Nothing
  */
-export function picTextGenerator(attribute: string): void {
+export function picTextGenerator(): void {
+	const attribute = 'pic-text';
 	getImageFile(attribute);
 	const getTextInputElement = <HTMLInputElement>(
 		document.getElementById(`${attribute}-text`)
 	);
 
-	const getOutputElement = <HTMLElement>(
-		document.querySelector(`[data-modal=${attribute}]  .output`)
-	);
+	const getOutputElement = utils.getOutput(attribute);
 
 	utils.countForText(getTextInputElement);
 	getPicTextResult(attribute, getOutputElement, getTextInputElement.value);
