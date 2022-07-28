@@ -42,6 +42,16 @@ export function copyCodeToClipboard(
         `;
 
 				break;
+			case 'gradient-border':
+				const element = outputElement.style;
+				codeToCopy = `
+          div {
+            border: ${element.border},
+            border-width: ${element.borderWidth},
+            border-image-slice: ${element.borderImageSlice},
+            border-image-source: ${element.borderImageSource},
+          }
+        `;
 		}
 		copy(codeToCopy);
 	}

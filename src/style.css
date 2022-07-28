@@ -237,13 +237,28 @@ textarea:focus {
 [data-modal='gradient-border'] .input p {
 	margin-bottom: 0.5em;
 }
-[data-modal='gradient-border'] [type='color']:last-of-type {
-	margin-bottom: 1em;
+
+[data-modal='gradient-border'] .input label {
+	background-color: #fff;
+	display: flex;
+	padding: 10px;
+	margin-bottom: 5px;
+	border-radius: 10px;
+	color: black;
 }
 
-[data-modal='gradient-border'] [type='color'] {
-	height: 40px;
-	width: 100%;
+[type='color'] {
+	width: 30px;
+	height: 30px;
+	border: none;
+	margin-right: 10px;
+}
+
+[type='color']::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+
+[type='color']::-webkit-color-swatch {
 	border: none;
 }
 
