@@ -234,6 +234,19 @@ textarea:focus {
 	overflow-y: hidden;
 }
 
+[data-modal='gradient-border'] .input p {
+	margin-bottom: 0.5em;
+}
+[data-modal='gradient-border'] [type='color']:last-of-type {
+	margin-bottom: 1em;
+}
+
+[data-modal='gradient-border'] [type='color'] {
+	height: 40px;
+	width: 100%;
+	border: none;
+}
+
 .count {
 	position: absolute;
 	right: 24px;
