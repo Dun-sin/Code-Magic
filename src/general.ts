@@ -128,6 +128,35 @@ export function getSVGButton(attribute: string): HTMLElement {
 	return getDownloadSVG;
 }
 
+export function getResultButton(attribute: string): HTMLElement {
+	const getOutputButton = <HTMLElement>(
+		document.querySelector(`[data-button = ${attribute}]`)
+	);
+
+	return getOutputButton;
+}
+
+export function getColorInput1(attribute: string): HTMLInputElement {
+	const colorElement = <HTMLInputElement>(
+		document.getElementById(`${attribute}-color1`)
+	);
+	return colorElement;
+}
+
+export function getColorInput2(attribute: string): HTMLInputElement {
+	const colorElement = <HTMLInputElement>(
+		document.getElementById(`${attribute}-color2`)
+	);
+	return colorElement;
+}
+
+export function getOutput(attribute: string): HTMLElement {
+	const outputElement = <HTMLElement>(
+		document.querySelector(`[data-modal = ${attribute}] .output`)
+	);
+
+	return outputElement;
+}
 function createDownloadLink(fileName: string, url: string) {
 	const link = document.createElement('a');
 	link.download = fileName;

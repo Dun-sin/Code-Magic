@@ -6,22 +6,19 @@ import * as utils from '../general';
  * @param attribute - The attribute name of the generator element
  * @return {void} Nothing
  */
-export function gradientTextGenerator(attribute: string): void {
+export function gradientTextGenerator(): void {
+	const attribute = 'gradient-text';
 	const getInputElement = <HTMLInputElement>(
 		document.getElementById(`${attribute}-text`)
 	);
-	const getOutputElement = <HTMLElement>(
-		document.querySelector(`[data-modal = ${attribute}] .output`)
-	);
+	const getOutputElement = utils.getOutput(attribute);
 	getOutputElement.style.display = 'grid';
 	getOutputElement.style.height = 'fit-content';
 	getOutputElement.style.placeItems = 'center';
 
-	const getOutputButton = document.querySelector(
-		`[data-button = ${attribute}]`,
-	);
+	const getTextButtonElement = utils.getResultButton(attribute);
 
-	getOutputButton?.addEventListener('click', () => {
+	getTextButtonElement?.addEventListener('click', () => {
 		if (getInputElement.value.length === 0) return;
 
 		getGradientTextResult(attribute, getInputElement.value, getOutputElement);
