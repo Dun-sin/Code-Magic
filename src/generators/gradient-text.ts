@@ -1,5 +1,10 @@
 import * as utils from '../general';
 
+type Colors = {
+	firstColor: string;
+	secondColor: string;
+};
+
 /**
  * @function gradientTextGenerator
  * @summary handles functionality of the gradient text generator
@@ -17,11 +22,23 @@ export function gradientTextGenerator(): void {
 	getOutputElement.style.placeItems = 'center';
 
 	const getTextButtonElement = utils.getResultButton(attribute);
+	const getFirstColor = utils.getColorInput1(attribute);
+	const getSecondColor = utils.getColorInput2(attribute);
 
 	getTextButtonElement?.addEventListener('click', () => {
 		if (getInputElement.value.length === 0) return;
 
-		getGradientTextResult(attribute, getInputElement.value, getOutputElement);
+		const colors = {
+			firstColor: getFirstColor.value,
+			secondColor: getSecondColor.value,
+		};
+
+		getGradientTextResult(
+			attribute,
+			getInputElement.value,
+			colors,
+			getOutputElement,
+		);
 		getInputElement.value = '';
 	});
 }
@@ -36,14 +53,14 @@ export function gradientTextGenerator(): void {
 function getGradientTextResult(
 	attribute: string,
 	text: string,
+	colors: Colors,
 	outputElement: HTMLElement,
 ): void {
 	const createTextElement = () => {
 		const wordElement = document.createElement('p');
 		wordElement.innerText = text;
 		wordElement.style.fontSize = '2rem';
-		wordElement.style.background =
-			'linear-gradient(to bottom, rgb(119, 118, 248) 50%, rgb(94, 238, 94))';
+		wordElement.style.background = `linear-gradient(to bottom, ${colors.firstColor} 50%, ${colors.secondColor})`;
 		wordElement.style.webkitBackgroundClip = 'text';
 		wordElement.style.backgroundClip = 'text';
 		wordElement.style.webkitTextFillColor = 'transparent';

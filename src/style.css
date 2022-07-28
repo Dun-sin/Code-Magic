@@ -233,12 +233,11 @@ textarea:focus {
 	width: var(--input-width);
 	overflow-y: hidden;
 }
-
-[data-modal='gradient-border'] .input p {
+.input p {
 	margin-bottom: 0.5em;
 }
 
-[data-modal='gradient-border'] .input label {
+.input label {
 	background-color: #fff;
 	display: flex;
 	padding: 10px;
