@@ -42,6 +42,16 @@ export function copyCodeToClipboard(
         `;
 
 				break;
+			case 'gradient-border':
+				const element = outputElement.style;
+				codeToCopy = `
+          div {
+            border: ${element.border},
+            border-width: ${element.borderWidth},
+            border-image-slice: ${element.borderImageSlice},
+            border-image-source: ${element.borderImageSource},
+          }
+        `;
 		}
 		copy(codeToCopy);
 	}
@@ -121,7 +131,7 @@ export const getColorInput1 = (attribute: string): HTMLInputElement =>
 
 export const getColorInput2 = (attribute: string): HTMLInputElement =>
 	<HTMLInputElement>document.getElementById(`${attribute}-color2`);
-
+  
 export const getOutput = (attribute: string): HTMLElement =>
 	<HTMLElement>document.querySelector(`[data-modal = ${attribute}] .output`);
 

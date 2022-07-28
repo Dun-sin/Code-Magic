@@ -17,11 +17,12 @@ export function gradientBorderGenerator(): void {
 			firstColor: color1.value,
 			secondColor: color2.value,
 		};
-		getGradientBorderResult(colors, getOutputElement);
+		getGradientBorderResult(attribute, colors, getOutputElement);
 	});
 }
 
 function getGradientBorderResult(
+	attribute: string,
 	colors: Colors,
 	outputElement: HTMLElement,
 ): void {
@@ -29,4 +30,9 @@ function getGradientBorderResult(
 	outputElement.style.borderWidth = '5px';
 	outputElement.style.borderImageSlice = '1';
 	outputElement.style.borderImageSource = `linear-gradient(100deg, ${colors.firstColor}, ${colors.secondColor})`;
+
+	const getCodeButtonElement = utils.getCopyCodeButton(attribute);
+	getCodeButtonElement.addEventListener('click', () => {
+		utils.copyCodeToClipboard(attribute, outputElement);
+	});
 }
