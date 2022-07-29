@@ -16,9 +16,7 @@ jobs:
         issue-message: "Wow, you just created your first issue on this project, that's so cool. Make sure to wait till you are allowed to work on this before you do and when you are allowed to, don't forget to mention this issue in your pull request. Also join the community - [Automated]"
         pr-message: "Congratualations on creating your first pull request on this project🥂🥳 I hope you continue to make this project better. Join the community - [Automated]" 
   issues-comments:
-    if: |
-      github.repository_owner != github.event.issue.user.login &&
-      github.event.pull_request.merged != true
+    if: ${{github.repository_owner != github.event.issue.user.login}} && ${{github.event.pull_request.merged != true}}
     runs-on: ubuntu-latest
     permissions:
       issues: write
@@ -28,9 +26,7 @@ jobs:
         message: "Thank you for creating this issue. Wait until you are allowed to work on this before you start, and do not forget to include this issue in your pull request. While you wait, don't forget to join the community - [Automated]."
         GITHUB_TOKEN: ${{ secrets.GENERAL_TOKEN }}
   pr-comments:
-    if: |
-      github.repository_owner != github.event.issue.user.login &&
-      github.event.pull_request.merged != true
+    if: ${{github.repository_owner != github.event.issue.user.login}} && ${{github.event.pull_request.merged != true}}
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
