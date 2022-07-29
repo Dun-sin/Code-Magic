@@ -51,6 +51,7 @@ nav h1 {
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
 	cursor: pointer;
+	animation: moveColor 500ms ease-in infinite alternate;
 }
 
 .menu {
@@ -320,6 +321,21 @@ footer {
 
 a {
 	color: var(--text-color);
+}
+
+@keyframes moveColor {
+	0% {
+		background: linear-gradient(26deg, rgb(255, 255, 255), rgb(105, 143, 216));
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+	100% {
+		background: linear-gradient(272deg, rgb(255, 255, 255), rgb(105, 143, 216));
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
 }
 
 @media screen and (max-width: 1300px) and (min-width: 1009px) {
