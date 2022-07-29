@@ -140,3 +140,13 @@ generators.forEach((generator) => {
 		checkingIfGeneratorExists(attributeValue);
 	});
 });
+
+// closing modal when user clicks outside
+document.addEventListener("click", function (event) {
+  if (event.target === null) return;
+  const element = <HTMLElement>event.target;
+  if (element.matches(".modal-container")) {
+    closeModalFunction();
+  }
+});
+
