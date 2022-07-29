@@ -96,6 +96,22 @@ export function downloadSVG(attribute: string, outputImage: HTMLElement): void {
 	});
 }
 
+export function triggerEmptyAnimation(inputElement: HTMLInputElement): void {
+	inputElement.style.borderColor = 'red';
+	inputElement.animate(
+		[
+			{ transform: 'translate(10px, 0)' },
+			{ transform: 'translate(-10px, 0)' },
+			{ transform: 'translate(0, 0)' },
+		],
+		{ duration: 300 },
+	);
+
+	setTimeout(() => {
+		inputElement.style.borderColor = 'white';
+	}, 1000);
+}
+
 /**
  * @function getCopyCodeButton
  * @summary Get the button element for copying code to clipboard
@@ -137,6 +153,9 @@ export const getOutput = (attribute: string): HTMLElement =>
 
 export const getRange = (attribute: string): HTMLInputElement =>
 	<HTMLInputElement>document.getElementById(`${attribute}-degree`);
+
+export const getInputText = (attribute: string) =>
+	<HTMLInputElement>document.getElementById(`${attribute}-text`);
 
 function createDownloadLink(fileName: string, url: string) {
 	const link = document.createElement('a');

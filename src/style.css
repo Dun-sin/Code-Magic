@@ -221,6 +221,7 @@ textarea:focus {
 	border: 0.5px solid var(--text-color);
 	border-radius: 3px;
 	font-size: 1.3rem;
+	position: relative;
 }
 
 ::placeholder {

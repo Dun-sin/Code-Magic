@@ -13,9 +13,7 @@ type Values = {
  */
 export function gradientTextGenerator(): void {
 	const attribute = 'gradient-text';
-	const getInputElement = <HTMLInputElement>(
-		document.getElementById(`${attribute}-text`)
-	);
+	const getInputElement = utils.getInputText(attribute);
 	const getOutputElement = utils.getOutput(attribute);
 	getOutputElement.style.display = 'grid';
 	getOutputElement.style.height = 'fit-content';
@@ -27,7 +25,10 @@ export function gradientTextGenerator(): void {
 	const getRangeElement = utils.getRange(attribute);
 
 	getTextButtonElement?.addEventListener('click', () => {
-		if (getInputElement.value.length === 0) return;
+		if (getInputElement.value.length === 0) {
+			utils.triggerEmptyAnimation(getInputElement);
+			return;
+		}
 
 		const values = {
 			firstColor: getFirstColor.value,
