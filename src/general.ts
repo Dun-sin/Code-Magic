@@ -135,6 +135,9 @@ export const getColorInput2 = (attribute: string): HTMLInputElement =>
 export const getOutput = (attribute: string): HTMLElement =>
 	<HTMLElement>document.querySelector(`[data-modal = ${attribute}] .output`);
 
+export const getRange = (attribute: string): HTMLInputElement =>
+	<HTMLInputElement>document.getElementById(`${attribute}-degree`);
+
 function createDownloadLink(fileName: string, url: string) {
 	const link = document.createElement('a');
 	link.download = fileName;

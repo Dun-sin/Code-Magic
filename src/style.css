@@ -212,7 +212,7 @@ main {
 input[type='text'],
 textarea,
 textarea:focus {
-	height: 30px;
+	height: 40px;
 	outline: none;
 	padding: 5px;
 	caret-color: var(--text-color);
@@ -220,6 +220,7 @@ textarea:focus {
 	background: transparent;
 	border: 0.5px solid var(--text-color);
 	border-radius: 3px;
+	font-size: 1.3rem;
 }
 
 ::placeholder {
@@ -251,6 +252,7 @@ textarea:focus {
 	height: 30px;
 	border: none;
 	margin-right: 10px;
+	cursor: pointer;
 }
 
 [type='color']::-webkit-color-swatch-wrapper {
@@ -259,6 +261,14 @@ textarea:focus {
 
 [type='color']::-webkit-color-swatch {
 	border: none;
+}
+
+#degree {
+	flex-direction: column;
+}
+
+#degree > span {
+	font-size: 0.7em;
 }
 
 .count {
