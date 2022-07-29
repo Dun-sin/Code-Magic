@@ -25,6 +25,16 @@ export function gradientTextGenerator(): void {
 	const getRangeElement = utils.getRange(attribute);
 
 	getTextButtonElement?.addEventListener('click', () => {
+		onClickButton();
+	});
+
+	document?.addEventListener('keydown', (e) => {
+		if (e.key === 'Enter') {
+			onClickButton();
+		}
+	});
+
+	function onClickButton() {
 		if (getInputElement.value.length === 0) {
 			utils.triggerEmptyAnimation(getInputElement);
 			return;
@@ -43,7 +53,7 @@ export function gradientTextGenerator(): void {
 			getOutputElement,
 		);
 		// getInputElement.value = '';
-	});
+	}
 }
 
 /**

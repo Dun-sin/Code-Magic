@@ -15,13 +15,23 @@ export function gradientBorderGenerator(): void {
 	const getRangeElement = utils.getRange(attribute);
 
 	getResultButtonElement.addEventListener('click', () => {
+		onClickButton();
+	});
+
+	document?.addEventListener('keydown', (e) => {
+		if (e.key === 'Enter') {
+			onClickButton();
+		}
+	});
+
+	function onClickButton() {
 		const values = {
 			firstColor: color1.value,
 			secondColor: color2.value,
 			degree: getRangeElement.value,
 		};
 		getGradientBorderResult(attribute, values, getOutputElement);
-	});
+	}
 }
 
 function getGradientBorderResult(
