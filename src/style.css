@@ -5,11 +5,11 @@
 	--secondary-color: #eae5ff;
 
 	/* Heights */
-	--generator-height: 14rem;
+	--generator-height: 15rem;
 	--modal-container-height: 100vh;
 
 	/* Widths */
-	--generator-width: 12rem;
+	--generator-width: 13rem;
 	--modal-container-width: 100vw;
 	--modal-width: calc(var(--modal-container-width) - 30vw);
 	--input-width: 300px;
@@ -92,11 +92,12 @@ main {
 	background-color: var(--secondary-color);
 	margin-right: 2rem;
 	margin-bottom: 0.7rem;
+	box-shadow: 0 15px 30px rgba(0, 0, 0, 0.30), 0 11px 8px rgba(0, 0, 0, 0.22);
 }
 
-.generator:hover {
+/* .generator:hover {
 	box-shadow: var(--secondary-color) -2.5px 2.5px 2px;
-}
+} */
 
 .generator > img {
 	width: var(--generator-width);
@@ -112,10 +113,10 @@ main {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
-	padding: 0.5rem 0 1rem 0;
+	padding: 1rem 0 1rem 0;
 }
 
-.generator h2 {
+.generator > div > h2 {
 	font-size: 1.2rem;
 }
 
@@ -139,7 +140,6 @@ main {
 	bottom: 0;
 	margin: auto;
 	background-color: #1d2a3a48;
-
 	display: none;
 	place-items: center;
 	padding: 2rem;
@@ -155,6 +155,7 @@ main {
 	justify-content: space-between;
 	background: #6d57d9;
 	border: 1px solid rgba(191, 178, 255, 0.3);
+	box-shadow: 0 15px 30px rgba(0, 0, 0, 0.30), 0 11px 8px rgba(0, 0, 0, 0.22);
 	border-radius: 10px;
 }
 
@@ -205,6 +206,7 @@ main {
 	display: flex;
 	flex-direction: column;
 	position: relative;
+
 }
 
 .input > .btn {
@@ -240,6 +242,9 @@ textarea:focus {
 .input p {
 	margin-bottom: 0.5em;
 }
+.input > .pickColor{
+	padding: .5rem 0;
+}
 
 .input label {
 	background-color: #fff;
@@ -248,6 +253,7 @@ textarea:focus {
 	margin-bottom: 5px;
 	border-radius: 10px;
 	color: black;
+	cursor: pointer !important;
 }
 
 [type='color'] {
@@ -272,6 +278,7 @@ textarea:focus {
 
 #degree > span {
 	font-size: 0.7em;
+	padding-bottom: .5rem;
 }
 
 .count {
@@ -284,12 +291,14 @@ textarea:focus {
 .btn {
 	height: 40px;
 	border-radius: 5px;
-	display: grid;
-	place-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	border: 1px solid var(--text-color);
 	cursor: pointer;
 	margin-top: 0.2rem;
 }
+
 
 .output {
 	width: var(--output-width);
@@ -365,11 +374,42 @@ a {
 	:root {
 		--output-width: 300px;
 	}
+	.modal-generator {
+		width: 80vw;
+		margin: 3rem 0;
+	}
+	.modal-container {
+		width:100%;
+		display:flex;
+		justify-content: center;
+		align-items: center;
+		
+	}
+	.generators {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.generator {
+		margin-right: 0;
+		margin-bottom: 2rem;
+		box-shadow: 0 15px 30px rgba(0, 0, 0, 0.30), 0 11px 8px rgba(0, 0, 0, 0.22);
+	}
+	footer {
+	font-size: 20px;
+	position: relative;
+	bottom: 1rem;
+	}
+
 }
 
 @media screen and (max-width: 444px) {
+	
 	.modal-generator {
 		width: 90vw;
+		margin: 3rem 0;
 	}
 }
 
