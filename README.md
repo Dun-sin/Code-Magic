@@ -58,6 +58,10 @@ cd trick-generator
 npm install
 ```
 
+```bash
+npm install -g commitizen 
+```
+
 5. Run the project
 
 ```bash
