@@ -89,15 +89,17 @@ main {
 	align-items: center;
 	cursor: pointer;
 	transition: all 200ms ease-in-out;
-	background-color: var(--secondary-color);
+	/* background-color: var(--secondary-color); */
 	margin-right: 2rem;
 	margin-bottom: 0.7rem;
 	box-shadow: 0 15px 30px rgba(0, 0, 0, 0.30), 0 11px 8px rgba(0, 0, 0, 0.22);
 }
 
-/* .generator:hover {
-	box-shadow: var(--secondary-color) -2.5px 2.5px 2px;
-} */
+.generator:hover {
+		width:  15rem;
+		box-shadow: 0 15px 30px rgba(0, 0, 0, 0.30), 0 11px 8px rgba(0, 0, 0, 0.22);
+
+}
 
 .generator > img {
 	width: var(--generator-width);
