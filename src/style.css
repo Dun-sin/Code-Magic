@@ -378,13 +378,6 @@ a {
 		width: 80vw;
 		margin: 3rem 0;
 	}
-	.modal-container {
-		width:100%;
-		display:flex;
-		justify-content: center;
-		align-items: center;
-		
-	}
 	.generators {
 		display: flex;
 		flex-wrap: wrap;
