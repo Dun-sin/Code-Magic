@@ -116,7 +116,7 @@ main {
 }
 
 .generator h2 {
-	font-size: 1.2rem;
+	font-size: min(1.1rem, 2.5rem);
 }
 
 .generator > div img {
@@ -320,13 +320,13 @@ footer {
 	color: #ffffff;
 	background-color: #9580ff;
 	z-index: 1;
-	-webkit-box-shadow: 0px -4px 11px 0px rgba(0,0,0,0.75);
-	-moz-box-shadow: 0px -4px 11px 0px rgba(0,0,0,0.75);
-	box-shadow: 0px -4px 11px 0px rgba(0,0,0,0.75);
+	-webkit-box-shadow: 0px -4px 11px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px -4px 11px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px -4px 11px 0px rgba(0, 0, 0, 0.75);
 }
 
 a {
-	color: #0000FF;
+	color: #0000ff;
 }
 
 @keyframes moveColor {
@@ -377,7 +377,7 @@ a {
 		width: 90vw;
 	}
 
-	footer{
+	footer {
 		font-size: 1.3rem;
 	}
 }
