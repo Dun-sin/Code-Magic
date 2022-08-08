@@ -21,6 +21,7 @@ export function copyCodeToClipboard(
 
 	function actOnGenerator() {
 		let codeToCopy: string = '';
+		let element;
 		switch (attribute) {
 			case 'pic-text':
 				codeToCopy = `
@@ -43,13 +44,23 @@ export function copyCodeToClipboard(
 
 				break;
 			case 'gradient-border':
-				const element = outputElement.style;
+				element = outputElement.style;
 				codeToCopy = `
           div {
             border: ${element.border},
             border-width: ${element.borderWidth},
             border-image-slice: ${element.borderImageSlice},
             border-image-source: ${element.borderImageSource},
+          }
+        `;
+				break;
+			case 'gradient-background':
+				element = outputElement.style;
+				codeToCopy = `
+          div {
+            height: 100px;
+            width: 100px;
+            background: ${element.backgroundImage};
           }
         `;
 		}

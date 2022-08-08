@@ -44,7 +44,7 @@
 						loading="lazy"
 					/>
 					<div>
-						<h2>Pic-Text generator</h2>
+						<h2>Pic-Text</h2>
 						<img
 							src="./assets/bi_arrow-right-square-fill.svg"
 							alt="Right Icon"
@@ -58,7 +58,7 @@
 						loading="lazy"
 					/>
 					<div>
-						<h2>Gradient Text Generator</h2>
+						<h2>Gradient Text</h2>
 						<img
 							src="./assets/bi_arrow-right-square-fill.svg"
 							alt="Right Icon"
@@ -68,11 +68,25 @@
 				<div class="generator" data-gen="gradient-border">
 					<img
 						src="https://user-images.githubusercontent.com/78784850/181470923-7693a5fd-6519-472a-9edd-a31667a14187.png"
-						alt="Gradient Border Generator"
+						alt="Gradient Border"
 						loading="lazy"
 					/>
 					<div>
-						<h2>Gradient Border Generator</h2>
+						<h2>Gradient Border</h2>
+						<img
+							src="./assets/bi_arrow-right-square-fill.svg"
+							alt="Right Icon"
+						/>
+					</div>
+				</div>
+				<div class="generator" data-gen="gradient-background">
+					<img
+						src="https://user-images.githubusercontent.com/78784850/183375805-478b002f-4ef2-4ab8-8b1b-da50482b45ff.png"
+						alt="Gradient Background"
+						loading="lazy"
+					/>
+					<div>
+						<h2>Gradient Background</h2>
 						<img
 							src="./assets/bi_arrow-right-square-fill.svg"
 							alt="Right Icon"
@@ -206,6 +220,51 @@
 							<div class="output"></div>
 							<div class="download-btn">
 								<button class="btn" data-download="gradient-border-code">
+									Get Code
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="modal-main-content" data-modal="gradient-background">
+						<div class="input">
+							<p>Pick Your Colors:</p>
+
+							<label for="colorPicker">
+								<input
+									type="color"
+									value="#1DB8CE"
+									id="gradient-background-color1"
+								/>
+								<span>First Color</span>
+							</label>
+
+							<label for="colorPicker">
+								<input
+									type="color"
+									value="#1DB4CE"
+									id="gradient-background-color2"
+								/>
+								<span>Second Color</span>
+							</label>
+
+							<label id="degree">
+								<span>Slide to change the degree</span>
+								<input
+									type="range"
+									max="360"
+									min="0"
+									id="gradient-background-degree"
+								/>
+							</label>
+
+							<div class="btn" data-button="gradient-background">
+								Get Result
+							</div>
+						</div>
+						<div class="download-output">
+							<div class="output"></div>
+							<div class="download-btn">
+								<button class="btn" data-download="gradient-background-code">
 									Get Code
 								</button>
 							</div>
