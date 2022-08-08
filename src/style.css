@@ -14,6 +14,7 @@
 	--modal-width: calc(var(--modal-container-width) - 30vw);
 	--input-width: 300px;
 	--output-width: 400px;
+	--pseudo-footer-height:70px;
 }
 
 *,
@@ -29,6 +30,7 @@ body {
 	background-color: var(--primary-color);
 	color: var(--text-color);
 	overflow-x: hidden;
+	padding-bottom:var(--pseudo-footer-height) ;
 }
 
 nav {
@@ -81,7 +83,7 @@ main {
 	height: var(--generator-height);
 	width: var(--generator-width);
 	border-radius: 10px;
-	text-align: center;
+	/* text-align: center; */
 	font-size: 1rem;
 	display: flex;
 	flex-direction: column;
@@ -112,19 +114,21 @@ main {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
-	padding: 0.5rem 0 1rem 0;
+	padding: 5px 10px;
+	position: relative;
 }
 
 .generator h2 {
+	padding-right: 10px;
 	font-size: 1.2rem;
 }
 
 .generator > div img {
 	height: 30px;
 	width: 30px;
-	position: relative;
-	margin-left: auto;
-	margin-right: 1rem;
+	position: absolute;
+	right: 7px;
+	bottom: 5px;
 }
 
 /* Generator Modal */
@@ -283,12 +287,13 @@ textarea:focus {
 
 .btn {
 	height: 40px;
-	border-radius: 5px;
-	display: grid;
-	place-items: center;
+	border-radius: 5px; 
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	border: 1px solid var(--text-color);
 	cursor: pointer;
-	margin-top: 0.2rem;
+	margin-top: 0.4rem;
 }
 
 .output {
@@ -375,6 +380,14 @@ a {
 @media screen and (max-width: 444px) {
 	.modal-generator {
 		width: 90vw;
+	}
+
+	.generator{
+		margin: 0.8rem auto;
+	}
+
+	:root {
+		--generator-width:14rem;
 	}
 
 	footer{
