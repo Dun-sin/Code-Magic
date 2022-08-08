@@ -1,5 +1,9 @@
 ### Contributing guidelines
 
+## Rules 
+- Don't work on anything unless you are assigned, if you make a pull request without being assigned to that issue, it will be closed without being merged 
+- Don't work on more than one issue at a time, this is so that you don't make a huge pull request and others can have opportunities to work on another issue while you work on something else 
+
 ## 👩🏽‍💻 Prerequisite Skills to Contribute
 
 ### Contribute in project
