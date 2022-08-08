@@ -104,6 +104,9 @@ Don't forget to join the discord community - [Join us](https://discord.gg/KUWjx4
 - Any contributions you make are greatly appreciated.
 - Check out our [contribution guidelines](/CONTRIBUTING.md) for more information.
 
+## 🖥️ Online IDE
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Dun-sin/trick-generator)
+
 ## 🛡️ License
 
 trick-generator is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
