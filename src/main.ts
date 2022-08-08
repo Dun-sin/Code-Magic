@@ -1,9 +1,10 @@
 // Generator Modules
 import { picTextGenerator } from './generators/pic-text';
 import { gradientTextGenerator } from './generators/gradient-text';
+import { gradientBorderGenerator } from './generators/gradient-border';
+import { gradientBackgroundGenerator } from './generators/gradient-background';
 
 import * as FilePond from 'filepond';
-import { gradientBorderGenerator } from './generators/gradient-border';
 
 /**
  * All Variables
@@ -81,6 +82,9 @@ function generatorsFunction(attribute: string): void {
 		case 'gradient-border':
 			gradientBorderGenerator();
 			break;
+		case 'gradient-background':
+			gradientBackgroundGenerator();
+			break;
 	}
 }
 
@@ -142,11 +146,10 @@ generators.forEach((generator) => {
 });
 
 // closing modal when user clicks outside
-document.addEventListener("click", function (event) {
-  if (event.target === null) return;
-  const element = <HTMLElement>event.target;
-  if (element.matches(".modal-container")) {
-    closeModalFunction();
-  }
+document.addEventListener('click', function (event) {
+	if (event.target === null) return;
+	const element = <HTMLElement>event.target;
+	if (element.matches('.modal-container')) {
+		closeModalFunction();
+	}
 });
-
