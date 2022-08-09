@@ -43,17 +43,14 @@ nav {
 }
 
 nav h1 {
-	background: linear-gradient(
-		90.3deg,
-		#ffffff 47.88%,
-		#aca1e5 74.32%,
-		#bfb8e5 99.74%
-	);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	background-clip: text;
-	cursor: pointer;
-	animation: moveColor 500ms ease-in infinite alternate;
+  font-size: 2rem;
+  background: linear-gradient(90deg, #ffffff, #aea3e9f8, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 70% 100%;
+  cursor: pointer;
+  animation: moveColor 7s linear infinite;
 }
 
 .menu {
@@ -335,18 +332,12 @@ a {
 }
 
 @keyframes moveColor {
-	0% {
-		background: linear-gradient(26deg, rgb(255, 255, 255), rgb(105, 143, 216));
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-	}
-	100% {
-		background: linear-gradient(272deg, rgb(255, 255, 255), rgb(105, 143, 216));
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-	}
+  0% {
+    background-position-x: -500%;
+  }
+  100% {
+    background-position-x: 500%;
+  }
 }
 
 @media screen and (max-width: 1300px) and (min-width: 1009px) {
