@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,14 +14,14 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-			rel="stylesheet"
-		/>
+			rel="stylesheet" />
 
 		<!-- Scripts -->
 		<script type="module" src="./src/main.ts" defer></script>
 
 		<title>Trick Generator</title>
 	</head>
+
 	<body>
 		<nav>
 			<h1 id="head">Trick Generator</h1>
@@ -38,59 +39,35 @@
 			<!-- Generator Card -->
 			<div class="generators">
 				<div class="generator" data-gen="pic-text">
-					<img
-						src="https://user-images.githubusercontent.com/78784850/177135924-aec3794a-8bd8-48ec-bd5a-4aee074c7a16.png"
-						alt="Picture-Text Generator"
-						loading="lazy"
-					/>
+					<img src="https://user-images.githubusercontent.com/78784850/177135924-aec3794a-8bd8-48ec-bd5a-4aee074c7a16.png"
+						alt="Picture-Text Generator" loading="lazy" />
 					<div>
 						<h2>Pic-Text</h2>
-						<img
-							src="./assets/bi_arrow-right-square-fill.svg"
-							alt="Right Icon"
-						/>
+						<img src="./assets/bi_arrow-right-square-fill.svg" alt="Right Icon" />
 					</div>
 				</div>
 				<div class="generator" data-gen="gradient-text">
-					<img
-						src="https://user-images.githubusercontent.com/78784850/179534667-c5de2a54-5eee-49d3-a7b6-6404e1cde5de.png"
-						alt="Gradient Text Generator"
-						loading="lazy"
-					/>
+					<img src="https://user-images.githubusercontent.com/78784850/179534667-c5de2a54-5eee-49d3-a7b6-6404e1cde5de.png"
+						alt="Gradient Text Generator" loading="lazy" />
 					<div>
 						<h2>Gradient Text</h2>
-						<img
-							src="./assets/bi_arrow-right-square-fill.svg"
-							alt="Right Icon"
-						/>
+						<img src="./assets/bi_arrow-right-square-fill.svg" alt="Right Icon" />
 					</div>
 				</div>
 				<div class="generator" data-gen="gradient-border">
-					<img
-						src="https://user-images.githubusercontent.com/78784850/181470923-7693a5fd-6519-472a-9edd-a31667a14187.png"
-						alt="Gradient Border"
-						loading="lazy"
-					/>
+					<img src="https://user-images.githubusercontent.com/50910798/183639196-f0feb476-cfa3-4396-8556-b251666d7ead.jpg"
+						alt="Gradient Border" loading="lazy" />
 					<div>
 						<h2>Gradient Border</h2>
-						<img
-							src="./assets/bi_arrow-right-square-fill.svg"
-							alt="Right Icon"
-						/>
+						<img src="./assets/bi_arrow-right-square-fill.svg" alt="Right Icon" />
 					</div>
 				</div>
 				<div class="generator" data-gen="gradient-background">
-					<img
-						src="https://user-images.githubusercontent.com/78784850/183375805-478b002f-4ef2-4ab8-8b1b-da50482b45ff.png"
-						alt="Gradient Background"
-						loading="lazy"
-					/>
+					<img src="https://user-images.githubusercontent.com/78784850/183375805-478b002f-4ef2-4ab8-8b1b-da50482b45ff.png"
+						alt="Gradient Background" loading="lazy" />
 					<div>
 						<h2>Gradient Background</h2>
-						<img
-							src="./assets/bi_arrow-right-square-fill.svg"
-							alt="Right Icon"
-						/>
+						<img src="./assets/bi_arrow-right-square-fill.svg" alt="Right Icon" />
 					</div>
 				</div>
 			</div>
@@ -99,20 +76,13 @@
 				<div class="modal-generator">
 					<div class="modal-header">
 						<p id="heading-text-modal"></p>
-						<img
-							src="./assets/close-square-fill.svg"
-							alt="close button"
-							id="close-modal"
-						/>
+						<img src="./assets/close-square-fill.svg" alt="close button" id="close-modal" />
 					</div>
 					<div class="modal-main-content" data-modal="pic-text">
 						<div class="input">
 							<div>
-								<textarea
-									id="pic-text-text"
-									placeholder="Enter the text you want(Optional)"
-									class="input-bar"
-								></textarea>
+								<textarea id="pic-text-text" placeholder="Enter the text you want(Optional)"
+									class="input-bar"></textarea>
 								<p class="count"><span>0</span>/400</p>
 							</div>
 							<input type="file" id="pic-text-file" required />
@@ -139,11 +109,7 @@
 					</div>
 					<div class="modal-main-content" data-modal="gradient-text">
 						<div class="input">
-							<input
-								type="text"
-								id="gradient-text-text"
-								placeholder="Enter the text"
-							/>
+							<input type="text" id="gradient-text-text" placeholder="Enter the text" />
 
 							<p>Pick Your Colors:</p>
 
@@ -158,12 +124,7 @@
 							</label>
 							<label id="degree">
 								<span>Slide to change the degree</span>
-								<input
-									type="range"
-									max="360"
-									min="0"
-									id="gradient-text-degree"
-								/>
+								<input type="range" max="360" min="0" id="gradient-text-degree" />
 							</label>
 							<div class="btn" data-button="gradient-text">Get Text</div>
 						</div>
@@ -187,31 +148,18 @@
 							<p>Pick Your Colors:</p>
 
 							<label for="colorPicker">
-								<input
-									type="color"
-									value="#1DB8CE"
-									id="gradient-border-color1"
-								/>
+								<input type="color" value="#1DB8CE" id="gradient-border-color1" />
 								<span>First Color</span>
 							</label>
 
 							<label for="colorPicker">
-								<input
-									type="color"
-									value="#1DB4CE"
-									id="gradient-border-color2"
-								/>
+								<input type="color" value="#1DB4CE" id="gradient-border-color2" />
 								<span>Second Color</span>
 							</label>
 
 							<label id="degree">
 								<span>Slide to change the degree</span>
-								<input
-									type="range"
-									max="360"
-									min="0"
-									id="gradient-border-degree"
-								/>
+								<input type="range" max="360" min="0" id="gradient-border-degree" />
 							</label>
 
 							<div class="btn" data-button="gradient-border">Get Result</div>
@@ -230,31 +178,18 @@
 							<p>Pick Your Colors:</p>
 
 							<label for="colorPicker">
-								<input
-									type="color"
-									value="#1DB8CE"
-									id="gradient-background-color1"
-								/>
+								<input type="color" value="#1DB8CE" id="gradient-background-color1" />
 								<span>First Color</span>
 							</label>
 
 							<label for="colorPicker">
-								<input
-									type="color"
-									value="#1DB4CE"
-									id="gradient-background-color2"
-								/>
+								<input type="color" value="#1DB4CE" id="gradient-background-color2" />
 								<span>Second Color</span>
 							</label>
 
 							<label id="degree">
 								<span>Slide to change the degree</span>
-								<input
-									type="range"
-									max="360"
-									min="0"
-									id="gradient-background-degree"
-								/>
+								<input type="range" max="360" min="0" id="gradient-background-degree" />
 							</label>
 
 							<div class="btn" data-button="gradient-background">
@@ -277,11 +212,10 @@
 		<footer>
 			<p>
 				Contribute to the Project
-				<a href="https://github.com/Dun-sin/trick-generator" target="_blank"
-					>Click Here</a
-				>
+				<a href="https://github.com/Dun-sin/trick-generator" target="_blank">Click Here</a>
 			</p>
 			<p>Made with 💘 by the community</p>
 		</footer>
 	</body>
+
 </html>
