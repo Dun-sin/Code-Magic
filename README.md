@@ -1,5 +1,7 @@
 ## trick-generator
 
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Dun-sin/trick-generator)
+
 A website to help you get simple tricks you can use in your applications with html and css
 
 ### ⚒️ Languages / Tools
