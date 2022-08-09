@@ -12,7 +12,6 @@
 
 - [Node.js](https://nodejs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
-- 
 ---
 
 ## 💥 How to Contribute
