@@ -85,14 +85,24 @@ git checkout -b YourBranchName
 ```bash
 git add .
 ```
+3. Run prettier using these commands to format the code properly and keep it readable.
 
-3. Commit your changes with
+>For checking the files for code style issues use this command
+```bash
+npm run prettier:check
+```
+
+>For resolving/overwriting the code style issues in the files changed use this command
+```bash
+npm run prettier:write
+```
+4. Commit your changes with
 
 ```bash
 git cz
 ```
 
-4. Push your changes
+5. Push your changes
 ```bash
 git push
 ```
