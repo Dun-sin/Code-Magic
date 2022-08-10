@@ -14,7 +14,6 @@ type Values = {
 export function gradientTextGenerator(): void {
   const attribute = "gradient-text";
   const getInputElement = utils.getInputText(attribute);
-  getInputElement.value = "Some Example Text";
   const getOutputElement = utils.getOutput(attribute);
   getOutputElement.style.display = "grid";
   getOutputElement.style.height = "fit-content";
