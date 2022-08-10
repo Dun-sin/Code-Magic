@@ -8,23 +8,18 @@ import copy from 'copy-to-clipboard';
  * @param {HTMLElement} outputElement - Element to copy the element from
  * @return {void} Nothing
  */
-export function copyCodeToClipboard(
-	attribute: string,
-	outputElement: HTMLElement,
-): void {
-	const copyCodeButton = <HTMLElement>(
-		document.querySelector(`[data-download=${attribute}-code]`)
-	);
-	copyCodeButton.addEventListener('click', (): void => {
-		actOnGenerator();
-	});
+export function copyCodeToClipboard(attribute: string, outputElement: HTMLElement): void {
+  const copyCodeButton = <HTMLElement>document.querySelector(`[data-download=${attribute}-code]`);
+  copyCodeButton.addEventListener('click', (): void => {
+    actOnGenerator();
+  });
 
-	function actOnGenerator() {
-		let codeToCopy: string = '';
-		let element;
-		switch (attribute) {
-			case 'pic-text':
-				codeToCopy = `
+  function actOnGenerator() {
+    let codeToCopy: string = '';
+    let element;
+    switch (attribute) {
+      case 'pic-text':
+        codeToCopy = `
       div {
         background-position: ${outputElement.style.backgroundPosition};
         background-size: ${outputElement.style.backgroundSize};
@@ -34,18 +29,18 @@ export function copyCodeToClipboard(
         -webkit-text-fill-color: ${outputElement.style.webkitTextFillColor};
       }
     `;
-				break;
-			case 'gradient-text':
-				codeToCopy = `
+        break;
+      case 'gradient-text':
+        codeToCopy = `
         p{
           ${outputElement.children[0].attributes[0].value}
         }
         `;
 
-				break;
-			case 'gradient-border':
-				element = outputElement.style;
-				codeToCopy = `
+        break;
+      case 'gradient-border':
+        element = outputElement.style;
+        codeToCopy = `
           div {
             border: ${element.border},
             border-width: ${element.borderWidth},
@@ -53,19 +48,19 @@ export function copyCodeToClipboard(
             border-image-source: ${element.borderImageSource},
           }
         `;
-				break;
-			case 'gradient-background':
-				element = outputElement.style;
-				codeToCopy = `
+        break;
+      case 'gradient-background':
+        element = outputElement.style;
+        codeToCopy = `
           div {
             height: 100px;
             width: 100px;
             background: ${element.backgroundImage};
           }
         `;
-		}
-		copy(codeToCopy);
-	}
+    }
+    copy(codeToCopy);
+  }
 }
 
 /**
@@ -75,10 +70,10 @@ export function copyCodeToClipboard(
  * @return {void} Nothing
  */
 export function countForText(inputElement: HTMLInputElement): void {
-	const countElement = <HTMLElement>document.querySelector('.count > span');
-	inputElement.addEventListener('keydown', (): void => {
-		countElement.innerText = `${inputElement.value.length + 1}`;
-	});
+  const countElement = <HTMLElement>document.querySelector('.count > span');
+  inputElement.addEventListener('keydown', (): void => {
+    countElement.innerText = `${inputElement.value.length + 1}`;
+  });
 }
 
 /**
@@ -88,10 +83,10 @@ export function countForText(inputElement: HTMLInputElement): void {
  * @return {void} Nothing
  */
 export function downloadPNG(attribute: string, outputImage: HTMLElement): void {
-	domtoimage.toPng(outputImage, { quality: 0.95 }).then((dataUrl) => {
-		const link = createDownloadLink(`${attribute}.png`, dataUrl);
-		link.click();
-	});
+  domtoimage.toPng(outputImage, { quality: 0.95 }).then((dataUrl) => {
+    const link = createDownloadLink(`${attribute}.png`, dataUrl);
+    link.click();
+  });
 }
 
 /**
@@ -101,26 +96,22 @@ export function downloadPNG(attribute: string, outputImage: HTMLElement): void {
  * @return {void} Nothing
  */
 export function downloadSVG(attribute: string, outputImage: HTMLElement): void {
-	domtoimage.toSvg(outputImage).then((dataUrl) => {
-		const link = createDownloadLink(`${attribute}.svg`, dataUrl);
-		link.click();
-	});
+  domtoimage.toSvg(outputImage).then((dataUrl) => {
+    const link = createDownloadLink(`${attribute}.svg`, dataUrl);
+    link.click();
+  });
 }
 
 export function triggerEmptyAnimation(inputElement: HTMLInputElement): void {
-	inputElement.style.borderColor = 'red';
-	inputElement.animate(
-		[
-			{ transform: 'translate(10px, 0)' },
-			{ transform: 'translate(-10px, 0)' },
-			{ transform: 'translate(0, 0)' },
-		],
-		{ duration: 300 },
-	);
+  inputElement.style.borderColor = 'red';
+  inputElement.animate(
+    [{ transform: 'translate(10px, 0)' }, { transform: 'translate(-10px, 0)' }, { transform: 'translate(0, 0)' }],
+    { duration: 300 }
+  );
 
-	setTimeout(() => {
-		inputElement.style.borderColor = 'white';
-	}, 1000);
+  setTimeout(() => {
+    inputElement.style.borderColor = 'white';
+  }, 1000);
 }
 
 /**
@@ -130,7 +121,7 @@ export function triggerEmptyAnimation(inputElement: HTMLInputElement): void {
  * @return {HTMLElement} The type of the button Element
  */
 export const getCopyCodeButton = (attribute: string): HTMLElement =>
-	<HTMLElement>document.querySelector(`[data-download = ${attribute}-code]`);
+  <HTMLElement>document.querySelector(`[data-download = ${attribute}-code]`);
 
 /**
  * @function getPNGButton
@@ -139,7 +130,7 @@ export const getCopyCodeButton = (attribute: string): HTMLElement =>
  * @return {HTMLElement} The type of the button Element
  */
 export const getPNGButton = (attribute: string): HTMLElement =>
-	<HTMLElement>document.querySelector(`[data-download=${attribute}-PNG]`);
+  <HTMLElement>document.querySelector(`[data-download=${attribute}-PNG]`);
 
 /**
  * @function getSVGButton
@@ -148,29 +139,28 @@ export const getPNGButton = (attribute: string): HTMLElement =>
  * @return {HTMLElement} The type of the button Element
  */
 export const getSVGButton = (attribute: string): HTMLElement =>
-	<HTMLElement>document.querySelector(`[data-download=${attribute}-svg]`);
+  <HTMLElement>document.querySelector(`[data-download=${attribute}-svg]`);
 
 export const getResultButton = (attribute: string): HTMLElement =>
-	<HTMLElement>document.querySelector(`[data-button = ${attribute}]`);
+  <HTMLElement>document.querySelector(`[data-button = ${attribute}]`);
 
 export const getColorInput1 = (attribute: string): HTMLInputElement =>
-	<HTMLInputElement>document.getElementById(`${attribute}-color1`);
+  <HTMLInputElement>document.getElementById(`${attribute}-color1`);
 
 export const getColorInput2 = (attribute: string): HTMLInputElement =>
-	<HTMLInputElement>document.getElementById(`${attribute}-color2`);
+  <HTMLInputElement>document.getElementById(`${attribute}-color2`);
 
 export const getOutput = (attribute: string): HTMLElement =>
-	<HTMLElement>document.querySelector(`[data-modal = ${attribute}] .output`);
+  <HTMLElement>document.querySelector(`[data-modal = ${attribute}] .output`);
 
 export const getRange = (attribute: string): HTMLInputElement =>
-	<HTMLInputElement>document.getElementById(`${attribute}-degree`);
+  <HTMLInputElement>document.getElementById(`${attribute}-degree`);
 
-export const getInputText = (attribute: string) =>
-	<HTMLInputElement>document.getElementById(`${attribute}-text`);
+export const getInputText = (attribute: string) => <HTMLInputElement>document.getElementById(`${attribute}-text`);
 
 function createDownloadLink(fileName: string, url: string) {
-	const link = document.createElement('a');
-	link.download = fileName;
-	link.href = url;
-	return link;
+  const link = document.createElement('a');
+  link.download = fileName;
+  link.href = url;
+  return link;
 }

@@ -14,9 +14,7 @@ let isOpen: boolean;
 // Elements
 const generators = document.querySelectorAll('[data-gen]');
 const closeModalElement = document.getElementById('close-modal');
-const modalContainerElement = <HTMLElement>(
-	document.querySelector('.modal-container')
-);
+const modalContainerElement = <HTMLElement>document.querySelector('.modal-container');
 
 /**
  * All types
@@ -30,10 +28,10 @@ type Display = 'grid' | 'flex' | 'none';
  * @return {void} nothing
  */
 function checkingIfGeneratorExists(attribute: string | null): void {
-	if (attribute === null) return;
+  if (attribute === null) return;
 
-	changeHeaderText(attribute);
-	generatorsFunction(attribute);
+  changeHeaderText(attribute);
+  generatorsFunction(attribute);
 }
 
 /**
@@ -43,12 +41,10 @@ function checkingIfGeneratorExists(attribute: string | null): void {
  * @return {void} nothing
  */
 function changeHeaderText(attribute: string): void {
-	const modalHeaderTextElement = <HTMLElement>(
-		document.getElementById('heading-text-modal')
-	);
+  const modalHeaderTextElement = <HTMLElement>document.getElementById('heading-text-modal');
 
-	attribute = attribute.charAt(0).toUpperCase() + attribute.slice(1);
-	modalHeaderTextElement.innerText = `${attribute} Generator`;
+  attribute = attribute.charAt(0).toUpperCase() + attribute.slice(1);
+  modalHeaderTextElement.innerText = `${attribute} Generator`;
 }
 
 /**
@@ -58,11 +54,11 @@ function changeHeaderText(attribute: string): void {
  * @return {void} nothing
  */
 function isVisible(isOpen: boolean): void {
-	if (isOpen) {
-		modalContainerElement.style.display = 'grid';
-	} else {
-		modalContainerElement.style.display = 'none';
-	}
+  if (isOpen) {
+    modalContainerElement.style.display = 'grid';
+  } else {
+    modalContainerElement.style.display = 'none';
+  }
 }
 
 /**
@@ -71,21 +67,21 @@ function isVisible(isOpen: boolean): void {
  * @param {string} attribute - The attribute name of the generator element
  */
 function generatorsFunction(attribute: string): void {
-	removeOrAddGeneratorContent(attribute, 'flex');
-	switch (attribute) {
-		case 'pic-text':
-			picTextGenerator();
-			break;
-		case 'gradient-text':
-			gradientTextGenerator();
-			break;
-		case 'gradient-border':
-			gradientBorderGenerator();
-			break;
-		case 'gradient-background':
-			gradientBackgroundGenerator();
-			break;
-	}
+  removeOrAddGeneratorContent(attribute, 'flex');
+  switch (attribute) {
+    case 'pic-text':
+      picTextGenerator();
+      break;
+    case 'gradient-text':
+      gradientTextGenerator();
+      break;
+    case 'gradient-border':
+      gradientBorderGenerator();
+      break;
+    case 'gradient-background':
+      gradientBackgroundGenerator();
+      break;
+  }
 }
 
 /**
@@ -95,61 +91,54 @@ function generatorsFunction(attribute: string): void {
  * @param {Display} display - display type
  * @return {void} Nothing
  */
-function removeOrAddGeneratorContent(
-	attribute: string,
-	display: Display,
-): void {
-	const generator = <HTMLElement>(
-		document.querySelector(`[data-modal = ${attribute}]`)
-	);
-	generator.style.display = `${display}`;
+function removeOrAddGeneratorContent(attribute: string, display: Display): void {
+  const generator = <HTMLElement>document.querySelector(`[data-modal = ${attribute}]`);
+  generator.style.display = `${display}`;
 }
 
 function closeModalFunction() {
-	isOpen = false;
+  isOpen = false;
 
-	isVisible(isOpen);
+  isVisible(isOpen);
 
-	const getImageEntryElement = <HTMLInputElement>(
-		document.getElementById(`pic-text-file`)
-	);
-	getImageEntryElement.setAttribute('value', '');
-	getImageEntryElement.setAttribute('src', '');
-	FilePond.destroy(getImageEntryElement);
+  const getImageEntryElement = <HTMLInputElement>document.getElementById(`pic-text-file`);
+  getImageEntryElement.setAttribute('value', '');
+  getImageEntryElement.setAttribute('src', '');
+  FilePond.destroy(getImageEntryElement);
 
-	if (attributeValue === null) return;
-	removeOrAddGeneratorContent(attributeValue, 'none');
+  if (attributeValue === null) return;
+  removeOrAddGeneratorContent(attributeValue, 'none');
 }
 
 // Close button for modals
 closeModalElement?.addEventListener('click', (): void => {
-	closeModalFunction();
+  closeModalFunction();
 });
 
 document?.addEventListener('keydown', (e) => {
-	if (e.key === 'Escape') {
-		closeModalFunction();
-	}
+  if (e.key === 'Escape') {
+    closeModalFunction();
+  }
 });
 
 // adding an event listeners to all generators card
 generators.forEach((generator) => {
-	generator?.addEventListener('click', (): void => {
-		isOpen = true;
-		isVisible(isOpen);
-		const checking = generator.getAttribute('data-gen');
-		if (checking === null) return;
+  generator?.addEventListener('click', (): void => {
+    isOpen = true;
+    isVisible(isOpen);
+    const checking = generator.getAttribute('data-gen');
+    if (checking === null) return;
 
-		attributeValue = checking;
-		checkingIfGeneratorExists(attributeValue);
-	});
+    attributeValue = checking;
+    checkingIfGeneratorExists(attributeValue);
+  });
 });
 
 // closing modal when user clicks outside
 document.addEventListener('click', function (event) {
-	if (event.target === null) return;
-	const element = <HTMLElement>event.target;
-	if (element.matches('.modal-container')) {
-		closeModalFunction();
-	}
+  if (event.target === null) return;
+  const element = <HTMLElement>event.target;
+  if (element.matches('.modal-container')) {
+    closeModalFunction();
+  }
 });

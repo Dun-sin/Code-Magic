@@ -1,9 +1,10 @@
 ### Contributing guidelines
 
-## Rules 
-- Don't create a pull request on an issue that doesn't exist, create an issue first and if the changes you are proposing are said to be okay, you can go ahead and create a pull request 
+## Rules
+
+- Don't create a pull request on an issue that doesn't exist, create an issue first and if the changes you are proposing are said to be okay, you can go ahead and create a pull request
 - Don't work on anything unless you are assigned, if you make a pull request without being assigned to that issue, it will be closed without being merged
-- Don't work on more than one issue at a time, this is so that you don't make a huge pull request and others can have opportunities to work on another issue while you work on something else 
+- Don't work on more than one issue at a time, this is so that you don't make a huge pull request and others can have opportunities to work on another issue while you work on something else
 - Do read the `readme.md` file
 
 ## 👩🏽‍💻 Prerequisite Skills to Contribute
@@ -12,6 +13,7 @@
 
 - [Node.js](https://nodejs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
+
 ---
 
 ## 💥 How to Contribute
@@ -34,16 +36,19 @@ git clone https://github.com/<your-github-username>/trick-generator
 ```
 
 3. Navigate to the newly created trick-generator project directory:
+
 ```bash
 cd trick-generator
 ```
 
 4. Set upstream command:
+
 ```bash
 git remote add upstream https://github.com/Dun-sin/trick-generator.git
 ```
 
 5. Create a new branch:
+
 ```bash
 git checkout -b YourBranchName
 ```
@@ -54,6 +59,7 @@ git checkout -b YourBranchName
 - Click "Fetch and merge"
 
 ### Alternatively, Git CLI way to Sync forked repository with origin repository:
+
 ```bash
 git fetch upstream
 ```
@@ -75,6 +81,7 @@ git cz
 ```
 
 9. Push your local commits to the remote repository:
+
 ```bash
 git push origin YourBranchName
 ```
