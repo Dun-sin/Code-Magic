@@ -146,6 +146,17 @@ main {
   place-items: center;
   padding: 2rem;
   z-index: 2;
+  animation-name: anime;
+  animation-duration: 2s;
+}
+
+@keyframes anime {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .modal-generator {
