@@ -43,7 +43,7 @@ nav {
 }
 
 nav h1 {
-font-size: 2rem;
+  font-size: 2rem;
   background: linear-gradient(90deg, #ffffff, #aea3e9f8, #fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
