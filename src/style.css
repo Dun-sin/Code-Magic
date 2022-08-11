@@ -39,11 +39,11 @@ nav {
   justify-content: space-between;
   font-size: 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  padding: 1.5rem 4rem 0.5rem 4rem;
+  padding: 1rem 4rem;
 }
 
 nav h1 {
-font-size: 2rem;
+  font-size: 2rem;
   background: linear-gradient(90deg, #ffffff, #aea3e9f8, #fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -55,12 +55,16 @@ font-size: 2rem;
 
 .menu {
   cursor: pointer;
+  height: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .menu div {
   width: 1.6rem;
-  margin-bottom: 5px;
-  height: 2.5px;
+  height: 3px;
   background-color: var(--secondary-color);
 }
 
