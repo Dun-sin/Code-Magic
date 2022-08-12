@@ -74,6 +74,7 @@ function getPicTextResult(
 	});
 	getCodeButtonElement.addEventListener('click', () => {
 		utils.copyCodeToClipboard(attribute, outputNode);
+		utils.showPopup('Code Copied', 'Code has been successfully copied to clipboard', 'success')
 	});
 
 	function setOnClick() {

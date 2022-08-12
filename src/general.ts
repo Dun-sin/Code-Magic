@@ -1,5 +1,7 @@
 import domtoimage from "dom-to-image";
 import copy from "copy-to-clipboard";
+// @ts-ignore
+import { Eggy } from '@s-r0/eggy-js';
 
 /**
  * @function copyCodeToClipboard
@@ -114,6 +116,23 @@ export function downloadSVG(attribute: string, outputImage: HTMLElement): void {
     const link = createDownloadLink(`${attribute}.svg`, dataUrl);
     link.click();
   });
+}
+
+/**
+ * @function showPopup
+ * @summary Show the popup on a page
+ * @param title - Main Text
+ * @param message - Secondary Text
+ * @param type - To specify the type of a popup, Like: success, warning, info, error, 
+ * @return {void} Nothing
+ */
+
+export function showPopup(title: string, message: string, type: string): void{
+  Eggy({
+    title:  title,
+    message:  message,
+    type:  type
+  })
 }
 
 export function triggerEmptyAnimation(inputElement: HTMLInputElement): void {
