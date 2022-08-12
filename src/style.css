@@ -400,3 +400,7 @@ a {
     margin-right: 50px;
   }
 }
+
+.eggy{
+  z-index: 10;
+}

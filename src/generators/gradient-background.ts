@@ -40,5 +40,6 @@ function getGradientBackgroundResult(
 	const getCodeButtonElement = utils.getCopyCodeButton(attribute);
 	getCodeButtonElement.addEventListener('click', () => {
 		utils.copyCodeToClipboard(attribute, outputElement);
+		utils.showPopup('Code Copied', 'Code has been successfully copied to clipboard', 'success')
 	});
 }
