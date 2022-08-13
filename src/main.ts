@@ -10,7 +10,7 @@ import * as FilePond from 'filepond';
  * All Variables
  */
 let attributeValue: string | null = null;
-let isOpen: boolean;
+let isOpen: boolean = false;
 // Elements
 const generators = document.querySelectorAll('[data-gen]');
 const closeModalElement = document.getElementById('close-modal');
