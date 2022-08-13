@@ -1,7 +1,8 @@
-import domtoimage from "dom-to-image";
-import copy from "copy-to-clipboard";
+import domtoimage from 'dom-to-image';
+import copy from 'copy-to-clipboard';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import { Eggy } from '@s-r0/eggy-js';
+import {Eggy} from '@s-r0/eggy-js';
 
 /**
  * @function copyCodeToClipboard
@@ -17,15 +18,15 @@ export function copyCodeToClipboard(
   const copyCodeButton = <HTMLElement>(
     document.querySelector(`[data-download=${attribute}-code]`)
   );
-  copyCodeButton.addEventListener("click", (): void => {
+  copyCodeButton.addEventListener('click', (): void => {
     actOnGenerator();
   });
 
   function actOnGenerator() {
-    let codeToCopy: string = "";
+    let codeToCopy = '';
     let element;
     switch (attribute) {
-      case "pic-text":
+      case 'pic-text':
         codeToCopy = `
       div {
         background-position: ${outputElement.style.backgroundPosition};
@@ -37,7 +38,7 @@ export function copyCodeToClipboard(
       }
     `;
         break;
-      case "gradient-text":
+      case 'gradient-text':
         codeToCopy = `
         p{	
           font-size: ${
@@ -53,7 +54,7 @@ export function copyCodeToClipboard(
         `;
 
         break;
-      case "gradient-border":
+      case 'gradient-border':
         element = outputElement.style;
         codeToCopy = `
           div {
@@ -64,7 +65,7 @@ export function copyCodeToClipboard(
           }
         `;
         break;
-      case "gradient-background":
+      case 'gradient-background':
         element = outputElement.style;
         codeToCopy = `
           div {
@@ -86,8 +87,8 @@ export function copyCodeToClipboard(
  * @return {void} Nothing
  */
 export function countForText(inputElement: HTMLInputElement): void {
-  const countElement = <HTMLElement>document.querySelector(".count > span");
-  inputElement.addEventListener("keydown", (): void => {
+  const countElement = <HTMLElement>document.querySelector('.count > span');
+  inputElement.addEventListener('keydown', (): void => {
     countElement.innerText = `${inputElement.value.length + 1}`;
   });
 }
@@ -99,7 +100,7 @@ export function countForText(inputElement: HTMLInputElement): void {
  * @return {void} Nothing
  */
 export function downloadPNG(attribute: string, outputImage: HTMLElement): void {
-  domtoimage.toPng(outputImage, { quality: 0.95 }).then((dataUrl) => {
+  domtoimage.toPng(outputImage, {quality: 0.95}).then((dataUrl) => {
     const link = createDownloadLink(`${attribute}.png`, dataUrl);
     link.click();
   });
@@ -123,31 +124,31 @@ export function downloadSVG(attribute: string, outputImage: HTMLElement): void {
  * @summary Show the popup on a page
  * @param title - Main Text
  * @param message - Secondary Text
- * @param type - To specify the type of a popup, Like: success, warning, info, error, 
+ * @param type - To specify the type of a popup, Like: success, warning, info, error,
  * @return {void} Nothing
  */
 
-export function showPopup(title: string, message: string, type: string): void{
+export function showPopup(title: string, message: string, type: string): void {
   Eggy({
-    title:  title,
-    message:  message,
-    type:  type
-  })
+    title: title,
+    message: message,
+    type: type,
+  });
 }
 
 export function triggerEmptyAnimation(inputElement: HTMLInputElement): void {
-  inputElement.style.borderColor = "red";
+  inputElement.style.borderColor = 'red';
   inputElement.animate(
     [
-      { transform: "translate(10px, 0)" },
-      { transform: "translate(-10px, 0)" },
-      { transform: "translate(0, 0)" },
+      {transform: 'translate(10px, 0)'},
+      {transform: 'translate(-10px, 0)'},
+      {transform: 'translate(0, 0)'},
     ],
-    { duration: 300 }
+    {duration: 300}
   );
 
   setTimeout(() => {
-    inputElement.style.borderColor = "white";
+    inputElement.style.borderColor = 'white';
   }, 1000);
 }
 
@@ -197,7 +198,7 @@ export const getInputText = (attribute: string) =>
   <HTMLInputElement>document.getElementById(`${attribute}-text`);
 
 function createDownloadLink(fileName: string, url: string) {
-  const link = document.createElement("a");
+  const link = document.createElement('a');
   link.download = fileName;
   link.href = url;
   return link;
