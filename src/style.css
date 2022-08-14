@@ -376,6 +376,10 @@ a {
 }
 
 @media screen and (max-width: 444px) {
+  nav {
+    padding: 1rem 2rem;
+  }
+
 	.modal-generator {
 		width: 90vw;
 	}
@@ -391,6 +395,12 @@ a {
 	footer {
 		font-size: 1.3rem;
 	}
+}
+
+@media screen and (max-width: 344px) {
+  nav{
+    padding: 1rem 1rem;
+  }
 }
 
 @media screen and (min-width: 1040px) {
