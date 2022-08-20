@@ -2,7 +2,7 @@ import domtoimage from 'dom-to-image';
 import copy from 'copy-to-clipboard';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import { Eggy } from '@s-r0/eggy-js';
+import {Eggy} from '@s-r0/eggy-js';
 
 /**
  * @function copyCodeToClipboard
@@ -41,10 +41,12 @@ export function copyCodeToClipboard(
       case 'gradient-text':
         codeToCopy = `
         p{	
-          font-size: ${(outputElement.children[0] as HTMLElement).style.fontSize
+          font-size: ${
+            (outputElement.children[0] as HTMLElement).style.fontSize
           };
-		  background: ${(outputElement.children[0] as HTMLElement).style.backgroundImage
-          };
+		  background: ${
+        (outputElement.children[0] as HTMLElement).style.backgroundImage
+      };
 		  background-clip: 'text';
 		  -webkit-background-clip: 'text';
 		  -webkit-text-fill-color: 'transparent';
@@ -98,7 +100,7 @@ export function countForText(inputElement: HTMLInputElement): void {
  * @return {void} Nothing
  */
 export function downloadPNG(attribute: string, outputImage: HTMLElement): void {
-  domtoimage.toPng(outputImage, { quality: 0.95 }).then((dataUrl) => {
+  domtoimage.toPng(outputImage, {quality: 0.95}).then((dataUrl) => {
     const link = createDownloadLink(`${attribute}.png`, dataUrl);
     link.click();
   });
@@ -138,11 +140,11 @@ export function triggerEmptyAnimation(inputElement: HTMLInputElement): void {
   inputElement.style.borderColor = 'red';
   inputElement.animate(
     [
-      { transform: 'translate(10px, 0)' },
-      { transform: 'translate(-10px, 0)' },
-      { transform: 'translate(0, 0)' },
+      {transform: 'translate(10px, 0)'},
+      {transform: 'translate(-10px, 0)'},
+      {transform: 'translate(0, 0)'},
     ],
-    { duration: 300 }
+    {duration: 300}
   );
 
   setTimeout(() => {
@@ -167,7 +169,6 @@ export const getCopyCodeButton = (attribute: string): HTMLElement =>
  */
 export const getPNGButton = (attribute: string): HTMLElement =>
   <HTMLElement>document.querySelector(`[data-download=${attribute}-PNG]`);
-
 
 /**
  * @function getSVGButton
@@ -200,10 +201,17 @@ export const getInputSpinner = (attribute: string) =>
   <HTMLInputElement>document.getElementById(`${attribute}-duration`);
 
 export const getRadioButtonSet = (attribute: string) =>
-  <NodeListOf<HTMLInputElement>>document.querySelectorAll(`[name = ${attribute}-radio]`);
+  <NodeListOf<HTMLInputElement>>(
+    document.querySelectorAll(`[name = ${attribute}-radio]`)
+  );
 
-export const getStyleSheet = () =>
-  <CSSStyleSheet>document.styleSheets[0];
+export const getStyleSheet = () => {
+  const stylesheet = Array.from(document.styleSheets).filter(
+    (styleSheet) =>
+      !styleSheet.href || styleSheet.href.startsWith(location.origin)
+  );
+  return <CSSStyleSheet>stylesheet[0];
+};
 
 function createDownloadLink(fileName: string, url: string) {
   const link = document.createElement('a');

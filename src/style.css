@@ -303,7 +303,7 @@ textarea:focus {
 }
 
 #duration-label {
-	width: 200px;
+
 	flex-direction: row-reverse;
 	justify-content: space-between;
 
