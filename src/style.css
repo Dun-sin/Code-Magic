@@ -103,14 +103,14 @@ main {
 	box-shadow: var(--secondary-color) -2.5px 2.5px 2px;
 }
 
-.generator > img {
+.generator>img {
 	width: var(--generator-width);
 	height: calc(var(--generator-height) / 1.4);
 	border-radius: 10px 10px 0 0;
 	object-fit: cover;
 }
 
-.generator > div {
+.generator>div {
 	height: calc(var(--generator-height) / 2.8);
 	width: var(--generator-width);
 	background: rgba(149, 128, 255, 1);
@@ -127,7 +127,7 @@ main {
 	font-size: min(1.1rem, 2.5rem);
 }
 
-.generator > div img {
+.generator>div img {
 	height: 30px;
 	width: 30px;
 	position: absolute;
@@ -200,7 +200,7 @@ main {
 	width: var(--input-width);
 }
 
-.input > div {
+.input>div {
 	position: relative;
 }
 
@@ -208,14 +208,14 @@ main {
 	font-size: 1.2rem;
 }
 
-.input > div:first-of-type {
+.input>div:first-of-type {
 	margin-bottom: 1rem;
 	display: flex;
 	flex-direction: column;
 	position: relative;
 }
 
-.input > .btn {
+.input>.btn {
 	width: var(--input-width);
 }
 
@@ -245,6 +245,7 @@ textarea:focus {
 	width: var(--input-width);
 	overflow-y: hidden;
 }
+
 .input p {
 	margin-bottom: 0.5em;
 }
@@ -274,12 +275,42 @@ textarea:focus {
 	border: none;
 }
 
+#radio-group {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+#animation-radio-label {
+	padding: 0;
+	margin: 0;
+	background: none;
+	font-weight: 600;
+	color: whitesmoke;
+	font-size: 0.9em;
+}
+
+#animation-radio-label>span {
+	padding-right: 8px;
+}
+
 #degree {
 	flex-direction: column;
 }
 
-#degree > span {
+#degree>span {
 	font-size: 0.7em;
+}
+
+#duration-label {
+	width: 200px;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+
+}
+
+#duration-label>span {
+	font-size: 0.9em;
 }
 
 .count {
@@ -307,9 +338,13 @@ textarea:focus {
 	margin-bottom: 1rem;
 }
 
-.download-output > p {
+
+
+
+.download-output>p {
 	font-size: 0.7rem;
 }
+
 .download-btn .btn {
 	width: 100%;
 }
@@ -342,6 +377,7 @@ a {
 	0% {
 		background-position-x: -500%;
 	}
+
 	100% {
 		bckground-position-x: 500%;
 	}
@@ -376,9 +412,9 @@ a {
 }
 
 @media screen and (max-width: 444px) {
-  nav {
-    padding: 1rem 2rem;
-  }
+	nav {
+		padding: 1rem 2rem;
+	}
 
 	.modal-generator {
 		width: 90vw;
@@ -398,9 +434,9 @@ a {
 }
 
 @media screen and (max-width: 344px) {
-  nav{
-    padding: 1rem 1rem;
-  }
+	nav {
+		padding: 1rem 1rem;
+	}
 }
 
 @media screen and (min-width: 1040px) {
@@ -408,7 +444,7 @@ a {
 		justify-content: center;
 	}
 
-	.modal-main-content > .input {
+	.modal-main-content>.input {
 		margin-right: 50px;
 	}
 }
