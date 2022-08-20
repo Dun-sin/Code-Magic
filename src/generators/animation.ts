@@ -113,7 +113,7 @@ function manageAnimation(values: Values, OutputElement: HTMLElement, stylesheet:
     }
 }
 
-function initialConfiguration(elements: NodeListOf<HTMLOptionElement>, DegreeElement: HTMLInputElement, OutputElement: HTMLElement, getCodeButtonElement: HTMLElement) {
+function initialConfiguration(elements: NodeListOf<HTMLInputElement>, DegreeElement: HTMLInputElement, OutputElement: HTMLElement, getCodeButtonElement: HTMLElement) {
 
     getCodeButtonElement.innerText = "Copy CSS";
     OutputElement.style.display = "flex";
