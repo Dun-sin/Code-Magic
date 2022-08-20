@@ -200,7 +200,7 @@ export const getInputSpinner = (attribute: string) =>
   <HTMLInputElement>document.getElementById(`${attribute}-duration`);
 
 export const getRadioButtonSet = (attribute: string) =>
-  <NodeListOf<HTMLOptionElement>>document.querySelectorAll(`[name = ${attribute}-radio]`);
+  <NodeListOf<HTMLInputElement>>document.querySelectorAll(`[name = ${attribute}-radio]`);
 
 export const getStyleSheet = () =>
   <CSSStyleSheet>document.styleSheets[0];
