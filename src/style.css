@@ -216,7 +216,6 @@ main {
 
 .input > .btn {
   width: var(--input-width);
-}
 
 input[type='text'],
 textarea,
@@ -244,6 +243,7 @@ textarea:focus {
   width: var(--input-width);
   overflow-y: hidden;
 }
+
 .input p {
   margin-bottom: 0.5em;
 }
@@ -273,12 +273,42 @@ textarea:focus {
   border: none;
 }
 
+#radio-group {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+#animation-radio-label {
+	padding: 0;
+	margin: 0;
+	background: none;
+	font-weight: 600;
+	color: whitesmoke;
+	font-size: 0.9em;
+}
+
+#animation-radio-label>span {
+	padding-right: 8px;
+}
+
 #degree {
   flex-direction: column;
 }
 
 #degree > span {
   font-size: 0.7em;
+}
+
+#duration-label {
+
+	flex-direction: row-reverse;
+	justify-content: space-between;
+
+}
+
+#duration-label>span {
+	font-size: 0.9em;
 }
 
 .count {
@@ -309,6 +339,7 @@ textarea:focus {
 .download-output > p {
   font-size: 0.7rem;
 }
+
 .download-btn .btn {
   width: 100%;
 }
@@ -371,6 +402,18 @@ a {
     --input-width: 100%;
     --modal-width: calc(var(--modal-container-width) - 10vw);
   }
+  
+	nav {
+		padding: 1rem 2rem;
+	}
+
+	.modal-generator {
+		width: 90vw;
+	}
+
+	.generator {
+		margin: 0.8rem auto;
+	}
 
   .modal-main-content {
     flex-direction: column;

@@ -197,6 +197,22 @@ export const getRange = (attribute: string): HTMLInputElement =>
 export const getInputText = (attribute: string) =>
   <HTMLInputElement>document.getElementById(`${attribute}-text`);
 
+export const getInputSpinner = (attribute: string) =>
+  <HTMLInputElement>document.getElementById(`${attribute}-duration`);
+
+export const getRadioButtonSet = (attribute: string) =>
+  <NodeListOf<HTMLInputElement>>(
+    document.querySelectorAll(`[name = ${attribute}-radio]`)
+  );
+
+export const getStyleSheet = () => {
+  const stylesheet = Array.from(document.styleSheets).filter(
+    (styleSheet) =>
+      !styleSheet.href || styleSheet.href.startsWith(location.origin)
+  );
+  return <CSSStyleSheet>stylesheet[0];
+};
+
 function createDownloadLink(fileName: string, url: string) {
   const link = document.createElement('a');
   link.download = fileName;
