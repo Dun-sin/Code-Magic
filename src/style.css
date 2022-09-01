@@ -456,3 +456,18 @@ a {
     font-size: 1.3rem;
   }
 }
+
+.contribute{
+color: aliceblue;
+font-family: 'Roboto Slab', serif;
+}
+.contribute:hover{
+  background-color: azure;
+  text-decoration: underline;
+  color: black;
+  font-family: 'Roboto Slab', serif;
+}
+.xd{
+  color: aliceblue;
+  font-family: 'Roboto Slab', serif;
+}
