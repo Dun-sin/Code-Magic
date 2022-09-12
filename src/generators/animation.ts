@@ -13,11 +13,13 @@ type Values = {
 
 export function animationGenerator() {
   const attribute = 'animation';
+  const stopAttribute = 'stop-animation';
   const DegreeElement = utils.getRange(attribute);
   const duration = utils.getInputSpinner(attribute);
   const radio_button_set = utils.getRadioButtonSet(attribute);
 
   const ResultElement = utils.getResultButton(attribute);
+  const stopResultElement = utils.getResultButton(stopAttribute);
   const OutputElement = utils.getOutput(attribute);
 
   const Stylesheet = utils.getStyleSheet();
@@ -42,6 +44,9 @@ export function animationGenerator() {
       duration: duration.value,
     };
     manageAnimation(values, OutputElement, Stylesheet);
+  });
+  stopResultElement.addEventListener('click', () => {
+    OutputElement.style.animation = '';
   });
 
   getCodeButtonElement.addEventListener('click', () => {
