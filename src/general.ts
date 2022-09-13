@@ -56,12 +56,28 @@ export function copyCodeToClipboard(
         break;
       case 'gradient-border':
         element = outputElement.style;
+        /*TODO: fix incorrect copied code*/
         codeToCopy = `
-          div {
-            border: ${element.border},
-            border-width: ${element.borderWidth},
-            border-image-slice: ${element.borderImageSlice},
-            border-image-source: ${element.borderImageSource},
+        div.gradient-border {
+          position: relative;
+          width: var(--output-width);
+          height: 300px;
+          word-wrap: break-word;
+          margin-bottom: 1rem;
+        }
+        
+        div.gradient-border::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: var(--gradient-border-radius); 
+          padding: 6px; 
+          background: linear-gradient(45deg, var(--gradient-color-1, red), var(--gradient-color-2, blue)); 
+          -webkit-mask: 
+             linear-gradient(#fff 0 0) content-box,
+             linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+              mask-composite: exclude; 
           }
         `;
         break;
@@ -196,6 +212,31 @@ export const getRange = (attribute: string): HTMLInputElement =>
 
 export const getInputText = (attribute: string) =>
   <HTMLInputElement>document.getElementById(`${attribute}-text`);
+
+export const getCheckbox = (attribute: string): HTMLInputElement =>
+  <HTMLInputElement>document.getElementById(`${attribute}-radius`);
+/* ||||  CONSIDER RENAMING getOutput above TO getGradientBorder ||||
+  * export const getGradientBorder = (attribute: string): HTMLElement =>
+  * <HTMLElement>document.querySelector(`${attribute}`);
+*/
+
+  /**
+   * @function activeRadius
+   * @summary Set the border-radius property of div.gradient-border::before to 50px
+   */
+export const activeRadius = (attribute: string): void =>
+  document
+    .querySelectorAll<HTMLElement>(`.${attribute}`)[0]
+    .style.setProperty(`--${attribute}-radius`, '50px');
+
+    /**
+   * @function activeRadius
+   * @summary Set the border-radius property of div.gradient-border::before to 0
+   */
+export const InactiveRadius = (attribute: string): void =>
+  document
+    .querySelectorAll<HTMLElement>(`.${attribute}`)[0]
+    .style.setProperty(`--${attribute}-radius`, '0');
 
 function createDownloadLink(fileName: string, url: string) {
   const link = document.createElement('a');
