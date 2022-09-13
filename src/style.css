@@ -168,7 +168,6 @@ main {
   flex-direction: column;
   justify-content: space-between;
   background: #6d57d9;
-  border: 1px solid rgba(191, 178, 255, 0.3);
   border-radius: 10px;
 }
 
@@ -251,6 +250,7 @@ textarea:focus {
   width: var(--input-width);
   overflow-y: hidden;
 }
+
 .input p {
   margin-bottom: 0.5em;
 }
@@ -277,7 +277,26 @@ textarea:focus {
 }
 
 [type='color']::-webkit-color-swatch {
-  border: none;
+	border: none;
+}
+
+#radio-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#animation-radio-label {
+  padding: 0;
+  margin: 0;
+  background: none;
+  font-weight: 600;
+  color: whitesmoke;
+  font-size: 0.9em;
+}
+
+#animation-radio-label > span {
+  padding-right: 8px;
 }
 
 #degree {
@@ -286,6 +305,15 @@ textarea:focus {
 
 #degree > span {
   font-size: 0.7em;
+}
+
+#duration-label {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+#duration-label > span {
+  font-size: 0.9em;
 }
 
 .count {
@@ -368,6 +396,7 @@ textarea:focus {
 .download-output > p {
   font-size: 0.7rem;
 }
+
 .download-btn .btn {
   width: 100%;
 }
@@ -411,10 +440,36 @@ a {
   }
 }
 
+@media screen and (min-width: 1040px) {
+  .modal-main-content {
+    justify-content: center;
+  }
+
+  .modal-main-content > .input {
+    margin-right: 50px;
+  }
+}
+
+.eggy {
+  z-index: 10;
+}
+
 @media screen and (max-width: 1010px) {
   :root {
     --input-width: 100%;
     --modal-width: calc(var(--modal-container-width) - 10vw);
+  }
+
+  nav {
+    padding: 1rem 2rem;
+  }
+
+  .modal-generator {
+    width: 90vw;
+  }
+
+  .generator {
+    margin: 0.8rem auto;
   }
 
   .modal-main-content {
@@ -438,6 +493,15 @@ a {
     width: 90vw;
   }
 
+  .modal-main-content {
+    justify-content: center !important;
+    align-items: center;
+  }
+
+  .input {
+    padding: 2rem 0.3rem 2rem 0.3rem;
+  }
+
   .generator {
     margin: 0.8rem auto;
   }
@@ -449,18 +513,4 @@ a {
   footer {
     font-size: 1.3rem;
   }
-}
-
-@media screen and (min-width: 1040px) {
-  .modal-main-content {
-    justify-content: center;
-  }
-
-  .modal-main-content > .input {
-    margin-right: 50px;
-  }
-}
-
-.eggy {
-  z-index: 10;
 }
