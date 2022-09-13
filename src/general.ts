@@ -216,23 +216,23 @@ export const getInputText = (attribute: string) =>
 export const getCheckbox = (attribute: string): HTMLInputElement =>
   <HTMLInputElement>document.getElementById(`${attribute}-radius`);
 /* ||||  CONSIDER RENAMING getOutput above TO getGradientBorder ||||
-  * export const getGradientBorder = (attribute: string): HTMLElement =>
-  * <HTMLElement>document.querySelector(`${attribute}`);
-*/
+ * export const getGradientBorder = (attribute: string): HTMLElement =>
+ * <HTMLElement>document.querySelector(`${attribute}`);
+ */
 
-  /**
-   * @function activeRadius
-   * @summary Set the border-radius property of div.gradient-border::before to 50px
-   */
+/**
+ * @function activeRadius
+ * @summary Set the border-radius property of div.gradient-border::before to 50px
+ */
 export const activeRadius = (attribute: string): void =>
   document
     .querySelectorAll<HTMLElement>(`.${attribute}`)[0]
     .style.setProperty(`--${attribute}-radius`, '50px');
 
-    /**
-   * @function activeRadius
-   * @summary Set the border-radius property of div.gradient-border::before to 0
-   */
+/**
+ * @function activeRadius
+ * @summary Set the border-radius property of div.gradient-border::before to 0
+ */
 export const InactiveRadius = (attribute: string): void =>
   document
     .querySelectorAll<HTMLElement>(`.${attribute}`)[0]

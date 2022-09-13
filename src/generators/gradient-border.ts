@@ -51,9 +51,18 @@ function getGradientBorderResult(
   values: Values,
   outputElement: HTMLElement
 ): void {
-  outputElement.style.setProperty(`--${attribute}-color-1`, `${values.firstColor}`);
-  outputElement.style.setProperty(`--${attribute}-color-2`, `${values.secondColor}`);
-  outputElement.style.setProperty(`--${attribute}-degree`, `${values.degree}deg`);
+  outputElement.style.setProperty(
+    `--${attribute}-color-1`,
+    `${values.firstColor}`
+  );
+  outputElement.style.setProperty(
+    `--${attribute}-color-2`,
+    `${values.secondColor}`
+  );
+  outputElement.style.setProperty(
+    `--${attribute}-degree`,
+    `${values.degree}deg`
+  );
   outputElement.style.visibility = 'visible';
   const getCodeButtonElement = utils.getCopyCodeButton(attribute);
   getCodeButtonElement.addEventListener('click', () => {
