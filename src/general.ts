@@ -15,71 +15,64 @@ export function copyCodeToClipboard(
   attribute: string,
   outputElement: HTMLElement
 ): void {
-  const copyCodeButton = <HTMLElement>(
-    document.querySelector(`[data-download=${attribute}-code]`)
-  );
-  copyCodeButton.addEventListener('click', (): void => {
-    actOnGenerator();
-  });
-
-  function actOnGenerator() {
-    let codeToCopy = '';
-    let element;
-    switch (attribute) {
-      case 'pic-text':
-        codeToCopy = `
-      div {
-        background-position: ${outputElement.style.backgroundPosition};
-        background-size: ${outputElement.style.backgroundSize};
-        background-repeat: ${outputElement.style.backgroundRepeat};
-        background-clip: ${outputElement.style.backgroundClip};
-        -webkit-background-clip: ${outputElement.style.webkitBackgroundClip};
-        -webkit-text-fill-color: ${outputElement.style.webkitTextFillColor};
-      }
-    `;
-        break;
-      case 'gradient-text':
-        codeToCopy = `
-        p{	
-          font-size: ${
-            (outputElement.children[0] as HTMLElement).style.fontSize
-          };
-		  background: ${
-        (outputElement.children[0] as HTMLElement).style.backgroundImage
-      };
-		  background-clip: 'text';
-		  -webkit-background-clip: 'text';
-		  -webkit-text-fill-color: 'transparent';
-        }
-        `;
-
-        break;
-      case 'gradient-border':
-        element = outputElement.style;
-        codeToCopy = `
-          div {
-            border: ${element.border},
-            border-width: ${element.borderWidth},
-            border-image-slice: ${element.borderImageSlice},
-            border-image-source: ${element.borderImageSource},
-          }
-        `;
-        break;
-      case 'gradient-background':
-        element = outputElement.style;
-        codeToCopy = `
-          div {
-            height: 100px;
-            width: 100px;
-            background: ${element.backgroundImage};
-          }
-        `;
-    }
-
-    copy(codeToCopy);
-  }
+  actOnGenerator(attribute, outputElement);
 }
 
+function actOnGenerator(attribute: string, outputElement: HTMLElement) {
+  let codeToCopy = '';
+  let element;
+  switch (attribute) {
+    case 'pic-text':
+      codeToCopy = `
+    div {
+      background-position: ${outputElement.style.backgroundPosition};
+      background-size: ${outputElement.style.backgroundSize};
+      background-repeat: ${outputElement.style.backgroundRepeat};
+      background-clip: ${outputElement.style.backgroundClip};
+      -webkit-background-clip: ${outputElement.style.webkitBackgroundClip};
+      -webkit-text-fill-color: ${outputElement.style.webkitTextFillColor};
+    }
+  `;
+      break;
+    case 'gradient-text':
+      codeToCopy = `
+      p{	
+        font-size: ${(outputElement.children[0] as HTMLElement).style.fontSize};
+    background: ${
+      (outputElement.children[0] as HTMLElement).style.backgroundImage
+    };
+    background-clip: 'text';
+    -webkit-background-clip: 'text';
+    -webkit-text-fill-color: 'transparent';
+      }
+      `;
+
+      break;
+    case 'gradient-border':
+      element = outputElement.style;
+      codeToCopy = `
+        div {
+          border: ${element.border},
+          border-width: ${element.borderWidth},
+          border-image-slice: ${element.borderImageSlice},
+          border-image-source: ${element.borderImageSource},
+        }
+      `;
+      break;
+    case 'gradient-background':
+      element = outputElement.style;
+      codeToCopy = `
+        div {
+          height: 100px;
+          width: 100px;
+          background: ${element.backgroundImage};
+        }
+      `;
+      break;
+  }
+
+  copy(codeToCopy);
+}
 /**
  * @function countForText
  * @summary Counts the number of text in the input element
