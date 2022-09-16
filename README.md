@@ -30,7 +30,7 @@ A website to help you get simple tricks you can use in your applications with ht
 
 ## 🧑🏾‍💻 Demo
 
-Check out the website: [Trick Generator](https://trick-generator.vercel.app/)
+Check out the website: [Code Magic](https://trick-generator.vercel.app/)
 
 ## 👇🏽 Prerequisites
 
@@ -61,7 +61,7 @@ npm install
 ```
 
 ```bash
-npm install -g commitizen 
+npm install -g commitizen
 ```
 
 5. Run the project
@@ -93,12 +93,14 @@ git cz
 ```
 
 4. Push your changes
+
 ```bash
 git push
 ```
 
 ## 👨‍👩‍👦 Community
-Don't forget to join the discord community - [Join us](https://discord.gg/KUWjx4fygJ) 
+
+Don't forget to join the discord community - [Join us](https://discord.gg/KUWjx4fygJ)
 
 ## 👩🏽‍💻 Contributing
 
