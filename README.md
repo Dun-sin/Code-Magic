@@ -4,7 +4,7 @@
 
 A website to help you get simple tricks you can use in your applications with html and css
 
-![opensource-giff](https://user-images.githubusercontent.com/100528412/190073831-bafecb4a-6593-4437-ba2a-69db07cccc53.gif)
+![code magic gif demo](https://user-images.githubusercontent.com/78784850/190603861-1691240f-7d37-41b2-87f7-08239d09f698.gif)
 
 ### ⚒️ Languages / Tools
 
