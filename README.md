@@ -4,6 +4,9 @@
 
 A website to help you get simple tricks you can use in your applications with html and css
 
+![opensource-giff](https://user-images.githubusercontent.com/100528412/190073831-bafecb4a-6593-4437-ba2a-69db07cccc53.gif)
+
+
 ### ⚒️ Languages / Tools
 
  <table>
