@@ -1,4 +1,4 @@
-import * as utils from '../general';
+import * as utils from '../lib/general';
 
 import * as FilePond from 'filepond';
 import 'filepond/dist/filepond.min.css';

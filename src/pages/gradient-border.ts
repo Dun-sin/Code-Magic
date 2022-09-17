@@ -1,4 +1,4 @@
-import * as utils from '../general';
+import * as utils from '../lib/general';
 
 type Values = {
   firstColor: string;

@@ -1,4 +1,4 @@
-import * as utils from '../general';
+import * as utils from '../lib/general';
 import copy from 'copy-to-clipboard';
 
 let initial_length = 0;
