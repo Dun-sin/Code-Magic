@@ -20,6 +20,8 @@
 *,
 *::after,
 *::before {
+  user-select: none;
+
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -29,21 +31,27 @@ body {
   font-family: 'Exo 2', 'Courier New', Courier, monospace;
   background-color: var(--primary-color);
   color: var(--text-color);
-  overflow-x: hidden;
+  overflow: hidden;
   padding-bottom: var(--pseudo-footer-height);
+  display: flex;
 }
 
 nav {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 1rem;
+  flex-direction: column;
+  position: relative;
+  font-size: 1.3rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  padding: 1rem 4rem;
+  padding: 0 1.5rem;
+  min-width: 15vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--primary-color);
 }
 
 nav h1 {
-  font-size: 2rem;
+  margin: 4rem 0;
+  font-size: 1.5rem;
   background: linear-gradient(90deg, #ffffff, #aea3e9f8, #fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -55,19 +63,30 @@ nav h1 {
   animation-direction: alternate;
 }
 
-.menu {
-  cursor: pointer;
-  height: 1.2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+nav ul {
+  list-style: none;
 }
 
-.menu div {
-  width: 1.6rem;
-  height: 3px;
-  background-color: var(--secondary-color);
+nav ul > li {
+  font-size: 0.8rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+}
+
+nav ul > li span {
+  margin-left: 0.2rem;
+}
+
+nav ul > li:hover {
+  background: linear-gradient(
+    80deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  cursor: pointer;
 }
 
 main {
@@ -348,19 +367,11 @@ textarea:focus {
 footer {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  position: fixed;
-  bottom: 0;
-  padding: 5px;
-  width: 100%;
+  font-size: 0.7rem;
+  position: absolute;
+  bottom: 2rem;
   color: #ffffff;
-  background-color: #9580ff;
-  z-index: 1;
-  -webkit-box-shadow: 0px -4px 11px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px -4px 11px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px -4px 11px 0px rgba(0, 0, 0, 0.75);
 }
 
 a {
@@ -372,7 +383,7 @@ a {
     background-position-x: -500%;
   }
   100% {
-    bckground-position-x: 500%;
+    background-position-x: 500%;
   }
 }
 
