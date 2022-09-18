@@ -73,18 +73,6 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
 
   copy(codeToCopy);
 }
-/**
- * @function countForText
- * @summary Counts the number of text in the input element
- * @param inputElement {HTMLInputElement} - The input element that holds the text
- * @return {void} Nothing
- */
-export function countForText(inputElement: HTMLInputElement): void {
-  const countElement = <HTMLElement>document.querySelector('.count > span');
-  inputElement.addEventListener('keydown', (): void => {
-    countElement.innerText = `${inputElement.value.length + 1}`;
-  });
-}
 
 /**
  * @function downloadPNG
@@ -182,7 +170,7 @@ export const getColorInput2 = (attribute: string): HTMLInputElement =>
   <HTMLInputElement>document.getElementById(`${attribute}-color2`);
 
 export const getOutput = (attribute: string): HTMLElement =>
-  <HTMLElement>document.querySelector(`[data-modal = ${attribute}] .output`);
+  <HTMLElement>document.querySelector(`[data-result = ${attribute}] > .output`);
 
 export const getRange = (attribute: string): HTMLInputElement =>
   <HTMLInputElement>document.getElementById(`${attribute}-degree`);
