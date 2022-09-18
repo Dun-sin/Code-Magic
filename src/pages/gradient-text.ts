@@ -17,7 +17,6 @@ export function gradientTextGenerator(): void {
   const getOutputElement = utils.getOutput(attribute);
   if (getOutputElement === null) return;
   getOutputElement.style.display = 'grid';
-  getOutputElement.style.height = 'fit-content';
   getOutputElement.style.placeItems = 'center';
 
   const getFirstColor = utils.getColorInput1(attribute);
