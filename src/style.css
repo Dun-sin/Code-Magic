@@ -30,7 +30,7 @@
 body {
   font-family: 'Exo 2', 'Courier New', Courier, monospace;
   color: var(--text-color);
-  overflow-x: hidden;
+  overflow: hidden;
   padding-bottom: var(--pseudo-footer-height);
   display: flex;
 }
@@ -51,7 +51,7 @@ nav {
 nav h1 {
   margin: 4rem 0;
   font-size: 1.5rem;
-  background: linear-gradient(90deg, #ffffff, #aea3e9f8, #fff);
+  background: linear-gradient(90deg, #ffffff, var(--secondary-color), #fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -262,6 +262,7 @@ textarea {
   align-items: center;
   justify-content: center;
   background-color: var(--primary-color);
+  color: var(--text-color);
   cursor: pointer;
   margin-top: 2rem;
   border: none;
@@ -333,11 +334,11 @@ footer {
   font-size: 0.7rem;
   position: absolute;
   bottom: 2rem;
-  color: #ffffff;
+  color: var(--text-color);
 }
 
 a {
-  color: #0000ff;
+  color: var(--tertiary-color);
 }
 
 @keyframes moveColor {
