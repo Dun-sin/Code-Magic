@@ -302,6 +302,8 @@ textarea {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .download-output > p {
