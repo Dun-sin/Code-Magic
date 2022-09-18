@@ -458,11 +458,40 @@ a {
 }
 
 /* fade in modals */
-.generator {
-  animation: fadeIn 200ms ease-in-out;
+.generator:nth-child(1) {
+  animation: fadeIn 150ms ease-in-out;
+}
+
+.generator:nth-child(2) {
+  animation: fadeIn 150ms ease-in-out 100ms;
+}
+
+.generator:nth-child(3) {
+  animation: fadeIn 150ms ease-in-out 200ms;
+}
+
+.generator:nth-child(4) {
+  animation: fadeIn 150ms ease-in-out 300ms;
+}
+
+.generator:nth-child(5) {
+  animation: fadeIn 150ms ease-in-out 400ms;
+}
+
+.generator:nth-child(6) {
+  animation: fadeIn 150ms ease-in-out 500ms;
 }
 
 @keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes moveIn {
   0% {
     transform: translateX(-100%);
     opacity: 0;
@@ -474,5 +503,5 @@ a {
 }
 
 .modal-container {
-  animation: fadeIn 0.5s ease-in-out;
+  animation: moveIn 0.5s ease-in-out;
 }
