@@ -2,7 +2,7 @@
   /* Colors */
   --primary-color: #081121;
   --text-color: #edf2f4;
-  --secondary-color: #0E213C;
+  --secondary-color: #0e213c;
 
   /* Heights */
   --generator-height: 14rem;
@@ -455,4 +455,24 @@ a {
   footer {
     font-size: 1.3rem;
   }
+}
+
+/* fade in modals */
+.generator {
+  animation: fadeIn 200ms ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.modal-container {
+  animation: fadeIn 0.5s ease-in-out;
 }
