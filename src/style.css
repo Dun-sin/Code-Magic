@@ -1,8 +1,9 @@
 :root {
   /* Colors */
   --primary-color: #735ce5;
-  --text-color: #edf2f4;
+  --text-color: #000;
   --secondary-color: #eae5ff;
+  --tertiary-color: #2196f3;
 
   /* Heights */
   --generator-height: 14rem;
@@ -10,8 +11,7 @@
 
   /* Widths */
   --generator-width: 12rem;
-  --modal-container-width: 100vw;
-  --modal-width: calc(var(--modal-container-width) - 30vw);
+  --content-container: 100%;
   --input-width: 300px;
   --output-width: 400px;
   --pseudo-footer-height: 70px;
@@ -29,7 +29,6 @@
 
 body {
   font-family: 'Exo 2', 'Courier New', Courier, monospace;
-  background-color: var(--primary-color);
   color: var(--text-color);
   overflow: hidden;
   padding-bottom: var(--pseudo-footer-height);
@@ -90,191 +89,80 @@ nav ul > li:hover {
 }
 
 main {
-  margin-top: 3rem;
-  padding: 0 4rem 0 4rem;
-}
-
-/* Generator Card */
-
-.generators {
+  width: var(--content-container);
   display: flex;
-  flex-wrap: wrap;
-}
-
-.generator {
-  height: var(--generator-height);
-  width: var(--generator-width);
-  border-radius: 10px;
-  /* text-align: center; */
-  font-size: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  cursor: pointer;
-  transition: all 200ms ease-in-out;
   background-color: var(--secondary-color);
-  margin-right: 2rem;
-  margin-bottom: 0.7rem;
-}
-
-.generator:hover {
-  box-shadow: var(--secondary-color) -2.5px 2.5px 2px;
-}
-
-.generator > img {
-  width: var(--generator-width);
-  height: calc(var(--generator-height) / 1.4);
-  border-radius: 10px 10px 0 0;
-  object-fit: cover;
-}
-
-.generator > div {
-  height: calc(var(--generator-height) / 2.8);
-  width: var(--generator-width);
-  background: rgba(149, 128, 255, 1);
-  border-radius: 0 0 10px 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: 5px 10px;
   position: relative;
 }
 
-.generator h2 {
-  padding-right: 10px;
-  font-size: min(1.1rem, 2.5rem);
-}
-
-.generator > div img {
-  height: 30px;
-  width: 30px;
-  position: absolute;
-  right: 7px;
-  bottom: 5px;
-}
-
-/* Generator Modal */
-
-.modal-container {
-  position: absolute;
-  height: 100vh;
-  width: 100vw;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  background-color: #1d2a3a48;
-
-  display: none;
-  place-items: center;
-  padding: 2rem;
-  z-index: 2;
-}
-
-.modal-generator {
-  width: calc(var(--modal-width) / 1.2);
-  border: 1px solid var(--text-color);
-  padding: 1rem;
+.generators {
+  min-height: var(--content-container);
+  min-width: var(--content-container);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background: #6d57d9;
-  border-radius: 10px;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-}
-
-.modal-header p {
-  font-weight: 600;
-  text-decoration: underline;
-}
-
-.modal-header img {
-  height: 20px;
-  width: 20px;
-  cursor: pointer;
-}
-
-.modal-main-content {
-  display: none;
-  flex-direction: row;
-  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 /* inputs */
 
-.input {
-  display: flex;
+.generators > div {
+  display: none;
+  min-width: var(--content-container);
+  max-width: var(--content-container);
   flex-direction: column;
-  flex-wrap: wrap;
-  width: var(--input-width);
+  justify-content: center;
+  align-items: center;
 }
 
-.input > div {
-  position: relative;
-}
-
-.input label {
-  font-size: 1.2rem;
-}
-
-.input > div:first-of-type {
-  margin-bottom: 1rem;
+[data-content='pic-text'] {
   display: flex;
-  flex-direction: column;
-  position: relative;
 }
 
-.input > .btn {
-  width: var(--input-width);
+[data-content='pic-text'] > div:first-of-type {
+  width: min(45%, 55%);
+  height: 250px;
+  border: 2px dashed var(--tertiary-color);
 }
 
-input[type='text'],
-textarea,
-textarea:focus {
-  height: 40px;
-  outline: none;
-  padding: 5px;
-  caret-color: var(--text-color);
+textarea {
+  border-radius: 5px;
+  width: min(45%, 55%);
+  height: 150px;
+  border: none;
+  background-color: var(--primary-color);
   color: var(--text-color);
-  background: transparent;
-  border: 0.5px solid var(--text-color);
-  border-radius: 3px;
-  font-size: 1.3rem;
-  position: relative;
+  resize: none;
+  padding: 1rem;
 }
 
 ::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color);
+  font-size: 1rem;
 }
 
-textarea,
-textarea:focus {
-  resize: none;
-  height: 100px;
-  width: var(--input-width);
-  overflow-y: hidden;
-}
-
-.input p {
-  margin-bottom: 0.5em;
-}
-
-.input label {
-  background-color: #fff;
+.colors {
   display: flex;
-  padding: 10px;
-  margin-bottom: 5px;
-  border-radius: 10px;
-  color: black;
+  align-items: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.colors .preview {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 100px;
+  height: 10px;
+  background-color: var(--primary-color);
+}
+
+.color {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 [type='color'] {
@@ -299,12 +187,28 @@ textarea:focus {
   justify-content: space-evenly;
 }
 
+.animation-type {
+  background-color: var(--primary-color);
+  width: min(45%, 55%);
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.animation-type > p {
+  margin-bottom: 0.5rem;
+}
+
+.radio-group {
+  display: flex;
+  justify-content: space-between;
+}
+
 #animation-radio-label {
   padding: 0;
   margin: 0;
   background: none;
   font-weight: 600;
-  color: whitesmoke;
+  color: var(--text-color);
   font-size: 0.9em;
 }
 
@@ -313,53 +217,102 @@ textarea:focus {
 }
 
 #degree {
+  display: flex;
   flex-direction: column;
+  background-color: var(--primary-color);
+  padding: 0.8rem;
+  border-radius: 5px;
+  width: min(45%, 55%);
 }
 
 #degree > span {
-  font-size: 0.7em;
-}
-
-#duration-label {
-  flex-direction: row-reverse;
-  justify-content: space-between;
-}
-
-#duration-label > span {
+  margin-bottom: 0.6rem;
   font-size: 0.9em;
 }
 
-.count {
-  position: absolute;
-  right: 24px;
-  bottom: 2px;
-  color: rgba(255, 255, 255, 0.461);
+.duration-label {
+  background-color: var(--primary-color);
+  width: min(45%, 55%);
+  padding: 1rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.duration-label > span {
+  font-size: 0.9em;
 }
 
 .btn {
   height: 40px;
+  width: 150px;
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--text-color);
+  background-color: var(--primary-color);
   cursor: pointer;
-  margin-top: 0.4rem;
+  margin-top: 2rem;
+  border: none;
+}
+
+/* Results */
+.side-results {
+  display: flex;
+  background-color: var(--secondary-color);
+  min-height: var(--content-container);
+  min-width: var(--content-container);
+  position: absolute;
+  left: 100%;
+  flex-direction: column;
+}
+
+.side-results .header {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  padding: 3rem;
+}
+
+.side-results .header > h2 {
+  margin-left: 1rem;
 }
 
 .output {
-  width: var(--output-width);
+  width: min(45%, 55%);
   height: 300px;
   word-wrap: break-word;
   margin-bottom: 1rem;
+  background-color: var(--primary-color);
+}
+
+.download-output {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .download-output > p {
   font-size: 0.7rem;
 }
 
-.download-btn .btn {
-  width: 100%;
+.download-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: min(25%, 35%);
+}
+
+.image-download {
+  display: flex;
+  margin-bottom: -1rem;
+}
+
+.image-download > button:first-of-type {
+  margin-right: 1rem;
 }
 
 /* FOOTER SECTION */
@@ -393,16 +346,6 @@ a {
   }
 }
 
-@media screen and (min-width: 1040px) {
-  .modal-main-content {
-    justify-content: center;
-  }
-
-  .modal-main-content > .input {
-    margin-right: 50px;
-  }
-}
-
 .eggy {
   z-index: 10;
 }
@@ -413,21 +356,8 @@ a {
     --modal-width: calc(var(--modal-container-width) - 10vw);
   }
 
-  nav {
-    padding: 1rem 2rem;
-  }
-
-  .modal-generator {
-    width: 90vw;
-  }
-
   .generator {
     margin: 0.8rem auto;
-  }
-
-  .modal-main-content {
-    flex-direction: column;
-    align-items: center;
   }
 
   .input {
@@ -442,15 +372,6 @@ a {
 }
 
 @media screen and (max-width: 444px) {
-  .modal-generator {
-    width: 90vw;
-  }
-
-  .modal-main-content {
-    justify-content: center !important;
-    align-items: center;
-  }
-
   .input {
     padding: 2rem 0.3rem 2rem 0.3rem;
   }
