@@ -13,41 +13,31 @@ type Values = {
 
 export function animationGenerator() {
   const attribute = 'animation';
-  const stopAttribute = 'stop-animation';
   const DegreeElement = utils.getRange(attribute);
   const duration = utils.getInputSpinner(attribute);
   const radio_button_set = utils.getRadioButtonSet(attribute);
 
-  const ResultElement = utils.getResultButton(attribute);
-  const stopResultElement = utils.getResultButton(stopAttribute);
   const OutputElement = utils.getOutput(attribute);
 
   const Stylesheet = utils.getStyleSheet();
   const getCodeButtonElement = utils.getCopyCodeButton(attribute);
   initial_length = Stylesheet.cssRules.length - 1;
 
-  initialConfiguration(
-    radio_button_set,
-    DegreeElement,
-    OutputElement,
-    getCodeButtonElement
-  );
+  initialConfiguration(radio_button_set, DegreeElement, OutputElement);
 
-  ResultElement.addEventListener('click', () => {
-    let i = 0;
-    for (i = 0; i < radio_button_set.length; i++)
-      if (radio_button_set[i].checked) break;
+  if (OutputElement === null) return;
 
-    const values: Values = {
-      type: radio_button_set[i].value,
-      degree: DegreeElement.value,
-      duration: duration.value,
-    };
-    manageAnimation(values, OutputElement, Stylesheet);
-  });
-  stopResultElement.addEventListener('click', () => {
-    OutputElement.style.animation = '';
-  });
+  let i = 0;
+
+  for (i = 0; i < radio_button_set.length; i++)
+    if (radio_button_set[i].checked) break;
+
+  const values: Values = {
+    type: radio_button_set[i].value,
+    degree: DegreeElement.value,
+    duration: duration.value,
+  };
+  manageAnimation(values, OutputElement, Stylesheet);
 
   getCodeButtonElement.addEventListener('click', () => {
     copy(css);
@@ -86,7 +76,8 @@ function manageAnimation(
       initial_length + 1
     );
 
-    OutputElement.style.animation = `flickerAnimation ${values.duration}s infinite`;
+    OutputElement.style.animation = `flickerAnimation ease-in`;
+    OutputElement.style.animationDuration = `${values.duration}s`;
     rule_added = true;
   } else if (values.type === 'skew') {
     css =
@@ -107,9 +98,10 @@ function manageAnimation(
       initial_length + 1
     );
 
-    OutputElement.style.animation = `skewAnimation ${values.duration}s infinite`;
+    OutputElement.style.animation = `skewAnimation ease-in`;
+    OutputElement.style.animationDuration = `${values.duration}s`;
     rule_added = true;
-  } else {
+  } else if (values.type === 'flip') {
     css =
       `/*Copy and paste keyframe into your css file, and apply the animation property in the element of your choice*/\n` +
       `@keyframes turnaround { \n` +
@@ -128,7 +120,9 @@ function manageAnimation(
       initial_length + 1
     );
 
-    OutputElement.style.animation = `turnaround ${values.duration}s infinite`;
+    OutputElement.style.animation = `turnaround ease-in`;
+    OutputElement.style.animationDuration = `${values.duration}s`;
+
     rule_added = true;
   }
 }
@@ -136,19 +130,16 @@ function manageAnimation(
 function initialConfiguration(
   elements: NodeListOf<HTMLInputElement>,
   DegreeElement: HTMLInputElement,
-  OutputElement: HTMLElement,
-  getCodeButtonElement: HTMLElement
+  OutputElement: HTMLElement
 ) {
-  getCodeButtonElement.innerText = 'Copy CSS';
+  if (OutputElement === null) return;
   OutputElement.style.display = 'flex';
   OutputElement.style.justifyContent = 'center';
   OutputElement.style.alignItems = 'center';
   OutputElement.style.fontSize = '1.1em';
   OutputElement.style.fontWeight = '700';
-  OutputElement.style.background = `linear-gradient(10deg, blue, yellow)`;
-  const text = document.createTextNode('Lorem Ipsum');
 
-  OutputElement.appendChild(text);
+  OutputElement.innerText = 'Lorem Ipsum';
 
   elements.forEach((el) =>
     el.addEventListener('click', () => {
