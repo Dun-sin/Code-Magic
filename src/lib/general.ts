@@ -15,98 +15,63 @@ export function copyCodeToClipboard(
   attribute: string,
   outputElement: HTMLElement
 ): void {
-  const copyCodeButton = <HTMLElement>(
-    document.querySelector(`[data-download=${attribute}-code]`)
-  );
-  copyCodeButton.addEventListener('click', (): void => {
-    actOnGenerator();
-  });
-
-  function actOnGenerator() {
-    let codeToCopy = '';
-    let element;
-    switch (attribute) {
-      case 'pic-text':
-        codeToCopy = `
-      div {
-        background-position: ${outputElement.style.backgroundPosition};
-        background-size: ${outputElement.style.backgroundSize};
-        background-repeat: ${outputElement.style.backgroundRepeat};
-        background-clip: ${outputElement.style.backgroundClip};
-        -webkit-background-clip: ${outputElement.style.webkitBackgroundClip};
-        -webkit-text-fill-color: ${outputElement.style.webkitTextFillColor};
-      }
-    `;
-        break;
-      case 'gradient-text':
-        codeToCopy = `
-        p{	
-          font-size: ${
-            (outputElement.children[0] as HTMLElement).style.fontSize
-          };
-		  background: ${
-        (outputElement.children[0] as HTMLElement).style.backgroundImage
-      };
-		  background-clip: 'text';
-		  -webkit-background-clip: 'text';
-		  -webkit-text-fill-color: 'transparent';
-        }
-        `;
-
-        break;
-      case 'gradient-border':
-        element = outputElement.style;
-        /*TODO: fix incorrect copied code*/
-        codeToCopy = `
-        div.gradient-border {
-          position: relative;
-          width: var(--output-width);
-          height: 300px;
-          word-wrap: break-word;
-          margin-bottom: 1rem;
-        }
-        
-        div.gradient-border::before {
-          content: "";
-          position: absolute;
-          inset: 0;
-          border-radius: var(--gradient-border-radius); 
-          padding: 6px; 
-          background: linear-gradient(45deg, var(--gradient-color-1, red), var(--gradient-color-2, blue)); 
-          -webkit-mask: 
-             linear-gradient(#fff 0 0) content-box,
-             linear-gradient(#fff 0 0);
-          -webkit-mask-composite: xor;
-              mask-composite: exclude; 
-          }
-        `;
-        break;
-      case 'gradient-background':
-        element = outputElement.style;
-        codeToCopy = `
-          div {
-            height: 100px;
-            width: 100px;
-            background: ${element.backgroundImage};
-          }
-        `;
-    }
-
-    copy(codeToCopy);
-  }
+  actOnGenerator(attribute, outputElement);
 }
 
-/**
- * @function countForText
- * @summary Counts the number of text in the input element
- * @param inputElement {HTMLInputElement} - The input element that holds the text
- * @return {void} Nothing
- */
-export function countForText(inputElement: HTMLInputElement): void {
-  const countElement = <HTMLElement>document.querySelector('.count > span');
-  inputElement.addEventListener('keydown', (): void => {
-    countElement.innerText = `${inputElement.value.length + 1}`;
-  });
+function actOnGenerator(attribute: string, outputElement: HTMLElement) {
+  let codeToCopy = '';
+  let element;
+  switch (attribute) {
+    case 'pic-text':
+      codeToCopy = `
+    div {
+      background-position: ${outputElement.style.backgroundPosition};
+      background-size: ${outputElement.style.backgroundSize};
+      background-repeat: ${outputElement.style.backgroundRepeat};
+      background-clip: ${outputElement.style.backgroundClip};
+      -webkit-background-clip: ${outputElement.style.webkitBackgroundClip};
+      -webkit-text-fill-color: ${outputElement.style.webkitTextFillColor};
+    }
+  `;
+      break;
+    case 'gradient-text':
+      codeToCopy = `
+      p{	
+        font-size: ${(outputElement.children[0] as HTMLElement).style.fontSize};
+    background: ${
+      (outputElement.children[0] as HTMLElement).style.backgroundImage
+    };
+    background-clip: 'text';
+    -webkit-background-clip: 'text';
+    -webkit-text-fill-color: 'transparent';
+      }
+      `;
+
+      break;
+    case 'gradient-border':
+      element = outputElement.style;
+      codeToCopy = `
+        div {
+          border: ${element.border},
+          border-width: ${element.borderWidth},
+          border-image-slice: ${element.borderImageSlice},
+          border-image-source: ${element.borderImageSource},
+        }
+      `;
+      break;
+    case 'gradient-background':
+      element = outputElement.style;
+      codeToCopy = `
+        div {
+          height: 100px;
+          width: 100px;
+          background: ${element.backgroundImage};
+        }
+      `;
+      break;
+  }
+
+  copy(codeToCopy);
 }
 
 /**
@@ -205,7 +170,7 @@ export const getColorInput2 = (attribute: string): HTMLInputElement =>
   <HTMLInputElement>document.getElementById(`${attribute}-color2`);
 
 export const getOutput = (attribute: string): HTMLElement =>
-  <HTMLElement>document.querySelector(`[data-modal = ${attribute}] .output`);
+  <HTMLElement>document.querySelector(`[data-result = ${attribute}] > .output`);
 
 export const getRange = (attribute: string): HTMLInputElement =>
   <HTMLInputElement>document.getElementById(`${attribute}-degree`);

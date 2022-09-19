@@ -1,289 +1,396 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="./src/style.css" />
 
-	<!-- CSS -->
-	<link rel="stylesheet" href="./src/style.css" />
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
 
-	<!-- Font -->
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link
-		href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-		rel="stylesheet" />
+    <!-- Scripts -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.0/iconify-icon.min.js"></script>
+    <script type="module" src="./src/main.ts" defer></script>
 
-	<!-- Scripts -->
-	<script type="module" src="./src/main.ts" defer></script>
+    <title>Code Magic</title>
+  </head>
 
-	<title>Trick Generator</title>
-</head>
+  <body>
+    <!-- Generator Card -->
+    <!-- Now👇🏾 -->
+    <!-- Side Bar -->
+    <nav>
+      <h1 id="head">Code Magic</h1>
+      <ul>
+        <li data-gen="pic-text">
+          <iconify-icon
+            inline
+            icon="cil:text-shapes"
+            style="color: white"
+            width="20"
+            height="20"
+          ></iconify-icon>
+          <span>Pic-Text</span>
+        </li>
+        <li data-gen="gradient-text">
+          <iconify-icon
+            inline
+            icon="ic:baseline-gradient"
+            style="color: white"
+            width="20"
+            height="20"
+          ></iconify-icon>
+          <span>Gradient Text</span>
+        </li>
+        <li data-gen="gradient-border">
+          <iconify-icon
+            inline
+            icon="fa-solid:border-all"
+            style="color: white"
+            width="20"
+            height="20"
+          ></iconify-icon>
+          <span>Gradient Border</span>
+        </li>
+        <li data-gen="gradient-background">
+          <iconify-icon
+            inline
+            icon="fluent:color-background-24-filled"
+            style="color: white"
+            width="20"
+            height="20"
+          ></iconify-icon>
+          <span>Gradient Background</span>
+        </li>
+        <li data-gen="animation">
+          <iconify-icon
+            inline
+            icon="clarity:animation-line"
+            style="color: white"
+            width="20"
+            height="20"
+          ></iconify-icon>
+          <span>Animator</span>
+        </li>
+      </ul>
+      <footer>
+        Contribute to the Project
+        <a href="https://github.com/Dun-sin/Code-Magic" target="_blank"
+          >Click Here</a
+        >
+      </footer>
+    </nav>
 
-<body>
-	<nav>
-		<h1 id="head">Trick Generator</h1>
-		<div>
-			<ul></ul>
-		</div>
-		<div class="menu">
-			<div></div>
-			<div></div>
-			<div></div>
-		</div>
-	</nav>
+    <main>
+      <div class="generators">
+        <!-- Pic Text -->
+        <div data-content="pic-text">
+          <div>
+            <input type="file" id="pic-text-file" required />
+          </div>
+          <div class="btn" data-button="pic-text">Get Results</div>
+        </div>
 
-	<main>
-		<!-- Generator Card -->
-		<div class="generators">
-			<div class="generator" data-gen="pic-text">
-				<img src="https://user-images.githubusercontent.com/78784850/177135924-aec3794a-8bd8-48ec-bd5a-4aee074c7a16.png"
-					alt="Picture-Text Generator" loading="lazy" />
-				<div>
-					<h2>Pic-Text</h2>
-					<img src="./assets/bi_arrow-right-square-fill.svg" alt="Right Icon" />
-				</div>
-			</div>
-			<div class="generator" data-gen="gradient-text">
-				<img src="https://user-images.githubusercontent.com/78784850/179534667-c5de2a54-5eee-49d3-a7b6-6404e1cde5de.png"
-					alt="Gradient Text Generator" loading="lazy" />
-				<div>
-					<h2>Gradient Text</h2>
-					<img src="./assets/bi_arrow-right-square-fill.svg" alt="Right Icon" />
-				</div>
-			</div>
-			<div class="generator" data-gen="gradient-border">
-				<img src="https://user-images.githubusercontent.com/50910798/183639196-f0feb476-cfa3-4396-8556-b251666d7ead.jpg"
-					alt="Gradient Border" loading="lazy" />
-				<div>
-					<h2>Gradient Border</h2>
-					<img src="./assets/bi_arrow-right-square-fill.svg" alt="Right Icon" />
-				</div>
-			</div>
-			<div class="generator" data-gen="gradient-background">
-				<img src="https://user-images.githubusercontent.com/78784850/183375805-478b002f-4ef2-4ab8-8b1b-da50482b45ff.png"
-					alt="Gradient Background" loading="lazy" />
-				<div>
-					<h2>Gradient Background</h2>
-					<img src="./assets/bi_arrow-right-square-fill.svg" alt="Right Icon" />
-				</div>
-			</div>
-			<div class="generator" data-gen="animation">
-				<img src="https://raw.githubusercontent.com/Akshat-Mishra101/Akshat-Mishra101/main/Images/animation-generator.png"
-					alt="animation generator" loading="lazy" />
-				<div>
-					<h2>Animator</h2>
-					<img src="./assets/bi_arrow-right-square-fill.svg" alt="Right Icon" />
-				</div>
-			</div>
-		</div>
-		<!-- Modal -->
-		<div class="modal-container">
-			<div class="modal-generator">
-				<div class="modal-header">
-					<p id="heading-text-modal"></p>
-					<img src="./assets/close-square-fill.svg" alt="close button" id="close-modal" />
-				</div>
-				<div class="modal-main-content" data-modal="pic-text">
-					<div class="input">
-						<div>
-							<textarea id="pic-text-text" placeholder="Enter the text you want(Optional)"
-								class="input-bar"></textarea>
-							<p class="count"><span>0</span>/400</p>
-						</div>
-						<input type="file" id="pic-text-file" required />
-						<div class="btn" data-button="pic-text">Get image</div>
-					</div>
-					<div class="download-output">
-						<div class="output"></div>
-						<p>
-							Note: Downloading only works for firefox <br />
-							but copying the code works for every browser
-						</p>
-						<div class="download-btn">
-							<button class="btn" data-download="pic-text-PNG">
-								Download PNG
-							</button>
-							<button class="btn" data-download="pic-text-svg">
-								Download Svg
-							</button>
-							<button class="btn" data-download="pic-text-code">
-								Get Code
-							</button>
-						</div>
-					</div>
-				</div>
-				<div class="modal-main-content" data-modal="gradient-text">
-					<div class="input">
-						<input type="text" id="gradient-text-text" placeholder="Enter the text" />
+        <!-- Gradient Text -->
+        <div data-content="gradient-text">
+          <textarea
+            id="gradient-text-text"
+            placeholder="Enter the text"
+          ></textarea>
 
-						<p>Pick Your Colors:</p>
+          <div class="colors">
+            <label for="color" class="color">
+              <input type="color" value="#000" id="gradient-text-color1" />
+              <span>First Color</span>
+            </label>
 
-						<label for="colorPicker">
-							<input type="color" value="#1DB8CE" id="gradient-text-color1" />
-							<span>First Color</span>
-						</label>
+            <div class="preview"></div>
 
-						<label for="colorPicker">
-							<input type="color" value="#1DB4CE" id="gradient-text-color2" />
-							<span>Second Color</span>
-						</label>
-						<label id="degree">
-							<span>Slide to change the degree</span>
-							<input type="range" max="360" min="0" id="gradient-text-degree" />
-						</label>
-						<div class="btn" data-button="gradient-text">Get Text</div>
-					</div>
-					<div class="download-output">
-						<div class="output"></div>
-						<div class="download-btn">
-							<button class="btn" data-download="gradient-text-PNG">
-								Download Image
-							</button>
-							<button class="btn" data-download="gradient-text-svg">
-								Download Svg
-							</button>
-							<button class="btn" data-download="gradient-text-code">
-								Get Code
-							</button>
-						</div>
-					</div>
-				</div>
-				<div class="modal-main-content" data-modal="gradient-border">
-					<div class="input">
-						<p>Pick Your Colors:</p>
+            <label for="color" class="color">
+              <input type="color" value="#000" id="gradient-text-color2" />
+              <span>Second Color</span>
+            </label>
+          </div>
 
-						<label for="colorPicker">
-							<input type="color" value="#1DB8CE" id="gradient-border-color1" />
-							<span>First Color</span>
-						</label>
+          <label id="degree">
+            <span>Degree</span>
+            <input type="range" max="360" min="0" id="gradient-text-degree" />
+          </label>
+          <div class="btn" data-button="gradient-text">Get Results</div>
+        </div>
 
-						<label for="colorPicker">
-							<input type="color" value="#1DB4CE" id="gradient-border-color2" />
-							<span>Second Color</span>
-						</label>
+        <!-- Gradient Border -->
+        <div data-content="gradient-border">
+          <div class="colors">
+            <label for="color" class="color">
+              <input type="color" value="#000" id="gradient-border-color1" />
+              <span>First Color</span>
+            </label>
 
-              <label for="gradient-border-radius">
+            <div class="preview"></div>
+
+            <label for="color" class="color">
+              <input type="color" value="#000" id="gradient-border-color2" />
+              <span>Second Color</span>
+            </label>
+          </div>
+
+          <label id="degree">
+            <span>Degree</span>
+            <input type="range" max="360" min="0" id="gradient-border-degree" />
+          </label>
+
+          <div class="btn" data-button="gradient-border">Get Result</div>
+        </div>
+
+        <!-- Gradient Background -->
+        <div data-content="gradient-background">
+          <div class="colors">
+            <label for="color" class="color">
+              <input
+                type="color"
+                value="#000"
+                id="gradient-background-color1"
+              />
+              <span>First Color</span>
+            </label>
+
+            <div class="preview"></div>
+
+            <label for="color" class="color">
+              <input
+                type="color"
+                value="#000"
+                id="gradient-background-color2"
+              />
+              <span>Second Color</span>
+            </label>
+          </div>
+
+          <label id="degree">
+            <span>Degree</span>
+            <input
+              type="range"
+              max="360"
+              min="0"
+              id="gradient-background-degree"
+            />
+          </label>
+
+          <div class="btn" data-button="gradient-background">Get Result</div>
+        </div>
+
+        <!-- Animation -->
+        <div data-content="animation">
+          <div class="animation-type">
+            <p>Animation Type</p>
+            <div class="radio-group">
+              <label id="animation-radio-label" for="skew">
                 <input
-                  type="checkbox"
-                  id="gradient-border-radius"
-                  name="check"
+                  checked
+                  type="radio"
+                  id="skew"
+                  name="animation-radio"
+                  value="skew"
                 />
-                <span>Include Radius</span>
+                <span>Skew</span>
               </label>
-
-              <label id="degree">
-                <span>Slide to change the degree</span>
+              <label id="animation-radio-label" for="fade">
                 <input
-                  type="range"
-                  max="360"
-                  min="0"
-                  id="gradient-border-degree"
+                  type="radio"
+                  id="fade"
+                  name="animation-radio"
+                  value="fade"
                 />
+                <span>Fade</span>
               </label>
-
-              <div class="btn" data-button="gradient-border">Get Result</div>
-            </div>
-            <div class="download-output">
-              <div class="output gradient-border"></div>
-              <div class="download-btn">
-                <button class="btn" data-download="gradient-border-code">
-                  Get Code
-                </button>
-              </div>
+              <label id="animation-radio-label" for="flip">
+                <input
+                  type="radio"
+                  id="flip"
+                  name="animation-radio"
+                  value="flip"
+                />
+                <span>Flip</span>
+              </label>
             </div>
           </div>
-          <div class="modal-main-content" data-modal="gradient-background">
-            <div class="input">
-              <p>Pick Your Colors:</p>
 
-						<label for="colorPicker">
-							<input type="color" value="#1DB8CE" id="gradient-background-color1" />
-							<span>First Color</span>
-						</label>
+          <label class="duration-label" for="animation-duration">
+            <span>Duration</span>
+            <input
+              type="number"
+              name="duration"
+              id="animation-duration"
+              min="0"
+              max="120"
+              step="1"
+              value="3"
+            />
+          </label>
 
-						<label for="colorPicker">
-							<input type="color" value="#1DB4CE" id="gradient-background-color2" />
-							<span>Second Color</span>
-						</label>
+          <label id="degree">
+            <span>Speed</span>
+            <input
+              type="range"
+              max="90"
+              min="-90"
+              value="50"
+              id="animation-degree"
+            />
+          </label>
 
-						<label id="degree">
-							<span>Slide to change the degree</span>
-							<input type="range" max="360" min="0" id="gradient-background-degree" />
-						</label>
+          <div class="btn" data-button="animation">Get Results</div>
+        </div>
+      </div>
 
-						<div class="btn" data-button="gradient-background">
-							Get Result
-						</div>
-					</div>
-					<div class="download-output">
-						<div class="output bg-output"></div>
-						<div class="download-btn">
-							<button class="btn" data-download="gradient-background-code">
-								Get Code
-							</button>
-						</div>
-					</div>
-				</div>
-				<!--our animation generator begins here-->
-				<div class="modal-main-content" data-modal="animation">
-					<div class="input">
-						<p>Select Duration</p>
-						<label id="duration-label" for="animation-duration">
-							<input type="number" name="duration" id="animation-duration" min="0" max="120" step=".1"
-								value="0.5">
-							<span>Duration</span>
-						</label>
-						<p>Animation Type</p>
-						<div id="radio-group">
-							<label id="animation-radio-label" for="skew">
-								<span>Skew</span>
-								<input checked type="radio" id="skew" name="animation-radio" value="skew">
-							</label>
-							<label id="animation-radio-label" for="fade">
-								<span>Fade</span>
-								<input type="radio" id="fade" name="animation-radio" value="fade">
-							</label>
-							<label id="animation-radio-label" for="flip">
-								<span>Flip</span>
-								<input type="radio" id="flip" name="animation-radio" value="flip">
-							</label>
-						</div>
-						<label id="degree">
-							<span>Select The Amount</span>
-							<input type="range" max="90" min="-90" value="50" id="animation-degree" />
-						</label>
+      <div class="side-results">
+        <div class="header">
+          <iconify-icon
+            inline
+            icon="lucide:sidebar-close"
+            style="color: white; cursor: pointer"
+            width="28"
+            height="28"
+            id="close-side-bar"
+          ></iconify-icon>
+          <h2>Results</h2>
+        </div>
+        <!-- Pic Text -->
+        <div class="download-output" data-result="pic-text">
+          <div class="output"></div>
+          <p>
+            Note: Downloading only works for firefox <br />
+            but copying the code works for every browser
+          </p>
+          <div class="download-btn">
+            <div class="image-download">
+              <button class="btn" data-download="pic-text-PNG">
+                <iconify-icon
+                  inline
+                  icon="bxs:download"
+                  style="color: white; margin-right: 5px"
+                  width="20"
+                ></iconify-icon>
+                Download PNG
+              </button>
+              <button class="btn" data-download="pic-text-svg">
+                <iconify-icon
+                  inline
+                  icon="bxs:download"
+                  style="color: white; margin-right: 5px"
+                  width="20"
+                ></iconify-icon>
+                Download Svg
+              </button>
+            </div>
 
-						<div class="btn" data-button="animation">
-							Apply Animation
-						</div>
-						<div class="btn" data-button="stop-animation">
-							Stop Animation
-						</div>
+            <button class="btn" data-download="pic-text-code">
+              <iconify-icon
+                inline
+                icon="bx:code-alt"
+                style="color: white; margin-right: 5px"
+                width="20"
+              ></iconify-icon>
+              Get Code
+            </button>
+          </div>
+        </div>
 
-					</div>
-					<div class="download-output">
-						<div class="output"></div>
-						<div class="download-btn">
-							<button class="btn" data-download="animation-code">
-								Get Code
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</main>
+        <!-- Gradient Text -->
+        <div class="download-output" data-result="gradient-text">
+          <div class="output"></div>
 
-	<footer>
-		<p>
-			Contribute to the Project
-			<a href="https://github.com/Dun-sin/trick-generator" target="_blank">Click Here</a>
-		</p>
-		<p>Made with 💘 by the community</p>
-	</footer>
-</body>
+          <div class="download-btn">
+            <div class="image-download">
+              <button class="btn" data-download="gradient-text-PNG">
+                <iconify-icon
+                  inline
+                  icon="bxs:download"
+                  style="color: white; margin-right: 5px"
+                  width="20"
+                ></iconify-icon>
+                Download PNG
+              </button>
+              <button class="btn" data-download="gradient-text-svg">
+                <iconify-icon
+                  inline
+                  icon="bxs:download"
+                  style="color: white; margin-right: 5px"
+                  width="20"
+                ></iconify-icon>
+                Download Svg
+              </button>
+            </div>
 
+            <button class="btn" data-download="gradient-text-code">
+              <iconify-icon
+                inline
+                icon="bx:code-alt"
+                style="color: white; margin-right: 5px"
+                width="20"
+              ></iconify-icon>
+              Get Code
+            </button>
+          </div>
+        </div>
+
+        <!-- Gradient Border -->
+        <div class="download-output" data-result="gradient-border">
+          <div class="output"></div>
+          <div class="download-btn">
+            <button class="btn" data-download="gradient-border-code">
+              <iconify-icon
+                inline
+                icon="bx:code-alt"
+                style="color: white; margin-right: 5px"
+                width="20"
+              ></iconify-icon>
+              Get Code
+            </button>
+          </div>
+        </div>
+
+        <!-- Gradient Background -->
+        <div class="download-output" data-result="gradient-background">
+          <div class="output"></div>
+          <div class="download-btn">
+            <button class="btn" data-download="gradient-background-code">
+              <iconify-icon
+                inline
+                icon="bx:code-alt"
+                style="color: white; margin-right: 5px"
+                width="20"
+              ></iconify-icon>
+              Get Code
+            </button>
+          </div>
+        </div>
+
+        <!-- Animation -->
+        <div class="download-output" data-result="animation">
+          <div class="output"></div>
+          <div class="download-btn">
+            <button class="btn" data-download="animation-code">
+              <iconify-icon
+                inline
+                icon="bx:code-alt"
+                style="color: white; margin-right: 5px"
+                width="20"
+              ></iconify-icon
+              >Get Code
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>

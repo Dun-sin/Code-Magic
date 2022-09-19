@@ -1,8 +1,10 @@
-## trick-generator
+## Code-Magic
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Dun-sin/trick-generator)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Dun-sin/Code-Magic)
 
 A website to help you get simple tricks you can use in your applications with html and css
+
+![code magic v2](https://user-images.githubusercontent.com/78784850/190919846-6bc18de7-34c4-4229-b6ea-d0160f8a0168.gif)
 
 ### ⚒️ Languages / Tools
 
@@ -30,7 +32,7 @@ A website to help you get simple tricks you can use in your applications with ht
 
 ## 🧑🏾‍💻 Demo
 
-Check out the website: [Trick Generator](https://trick-generator.vercel.app/)
+Check out the website: [Code Magic](https://Code-Magic.vercel.app/)
 
 ## 👇🏽 Prerequisites
 
@@ -41,17 +43,17 @@ Before installation, please make sure you have already installed the following t
 
 ## 🛠️ Installation Steps
 
-1. [Fork](https://github.com/Dun-sin/trick-generator/fork) the project. Click on the <a href="https://github.com/Dun-sin/trick-generator/fork"><img src="https://i.imgur.com/G4z1kEe.png" height="15" width="15"></a> icon in the top right to get started
+1. [Fork](https://github.com/Dun-sin/Code-Magic/fork) the project. Click on the <a href="https://github.com/Dun-sin/Code-Magic/fork"><img src="https://i.imgur.com/G4z1kEe.png" height="15" width="15"></a> icon in the top right to get started
 2. Clone the project, you can use the following command:
 
 ```bash
-git clone https://github.com/<your-github-username>/trick-generator
+git clone https://github.com/<your-github-username>/Code-Magic
 ```
 
 3. Navigate to the project directory
 
 ```bash
-cd trick-generator
+cd Code-Magic
 ```
 
 4. Install dependencies with npm install
@@ -61,7 +63,7 @@ npm install
 ```
 
 ```bash
-npm install -g commitizen 
+npm install -g commitizen
 ```
 
 5. Run the project
@@ -93,12 +95,14 @@ git cz
 ```
 
 4. Push your changes
+
 ```bash
 git push
 ```
 
 ## 👨‍👩‍👦 Community
-Don't forget to join the discord community - [Join us](https://discord.gg/KUWjx4fygJ) 
+
+Don't forget to join the discord community - [Join us](https://discord.gg/KUWjx4fygJ)
 
 ## 👩🏽‍💻 Contributing
 
@@ -108,13 +112,13 @@ Don't forget to join the discord community - [Join us](https://discord.gg/KUWjx4
 
 ## 🛡️ License
 
-trick-generator is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Code-Magic is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 💪🏽 Thanks to all Contributors
 
-Thanks a lot for spending your time helping trick-generator grow. Thanks a lot! Keep rocking🍻
+Thanks a lot for spending your time helping Code-Magic grow. Thanks a lot! Keep rocking🍻
 
-[![Contributors](https://contrib.rocks/image?repo=Dun-sin/trick-generator)](https://github.com/Dun-sin/trick-generator/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=Dun-sin/Code-Magic)](https://github.com/Dun-sin/Code-Magic/graphs/contributors)
 
 ## 🙏🏽 Support
 

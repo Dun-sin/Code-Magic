@@ -1,23 +1,63 @@
 // Generator Modules
-import { picTextGenerator } from './generators/pic-text';
-import { gradientTextGenerator } from './generators/gradient-text';
-import { gradientBorderGenerator } from './generators/gradient-border';
-import { gradientBackgroundGenerator } from './generators/gradient-background';
-import { animationGenerator } from './generators/animation';
+import {picTextGenerator} from './pages/pic-text';
+import {gradientTextGenerator} from './pages/gradient-text';
+import {gradientBorderGenerator} from './pages/gradient-border';
+import {gradientBackgroundGenerator} from './pages/gradient-background';
+import {animationGenerator} from './pages/animation';
 
+// import * as FilePond from 'filepond';
 import * as FilePond from 'filepond';
+import 'filepond/dist/filepond.min.css';
+
+// File Pond Plugins
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginImageResize from 'filepond-plugin-image-resize';
+import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
+
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+
+FilePond.registerPlugin(
+  FilePondPluginImagePreview,
+  FilePondPluginImageResize,
+  FilePondPluginImageTransform
+);
 
 /**
  * All Variables
  */
 let attributeValue: string | null = null;
-let isOpen = false;
+let imageSRC = '';
+const sideBarSlide = [{left: '100%'}, {left: '0%'}];
+
+const sideBarTiming = {
+  duration: 500,
+  iterations: 1,
+  easing: 'ease-in',
+};
+
 // Elements
 const generators = document.querySelectorAll('[data-gen]');
-const closeModalElement = document.getElementById('close-modal');
-const modalContainerElement = <HTMLElement>(
-  document.querySelector('.modal-container')
+const sidebar = <HTMLElement>document.querySelector('.side-results');
+const getResults = document.querySelectorAll('[data-button]');
+const results = document.querySelectorAll('[data-result]');
+const closeBar = document.getElementById('close-side-bar');
+const getImageEntryElement = <HTMLInputElement>(
+  document.getElementById(`pic-text-file`)
 );
+
+FilePond.create(getImageEntryElement, {
+  imagePreviewMaxHeight: 200,
+
+  onpreparefile: (fileItem, output): void => {
+    // create a new image object
+    const img = new Image();
+
+    // set the image source to the output of the Image Transform plugin
+    img.src = URL.createObjectURL(output);
+    imageSRC = img.src;
+    console.log(fileItem);
+  },
+});
 
 /**
  * All types
@@ -25,57 +65,14 @@ const modalContainerElement = <HTMLElement>(
 type Display = 'grid' | 'flex' | 'none';
 
 /**
- * @function checkingIfGeneratorExists
- * @summary Check if the attribute value exists
- * @param {string | null} attribute - The attribute name of the generator element
- * @return {void} nothing
- */
-function checkingIfGeneratorExists(attribute: string | null): void {
-  if (attribute === null) return;
-
-  changeHeaderText(attribute);
-  generatorsFunction(attribute);
-}
-
-/**
- * @function changeHeaderText
- * @summary Change the header text of the generator based on the attribute value
- * @param {string} attribute - The attribute name of the generator element
- * @return {void} nothing
- */
-function changeHeaderText(attribute: string): void {
-  const modalHeaderTextElement = <HTMLElement>(
-    document.getElementById('heading-text-modal')
-  );
-
-  attribute = attribute.charAt(0).toUpperCase() + attribute.slice(1);
-  modalHeaderTextElement.innerText = `${attribute} Generator`;
-}
-
-/**
- * @function isVisible
- * @summary uses the value of isOpen to change the visibility of the modal
- * @param isOpen {boolean} - the variable for if the modal is open or closed
- * @return {void} nothing
- */
-function isVisible(isOpen: boolean): void {
-  if (isOpen) {
-    modalContainerElement.style.display = 'grid';
-  } else {
-    modalContainerElement.style.display = 'none';
-  }
-}
-
-/**
  * @function generatorsFunction
  * @summary a function with the collection of functions for generators
  * @param {string} attribute - The attribute name of the generator element
  */
 function generatorsFunction(attribute: string): void {
-  removeOrAddGeneratorContent(attribute, 'flex');
   switch (attribute) {
     case 'pic-text':
-      picTextGenerator();
+      picTextGenerator(imageSRC);
       break;
     case 'gradient-text':
       gradientTextGenerator();
@@ -89,72 +86,79 @@ function generatorsFunction(attribute: string): void {
     case 'animation':
       animationGenerator();
       break;
-
   }
 }
 
 /**
- * @function removeOrAddGeneratorContent
+ * @function showContent
  * @summary use to toggle visibilty of content in generators
  * @param {string} attribute - The attribute name of the generator element
  * @param {Display} display - display type
  * @return {void} Nothing
  */
-function removeOrAddGeneratorContent(
-  attribute: string,
-  display: Display
-): void {
-  const generator = <HTMLElement>(
-    document.querySelector(`[data-modal = ${attribute}]`)
-  );
-  generator.style.display = `${display}`;
+function showContent(attribute: string, display: Display): void {
+  const generators = document.querySelectorAll(`[data-content]`);
+
+  generators.forEach((item) => {
+    const element = <HTMLElement>item;
+    if (element.getAttribute('data-content') === attribute) {
+      element.style.display = `${display}`;
+    } else {
+      element.style.display = 'none';
+    }
+  });
 }
 
-function closeModalFunction() {
-  isOpen = false;
-
-  isVisible(isOpen);
-
-  const getImageEntryElement = <HTMLInputElement>(
-    document.getElementById(`pic-text-file`)
-  );
-  getImageEntryElement.setAttribute('value', '');
-  getImageEntryElement.setAttribute('src', '');
-  FilePond.destroy(getImageEntryElement);
-
-  if (attributeValue === null) return;
-  removeOrAddGeneratorContent(attributeValue, 'none');
+function showResult(attribute: string | null) {
+  results.forEach((item) => {
+    const element = <HTMLElement>item;
+    if (element.getAttribute('data-result') === attribute) {
+      element.style.display = 'flex';
+    } else {
+      element.style.display = 'none';
+    }
+  });
+  if (attribute === null) return;
+  generatorsFunction(attribute);
 }
 
-// Close button for modals
-closeModalElement?.addEventListener('click', (): void => {
-  closeModalFunction();
-});
+// function fixPicTextFile() {
+//   const getImageEntryElement = <HTMLInputElement>(
+//     document.getElementById(`pic-text-file`)
+//   );
+//   getImageEntryElement.setAttribute('value', '');
+//   getImageEntryElement.setAttribute('src', '');
+//   FilePond.destroy(getImageEntryElement);
 
-document?.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    closeModalFunction();
-  }
-});
+//   if (attributeValue === null) return;
+//   removeOrAddGeneratorContent(attributeValue, 'none');
+// }
 
 // adding an event listeners to all generators card
+
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
-    isOpen = true;
-    isVisible(isOpen);
+    sidebar.style.left = '100%';
     const checking = generator.getAttribute('data-gen');
     if (checking === null) return;
 
     attributeValue = checking;
-    checkingIfGeneratorExists(attributeValue);
+    showContent(attributeValue, 'flex');
   });
 });
 
-// closing modal when user clicks outside
-document.addEventListener('click', function (event) {
-  if (event.target === null) return;
-  const element = <HTMLElement>event.target;
-  if (element.matches('.modal-container')) {
-    closeModalFunction();
-  }
+getResults.forEach((getResult) => {
+  getResult?.addEventListener('click', () => {
+    showResult(getResult.getAttribute('data-button'));
+    sidebar.animate(sideBarSlide, sideBarTiming);
+    sidebar.style.left = '0%';
+  });
+});
+showResult(null);
+
+closeBar?.addEventListener('click', () => {
+  const sideBarSlide = [{left: '0%'}, {left: '100%'}];
+  sidebar.animate(sideBarSlide, sideBarTiming);
+  sidebar.style.left = '100%';
+  showResult(null);
 });

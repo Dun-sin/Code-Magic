@@ -1,5 +1,5 @@
 {
-  "name": "trick-generator",
+  "name": "Code-Magic",
   "private": true,
   "version": "0.0.0-development",
   "scripts": {
@@ -43,6 +43,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Dun-sin/trick-generator.git"
+    "url": "https://github.com/Dun-sin/Code-Magic.git"
   }
 }

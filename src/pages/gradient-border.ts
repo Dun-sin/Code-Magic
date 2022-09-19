@@ -1,4 +1,4 @@
-import * as utils from '../general';
+import * as utils from '../lib/general';
 
 type Values = {
   firstColor: string;
@@ -10,14 +10,13 @@ export function gradientBorderGenerator(): void {
   const attribute = 'gradient-border';
   const color1 = utils.getColorInput1(attribute);
   const color2 = utils.getColorInput2(attribute);
-  const getResultButtonElement = utils.getResultButton(attribute);
   const getOutputElement = utils.getOutput(attribute);
   const getRangeElement = utils.getRange(attribute);
   const getCheckboxElement = utils.getCheckbox(attribute);
   const activateRadius = utils.activeRadius;
   const deactivateRadius = utils.InactiveRadius;
 
-  getResultButtonElement.addEventListener('click', () => {
+  getOutputElement.addEventListener('click', () => {
     onClickButton();
   });
 

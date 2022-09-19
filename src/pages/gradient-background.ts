@@ -1,4 +1,4 @@
-import * as utils from '../general';
+import * as utils from '../lib/general';
 
 type Values = {
   firstColor: string;
@@ -13,21 +13,14 @@ export function gradientBackgroundGenerator() {
   const color2 = utils.getColorInput2(attribute);
   const getDegreeElement = utils.getRange(attribute);
 
-  const getResultElement = utils.getResultButton(attribute);
   const getOutputElement = utils.getOutput(attribute);
 
-  getResultElement.addEventListener('click', () => {
-    onClickButton();
-  });
-
-  function onClickButton() {
-    const values: Values = {
-      firstColor: color1.value,
-      secondColor: color2.value,
-      degree: getDegreeElement.value,
-    };
-    getGradientBackgroundResult(attribute, values, getOutputElement);
-  }
+  const values: Values = {
+    firstColor: color1.value,
+    secondColor: color2.value,
+    degree: getDegreeElement.value,
+  };
+  getGradientBackgroundResult(attribute, values, getOutputElement);
 }
 
 function getGradientBackgroundResult(
