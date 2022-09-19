@@ -65,9 +65,9 @@ FilePond.create(getImageEntryElement, {
 type Display = 'grid' | 'flex' | 'none';
 
 /**
- * @function generatorsFunction
- * @summary a function with the collection of functions for generators
- * @param {string} attribute - The attribute name of the generator element
+ * sets which generator to call
+ *
+ * @param attribute - The attribute name of the generator element
  */
 function generatorsFunction(attribute: string): void {
   switch (attribute) {
@@ -90,11 +90,10 @@ function generatorsFunction(attribute: string): void {
 }
 
 /**
- * @function showContent
- * @summary use to toggle visibilty of content in generators
- * @param {string} attribute - The attribute name of the generator element
- * @param {Display} display - display type
- * @return {void} Nothing
+ * use to toggle visibilty of content in generators
+ *
+ * @param attribute  The attribute name of the generator element
+ * @param display  display type
  */
 function showContent(attribute: string, display: Display): void {
   const generators = document.querySelectorAll(`[data-content]`);
@@ -156,6 +155,7 @@ getResults.forEach((getResult) => {
 });
 showResult(null);
 
+// onClick event listener for the closebar icon
 closeBar?.addEventListener('click', () => {
   const sideBarSlide = [{left: '0%'}, {left: '100%'}];
   sidebar.animate(sideBarSlide, sideBarTiming);

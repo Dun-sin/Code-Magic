@@ -23,6 +23,13 @@ export function gradientBackgroundGenerator() {
   getGradientBackgroundResult(attribute, values, getOutputElement);
 }
 
+/**
+ * sets the result to the output element
+ *
+ * @param attribute attribute name of the generator
+ * @param values object that contains all values entered by users
+ * @param outputElement output element to display result
+ */
 function getGradientBackgroundResult(
   attribute: string,
   values: Values,

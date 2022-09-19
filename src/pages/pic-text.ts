@@ -1,10 +1,7 @@
 import * as utils from '../lib/general';
 
 /**
- * @function picTextGenerator
- * @summary function for all the functions of the pic-text generator
- * @param attribute - The attribute name of the generator element
- * @return {void} Nothing
+ * @param image - image inputed string
  */
 export function picTextGenerator(image: string): void {
   const attribute = 'pic-text';
@@ -23,12 +20,10 @@ export function picTextGenerator(image: string): void {
 }
 
 /**
- * @function getPicTextResult
- * @summary Sets the image and the text(if any) to the output element
+ * Sets the image and the text(if any) to the output element
+ *
  * @param attribute - The attribute name of the generator element
  * @param outputNode - The output element to display
- * @param text - The text to display on the image
- * @return {void} nothing
  */
 function getPicTextResult(attribute: string, outputNode: HTMLElement): void {
   const getCodeButtonElement = utils.getCopyCodeButton(attribute);

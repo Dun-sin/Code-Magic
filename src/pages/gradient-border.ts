@@ -21,6 +21,13 @@ export function gradientBorderGenerator(): void {
   getGradientBorderResult(attribute, values, getOutputElement);
 }
 
+/**
+ * sets the result to the output element
+ *
+ * @param attribute attribute name of the generator
+ * @param values values entered by users
+ * @param outputElement output element to display result
+ */
 function getGradientBorderResult(
   attribute: string,
   values: Values,

@@ -1,0 +1,9 @@
+{
+  "out": "./docs",
+  "excludeExternals": true,
+  "readme": "none",
+  "name": "Typedoc project reference documentation",
+  "entryPointStrategy": "resolve",
+  "entryPoints": ["./src/main.ts", "./src/pages/*", "./src/lib/*"],
+  "tsconfig": "./tsconfig.json"
+}
