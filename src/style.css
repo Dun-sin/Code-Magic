@@ -48,6 +48,13 @@ nav {
   background-color: var(--primary-color);
 }
 
+.menu {
+  display: none;
+}
+#menu-btn {
+  display: none;
+}
+
 nav h1 {
   margin: 4rem 0;
   font-size: 1.5rem;
@@ -386,6 +393,34 @@ a {
 @media screen and (max-width: 444px) {
   .input {
     padding: 2rem 0.3rem 2rem 0.3rem;
+  }
+
+  .menu {
+    display: block;
+    position: absolute;
+    top: 1.7rem;
+    right: 1rem;
+  }
+
+  .closed-nav {
+    width: 5vw;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .closed-nav .menu {
+    top: 3rem;
+    right: auto;
+  }
+
+  .closed-nav ul > li {
+    margin-block: 1.5rem;
+  }
+
+  .closed-nav h1,
+  .closed-nav span,
+  .closed-nav footer {
+    display: none;
   }
 
   .generator {
