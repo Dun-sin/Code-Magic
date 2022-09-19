@@ -1,5 +1,3 @@
-### Contributing guidelines
-
 ## Rules
 
 - Don't create a pull request on an issue that doesn't exist, create an issue first and if the changes you are proposing are said to be okay, you can go ahead and create a pull request
@@ -10,7 +8,11 @@
 
 - Do read the `readme.md` file
 
-- Fill out issue and pull request(PR) templates properly, if you don't know how, check out previous issues/PR to know how they are filled
+- Fill out issue and pull request(PR) templates properly, if you don't know how, check out previous issues/PR to know how they are filled or this video👇🏾
+
+#### 👌🏾 How to fill a pull request template
+![Pull Request Template](https://user-images.githubusercontent.com/78784850/191111605-f9626ac3-4ec6-4478-9bf5-5e48e58898a1.gif)
+
 
 ## 👩🏽‍💻 Prerequisite Skills to Contribute
 
