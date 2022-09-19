@@ -46,6 +46,7 @@ nav {
   height: 100vh;
   overflow: hidden;
   background-color: var(--primary-color);
+  z-index: 99;
 }
 
 .menu {
@@ -53,6 +54,9 @@ nav {
 }
 #menu-btn {
   display: none;
+}
+#menu-icon {
+  cursor: pointer;
 }
 
 nav h1 {
@@ -106,11 +110,13 @@ nav ul > li:hover {
 
 main {
   width: var(--content-container);
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--secondary-color);
   position: relative;
+  outline: 2px solid red;
 }
 
 .generators {
@@ -391,6 +397,10 @@ a {
 }
 
 @media screen and (max-width: 444px) {
+  nav {
+    position: absolute;
+  }
+
   .input {
     padding: 2rem 0.3rem 2rem 0.3rem;
   }
@@ -399,28 +409,12 @@ a {
     display: block;
     position: absolute;
     top: 1.7rem;
-    right: 1rem;
+    left: 1rem;
+    z-index: 999;
   }
 
   .closed-nav {
-    width: 5vw;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .closed-nav .menu {
-    top: 3rem;
-    right: auto;
-  }
-
-  .closed-nav ul > li {
-    margin-block: 1.5rem;
-  }
-
-  .closed-nav h1,
-  .closed-nav span,
-  .closed-nav footer {
-    display: none;
+    left: -100%;
   }
 
   .generator {
