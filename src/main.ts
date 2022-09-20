@@ -44,6 +44,25 @@ const closeBar = document.getElementById('close-side-bar');
 const getImageEntryElement = <HTMLInputElement>(
   document.getElementById(`pic-text-file`)
 );
+const navBar = document.querySelector('#nav');
+const menuIcon = document.querySelector('#menu-icon');
+
+menuIcon?.addEventListener('click', () => {
+  if (navBar?.classList.contains('closed-nav')) {
+    navBar?.classList.remove('closed-nav');
+    menuIcon?.setAttribute('icon', 'ci:close-big');
+  } else {
+    navBar?.classList.add('closed-nav');
+    menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
+  }
+});
+
+for (let i = 0; i < generators.length; i++) {
+  generators[i].addEventListener('click', () => {
+    navBar?.classList.add('closed-nav');
+    menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
+  });
+}
 
 FilePond.create(getImageEntryElement, {
   imagePreviewMaxHeight: 200,

@@ -46,6 +46,17 @@ nav {
   height: 100vh;
   overflow: hidden;
   background-color: var(--primary-color);
+  z-index: 99;
+}
+
+.menu {
+  display: none;
+}
+#menu-btn {
+  display: none;
+}
+#menu-icon {
+  cursor: pointer;
 }
 
 nav h1 {
@@ -99,11 +110,13 @@ nav ul > li:hover {
 
 main {
   width: var(--content-container);
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--secondary-color);
   position: relative;
+  outline: 2px solid red;
 }
 
 .generators {
@@ -384,8 +397,24 @@ a {
 }
 
 @media screen and (max-width: 444px) {
+  nav {
+    position: absolute;
+  }
+
   .input {
     padding: 2rem 0.3rem 2rem 0.3rem;
+  }
+
+  .menu {
+    display: block;
+    position: absolute;
+    top: 1.7rem;
+    left: 1rem;
+    z-index: 999;
+  }
+
+  .closed-nav {
+    left: -100%;
   }
 
   .generator {
