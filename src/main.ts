@@ -97,15 +97,27 @@ function generatorsFunction(attribute: string): void {
  */
 function showContent(attribute: string, display: Display): void {
   const generators = document.querySelectorAll(`[data-content]`);
+  const generatorsNav = document.querySelectorAll(`[data-gen]`);
+  const showGen = <HTMLElement>(
+    document.querySelector(`[data-content=${attribute}]`)
+  );
+  const highLightGen = <HTMLElement>(
+    document.querySelector(`[data-gen=${attribute}]`)
+  );
 
   generators.forEach((item) => {
     const element = <HTMLElement>item;
-    if (element.getAttribute('data-content') === attribute) {
-      element.style.display = `${display}`;
-    } else {
-      element.style.display = 'none';
-    }
+    element.style.display = 'none';
   });
+  generatorsNav.forEach((item) => {
+    const generatorNav = <HTMLElement>item;
+    generatorNav.style.border = 'none';
+    generatorNav.style.background = 'none';
+  });
+
+  showGen.style.display = `${display}`;
+  highLightGen.style.background = `linear-gradient(80deg,var(--primary-color), var(--secondary-color))`;
+  highLightGen.style.border = '1px solid var(--tertiary-color)';
 }
 
 function showResult(attribute: string | null) {

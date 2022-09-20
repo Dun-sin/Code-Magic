@@ -68,20 +68,11 @@ nav ul {
 
 nav ul > li {
   font-size: 0.8rem;
-  padding-top: 0.6rem;
-  padding-bottom: 0.6rem;
+  padding: 0.6rem 0.5rem;
   border-radius: 3px;
   display: flex;
   align-items: center;
-}
-
-nav ul > li {
-  font-size: 0.8rem;
-  padding-top: 0.6rem;
-  padding-bottom: 0.6rem;
-  border-radius: 3px;
-  display: flex;
-  align-items: center;
+  margin-bottom: 0.3rem;
 }
 
 nav ul > li span {
