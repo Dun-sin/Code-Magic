@@ -47,6 +47,55 @@ const getImageEntryElement = <HTMLInputElement>(
 const navBar = document.querySelector('#nav');
 const menuIcon = document.querySelector('#menu-icon');
 
+//gradient text color elements
+const gradientTextInputs = document.querySelectorAll('.gradient-text-inputs');
+const textPreview = <HTMLElement>(
+  document.querySelector('#gradient-text-color-preview')
+);
+const gradientTextColor1 = <HTMLInputElement>(
+  document.querySelector('#gradient-text-color1')
+);
+const gradientTextColor2 = <HTMLInputElement>(
+  document.querySelector('#gradient-text-color2')
+);
+const gradientTextDegree = <HTMLInputElement>(
+  document.querySelector('#gradient-text-degree')
+);
+
+//gradient border color element
+const gradientBorderInputs = document.querySelectorAll(
+  '.gradient-border-inputs'
+);
+const borderPreview = <HTMLElement>(
+  document.querySelector('#gradient-border-color-preview')
+);
+const gradientBorderColor1 = <HTMLInputElement>(
+  document.querySelector('#gradient-border-color1')
+);
+const gradientBorderColor2 = <HTMLInputElement>(
+  document.querySelector('#gradient-border-color2')
+);
+const gradientBorderDegree = <HTMLInputElement>(
+  document.querySelector('#gradient-border-degree')
+);
+
+//gradient background color elements
+const gradientBackgroundInputs = document.querySelectorAll(
+  '.gradient-background-inputs'
+);
+const backgroundPreview = <HTMLElement>(
+  document.querySelector('#gradient-background-color-preview')
+);
+const gradientBackgroundColor1 = <HTMLInputElement>(
+  document.querySelector('#gradient-background-color1')
+);
+const gradientBackgroundColor2 = <HTMLInputElement>(
+  document.querySelector('#gradient-background-color2')
+);
+const gradientBackgroundDegree = <HTMLInputElement>(
+  document.querySelector('#gradient-background-degree')
+);
+
 menuIcon?.addEventListener('click', () => {
   if (navBar?.classList.contains('closed-nav')) {
     navBar?.classList.remove('closed-nav');
@@ -193,3 +242,51 @@ closeBar?.addEventListener('click', () => {
   sidebar.style.left = '100%';
   showResult(null);
 });
+
+for (let i = 0; i < gradientBackgroundInputs.length; i++) {
+  gradientBackgroundInputs[i].addEventListener('input', () =>
+    createGradientPreview(
+      gradientBackgroundColor1,
+      gradientBackgroundColor2,
+      gradientBackgroundDegree,
+      backgroundPreview
+    )
+  );
+}
+
+//set gradient border preview
+for (let i = 0; i < gradientBorderInputs.length; i++) {
+  gradientBorderInputs[i].addEventListener('input', () =>
+    createGradientPreview(
+      gradientBorderColor1,
+      gradientBorderColor2,
+      gradientBorderDegree,
+      borderPreview
+    )
+  );
+}
+
+//set gradient text preview
+for (let i = 0; i < gradientTextInputs.length; i++) {
+  gradientTextInputs[i].addEventListener('input', () =>
+    createGradientPreview(
+      gradientTextColor1,
+      gradientTextColor2,
+      gradientTextDegree,
+      textPreview
+    )
+  );
+}
+
+//create gradient preview
+const createGradientPreview = (
+  color1: HTMLInputElement,
+  color2: HTMLInputElement,
+  range: HTMLInputElement,
+  preview: HTMLElement
+) => {
+  const colorFrom = color1?.value;
+  const colorTo = color2?.value;
+  const fill = range?.value;
+  preview.style.background = `linear-gradient(${fill}deg, ${colorFrom}, ${colorTo})`;
+};
