@@ -4,6 +4,7 @@ type Values = {
   firstColor: string;
   secondColor: string;
   degree: string;
+  radius: string;
 };
 
 export function gradientBorderGenerator(): void {
@@ -12,11 +13,25 @@ export function gradientBorderGenerator(): void {
   const color2 = utils.getColorInput2(attribute);
   const getOutputElement = utils.getOutput(attribute);
   const getRangeElement = utils.getRange(attribute);
+  const getCheckboxElement = utils.getCheckbox(attribute);
+  const getBorderRadiusInput = utils.getRadiusInput(attribute);
+  const showRadiusInput = utils.showRadius;
+  const hideRadiusInput = utils.hideRadius;
 
-  const values = {
+  getCheckboxElement.addEventListener('change', (e: Event): void => {
+    const target = e.target as HTMLInputElement;
+    if (target.checked) {
+      showRadiusInput(attribute);
+    } else {
+      hideRadiusInput(attribute);
+    }
+  });
+
+  const values: Values = {
     firstColor: color1.value,
     secondColor: color2.value,
     degree: getRangeElement.value,
+    radius: getBorderRadiusInput.value,
   };
   getGradientBorderResult(attribute, values, getOutputElement);
 }
@@ -33,10 +48,27 @@ function getGradientBorderResult(
   values: Values,
   outputElement: HTMLElement
 ): void {
-  outputElement.style.border = 'solid';
-  outputElement.style.borderWidth = '5px';
-  outputElement.style.borderImageSlice = '1';
-  outputElement.style.borderImageSource = `linear-gradient(${values.degree}deg, ${values.firstColor}, ${values.secondColor})`;
+  outputElement.style.setProperty(
+    `--${attribute}-color-1`,
+    `${values.firstColor}`
+  );
+  outputElement.style.setProperty(
+    `--${attribute}-color-2`,
+    `${values.secondColor}`
+  );
+  outputElement.style.setProperty(
+    `--${attribute}-degree`,
+    `${values.degree}deg`
+  );
+
+  outputElement.style.setProperty(
+    `--${attribute}-radius`,
+    `${values.radius}px`
+  );
+
+  outputElement.style.backgroundColor = 'transparent';
+  outputElement.style.visibility = 'visible';
+  utils.getCheckbox(attribute).checked = false;
 
   const getCodeButtonElement = utils.getCopyCodeButton(attribute);
   getCodeButtonElement.addEventListener('click', () => {

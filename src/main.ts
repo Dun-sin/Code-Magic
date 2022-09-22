@@ -213,13 +213,17 @@ function showResult(attribute: string | null) {
 //   removeOrAddGeneratorContent(attributeValue, 'none');
 // }
 
-// adding an event listeners to all generators card
+// add event listener to generator icons
 
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
     sidebar.style.left = '100%';
     const checking = generator.getAttribute('data-gen');
-    if (checking === null) return;
+    if (checking === 'gradient-border') {
+      generatorsFunction(checking);
+    } else if (checking === null) {
+      return;
+    }
 
     attributeValue = checking;
     showContent(attributeValue, 'flex');

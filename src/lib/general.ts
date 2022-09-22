@@ -152,6 +152,22 @@ export const getRange = (attribute: string): HTMLInputElement =>
 export const getInputText = (attribute: string) =>
   <HTMLInputElement>document.getElementById(`${attribute}-text`);
 
+export const getCheckbox = (attribute: string): HTMLInputElement =>
+  <HTMLInputElement>document.getElementById(`${attribute}-radius`);
+
+export const getRadiusInput = (attribute: string) =>
+  <HTMLInputElement>document.getElementById(`${attribute}-input`);
+
+export const showRadius = (attribute: string): void =>
+  document
+    .querySelectorAll<HTMLElement>(`#${attribute}-input`)[0]
+    .style.setProperty('display', 'inline');
+
+export const hideRadius = (attribute: string): void =>
+  document
+    .querySelectorAll<HTMLElement>(`#${attribute}-input`)[0]
+    .style.setProperty('display', 'none');
+
 export const getInputSpinner = (attribute: string) =>
   <HTMLInputElement>document.getElementById(`${attribute}-duration`);
 
@@ -167,6 +183,11 @@ export const getStyleSheet = () => {
   );
   return <CSSStyleSheet>stylesheet[0];
 };
+
+/* ||||  CONSIDER RENAMING getOutput above TO getGradientBorder ||||
+ * (for example) export const getGradientBorder = (attribute: string): HTMLElement =>
+ * <HTMLElement>document.querySelector(`${attribute}`);
+ */
 
 function createDownloadLink(fileName: string, url: string) {
   const link = document.createElement('a');
