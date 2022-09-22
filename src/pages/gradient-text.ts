@@ -6,11 +6,6 @@ type Values = {
   degree: string;
 };
 
-/**
- * @function gradientTextGenerator
- * @summary handles functionality of the gradient text generator
- * @return {void} Nothing
- */
 export function gradientTextGenerator(): void {
   const attribute = 'gradient-text';
   const getInputElement = utils.getInputText(attribute);
@@ -44,11 +39,12 @@ export function gradientTextGenerator(): void {
 }
 
 /**
- * @function getGradientTextResult
- * @summary creates the text, adds styling and shows the new text
- * @param {string} text - Text to add the gradient
- * @param {HTMLElement} outputElement - Elements that shows the result
- * @return {void} nothing
+ * creates the text, adds styling and shows the new text
+ *
+ * @param text Text to add the gradient
+ * @param outputElement  Elements that shows the result
+ * @param values object of all values inputted by user
+ * @param outputElement Output element for displaying the result
  */
 function getGradientTextResult(
   attribute: string,

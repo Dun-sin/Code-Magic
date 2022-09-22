@@ -5,11 +5,10 @@ import copy from 'copy-to-clipboard';
 import {Eggy} from '@s-r0/eggy-js';
 
 /**
- * @function copyCodeToClipboard
- * @summary Allows you to copy to clipboard
- * @param {string} attribute - The attribute name of the generator element
- * @param {HTMLElement} outputElement - Element to copy the element from
- * @return {void} Nothing
+ * Allows you to copy to clipboard
+ *
+ * @param attribute The attribute name of the generator element
+ * @param outputElement output element to display result
  */
 export function copyCodeToClipboard(
   attribute: string,
@@ -18,6 +17,12 @@ export function copyCodeToClipboard(
   actOnGenerator(attribute, outputElement);
 }
 
+/**
+ * what should copy when the copy css button is clicked
+ *
+ * @param attribute attribute of the clicked generator
+ * @param outputElement output element to display result
+ */
 function actOnGenerator(attribute: string, outputElement: HTMLElement) {
   let codeToCopy = '';
   let element;
@@ -74,12 +79,6 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
   copy(codeToCopy);
 }
 
-/**
- * @function downloadPNG
- * @summary Download the element in image type extension of png
- * @param outputImage {HTMLElement} - element to convert to an image
- * @return {void} Nothing
- */
 export function downloadPNG(attribute: string, outputImage: HTMLElement): void {
   domtoimage.toPng(outputImage, {quality: 0.95}).then((dataUrl) => {
     const link = createDownloadLink(`${attribute}.png`, dataUrl);
@@ -87,12 +86,6 @@ export function downloadPNG(attribute: string, outputImage: HTMLElement): void {
   });
 }
 
-/**
- * @function downloadSVG
- * @summary Download the element in image type extension of svg
- * @param outputImage {HTMLElement} - element to convert to an svg
- * @return {void} Nothing
- */
 export function downloadSVG(attribute: string, outputImage: HTMLElement): void {
   domtoimage.toSvg(outputImage).then((dataUrl) => {
     const link = createDownloadLink(`${attribute}.svg`, dataUrl);
@@ -101,12 +94,11 @@ export function downloadSVG(attribute: string, outputImage: HTMLElement): void {
 }
 
 /**
- * @function showPopup
- * @summary Show the popup on a page
+ * Show the popup on a page
+ *
  * @param title - Main Text
  * @param message - Secondary Text
  * @param type - To specify the type of a popup, Like: success, warning, info, error,
- * @return {void} Nothing
  */
 
 export function showPopup(title: string, message: string, type: string): void {
@@ -133,30 +125,12 @@ export function triggerEmptyAnimation(inputElement: HTMLInputElement): void {
   }, 1000);
 }
 
-/**
- * @function getCopyCodeButton
- * @summary Get the button element for copying code to clipboard
- * @param attribute {string} - The attribute name of the generator element
- * @return {HTMLElement} The type of the button Element
- */
 export const getCopyCodeButton = (attribute: string): HTMLElement =>
   <HTMLElement>document.querySelector(`[data-download = ${attribute}-code]`);
 
-/**
- * @function getPNGButton
- * @summary Get the button element for downloading in image form
- * @param attribute {string} - The attribute name of the generator element
- * @return {HTMLElement} The type of the button Element
- */
 export const getPNGButton = (attribute: string): HTMLElement =>
   <HTMLElement>document.querySelector(`[data-download=${attribute}-PNG]`);
 
-/**
- * @function getSVGButton
- * @summary Get the button element for downloading in svg format
- * @param attribute {string} - The attribute name of the generator element
- * @return {HTMLElement} The type of the button Element
- */
 export const getSVGButton = (attribute: string): HTMLElement =>
   <HTMLElement>document.querySelector(`[data-download=${attribute}-svg]`);
 

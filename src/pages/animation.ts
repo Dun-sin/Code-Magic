@@ -49,6 +49,13 @@ export function animationGenerator() {
   });
 }
 
+/**
+ * sets the animation to the output element
+ *
+ * @param values object that contains all values entered by users
+ * @param OutputElement output element to display result
+ * @param stylesheet css stylesheet
+ */
 function manageAnimation(
   values: Values,
   OutputElement: HTMLElement,
@@ -127,11 +134,18 @@ function manageAnimation(
   }
 }
 
+/**
+ * sets the inital configuration of the elements
+ *
+ * @param elements radio elements
+ * @param DegreeElement degree element
+ * @param OutputElement output element to display result
+ */
 function initialConfiguration(
   elements: NodeListOf<HTMLInputElement>,
   DegreeElement: HTMLInputElement,
   OutputElement: HTMLElement
-) {
+): void {
   if (OutputElement === null) return;
   OutputElement.style.display = 'flex';
   OutputElement.style.justifyContent = 'center';

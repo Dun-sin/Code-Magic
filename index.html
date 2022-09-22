@@ -5,6 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- HTML Meta Tags -->
+    <title>Code Magic</title>
+    <meta
+      name="description"
+      content="All-in-one tool for Developers. Generate gradient background, border, text, and animation with just one click."
+    />
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://code-magic.vercel.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Code Magic" />
+    <meta
+      property="og:description"
+      content="All-in-one tool for Developers. Generate gradient background, border, text, and animation with just one click."
+    />
+    <meta
+      property="og:image"
+      content="https://nakam360.netlify.app/src/Assets/Images/open-graph.webp"
+    />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="code-magic.vercel.app" />
+    <meta property="twitter:url" content="https://code-magic.vercel.app/" />
+    <meta name="twitter:title" content="Code Magic" />
+    <meta
+      name="twitter:description"
+      content="All-in-one tool for Developers. Generate gradient background, border, text, and animation with just one click."
+    />
+    <meta
+      name="twitter:image"
+      content="https://nakam360.netlify.app/src/Assets/Images/open-graph.webp"
+    />
+
+    <!-- Meta Tags Generated via https://www.opengraph.xyz -->
+
     <!-- CSS -->
     <link rel="stylesheet" href="./src/style.css" />
 
@@ -27,7 +63,17 @@
     <!-- Generator Card -->
     <!-- Now👇🏾 -->
     <!-- Side Bar -->
-    <nav>
+    <div class="menu">
+      <iconify-icon
+        id="menu-icon"
+        inline
+        icon="dashicons:menu-alt"
+        style="color: white"
+        width="30"
+        height="30"
+      ></iconify-icon>
+    </div>
+    <nav id="nav" class="closed-nav">
       <h1 id="head">Code Magic</h1>
       <ul>
         <li data-gen="pic-text">
@@ -108,21 +154,37 @@
 
           <div class="colors">
             <label for="color" class="color">
-              <input type="color" value="#000" id="gradient-text-color1" />
+              <input
+                type="color"
+                value="#000"
+                id="gradient-text-color1"
+                class="gradient-text-inputs"
+              />
               <span>First Color</span>
             </label>
 
-            <div class="preview"></div>
+            <div class="preview" id="gradient-text-color-preview"></div>
 
             <label for="color" class="color">
-              <input type="color" value="#000" id="gradient-text-color2" />
+              <input
+                type="color"
+                value="#000"
+                id="gradient-text-color2"
+                class="gradient-text-inputs"
+              />
               <span>Second Color</span>
             </label>
           </div>
 
           <label id="degree">
             <span>Degree</span>
-            <input type="range" max="360" min="0" id="gradient-text-degree" />
+            <input
+              type="range"
+              max="360"
+              min="0"
+              id="gradient-text-degree"
+              class="gradient-text-inputs"
+            />
           </label>
           <div class="btn" data-button="gradient-text">Get Results</div>
         </div>
@@ -131,14 +193,24 @@
         <div data-content="gradient-border">
           <div class="colors">
             <label for="color" class="color">
-              <input type="color" value="#000" id="gradient-border-color1" />
+              <input
+                type="color"
+                value="#000"
+                id="gradient-border-color1"
+                class="gradient-border-inputs"
+              />
               <span>First Color</span>
             </label>
 
-            <div class="preview"></div>
+            <div class="preview" id="gradient-border-color-preview"></div>
 
             <label for="color" class="color">
-              <input type="color" value="#000" id="gradient-border-color2" />
+              <input
+                type="color"
+                value="#000"
+                id="gradient-border-color2"
+                class="gradient-border-inputs"
+              />
               <span>Second Color</span>
             </label>
           </div>
@@ -153,7 +225,13 @@
           
           <label id="degree">
             <span>Degree</span>
-            <input type="range" max="360" min="0" id="gradient-border-degree" />
+            <input
+              type="range"
+              max="360"
+              min="0"
+              id="gradient-border-degree"
+              class="gradient-border-inputs"
+            />
           </label>
 
           <div class="btn" data-button="gradient-border">Get Result</div>
@@ -167,17 +245,19 @@
                 type="color"
                 value="#000"
                 id="gradient-background-color1"
+                class="gradient-background-inputs"
               />
               <span>First Color</span>
             </label>
 
-            <div class="preview"></div>
+            <div class="preview" id="gradient-background-color-preview"></div>
 
             <label for="color" class="color">
               <input
                 type="color"
                 value="#000"
                 id="gradient-background-color2"
+                class="gradient-background-inputs"
               />
               <span>Second Color</span>
             </label>
@@ -190,6 +270,7 @@
               max="360"
               min="0"
               id="gradient-background-degree"
+              class="gradient-background-inputs"
             />
           </label>
 
