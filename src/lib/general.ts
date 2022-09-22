@@ -180,28 +180,19 @@ export const getInputText = (attribute: string) =>
 
 export const getCheckbox = (attribute: string): HTMLInputElement =>
   <HTMLInputElement>document.getElementById(`${attribute}-radius`);
-/* ||||  CONSIDER RENAMING getOutput above TO getGradientBorder ||||
- * export const getGradientBorder = (attribute: string): HTMLElement =>
- * <HTMLElement>document.querySelector(`${attribute}`);
- */
 
-/**
- * @function activeRadius
- * @summary Set the border-radius property of div.gradient-border::before to 50px
- */
-export const activeRadius = (attribute: string): void =>
-  document
-    .querySelectorAll<HTMLElement>(`.${attribute}`)[0]
-    .style.setProperty(`--${attribute}-radius`, '50px');
+export const getRadiusInput = (attribute: string) =>
+  <HTMLInputElement>document.getElementById(`${attribute}-input`);
 
-/**
- * @function activeRadius
- * @summary Set the border-radius property of div.gradient-border::before to 0
- */
-export const InactiveRadius = (attribute: string): void =>
+export const showRadius = (attribute: string): void =>
   document
-    .querySelectorAll<HTMLElement>(`.${attribute}`)[0]
-    .style.setProperty(`--${attribute}-radius`, '0');
+    .querySelectorAll<HTMLElement>(`#${attribute}-input`)[0]
+    .style.setProperty('display', 'inline');
+
+export const hideRadius = (attribute: string): void =>
+  document
+    .querySelectorAll<HTMLElement>(`#${attribute}-input`)[0]
+    .style.setProperty('display', 'none');
 
 export const getInputSpinner = (attribute: string) =>
   <HTMLInputElement>document.getElementById(`${attribute}-duration`);
@@ -218,6 +209,11 @@ export const getStyleSheet = () => {
   );
   return <CSSStyleSheet>stylesheet[0];
 };
+
+/* ||||  CONSIDER RENAMING getOutput above TO getGradientBorder ||||
+ * (for example) export const getGradientBorder = (attribute: string): HTMLElement =>
+ * <HTMLElement>document.querySelector(`${attribute}`);
+ */
 
 function createDownloadLink(fileName: string, url: string) {
   const link = document.createElement('a');

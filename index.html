@@ -143,6 +143,14 @@
             </label>
           </div>
 
+          <label class="radius" for="gradient-border-radius">
+            <input type="checkbox" id="gradient-border-radius" name="check" />
+            <span> Include Radius </span>
+          <label id="radius-input-label" for="gradient-border-input">
+            <input type="number" id="gradient-border-input" name="desired-radius" placeholder="Enter a number e.g. 50" autofocus required />
+          </label>
+          </label>
+          
           <label id="degree">
             <span>Degree</span>
             <input type="range" max="360" min="0" id="gradient-border-degree" />
@@ -345,7 +353,7 @@
 
         <!-- Gradient Border -->
         <div class="download-output" data-result="gradient-border">
-          <div class="output"></div>
+          <div class="output gradient-border"></div>
           <div class="download-btn">
             <button class="btn" data-download="gradient-border-code">
               <iconify-icon

@@ -2,6 +2,7 @@
   /* Colors */
   --primary-color: #081121;
   --text-color: #edf2f4;
+  --input-color: #000000;
   --secondary-color: #0e213c;
   --tertiary-color: #2196f3;
   --gradient-border-color-1: red;
@@ -15,7 +16,7 @@
   --generator-width: 12rem;
   --content-container: 100%;
   --input-width: 300px;
-  --output-width: 400px;
+  --output-width: 300px;
   --pseudo-footer-height: 70px;
 
   /* GRADIENT BORDER SECTION */
@@ -154,7 +155,7 @@ textarea {
 }
 
 ::placeholder {
-  color: var(--text-color);
+  color: var(--input-color);
   font-size: 1rem;
 }
 
@@ -193,7 +194,7 @@ textarea {
 }
 
 [type='color']::-webkit-color-swatch {
-	border: none;
+  border: none;
 }
 
 #radio-group {
@@ -231,9 +232,28 @@ textarea {
   padding-right: 8px;
 }
 
+#radius-input-label {
+  display: flex;
+  justify-content: center;
+}
+
+#gradient-border-input {
+  display: none;
+  min-width: 0;
+}
+
 #degree {
   display: flex;
   flex-direction: column;
+  background-color: var(--primary-color);
+  padding: 0.8rem;
+  margin-top: 2rem;
+  border-radius: 5px;
+  width: min(45%, 55%);
+}
+
+.radius {
+  text-align: center;
   background-color: var(--primary-color);
   padding: 0.8rem;
   border-radius: 5px;

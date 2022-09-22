@@ -4,6 +4,7 @@ type Values = {
   firstColor: string;
   secondColor: string;
   degree: string;
+  radius: string;
 };
 
 export function gradientBorderGenerator(): void {
@@ -13,36 +14,26 @@ export function gradientBorderGenerator(): void {
   const getOutputElement = utils.getOutput(attribute);
   const getRangeElement = utils.getRange(attribute);
   const getCheckboxElement = utils.getCheckbox(attribute);
-  const activateRadius = utils.activeRadius;
-  const deactivateRadius = utils.InactiveRadius;
-
-  getOutputElement.addEventListener('click', () => {
-    onClickButton();
-  });
+  const getBorderRadiusInput = utils.getRadiusInput(attribute);
+  const showRadiusInput = utils.showRadius;
+  const hideRadiusInput = utils.hideRadius;
 
   getCheckboxElement.addEventListener('change', (e: Event): void => {
     const target = e.target as HTMLInputElement;
     if (target.checked) {
-      activateRadius(attribute);
+      showRadiusInput(attribute);
     } else {
-      deactivateRadius(attribute);
+      hideRadiusInput(attribute);
     }
   });
 
-  document?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      onClickButton();
-    }
-  });
-
-  function onClickButton() {
-    const values: Values = {
-      firstColor: color1.value,
-      secondColor: color2.value,
-      degree: getRangeElement.value,
-    };
-    getGradientBorderResult(attribute, values, getOutputElement);
-  }
+  const values: Values = {
+    firstColor: color1.value,
+    secondColor: color2.value,
+    degree: getRangeElement.value,
+    radius: getBorderRadiusInput.value,
+  };
+  getGradientBorderResult(attribute, values, getOutputElement);
 }
 
 function getGradientBorderResult(
@@ -62,7 +53,16 @@ function getGradientBorderResult(
     `--${attribute}-degree`,
     `${values.degree}deg`
   );
+
+  outputElement.style.setProperty(
+    `--${attribute}-radius`,
+    `${values.radius}px`
+  );
+
+  outputElement.style.backgroundColor = 'transparent';
   outputElement.style.visibility = 'visible';
+  utils.getCheckbox(attribute).checked = false;
+
   const getCodeButtonElement = utils.getCopyCodeButton(attribute);
   getCodeButtonElement.addEventListener('click', () => {
     utils.copyCodeToClipboard(attribute, outputElement);
