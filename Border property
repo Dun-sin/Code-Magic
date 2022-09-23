@@ -1,0 +1,484 @@
+          :root {
+             /* Colors */
+             --primary-color: #081121;
+             --text-color: #edf2f4;
+             --input-color: #000000;
+             --secondary-color: #0e213c;
+             --tertiary-color: #2196f3;
+             --gradient-border-color-1: red;
+             --gradient-border-color-2: blue;
+             /* Heights */
+             --generator-height: 14rem;
+             --modal-container-height: 100vh;
+             /* Widths */
+             --generator-width: 12rem;
+             --content-container: 100%;
+             --input-width: 300px;
+             --output-width: 300px;
+             --pseudo-footer-height: 70px;
+             /* GRADIENT BORDER SECTION */
+             --gradient-border-radius: 0;
+             --gradient-border-degree: 45deg;
+         }
+         
+         *,
+         *::after,
+         *::before {
+             user-select: none;
+             margin: 0;
+             padding: 0;
+             box-sizing: border-box;
+         }
+         
+         body {
+             font-family: 'Exo 2', 'Courier New', Courier, monospace;
+             color: var(--text-color);
+             overflow: hidden;
+             padding-bottom: var(--pseudo-footer-height);
+             display: flex;
+         }
+         
+         nav {
+             display: flex;
+             flex-direction: column;
+             position: relative;
+             font-size: 1.3rem;
+             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+             padding: 0 1.5rem;
+             min-width: 15vw;
+             height: 100vh;
+             overflow: hidden;
+             background-color: var(--primary-color);
+             z-index: 99;
+         }
+         
+         .menu {
+             display: none;
+         }
+         
+         #menu-btn {
+             display: none;
+         }
+         
+         #menu-icon {
+             cursor: pointer;
+         }
+         
+         nav h1 {
+             margin: 4rem 0;
+             font-size: 1.5rem;
+             background: linear-gradient(90deg, #ffffff, var(--secondary-color), #fff);
+             -webkit-background-clip: text;
+             -webkit-text-fill-color: transparent;
+             background-clip: text;
+             background-size: 70% 100%;
+             cursor: pointer;
+             animation: moveColor 7s linear infinite;
+             animation-fill-mode: both;
+             animation-direction: alternate;
+         }
+         
+         nav ul {
+             list-style: none;
+         }
+         
+         nav ul>li {
+             font-size: 0.8rem;
+             padding: 0.6rem 0.5rem;
+             border-radius: 3px;
+             display: flex;
+             align-items: center;
+             margin-bottom: 0.3rem;
+         }
+         
+         nav ul>li span {
+             margin-left: 0.2rem;
+         }
+         
+         nav ul>li:hover {
+             background: linear-gradient( 80deg, var(--primary-color), var(--secondary-color));
+             cursor: pointer;
+         }
+         
+         main {
+             width: var(--content-container);
+             height: 100vh;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             background-color: var(--secondary-color);
+             position: relative;
+             outline: 2px solid red;
+         }
+         
+         .generators {
+             min-height: var(--content-container);
+             min-width: var(--content-container);
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             justify-content: center;
+         }
+         /* inputs */
+         
+         .generators>div {
+             display: none;
+             min-width: var(--content-container);
+             max-width: var(--content-container);
+             flex-direction: column;
+             justify-content: center;
+             align-items: center;
+         }
+         
+         [data-content='pic-text'] {
+             display: flex;
+         }
+         
+         [data-content='pic-text']>div:first-of-type {
+             width: min(45%, 55%);
+             height: 250px;
+             border: 2px dashed var(--tertiary-color);
+         }
+         
+         textarea {
+             border-radius: 5px;
+             width: min(45%, 55%);
+             height: 150px;
+             border: none;
+             background-color: var(--primary-color);
+             color: var(--text-color);
+             resize: none;
+             padding: 1rem;
+         }
+         
+          ::placeholder {
+             color: var(--input-color);
+             font-size: 1rem;
+         }
+         
+         .colors {
+             display: flex;
+             align-items: center;
+             margin-top: 1.5rem;
+             margin-bottom: 1.5rem;
+         }
+         
+         .colors .preview {
+             margin-left: 10px;
+             margin-right: 10px;
+             width: 100px;
+             height: 10px;
+             background-color: var(--primary-color);
+         }
+         
+         .color {
+             display: flex;
+             flex-direction: column;
+             justify-content: center;
+             align-items: center;
+         }
+         
+         [type='color'] {
+             width: 30px;
+             height: 30px;
+             border: none;
+             margin-right: 10px;
+             cursor: pointer;
+         }
+         
+         [type='color']::-webkit-color-swatch-wrapper {
+             padding: 0;
+         }
+         
+         [type='color']::-webkit-color-swatch {
+             border: none;
+         }
+         
+         #radio-group {
+             display: flex;
+             flex-direction: row;
+             justify-content: space-evenly;
+         }
+         
+         .animation-type {
+             background-color: var(--primary-color);
+             width: min(45%, 55%);
+             padding: 1rem;
+             border-radius: 5px;
+         }
+         
+         .animation-type>p {
+             margin-bottom: 0.5rem;
+         }
+         
+         .radio-group {
+             display: flex;
+             justify-content: space-between;
+         }
+         
+         #animation-radio-label {
+             padding: 0;
+             margin: 0;
+             background: none;
+             font-weight: 600;
+             color: var(--text-color);
+             font-size: 0.9em;
+         }
+         
+         #animation-radio-label>span {
+             padding-right: 8px;
+         }
+         
+         #radius-input-label {
+             display: flex;
+             justify-content: center;
+         }
+         
+         #gradient-border-input {
+             display: none;
+             min-width: 0;
+         }
+         
+         #degree {
+             display: flex;
+             flex-direction: column;
+             background-color: var(--primary-color);
+             padding: 0.8rem;
+             margin-top: 2rem;
+             border-radius: 5px;
+             width: min(45%, 55%);
+         }
+         
+         .radius {
+             text-align: center;
+             background-color: var(--primary-color);
+             padding: 0.8rem;
+             border-radius: 5px;
+             width: min(45%, 55%);
+         }
+         
+         #degree>span {
+             margin-bottom: 0.6rem;
+             font-size: 0.9em;
+         }
+         
+         .duration-label {
+             background-color: var(--primary-color);
+             width: min(45%, 55%);
+             padding: 1rem;
+             border-radius: 5px;
+             margin-top: 1rem;
+             margin-bottom: 1rem;
+             display: flex;
+             justify-content: space-between;
+         }
+         
+         .duration-label>span {
+             font-size: 0.9em;
+         }
+         
+         .btn {
+             height: 40px;
+             width: 150px;
+             border-radius: 5px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             background-color: var(--primary-color);
+             color: var(--text-color);
+             cursor: pointer;
+             margin-top: 2rem;
+             border: none;
+         }
+         /* Results */
+         
+         .side-results {
+             display: flex;
+             background-color: var(--secondary-color);
+             min-height: var(--content-container);
+             min-width: var(--content-container);
+             position: absolute;
+             left: 100%;
+             flex-direction: column;
+         }
+         
+         .side-results .header {
+             height: 10vh;
+             display: flex;
+             align-items: center;
+             padding: 3rem;
+         }
+         
+         .side-results .header>h2 {
+             margin-left: 1rem;
+         }
+         
+         .output {
+             width: min(45%, 55%);
+             height: 300px;
+             word-wrap: break-word;
+             margin-bottom: 1rem;
+             background-color: var(--primary-color);
+         }
+         
+         .download-output {
+             flex-direction: column;
+             justify-content: center;
+             align-items: center;
+             margin-top: auto;
+             margin-bottom: auto;
+         }
+         
+         .gradient-border {
+             visibility: hidden;
+             position: relative;
+             width: var(--output-width);
+             height: 300px;
+             word-wrap: break-word;
+             margin-bottom: 1rem;
+         }
+         
+         corners {
+             #125;
+             empty-cells: 98dcb;
+             /* close at #68 */
+         }
+         /*	
+* NOTE: The border-radius property is not supported with border-image, therefore,
+*	the css for the gradient-border below relies on CSS Mask property applied to a pseudo background.
+*
+* 	The code below uses a trick based on using a pseudo element to circumvent 
+*	the restriction posed by using border-image.
+*	1. The before pseudo element represents the background-image placed on the .gradient-border div.
+*	   We apply a gradient as background and we make its origin the border box 
+*      (by default it's the padding box).
+*	2. Using the mask property, we apply two opaque layers.
+*	   The bottom one will cover the whole element and 
+*	   the top one will cover only the content box (so it will not cover the border area).
+*	3. Using the mask-composite property, we exclude the content area from the border area 
+*	   so that only the border will remain visible.
+*	4. -webkit-mask-composite: xor; this line is required for compatibility with Chrome browser.
+	@demo: https://stackoverflow.com/questions/51496204/border-gradient-with-border-radius
+	@credit: https://dev.to/afif/border-with-gradient-and-radius-387f
+*/
+         
+         .gradient-border::before {
+             content: '';
+             position: absolute;
+             inset: 0;
+             border-radius: var(--gradient-border-radius);
+             padding: 6px;
+             background: linear-gradient( var(--gradient-border-degree, 45deg), var(--gradient-border-color-1, red), var(--gradient-border-color-2, blue)) border-box;
+             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+             -webkit-mask-composite: xor;
+             mask-composite: exclude;
+         }
+         
+         .bg-output {
+             width: var(--output-width);
+             height: 300px;
+             word-wrap: break-word;
+             margin-bottom: 1rem;
+         }
+         
+         .download-output>p {
+             font-size: 0.7rem;
+         }
+         
+         .download-btn {
+             display: flex;
+             flex-direction: column;
+             justify-content: center;
+             align-items: center;
+             width: min(25%, 35%);
+         }
+         
+         .image-download {
+             display: flex;
+             margin-bottom: -1rem;
+         }
+         
+         .image-download>button:first-of-type {
+             margin-right: 1rem;
+         }
+         /* FOOTER SECTION */
+         
+         footer {
+             display: flex;
+             flex-direction: column;
+             justify-content: center;
+             font-size: 0.7rem;
+             position: absolute;
+             bottom: 2rem;
+             color: var(--text-color);
+         }
+         
+         a {
+             color: var(--tertiary-color);
+         }
+         
+         @keyframes moveColor {
+             0% {
+                 background-position-x: -500%;
+             }
+             100% {
+                 background-position-x: 500%;
+             }
+         }
+         
+         @media screen and (max-width: 1300px) and (min-width: 1009px) {
+              :root {
+                 --modal-width: calc(var(--modal-container-width) - 20vw);
+             }
+         }
+         
+         .eggy {
+             z-index: 10;
+         }
+         
+         @media screen and (max-width: 1010px) {
+              :root {
+                 --input-width: 100%;
+                 --modal-width: calc(var(--modal-container-width) - 10vw);
+             }
+             .generator {
+                 margin: 0.8rem auto;
+             }
+             .input {
+                 padding: 2rem;
+             }
+         }
+         
+         @media screen and (max-width: 650px) {
+              :root {
+                 --output-width: 300px;
+             }
+         }
+         
+         @media screen and (max-width: 444px) {
+             nav {
+                 position: absolute;
+             }
+             .input {
+                 padding: 2rem 0.3rem 2rem 0.3rem;
+             }
+             .menu {
+                 display: block;
+                 position: absolute;
+                 top: 1.7rem;
+                 left: 1rem;
+                 z-index: 999;
+             }
+             .closed-nav {
+                 left: -100%;
+             }
+             .generator {
+                 margin: 0.8rem auto;
+             }
+              :root {
+                 --generator-width: 14rem;
+             }
+             footer {
+                 font-size: 1.3rem;
+             }
+         }
