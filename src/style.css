@@ -159,7 +159,7 @@ textarea {
 }
 
 ::placeholder {
-  color: var(--input-color);
+  color: #A5A5A7;
   font-size: 1rem;
 }
 
