@@ -328,6 +328,10 @@ textarea {
   background-color: var(--primary-color);
 }
 
+.output > p {
+  font-size: calc(1rem + 1vw) !important;
+}
+
 .download-output {
   flex-direction: column;
   justify-content: center;
@@ -473,10 +477,6 @@ a {
   .output,
   .input {
     padding: 2rem 0.3rem 2rem 0.3rem;
-  }
-
-  .output > p {
-    font-size: 1rem !important;
   }
 
   .menu {
