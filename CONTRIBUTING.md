@@ -8,6 +8,8 @@
 
 - Do read the `readme.md` file
 
+- Add the Issue you worked on in your Pull Request
+ 
 - Fill out issue and pull request(PR) templates properly, if you don't know how, check out previous issues/PR to know how they are filled or this video👇🏾
 
 #### 👌🏾 How to fill a pull request template
