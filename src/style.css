@@ -159,7 +159,7 @@ textarea {
 }
 
 ::placeholder {
-  color: #A5A5A7;
+  color: #a5a5a7;
   font-size: 1rem;
 }
 
@@ -470,8 +470,13 @@ a {
     position: absolute;
   }
 
+  .output,
   .input {
     padding: 2rem 0.3rem 2rem 0.3rem;
+  }
+
+  .output > p {
+    font-size: 1rem !important;
   }
 
   .menu {
