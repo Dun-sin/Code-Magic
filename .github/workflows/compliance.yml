@@ -21,6 +21,10 @@ jobs:
         with:
           body-auto-close: false
           protected-branch-auto-close: false
+          repo-token:
+            required: false
+            description: 'Repo Access Token'
+            default: ${{secrets.GENERAL_TOKEN}}
           watch-files: |
             package.json
             package-lock.json
