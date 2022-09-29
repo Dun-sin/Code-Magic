@@ -7,7 +7,7 @@ export function picTextGenerator(image: string): void {
   const attribute = 'pic-text';
   const outputNode = utils.getOutput(attribute);
 
-  let imageText = `################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################`;
+  const imageText = `################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################`;
 
   outputNode.style.background = `url(${image}) center no-repeat`;
   outputNode.style.width = 'var(--output-width)';
@@ -19,18 +19,17 @@ export function picTextGenerator(image: string): void {
   getPicTextResult(attribute, outputNode);
 }
 
-// function to disable the get result button once page loads 
-
-function disableImgResultBtn(){
-  let getPicResultBtn = document.querySelector('[data-button="pic-text"]') as HTMLButtonElement;
+// function to disable the get result button once page loads
+function disableImgResultBtn() {
+  const getPicResultBtn = document.querySelector(
+    '[data-button="pic-text"]'
+  ) as HTMLButtonElement;
 
   getPicResultBtn.style.pointerEvents = 'none';
-
 }
 
 // disable function instantiation
 disableImgResultBtn();
-
 
 /**
  * Sets the image and the text(if any) to the output element
@@ -39,13 +38,13 @@ disableImgResultBtn();
  * @param outputNode - The output element to display
  */
 function getPicTextResult(attribute: string, outputNode: HTMLElement): void {
-  const getCodeButtonElement = utils.getCopyCodeButton(attribute);
-  const getPNGButtonElement = utils.getPNGButton(attribute);
-  const getSVGButtonElement = utils.getSVGButton(attribute);
-
   if (outputNode === null) {
     return;
   }
+
+  const getCodeButtonElement = utils.getCopyCodeButton(attribute);
+  const getPNGButtonElement = utils.getPNGButton(attribute);
+  const getSVGButtonElement = utils.getSVGButton(attribute);
 
   getPNGButtonElement.addEventListener('click', () => {
     utils.downloadPNG(attribute, outputNode);

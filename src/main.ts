@@ -26,7 +26,7 @@ FilePond.registerPlugin(
  * All Variables
  */
 let attributeValue: string | null = null;
-let imageSRC = '';
+let imageSRC: string;
 const sideBarSlide = [{left: '100%'}, {left: '0%'}];
 
 const sideBarTiming = {
@@ -124,23 +124,29 @@ FilePond.create(getImageEntryElement, {
     img.src = URL.createObjectURL(output);
     imageSRC = img.src;
 
-    // function to enable the get result button once image uploade d
-    function enableImgResultBtn(){
-      let getPicResultBtn = document.querySelector('[data-button="pic-text"]') as HTMLButtonElement;
+    // function to enable the get result button once image uploaded
+    function enableImgResultBtn() {
+      const getPicResultBtn = document.querySelector(
+        '[data-button="pic-text"]'
+      ) as HTMLButtonElement;
 
       getPicResultBtn.style.pointerEvents = '';
-
     }
+
     enableImgResultBtn();
 
     // disable btn also when close btn clicked on image display
-    let closeBtn = document.querySelector('.filepond--action-remove-item') as HTMLButtonElement;
+    const closeBtn = document.querySelector(
+      '.filepond--action-remove-item'
+    ) as HTMLButtonElement;
 
-    closeBtn.addEventListener('click', function(){
-      let getPicResultBtn = document.querySelector('[data-button="pic-text"]') as HTMLButtonElement;
+    closeBtn.addEventListener('click', function () {
+      const getPicResultBtn = document.querySelector(
+        '[data-button="pic-text"]'
+      ) as HTMLButtonElement;
 
       getPicResultBtn.style.pointerEvents = 'none';
-    })
+    });
 
     console.log(fileItem);
   },
