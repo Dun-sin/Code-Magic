@@ -25,8 +25,10 @@ FilePond.registerPlugin(
 /**
  * All Variables
  */
+const FINAL_WIDTH = 300;
 let attributeValue: string | null = null;
 let imageSRC: string;
+let imageHeight: number;
 const sideBarSlide = [{left: '100%'}, {left: '0%'}];
 
 const sideBarTiming = {
@@ -120,6 +122,14 @@ FilePond.create(getImageEntryElement, {
     // create a new image object
     const img = new Image();
 
+    // Dirty trick to get the final visible height of the picture
+    // Based on the knowledge the width will be 300px
+    img.onload = () => {
+      imageHeight = Math.floor(
+        img.naturalHeight / (img.naturalWidth / FINAL_WIDTH)
+      );
+    };
+
     // set the image source to the output of the Image Transform plugin
     img.src = URL.createObjectURL(output);
     imageSRC = img.src;
@@ -165,7 +175,7 @@ type Display = 'grid' | 'flex' | 'none';
 function generatorsFunction(attribute: string): void {
   switch (attribute) {
     case 'pic-text':
-      picTextGenerator(imageSRC);
+      picTextGenerator(imageSRC, imageHeight);
       break;
     case 'gradient-text':
       gradientTextGenerator();
@@ -183,7 +193,7 @@ function generatorsFunction(attribute: string): void {
 }
 
 /**
- * use to toggle visibilty of content in generators
+ * use to toggle visibility of content in generators
  *
  * @param attribute  The attribute name of the generator element
  * @param display  display type

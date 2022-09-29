@@ -2,15 +2,23 @@ import * as utils from '../lib/general';
 
 /**
  * @param image - image inputed string
+ * @param imageHeight - image height number
  */
-export function picTextGenerator(image: string): void {
+export function picTextGenerator(image: string, imageHeight: number): void {
   const attribute = 'pic-text';
   const outputNode = utils.getOutput(attribute);
 
-  const imageText = `################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################`;
+  // The value 19 is the result I got by dividing the height of the image by
+  // the number of lines of text necessary to cover its full height.
+  // Probably based on font size ... I'm wondering if it will work everywhere though.
+  // It's a lame solution, we have to find a better way in the future.
+  const imageText = '###########################'.repeat(
+    Math.ceil(imageHeight / 19)
+  );
 
   outputNode.style.background = `url(${image}) center no-repeat`;
   outputNode.style.width = 'var(--output-width)';
+  outputNode.style.height = `${imageHeight}px`;
   outputNode.style.backgroundSize = 'var(--output-width)';
   outputNode.style.backgroundClip = 'text';
   outputNode.style.webkitBackgroundClip = 'text';
