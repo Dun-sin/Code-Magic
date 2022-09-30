@@ -159,7 +159,7 @@ textarea {
 }
 
 ::placeholder {
-  color: #A5A5A7;
+  color: #a5a5a7;
   font-size: 1rem;
 }
 
@@ -328,6 +328,10 @@ textarea {
   background-color: var(--primary-color);
 }
 
+.output > p {
+  font-size: calc(1rem + 1vw) !important;
+}
+
 .download-output {
   flex-direction: column;
   justify-content: center;
@@ -470,6 +474,7 @@ a {
     position: absolute;
   }
 
+  .output,
   .input {
     padding: 2rem 0.3rem 2rem 0.3rem;
   }
