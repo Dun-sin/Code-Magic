@@ -314,7 +314,6 @@ for (let i = 0; i < gradientBorderInputs.length; i++) {
 
 //set gradient text preview
 for (let i = 0; i < gradientTextInputs.length; i++) {
-  displayGradientValue(gradientTextDegree);
   gradientTextInputs[i].addEventListener('input', () =>
     createGradientPreview(
       gradientTextColor1,
