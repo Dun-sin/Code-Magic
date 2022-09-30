@@ -126,7 +126,7 @@ FilePond.create(getImageEntryElement, {
 
     // function to enable the get result button once image uploade d
     function enableImgResultBtn(){
-      let getPicResultBtn = document.querySelector('[data-button="pic-text"]') as HTMLButtonElement;
+      const getPicResultBtn = document.querySelector('[data-button="pic-text"]') as HTMLButtonElement;
 
       getPicResultBtn.style.pointerEvents = '';
 
@@ -134,10 +134,10 @@ FilePond.create(getImageEntryElement, {
     enableImgResultBtn();
 
     // disable btn also when close btn clicked on image display
-    let closeBtn = document.querySelector('.filepond--action-remove-item') as HTMLButtonElement;
+    const closeBtn = document.querySelector('.filepond--action-remove-item') as HTMLButtonElement;
 
     closeBtn.addEventListener('click', function(){
-      let getPicResultBtn = document.querySelector('[data-button="pic-text"]') as HTMLButtonElement;
+      const getPicResultBtn = document.querySelector('[data-button="pic-text"]') as HTMLButtonElement;
 
       getPicResultBtn.style.pointerEvents = 'none';
     })
