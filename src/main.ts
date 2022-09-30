@@ -4,8 +4,6 @@ import {gradientTextGenerator} from './pages/gradient-text';
 import {gradientBorderGenerator} from './pages/gradient-border';
 import {gradientBackgroundGenerator} from './pages/gradient-background';
 import {animationGenerator} from './pages/animation';
-
-// import * as FilePond from 'filepond';
 import * as FilePond from 'filepond';
 import 'filepond/dist/filepond.min.css';
 
