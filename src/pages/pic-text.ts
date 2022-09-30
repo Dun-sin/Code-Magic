@@ -7,6 +7,7 @@ import * as utils from '../lib/general';
 export function picTextGenerator(image: string, imageHeight: number): void {
   const attribute = 'pic-text';
   const outputNode = utils.getOutput(attribute);
+  const resultPage = utils.getResultPage();
 
   // The value 19 is the result I got by dividing the height of the image by
   // the number of lines of text necessary to cover its full height.
@@ -16,6 +17,7 @@ export function picTextGenerator(image: string, imageHeight: number): void {
     Math.ceil(imageHeight / 19)
   );
 
+  resultPage.style.display = 'flex';
   outputNode.style.background = `url(${image}) center no-repeat`;
   outputNode.style.width = 'var(--output-width)';
   outputNode.style.height = `${imageHeight}px`;

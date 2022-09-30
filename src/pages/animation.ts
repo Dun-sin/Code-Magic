@@ -21,6 +21,10 @@ export function animationGenerator() {
 
   const Stylesheet = utils.getStyleSheet();
   const getCodeButtonElement = utils.getCopyCodeButton(attribute);
+  const resultPage = utils.getResultPage();
+  
+  resultPage.style.display = 'flex';
+
   initial_length = Stylesheet.cssRules.length - 1;
 
   initialConfiguration(radio_button_set, DegreeElement, OutputElement);
