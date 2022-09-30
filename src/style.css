@@ -300,7 +300,7 @@ textarea {
 
 /* Results */
 .side-results {
-  display: flex;
+  display: none;
   background-color: var(--secondary-color);
   min-height: var(--content-container);
   min-width: var(--content-container);

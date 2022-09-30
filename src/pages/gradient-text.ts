@@ -10,6 +10,9 @@ export function gradientTextGenerator(): void {
   const attribute = 'gradient-text';
   const getInputElement = utils.getInputText(attribute);
   const getOutputElement = utils.getOutput(attribute);
+  const resultPage = utils.getResultPage();
+  
+  resultPage.style.display = 'flex';
   if (getOutputElement === null) return;
   getOutputElement.style.display = 'grid';
   getOutputElement.style.placeItems = 'center';

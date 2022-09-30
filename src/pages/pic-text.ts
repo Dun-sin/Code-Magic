@@ -6,9 +6,11 @@ import * as utils from '../lib/general';
 export function picTextGenerator(image: string): void {
   const attribute = 'pic-text';
   const outputNode = utils.getOutput(attribute);
+  const resultPage = utils.getResultPage();
 
   let imageText = `################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################`;
 
+  resultPage.style.display = 'flex';
   outputNode.style.background = `url(${image}) center no-repeat`;
   outputNode.style.width = 'var(--output-width)';
   outputNode.style.backgroundSize = 'var(--output-width)';

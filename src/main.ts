@@ -236,7 +236,7 @@ function showResult(attribute: string | null) {
 
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
-    sidebar.style.left = '100%';
+    sidebar.style.display = 'none';
     const checking = generator.getAttribute('data-gen');
     if (checking === 'gradient-border') {
       generatorsFunction(checking);
@@ -264,6 +264,9 @@ closeBar?.addEventListener('click', () => {
   sidebar.animate(sideBarSlide, sideBarTiming);
   sidebar.style.left = '100%';
   showResult(null);
+  setTimeout(() => {
+    sidebar.style.display = 'none'
+  }, 600);
 });
 
 for (let i = 0; i < gradientBackgroundInputs.length; i++) {
