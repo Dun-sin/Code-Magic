@@ -131,6 +131,23 @@ main {
   position: absolute;  left:10px;top:120px;
   line-height: 40px;
 }
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gif{
+    display: flex;
+    margin: -67px 25%;
+    width: 49%;
+    height: 40%;
+    justify-content: center;
+    z-index: 1000;  
+    position: absolute; left:10px;top:360px;
+    border: 2px solid whitesmoke;
+    align-items: center;
+}
 
 .generators {
   min-height: var(--content-container);
