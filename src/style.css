@@ -272,6 +272,10 @@ textarea {
   align-items: center;
 }
 
+.degree-display {
+  opacity: 0.7;
+}
+
 .duration-label {
   background-color: var(--primary-color);
   width: min(45%, 55%);

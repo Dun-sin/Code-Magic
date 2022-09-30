@@ -96,6 +96,9 @@ const gradientBackgroundDegree = <HTMLInputElement>(
   document.querySelector('#gradient-background-degree')
 );
 
+// get all range inputs
+const gradientRangeInputs = document.querySelectorAll('.degree-range');
+
 menuIcon?.addEventListener('click', () => {
   if (navBar?.classList.contains('closed-nav')) {
     navBar?.classList.remove('closed-nav');
@@ -125,22 +128,27 @@ FilePond.create(getImageEntryElement, {
     imageSRC = img.src;
 
     // function to enable the get result button once image uploade d
-    function enableImgResultBtn(){
-      let getPicResultBtn = document.querySelector('[data-button="pic-text"]') as HTMLButtonElement;
+    function enableImgResultBtn() {
+      let getPicResultBtn = document.querySelector(
+        '[data-button="pic-text"]'
+      ) as HTMLButtonElement;
 
       getPicResultBtn.style.pointerEvents = '';
-
     }
     enableImgResultBtn();
 
     // disable btn also when close btn clicked on image display
-    let closeBtn = document.querySelector('.filepond--action-remove-item') as HTMLButtonElement;
+    let closeBtn = document.querySelector(
+      '.filepond--action-remove-item'
+    ) as HTMLButtonElement;
 
-    closeBtn.addEventListener('click', function(){
-      let getPicResultBtn = document.querySelector('[data-button="pic-text"]') as HTMLButtonElement;
+    closeBtn.addEventListener('click', function () {
+      let getPicResultBtn = document.querySelector(
+        '[data-button="pic-text"]'
+      ) as HTMLButtonElement;
 
       getPicResultBtn.style.pointerEvents = 'none';
-    })
+    });
 
     console.log(fileItem);
   },
@@ -266,6 +274,27 @@ closeBar?.addEventListener('click', () => {
   showResult(null);
 });
 
+// display current gradient value for each range inputs
+const displayGradientValue = (gradientElement: HTMLInputElement) => {
+  gradientElement.addEventListener('input', (e) => {
+    const target = e.target as HTMLInputElement;
+    const degreeDisplayElement = <HTMLElement>(
+      target.parentElement?.querySelector('.degree-display')
+    );
+
+    // change % to s for the animator page
+    if (degreeDisplayElement.classList.contains('speed')) {
+      degreeDisplayElement.innerText = `${target.value}s`;
+    } else {
+      degreeDisplayElement.innerText = `${target.value}%`;
+    }
+  });
+};
+
+gradientRangeInputs.forEach((gradientRangeInput: HTMLInputElement) => {
+  displayGradientValue(gradientRangeInput);
+});
+
 for (let i = 0; i < gradientBackgroundInputs.length; i++) {
   gradientBackgroundInputs[i].addEventListener('input', () =>
     createGradientPreview(
@@ -291,6 +320,7 @@ for (let i = 0; i < gradientBorderInputs.length; i++) {
 
 //set gradient text preview
 for (let i = 0; i < gradientTextInputs.length; i++) {
+  displayGradientValue(gradientTextDegree);
   gradientTextInputs[i].addEventListener('input', () =>
     createGradientPreview(
       gradientTextColor1,
