@@ -279,15 +279,9 @@ const displayGradientValue = (gradientElement: HTMLInputElement) => {
   gradientElement.addEventListener('input', (e) => {
     const target = e.target as HTMLInputElement;
     const degreeDisplayElement = <HTMLElement>(
-      target.parentElement?.querySelector('.degree-display')
+      target.parentElement?.querySelector('#degree-display')
     );
-
-    // change % to s for the animator page
-    if (degreeDisplayElement.classList.contains('speed')) {
-      degreeDisplayElement.innerText = `${target.value}s`;
-    } else {
-      degreeDisplayElement.innerText = `${target.value}%`;
-    }
+    degreeDisplayElement.innerText = `${target.value}deg`;
   });
 };
 
