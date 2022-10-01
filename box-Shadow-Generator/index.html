@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="robots" content="index,follow,noodp,noydir">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="CSS Box Shadow Generator">
+		<meta name="publisher" content="Dirk Einecke">
+		<meta property="og:site_name" content="CSS Box Shadow Generator">
+		<meta property="og:title" content="CSS Box Shadow Generator">
+		<meta itemprop="name" content="CSS Box Shadow Generator">
+		<meta property="og:description" content="CSS Box Shadow Generator">
+		<meta itemprop="description" content="CSS Box Shadow Generator">
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:url" content="https://css-box-shadow-generator.com">
+		<meta name="twitter:title" content="CSS Box Shadow Generator">
+		<meta name="twitter:description" content="CSS Box Shadow Generator">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="https://css-box-shadow-generator.com">
+		<title>CSS Box Shadow Generator</title>
+		<link href="/assets/css/responsive.min.css" rel="stylesheet">
+		<style>
+			#example_wrapper {
+				padding: 100px 0 100px 0;
+			}
+
+			#example {
+				margin: 0 auto 0 auto;
+				width: 200px;
+				height: 200px;
+				background-color: yellow;
+			}
+			
+			footer {
+				border-top: 1px solid #b3b3b3;
+				margin-top: 40px;
+				padding-top: 15px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<h1>CSS Box Shadow Generator</h1>
+			</header>
+			
+			<hr>
+			
+			<script type="text/template" id="shadow_edit_template">
+				<form>
+					<div class="row">
+						<div class="col-xxs-12 col-xs-12 col-s-6 col-m-6 col-l-6">
+							<p>
+								<label for="horizontal_position_range">Horizontal Position</label>
+								<input id="horizontal_position_range" type="range" min="-100" max="100" value="<%= horizontal_position_value %>" step="1">
+								<div class="input-group">
+									<input id="horizontal_position_text" type="text" value="<%= horizontal_position_value %>" readonly><span class="input-group-addon supplement">px</span>
+								</div>
+							</p>
+						</div>
+						<div class="col-xxs-12 col-xs-12 col-s-6 col-m-6 col-l-6">
+							<p>
+								<label for="vertical_position_range">Vertical Position</label>
+								<input id="vertical_position_range" type="range" min="-100" max="100" value="<%= vertical_position_value %>" step="1">
+								<div class="input-group">
+									<input id="vertical_position_text" type="text" value="<%= vertical_position_value %>" readonly><span class="input-group-addon supplement">px</span>
+								</div>
+							</p>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-xxs-12 col-xs-12 col-s-6 col-m-6 col-l-6">
+							<p>
+								<label for="blur_radius_range">Blur Radius</label>
+								<input id="blur_radius_range" type="range" min="0" max="300" value="<%= blur_radius_value %>" step="1">
+								<div class="input-group">
+									<input id="blur_radius_text" type="text" value="<%= blur_radius_value %>" readonly><span class="input-group-addon supplement">px</span>
+								</div>
+							</p>
+						</div>
+						<div class="col-xxs-12 col-xs-12 col-s-6 col-m-6 col-l-6">
+							<p>
+								<label for="spread_radius_range">Spread Radius</label>
+								<input id="spread_radius_range" type="range" min="-100" max="100" value="<%= spread_radius_value %>" step="1">
+								<div class="input-group">
+									<input id="spread_radius_text" type="text" value="<%= spread_radius_value %>" readonly><span class="input-group-addon supplement">px</span>
+								</div>
+							</p>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-xxs-12 col-xs-12 col-s-12 col-m-4 col-l-4">
+							<p>
+								<label for="shadow_color_color">Shadow Color</label>
+								<div class="row">
+									<div class="col-xxs-6 col-xs-6 col-s-6 col-m-12 col-l-6">
+										<input id="shadow_color_color" type="color" value="<%= shadow_color_value %>">
+									</div>
+									<div class="col-xxs-6 col-xs-6 col-s-6 col-m-12 col-l-6">
+										<div class="input-group">
+											<input id="shadow_color_text" type="text" value="<%= shadow_color_value %>" readonly>
+										</div>
+									</div>
+								</div>
+							</p>
+						</div>
+						<div class="col-xxs-12 col-xs-12 col-s-12 col-m-4 col-l-4">
+							<p>
+								<label for="box_color_color">Box Color</label>
+								<div class="row">
+									<div class="col-xxs-6 col-xs-6 col-s-6 col-m-12 col-l-6">
+										<input id="box_color_color" type="color" value="<%= box_color_value %>">
+									</div>
+									<div class="col-xxs-6 col-xs-6 col-s-6 col-m-12 col-l-6">
+										<div class="input-group">
+											<input id="box_color_text" type="text" value="<%= box_color_value %>" readonly>
+										</div>
+									</div>
+								</div>
+							</p>
+						</div>
+						<div class="col-xxs-12 col-xs-12 col-s-12 col-m-4 col-l-4">
+							<p>
+								<label for="background_color_color">Background Color</label>
+								<div class="row">
+									<div class="col-xxs-6 col-xs-6 col-s-6 col-m-12 col-l-6">
+										<input id="background_color_color" type="color" value="<%= background_color_value %>">
+									</div>
+									<div class="col-xxs-6 col-xs-6 col-s-6 col-m-12 col-l-6">
+										<div class="input-group">
+											<input id="background_color_text" type="text" value="<%= background_color_value %>" readonly>
+										</div>
+									</div>
+								</div>
+							</p>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-xxs-12 col-xs-3 col-s-2 col-m-2 col-l-2">
+							<label for="opacity_range">Opacity</label>
+						</div>
+						<div class="col-xxs-8 col-xs-6 col-s-8 col-m-8 col-l-8">
+						<input id="opacity_range" type="range" min="0" max="1" value="<%= opacity_value %>" step="0.01">
+						</div>
+						<div class="col-xxs-4 col-xs-3 col-s-2 col-m-2 col-l-2">
+							<div class="input-group">
+								<input id="opacity_text" type="text" value="<%= opacity_value %>" readonly>
+							</div>
+						</div>
+					</div>
+				</form>
+			</script>
+	
+			<script type="text/template" id="shadow_example_template">
+				<div id="example_wrapper">
+					<div id="example"></div>				
+				</div>
+			</script>
+	
+			<script type="text/template" id="shadow_output_template">
+				<div id="output">
+					<pre></pre>
+				</div>
+			</script>
+	
+	
+			<div class="row">
+				<div class="col-xxs-12 col-xs-12 col-s-6 col-m-6 col-l-6">
+					<div id="shadow_edit_container"></div>
+				</div>
+				<div class="col-xxs-12 col-xs-12 col-s-6 col-m-6 col-l-6">
+					<div id="shadow_example_container"></div>
+				</div>
+			</div>
+	
+			<div id="shadow_output_container"></div>
+			
+
+		</div>
+
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/underscore-min.js"></script>
+		<script src="/assets/js/backbone-min.js"></script>
+		<script src="/assets/js/responsive.min.js"></script>
+		<script type="text/javascript">
+			
+			function hexToRgb(hex, alpha) {
+			    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+			    var toString = function () {
+			        if (this.alpha == undefined) {
+			            return "rgb(" + this.r + ", " + this.g + ", " + this.b + ")";
+			        }
+			        if (this.alpha > 1) {
+			            this.alpha = 1;
+			        } else if (this.alpha < 0) {
+			            this.alpha = 0;
+			        }
+			        return "rgba(" + this.r + ", " + this.g + ", " + this.b + ", " + this.alpha + ")";
+			    } 
+			    if (alpha == undefined) {
+			        return result ? {
+			            r: parseInt(result[1], 16),
+			            g: parseInt(result[2], 16),
+			            b: parseInt(result[3], 16),
+			            toString: toString
+			        } : null;
+			    }
+			    if (alpha > 1) {
+			        alpha = 1;
+			    } else if (alpha < 0) {
+			        alpha = 0;
+			    }
+			    return result ? {
+			        r: parseInt(result[1], 16),
+			        g: parseInt(result[2], 16),
+			        b: parseInt(result[3], 16),
+			        alpha: alpha,
+			        toString: toString
+			    } : null;
+			}
+
+			$(function(){
+				var Shadow = Backbone.Model.extend({
+					defaults: {
+						horizontalPosition: 10,
+						verticalPosition: 10,
+						blurRadius: 5,
+						spreadRadius: 0,
+						shadowColor: '#000000',
+						boxColor: '#D3FFC1',
+						backgroundColor: '#ffffff',
+						opacity: 0.75,
+						css: ''
+					},
+					
+					initialize: function() {
+						this.on('change:horizontalPosition change:verticalPosition change:blurRadius change:spreadRadius change:shadowColor change:opacity', function(model) {
+							var shadow_color_rgb = hexToRgb(this.get('shadowColor'), 1);
+							this.set({
+								css: this.get('horizontalPosition') + 'px ' + this.get('verticalPosition') + 'px ' + this.get('blurRadius') + 'px ' + this.get('spreadRadius') + 'px rgba(' + shadow_color_rgb.r + ', ' + shadow_color_rgb.g + ', ' + shadow_color_rgb.b + ', ' + this.get('opacity') + ')'
+							});
+						});
+					}
+				});
+				
+				var shadow = new Shadow();
+				
+				/* ---------- */
+				
+				var ShadowEditView = Backbone.View.extend({
+					el: $('#shadow_edit_container'),
+
+					initialize: function() {
+						this.on('updateInterface', this.updateInterface, this);
+						this.render();
+					},
+					
+					render: function() {
+						var template = _.template($('#shadow_edit_template').html());
+						var variables = {
+							horizontal_position_value: shadow.get('horizontalPosition'),
+							vertical_position_value: shadow.get('verticalPosition'),
+							blur_radius_value: shadow.get('blurRadius'),
+							spread_radius_value: shadow.get('spreadRadius'),
+							shadow_color_value: shadow.get('shadowColor'),
+							box_color_value: shadow.get('boxColor'),
+							background_color_value: shadow.get('backgroundColor'),
+							opacity_value: shadow.get('opacity')
+						};
+						var html = template(variables);
+						this.$el.html(html);
+					},
+					
+					events: {
+						'input input[id=horizontal_position_range]': 'updateInterface',
+						'input input[id=vertical_position_range]': 'updateInterface',
+						'input input[id=blur_radius_range]': 'updateInterface',
+						'input input[id=spread_radius_range]': 'updateInterface',
+						'input input[id=shadow_color_color]': 'updateInterface',
+						'input input[id=box_color_color]': 'updateInterface',
+						'input input[id=background_color_color]': 'updateInterface',
+						'input input[id=opacity_range]': 'updateInterface'
+					},
+					
+					updateInterface: function() {
+						shadow.set({
+							horizontalPosition: $('#horizontal_position_range').val(),
+							verticalPosition: $('#vertical_position_range').val(),
+							blurRadius: $('#blur_radius_range').val(),
+							spreadRadius: $('#spread_radius_range').val(),
+							shadowColor: $('#shadow_color_color').val(),
+							boxColor: $('#box_color_color').val(),
+							backgroundColor: $('#background_color_color').val(),
+							opacity: $('#opacity_range').val()
+						});
+						
+						$('#horizontal_position_text').val(shadow.get('horizontalPosition'));
+						$('#vertical_position_text').val(shadow.get('verticalPosition'));
+						$('#blur_radius_text').val(shadow.get('blurRadius'));
+						$('#spread_radius_text').val(shadow.get('spreadRadius'));
+						$('#shadow_color_text').val(shadow.get('shadowColor'));
+						$('#box_color_text').val(shadow.get('boxColor'));
+						$('#background_color_text').val(shadow.get('backgroundColor'));
+						$('#opacity_text').val(shadow.get('opacity'));
+
+						$('#example').css('-webkit-box-shadow', shadow.get('css'));
+						$('#example').css('-moz-box-shadow', shadow.get('css'));
+						$('#example').css('box-shadow', shadow.get('css'));
+						$('#example').css('background-color', shadow.get('boxColor'));
+						$('#example_wrapper').css('background-color', shadow.get('backgroundColor'));
+						
+						$('#output pre').html('-webkit-box-shadow: ' + shadow.get('css') + ';\n' + '-moz-box-shadow: ' + shadow.get('css') + ';\n' + 'box-shadow: ' + shadow.get('css'));
+					}
+				});
+				
+				var shadow_edit_view = new ShadowEditView();
+
+				/* ---------- */
+				
+				var ShadowExampleView = Backbone.View.extend({
+					el: $('#shadow_example_container'),
+
+					initialize: function() {
+						this.render();
+					},
+					
+					render: function() {
+						var template = _.template($('#shadow_example_template').html(), {});
+						this.$el.html(template);
+					}
+				});
+				
+				var shadow_example_view = new ShadowExampleView();
+
+				/* ---------- */
+				
+				var ShadowOutputView = Backbone.View.extend({
+					el: $('#shadow_output_container'),
+					
+					initialize: function() {
+						this.render();
+					},
+					
+					render: function() {
+						var template = _.template($('#shadow_output_template').html(), {});
+						this.$el.html(template);
+					}
+				});
+				
+				var shadow_output_view = new ShadowOutputView();
+				
+				/* ---------- */
+
+				shadow_edit_view.trigger('updateInterface');
+			});
+		</script>
+	</body>
+</html>
