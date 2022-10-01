@@ -11,7 +11,7 @@ export function gradientTextGenerator(): void {
   const getInputElement = utils.getInputText(attribute);
   const getOutputElement = utils.getOutput(attribute);
   const resultPage = utils.getResultPage();
-  
+
   resultPage.style.display = 'flex';
   if (getOutputElement === null) return;
   getOutputElement.style.display = 'grid';
@@ -23,7 +23,7 @@ export function gradientTextGenerator(): void {
 
   if (getInputElement.value.length === 0) {
     utils.triggerEmptyAnimation(getInputElement);
-    return;
+    throw new Error('Text is empty!');
   }
 
   const values = {
