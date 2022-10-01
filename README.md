@@ -85,7 +85,7 @@ git checkout -b YourBranchName
 > NOTE: don't commit the package.json
 
 ```bash
-git add .
+git add <path to the file you worked on>
 ```
 
 3. Commit your changes with
