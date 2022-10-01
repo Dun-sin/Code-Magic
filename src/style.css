@@ -244,6 +244,18 @@ textarea {
 #gradient-border-input {
   display: none;
   min-width: 0;
+  border: 2px solid #2196f3;
+  padding: 4px;
+  margin: 8px;
+  font-family: inherit;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0; 
 }
 
 #degree {
