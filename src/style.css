@@ -116,6 +116,14 @@ main {
   position: relative;
   outline: 2px solid red;
 }
+.box{
+  display: flex;
+  justify-content: center;
+}img{
+  max-width: 100%;
+  height: auto;
+  border: 2px solid whitesmoke;
+}
 
 .body-text{
   display: flex;
@@ -131,11 +139,6 @@ main {
   position: absolute;  left:10px;top:120px;
   line-height: 40px;
 }
-.container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .gif{
     display: flex;
@@ -145,7 +148,6 @@ main {
     justify-content: center;
     z-index: 1000;  
     position: absolute; left:10px;top:360px;
-    border: 2px solid whitesmoke;
     align-items: center;
 }
 
