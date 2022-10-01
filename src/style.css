@@ -244,6 +244,10 @@ textarea {
 #gradient-border-input {
   display: none;
   min-width: 0;
+}
+
+#animation-duration,
+#gradient-border-input {
   border: 2px solid #2196f3;
   border-radius: 5px;
   padding: 4px;
