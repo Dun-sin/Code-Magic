@@ -11,8 +11,10 @@ type Values = {
   duration: string;
 };
 
+const attribute = 'animation';
+let getCodeButtonElement =  utils.getCopyCodeButton(attribute);
+
 export function animationGenerator() {
-  const attribute = 'animation';
   const DegreeElement = utils.getRange(attribute);
   const duration = utils.getInputSpinner(attribute);
   const radio_button_set = utils.getRadioButtonSet(attribute);
@@ -20,10 +22,12 @@ export function animationGenerator() {
   const OutputElement = utils.getOutput(attribute);
 
   const Stylesheet = utils.getStyleSheet();
-  const getCodeButtonElement = utils.getCopyCodeButton(attribute);
+  // getCodeButtonElement = utils.getCopyCodeButton(attribute);
   const resultPage = utils.getResultPage();
   
   resultPage.style.display = 'flex';
+
+ 
 
   initial_length = Stylesheet.cssRules.length - 1;
 
@@ -42,16 +46,19 @@ export function animationGenerator() {
     duration: duration.value,
   };
   manageAnimation(values, OutputElement, Stylesheet);
-
-  getCodeButtonElement.addEventListener('click', () => {
-    copy(css);
-    utils.showPopup(
-      'Code Copied',
-      'Code has been successfully copied to clipboard',
-      'success'
-    );
-  });
 }
+
+// set event listener for copy code btn
+getCodeButtonElement.addEventListener('click', () => {
+  copy(css);
+  utils.showPopup(
+    'Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
+});
+
+
 
 /**
  * sets the animation to the output element
@@ -65,10 +72,10 @@ function manageAnimation(
   OutputElement: HTMLElement,
   stylesheet: CSSStyleSheet
 ) {
-  if (rule_added) {
-    stylesheet.deleteRule(initial_length + 1);
-    rule_added = false;
-  }
+  // if (rule_added) {
+  //   stylesheet.deleteRule(initial_length + 1);
+  //   rule_added = false;
+  // }
   if (values.type === 'fade') {
     css =
       `/*Copy and paste keyframe into your css file, and apply the animation property in the element of your choice*/\n` +
