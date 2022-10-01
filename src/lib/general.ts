@@ -125,6 +125,9 @@ export function triggerEmptyAnimation(inputElement: HTMLInputElement): void {
   }, 1000);
 }
 
+export const getResultPage = (): HTMLElement =>
+  <HTMLElement>document.querySelector('.side-results');
+
 export const getCopyCodeButton = (attribute: string): HTMLElement =>
   <HTMLElement>document.querySelector(`[data-download = ${attribute}-code]`);
 

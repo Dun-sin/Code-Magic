@@ -4,8 +4,6 @@ import {gradientTextGenerator} from './pages/gradient-text';
 import {gradientBorderGenerator} from './pages/gradient-border';
 import {gradientBackgroundGenerator} from './pages/gradient-background';
 import {animationGenerator} from './pages/animation';
-
-// import * as FilePond from 'filepond';
 import * as FilePond from 'filepond';
 import 'filepond/dist/filepond.min.css';
 
@@ -25,8 +23,10 @@ FilePond.registerPlugin(
 /**
  * All Variables
  */
+const FINAL_WIDTH = 300;
 let attributeValue: string | null = null;
-let imageSRC = '';
+let imageSRC: string;
+let imageHeight: number;
 const sideBarSlide = [{left: '100%'}, {left: '0%'}];
 
 const sideBarTiming = {
@@ -120,27 +120,41 @@ FilePond.create(getImageEntryElement, {
     // create a new image object
     const img = new Image();
 
+    // Dirty trick to get the final visible height of the picture
+    // Based on the knowledge the width will be 300px
+    img.onload = () => {
+      imageHeight = Math.floor(
+        img.naturalHeight / (img.naturalWidth / FINAL_WIDTH)
+      );
+    };
+
     // set the image source to the output of the Image Transform plugin
     img.src = URL.createObjectURL(output);
     imageSRC = img.src;
 
-    // function to enable the get result button once image uploade d
-    function enableImgResultBtn(){
-      let getPicResultBtn = document.querySelector('[data-button="pic-text"]') as HTMLButtonElement;
+    // function to enable the get result button once image uploaded
+    function enableImgResultBtn() {
+      const getPicResultBtn = document.querySelector(
+        '[data-button="pic-text"]'
+      ) as HTMLButtonElement;
 
       getPicResultBtn.style.pointerEvents = '';
-
     }
+
     enableImgResultBtn();
 
     // disable btn also when close btn clicked on image display
-    let closeBtn = document.querySelector('.filepond--action-remove-item') as HTMLButtonElement;
+    const closeBtn = document.querySelector(
+      '.filepond--action-remove-item'
+    ) as HTMLButtonElement;
 
-    closeBtn.addEventListener('click', function(){
-      let getPicResultBtn = document.querySelector('[data-button="pic-text"]') as HTMLButtonElement;
+    closeBtn.addEventListener('click', function () {
+      const getPicResultBtn = document.querySelector(
+        '[data-button="pic-text"]'
+      ) as HTMLButtonElement;
 
       getPicResultBtn.style.pointerEvents = 'none';
-    })
+    });
 
     console.log(fileItem);
   },
@@ -159,7 +173,7 @@ type Display = 'grid' | 'flex' | 'none';
 function generatorsFunction(attribute: string): void {
   switch (attribute) {
     case 'pic-text':
-      picTextGenerator(imageSRC);
+      picTextGenerator(imageSRC, imageHeight);
       break;
     case 'gradient-text':
       gradientTextGenerator();
@@ -177,7 +191,7 @@ function generatorsFunction(attribute: string): void {
 }
 
 /**
- * use to toggle visibilty of content in generators
+ * use to toggle visibility of content in generators
  *
  * @param attribute  The attribute name of the generator element
  * @param display  display type
@@ -236,7 +250,7 @@ function showResult(attribute: string | null) {
 
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
-    sidebar.style.left = '100%';
+    sidebar.style.display = 'none';
     const checking = generator.getAttribute('data-gen');
     if (checking === 'gradient-border') {
       generatorsFunction(checking);
@@ -264,6 +278,9 @@ closeBar?.addEventListener('click', () => {
   sidebar.animate(sideBarSlide, sideBarTiming);
   sidebar.style.left = '100%';
   showResult(null);
+  setTimeout(() => {
+    sidebar.style.display = 'none'
+  }, 600);
 });
 
 for (let i = 0; i < gradientBackgroundInputs.length; i++) {
