@@ -245,8 +245,9 @@ textarea {
   display: none;
   min-width: 0;
   border: 2px solid #2196f3;
+  border-radius: 5px;
   padding: 4px;
-  margin: 8px;
+  margin-top: 8px;
   font-family: inherit;
 }
 
