@@ -12,6 +12,8 @@
 
 - Don't work on the main branch, create your own branch by following the instructions [here](https://github.com/Dun-sin/Code-Magic/blob/main/CONTRIBUTING.md#-how-to-make-a-pull-request)
 
+- Don't commit the lock files eg package.json
+
 - Fill out issue and pull request(PR) templates properly, if you don't know how, check out previous issues/PR to know how they are filled or this video👇🏾
 
 #### 👌🏾 How to fill a pull request template
