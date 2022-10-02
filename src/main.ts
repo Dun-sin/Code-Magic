@@ -27,12 +27,19 @@ const FINAL_WIDTH = 300;
 let attributeValue: string | null = null;
 let imageSRC: string;
 let imageHeight: number;
-const sideBarSlide = [{left: '100%'}, {left: '0%'}];
+const sideBarSlide = [
+  {left: '30%', opacity: '0'},
+  {left: '0%', opacity: '1'},
+];
+const sideBarSlideOut = [
+  {left: '0%', opacity: '1'},
+  {left: '30%', opacity: '0'},
+];
 
 const sideBarTiming = {
-  duration: 500,
+  duration: 450,
   iterations: 1,
-  easing: 'ease-in',
+  easing: 'ease',
 };
 
 // Elements
@@ -144,6 +151,7 @@ FilePond.create(getImageEntryElement, {
     enableImgResultBtn();
 
     // disable btn also when close btn clicked on image display
+
     const closeBtn = document.querySelector(
       '.filepond--action-remove-item'
     ) as HTMLButtonElement;
@@ -274,12 +282,11 @@ showResult(null);
 
 // onClick event listener for the closebar icon
 closeBar?.addEventListener('click', () => {
-  const sideBarSlide = [{left: '0%'}, {left: '100%'}];
-  sidebar.animate(sideBarSlide, sideBarTiming);
+  sidebar.animate(sideBarSlideOut, sideBarTiming);
   sidebar.style.left = '100%';
   showResult(null);
   setTimeout(() => {
-    sidebar.style.display = 'none'
+    sidebar.style.display = 'none';
   }, 600);
 });
 
