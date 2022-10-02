@@ -113,6 +113,20 @@ menuIcon?.addEventListener('click', () => {
   }
 });
 
+const menu = <HTMLElement>(document.querySelector('.menu'))
+const body = <HTMLElement>(document.querySelector('body'))
+
+if(getComputedStyle(menu).display == 'block'){
+  body.onclick = (e)=>{
+    if(e.target !== navBar){
+        if(e.target !== menuIcon){
+          navBar?.classList.add('closed-nav')
+          menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
+        }
+    }
+  }
+}
+
 for (let i = 0; i < generators.length; i++) {
   generators[i].addEventListener('click', () => {
     navBar?.classList.add('closed-nav');
@@ -258,14 +272,13 @@ function showResult(attribute: string | null) {
 
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
-    sidebar.style.display = 'none';
     const checking = generator.getAttribute('data-gen');
     if (checking === 'gradient-border') {
       generatorsFunction(checking);
     } else if (checking === null) {
       return;
     }
-
+    sidebar.style.display = 'none';
     attributeValue = checking;
     showContent(attributeValue, 'flex');
   });
