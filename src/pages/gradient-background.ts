@@ -14,6 +14,9 @@ export function gradientBackgroundGenerator() {
   const getDegreeElement = utils.getRange(attribute);
 
   const getOutputElement = utils.getOutput(attribute);
+  const resultPage = utils.getResultPage();
+  
+  resultPage.style.display = 'flex';
 
   const values: Values = {
     firstColor: color1.value,

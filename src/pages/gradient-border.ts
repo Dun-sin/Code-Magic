@@ -17,6 +17,9 @@ export function gradientBorderGenerator(): void {
   const getBorderRadiusInput = utils.getRadiusInput(attribute);
   const showRadiusInput = utils.showRadius;
   const hideRadiusInput = utils.hideRadius;
+  const resultPage = utils.getResultPage();
+  
+  resultPage.style.display = 'flex';
 
   getCheckboxElement.addEventListener('change', (e: Event): void => {
     const target = e.target as HTMLInputElement;
