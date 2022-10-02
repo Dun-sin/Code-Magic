@@ -258,14 +258,13 @@ function showResult(attribute: string | null) {
 
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
-    sidebar.style.display = 'none';
     const checking = generator.getAttribute('data-gen');
     if (checking === 'gradient-border') {
       generatorsFunction(checking);
     } else if (checking === null) {
       return;
     }
-
+    sidebar.style.display = 'none';
     attributeValue = checking;
     showContent(attributeValue, 'flex');
   });
