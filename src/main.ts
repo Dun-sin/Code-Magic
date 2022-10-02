@@ -4,6 +4,7 @@ import {gradientTextGenerator} from './pages/gradient-text';
 import {gradientBorderGenerator} from './pages/gradient-border';
 import {gradientBackgroundGenerator} from './pages/gradient-background';
 import {animationGenerator} from './pages/animation';
+import {borderRadiusGenerator} from './pages/border-radius';
 import * as FilePond from 'filepond';
 import 'filepond/dist/filepond.min.css';
 
@@ -94,6 +95,29 @@ const gradientBackgroundColor2 = <HTMLInputElement>(
 );
 const gradientBackgroundDegree = <HTMLInputElement>(
   document.querySelector('#gradient-background-degree')
+);
+
+// border radius elements
+const borderRadiusInputs = document.querySelectorAll('.border-radius-inputs');
+const borderTop = <HTMLInputElement>(
+  document.querySelector('#border-radius-top')
+);
+const borderLeft = <HTMLInputElement>(
+  document.querySelector('#border-radius-left')
+);
+const borderBottom = <HTMLInputElement>(
+  document.querySelector('#border-radius-bottom')
+);
+const borderRight = <HTMLInputElement>(
+  document.querySelector('#border-radius-right')
+);
+
+const borderRadiusPreview = <HTMLElement>(
+  document.querySelector('.border-radius-preview-box > .preview')
+);
+
+const boderRadiusCode = <HTMLElement>(
+  document.querySelector('#border-radius-code')
 );
 
 menuIcon?.addEventListener('click', () => {
@@ -187,6 +211,8 @@ function generatorsFunction(attribute: string): void {
     case 'animation':
       animationGenerator();
       break;
+    case 'border-radius':
+      borderRadiusGenerator();
   }
 }
 
@@ -279,7 +305,7 @@ closeBar?.addEventListener('click', () => {
   sidebar.style.left = '100%';
   showResult(null);
   setTimeout(() => {
-    sidebar.style.display = 'none'
+    sidebar.style.display = 'none';
   }, 600);
 });
 
@@ -318,6 +344,21 @@ for (let i = 0; i < gradientTextInputs.length; i++) {
   );
 }
 
+//set border radius
+
+for (let i = 0; i < borderRadiusInputs.length; i++) {
+  borderRadiusInputs[i].addEventListener('change', () =>
+    BorderRadiusGenerator(
+      borderTop,
+      borderLeft,
+      borderBottom,
+      borderRight,
+      borderRadiusPreview,
+      boderRadiusCode
+    )
+  );
+}
+
 //create gradient preview
 const createGradientPreview = (
   color1: HTMLInputElement,
@@ -329,4 +370,27 @@ const createGradientPreview = (
   const colorTo = color2?.value;
   const fill = range?.value;
   preview.style.background = `linear-gradient(${fill}deg, ${colorFrom}, ${colorTo})`;
+};
+
+// border radius generator
+
+const BorderRadiusGenerator = (
+  borderTop: HTMLInputElement,
+  borderLeft: HTMLInputElement,
+  borderBottom: HTMLInputElement,
+  borderRight: HTMLInputElement,
+  borderRadiusPreview: HTMLElement,
+  boderRadiusCode: HTMLElement
+) => {
+  boderRadiusCode.innerHTML = `border-radius: 
+    ${borderTop.value}% ${100 - Number(borderTop.value)}%
+       ${borderBottom.value}% ${100 - Number(borderBottom.value)}% /
+       ${borderLeft.value}% ${borderRight.value}%
+       ${100 - Number(borderRight.value)}% ${100 - Number(borderLeft.value)}%`;
+
+  borderRadiusPreview.style.borderRadius = `
+    ${borderTop.value}% ${100 - Number(borderTop.value)}%
+    ${borderBottom.value}% ${100 - Number(borderBottom.value)}% /
+    ${borderLeft.value}% ${borderRight.value}%
+    ${100 - Number(borderRight.value)}% ${100 - Number(borderLeft.value)}%`;
 };
