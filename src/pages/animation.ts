@@ -2,7 +2,7 @@ import * as utils from '../lib/general';
 import copy from 'copy-to-clipboard';
 
 let initial_length = 0;
-let rule_added = false;
+// let rule_added = false;
 let css = '';
 
 type Values = {
@@ -96,7 +96,7 @@ function manageAnimation(
 
     OutputElement.style.animation = `flickerAnimation ease-in`;
     OutputElement.style.animationDuration = `${values.duration}s`;
-    rule_added = true;
+    // rule_added = true;
   } else if (values.type === 'skew') {
     css =
       `/*Copy and paste keyframe into your css file, and apply the animation property in the element of your choice*/\n` +
@@ -118,7 +118,7 @@ function manageAnimation(
 
     OutputElement.style.animation = `skewAnimation ease-in`;
     OutputElement.style.animationDuration = `${values.duration}s`;
-    rule_added = true;
+    // rule_added = true;
   } else if (values.type === 'flip') {
     css =
       `/*Copy and paste keyframe into your css file, and apply the animation property in the element of your choice*/\n` +
@@ -141,7 +141,7 @@ function manageAnimation(
     OutputElement.style.animation = `turnaround ease-in`;
     OutputElement.style.animationDuration = `${values.duration}s`;
 
-    rule_added = true;
+    // rule_added = true;
   }
 }
 
