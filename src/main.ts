@@ -35,9 +35,6 @@ const sideBarSlideOut = [
   {left: '0%', opacity: '1'},
   {left: '30%', opacity: '0'},
 ];
-let imageSRC: string;
-let imageHeight: number;
-const sideBarSlide = [{left: '100%'}, {left: '0%'}];
 
 const sideBarTiming = {
   duration: 450,
@@ -141,7 +138,6 @@ FilePond.create(getImageEntryElement, {
     // set the image source to the output of the Image Transform plugin
     img.src = URL.createObjectURL(output);
     imageSRC = img.src;
-
 
     // function to enable the get result button once image uploaded
     function enableImgResultBtn() {
@@ -290,7 +286,7 @@ closeBar?.addEventListener('click', () => {
   sidebar.style.left = '100%';
   showResult(null);
   setTimeout(() => {
-    sidebar.style.display = 'none'
+    sidebar.style.display = 'none';
   }, 600);
 });
 
