@@ -129,6 +129,16 @@
           ></iconify-icon>
           <span>Animator</span>
         </li>
+        <li data-gen="Box-Shadow">
+          <iconify-icon
+            inline
+            icon="mdi:box-shadow"
+            style="color: white"
+            width="20"
+            height="20"
+          ></iconify-icon>
+          <span>Box Shadow Generator</span>
+        </li>
       </ul>
       <footer>
         Contribute to the Project
@@ -342,6 +352,56 @@
 
           <div class="btn" data-button="animation">Get Results</div>
         </div>
+
+        <!--box shadow Generater --->
+        <div data-content="Box-Shadow">
+          <div class="container">
+            <div class="result">
+              <div id="element"></div>
+            </div>
+            <div class="sliders">
+              <div class="slider-wrapper">
+                <label for="h-shadow">Horizontal Shadow:</label>
+                <input type="range" id="h-shadow" max="100" min="-100" value="0" />
+              </div>
+              <div class="slider-wrapper">
+                <label for="v-shadow">Vertical Shadow:</label>
+                <input type="range" id="v-shadow" max="100" min="-100" value="0" />
+              </div>
+              <div class="slider-wrapper">
+                <label for="blur-radius">Blur Radius:</label>
+                <input type="range" id="blur-radius" max="100" min="0" value="0" />
+              </div>
+              <div class="slider-wrapper">
+                <label for="spread-radius">Spread Radius:</label>
+                <input type="range" id="spread-radius" max="50" min="-50" value="0" />
+              </div>
+              <div class="slider-wrapper">
+                <label for="shadow-color">Shadow Color:</label>
+                <input type="color" id="shadow-color" />
+              </div>
+              <div class="slider-wrapper">
+                <label for="shadow-color-opacity">Shadow Color Opacity:</label>
+                <input
+                  type="range"
+                  id="shadow-color-opacity"
+                  max="1"
+                  min="0"
+                  step="0.1"
+                  value="1"
+                />
+              </div>
+              <div class="input-wrapper">
+                <label for="shadow-inset">Inset Shadow:</label>
+                <input type="checkbox" id="shadow-inset" />
+              </div>
+            </div>
+            <div class="code-wrapper">
+              <textarea rows="2" id="code"></textarea>
+              <button onclick="copyCode()">Copy</button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="side-results">
@@ -483,6 +543,7 @@
           </div>
         </div>
       </div>
+      <script src="src/script.js"></script>
     </main>
   </body>
 </html>

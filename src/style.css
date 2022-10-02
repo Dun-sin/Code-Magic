@@ -503,3 +503,58 @@ a {
     font-size: 1.3rem;
   }
 }
+
+
+/* _____________box- Shadow____________ */
+.container {
+  padding: 30px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 47%;
+    top: 47%;
+    width: 91vmin;
+    border-radius: 10px;
+}
+.result {
+  padding: 106px 0;
+}
+#element {
+  height: 50px;
+  width: 50px;
+  position: relative;
+  background-color: #0075ff;
+  margin: auto;
+}
+.sliders {
+  display: grid;
+  grid-template-columns: 6fr 6fr;
+  gap: 20px 15px;
+}
+.slider-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+input[type="range"] {
+  width: 100%;
+}
+.code-wrapper {
+  display: grid;
+  grid-template-columns: 10fr 2fr;
+  gap: 5px;
+  margin-top: 20px;
+}
+textarea {
+  resize: none;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 30vw;
+  height: 12vh;
+}
+.code-wrapper button {
+  background-color: #0075ff;
+  border-radius: 5px;
+  border: none;
+  color: #ffffff;
+}
