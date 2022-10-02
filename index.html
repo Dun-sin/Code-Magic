@@ -45,7 +45,7 @@
     <link rel="stylesheet" href="./src/style.css" />
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="./assets/Favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/Favicon.png" type="image/x-icon" />
 
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -128,6 +128,16 @@
             height="20"
           ></iconify-icon>
           <span>Animator</span>
+        </li>
+        <li data-gen="border-radius">
+          <iconify-icon
+            inline
+            icon="ic:twotone-rounded-corner"
+            style="color: white"
+            width="20"
+            height="20"
+          ></iconify-icon>
+          <span>Border Radius</span>
         </li>
       </ul>
       <footer>
@@ -221,11 +231,18 @@
           <label class="radius" for="gradient-border-radius">
             <input type="checkbox" id="gradient-border-radius" name="check" />
             <span> Include Radius </span>
-          <label id="radius-input-label" for="gradient-border-input">
-            <input type="number" id="gradient-border-input" name="desired-radius" placeholder="Enter a number e.g. 50" autofocus required />
+            <label id="radius-input-label" for="gradient-border-input">
+              <input
+                type="number"
+                id="gradient-border-input"
+                name="desired-radius"
+                placeholder="Enter a number e.g. 50"
+                autofocus
+                required
+              />
+            </label>
           </label>
-          </label>
-          
+
           <label id="degree">
             <span>Degree</span>
             <input
@@ -342,6 +359,46 @@
           </label>
 
           <div class="btn" data-button="animation">Get Results</div>
+        </div>
+
+        <!-- border radius generator -->
+        <div data-content="border-radius">
+          <div class="border-radius-preview-box">
+            <div class="preview"></div>
+            <div class="border-range-inputs">
+              <input
+                type="range"
+                max="100"
+                min="0"
+                id="border-radius-top"
+                class="border-radius-inputs"
+              />
+              <input
+                type="range"
+                max="100"
+                min="0"
+                id="border-radius-left"
+                class="border-radius-inputs"
+              />
+              <input
+                type="range"
+                max="100"
+                min="0"
+                id="border-radius-right"
+                class="border-radius-inputs"
+              />
+              <input
+                type="range"
+                max="100"
+                min="0"
+                id="border-radius-bottom"
+                class="border-radius-inputs"
+              />
+            </div>
+          </div>
+          <div id="border-radius-code">Border Radius :</div>
+
+          <div class="btn" data-button="border-radius">Get Results</div>
         </div>
       </div>
 
@@ -473,6 +530,22 @@
           <div class="output"></div>
           <div class="download-btn">
             <button class="btn" data-download="animation-code">
+              <iconify-icon
+                inline
+                icon="bx:code-alt"
+                style="color: white; margin-right: 5px"
+                width="20"
+              ></iconify-icon
+              >Get Code
+            </button>
+          </div>
+        </div>
+
+        <!-- border radius -->
+        <div class="download-output" data-result="border-radius">
+          <div class="output"></div>
+          <div class="download-btn">
+            <button class="btn" data-download="border-radius-code">
               <iconify-icon
                 inline
                 icon="bx:code-alt"
