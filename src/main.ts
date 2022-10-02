@@ -27,12 +27,19 @@ FilePond.registerPlugin(
  */
 let attributeValue: string | null = null;
 let imageSRC = '';
-const sideBarSlide = [{left: '100%'}, {left: '0%'}];
+const sideBarSlide = [
+  {left: '30%', opacity: '0'},
+  {left: '0%', opacity: '1'},
+];
+const sideBarSlideOut = [
+  {left: '0%', opacity: '1'},
+  {left: '30%', opacity: '0'},
+];
 
 const sideBarTiming = {
-  duration: 500,
+  duration: 450,
   iterations: 1,
-  easing: 'ease-in',
+  easing: 'ease',
 };
 
 // Elements
@@ -125,22 +132,27 @@ FilePond.create(getImageEntryElement, {
     imageSRC = img.src;
 
     // function to enable the get result button once image uploade d
-    function enableImgResultBtn(){
-      let getPicResultBtn = document.querySelector('[data-button="pic-text"]') as HTMLButtonElement;
+    function enableImgResultBtn() {
+      let getPicResultBtn = document.querySelector(
+        '[data-button="pic-text"]'
+      ) as HTMLButtonElement;
 
       getPicResultBtn.style.pointerEvents = '';
-
     }
     enableImgResultBtn();
 
     // disable btn also when close btn clicked on image display
-    let closeBtn = document.querySelector('.filepond--action-remove-item') as HTMLButtonElement;
+    let closeBtn = document.querySelector(
+      '.filepond--action-remove-item'
+    ) as HTMLButtonElement;
 
-    closeBtn.addEventListener('click', function(){
-      let getPicResultBtn = document.querySelector('[data-button="pic-text"]') as HTMLButtonElement;
+    closeBtn.addEventListener('click', function () {
+      let getPicResultBtn = document.querySelector(
+        '[data-button="pic-text"]'
+      ) as HTMLButtonElement;
 
       getPicResultBtn.style.pointerEvents = 'none';
-    })
+    });
 
     console.log(fileItem);
   },
@@ -260,8 +272,7 @@ showResult(null);
 
 // onClick event listener for the closebar icon
 closeBar?.addEventListener('click', () => {
-  const sideBarSlide = [{left: '0%'}, {left: '100%'}];
-  sidebar.animate(sideBarSlide, sideBarTiming);
+  sidebar.animate(sideBarSlideOut, sideBarTiming);
   sidebar.style.left = '100%';
   showResult(null);
 });
