@@ -28,12 +28,19 @@ const FINAL_WIDTH = 300;
 let attributeValue: string | null = null;
 let imageSRC: string;
 let imageHeight: number;
-const sideBarSlide = [{left: '100%'}, {left: '0%'}];
+const sideBarSlide = [
+  {left: '30%', opacity: '0'},
+  {left: '0%', opacity: '1'},
+];
+const sideBarSlideOut = [
+  {left: '0%', opacity: '1'},
+  {left: '30%', opacity: '0'},
+];
 
 const sideBarTiming = {
-  duration: 500,
+  duration: 450,
   iterations: 1,
-  easing: 'ease-in',
+  easing: 'ease',
 };
 
 // Elements
@@ -130,6 +137,20 @@ menuIcon?.addEventListener('click', () => {
   }
 });
 
+const menu = <HTMLElement>(document.querySelector('.menu'))
+const body = <HTMLElement>(document.querySelector('body'))
+
+if(getComputedStyle(menu).display == 'block'){
+  body.onclick = (e)=>{
+    if(e.target !== navBar){
+        if(e.target !== menuIcon){
+          navBar?.classList.add('closed-nav')
+          menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
+        }
+    }
+  }
+}
+
 for (let i = 0; i < generators.length; i++) {
   generators[i].addEventListener('click', () => {
     navBar?.classList.add('closed-nav');
@@ -168,6 +189,7 @@ FilePond.create(getImageEntryElement, {
     enableImgResultBtn();
 
     // disable btn also when close btn clicked on image display
+
     const closeBtn = document.querySelector(
       '.filepond--action-remove-item'
     ) as HTMLButtonElement;
@@ -276,14 +298,13 @@ function showResult(attribute: string | null) {
 
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
-    sidebar.style.display = 'none';
     const checking = generator.getAttribute('data-gen');
     if (checking === 'gradient-border') {
       generatorsFunction(checking);
     } else if (checking === null) {
       return;
     }
-
+    sidebar.style.display = 'none';
     attributeValue = checking;
     showContent(attributeValue, 'flex');
   });
@@ -300,8 +321,7 @@ showResult(null);
 
 // onClick event listener for the closebar icon
 closeBar?.addEventListener('click', () => {
-  const sideBarSlide = [{left: '0%'}, {left: '100%'}];
-  sidebar.animate(sideBarSlide, sideBarTiming);
+  sidebar.animate(sideBarSlideOut, sideBarTiming);
   sidebar.style.left = '100%';
   showResult(null);
   setTimeout(() => {
