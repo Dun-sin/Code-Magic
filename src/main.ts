@@ -274,7 +274,7 @@ closeBar?.addEventListener('click', () => {
   showResult(null);
 });
 
-// display current gradient value for each range inputs
+// display current gradient value for all range inputs
 const displayGradientValue = (gradientElement: HTMLInputElement) => {
   gradientElement.addEventListener('input', (e) => {
     const target = e.target as HTMLInputElement;
