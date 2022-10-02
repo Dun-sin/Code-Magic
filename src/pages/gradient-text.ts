@@ -9,9 +9,15 @@ type Values = {
 export function gradientTextGenerator(): void {
   const attribute = 'gradient-text';
   const getInputElement = utils.getInputText(attribute);
+
+  if (getInputElement.value.length === 0) {
+    utils.triggerEmptyAnimation(getInputElement);
+    return;
+  }
+
   const getOutputElement = utils.getOutput(attribute);
   const resultPage = utils.getResultPage();
-  
+
   resultPage.style.display = 'flex';
   if (getOutputElement === null) return;
   getOutputElement.style.display = 'grid';
@@ -20,11 +26,6 @@ export function gradientTextGenerator(): void {
   const getFirstColor = utils.getColorInput1(attribute);
   const getSecondColor = utils.getColorInput2(attribute);
   const getRangeElement = utils.getRange(attribute);
-
-  if (getInputElement.value.length === 0) {
-    utils.triggerEmptyAnimation(getInputElement);
-    return;
-  }
 
   const values = {
     firstColor: getFirstColor.value,
