@@ -27,12 +27,19 @@ const FINAL_WIDTH = 300;
 let attributeValue: string | null = null;
 let imageSRC: string;
 let imageHeight: number;
-const sideBarSlide = [{left: '100%'}, {left: '0%'}];
+const sideBarSlide = [
+  {left: '30%', opacity: '0'},
+  {left: '0%', opacity: '1'},
+];
+const sideBarSlideOut = [
+  {left: '0%', opacity: '1'},
+  {left: '30%', opacity: '0'},
+];
 
 const sideBarTiming = {
-  duration: 500,
+  duration: 450,
   iterations: 1,
-  easing: 'ease-in',
+  easing: 'ease',
 };
 
 // Elements
@@ -96,6 +103,9 @@ const gradientBackgroundDegree = <HTMLInputElement>(
   document.querySelector('#gradient-background-degree')
 );
 
+// get all range inputs
+const gradientRangeInputs = document.querySelectorAll('.degree-range');
+
 menuIcon?.addEventListener('click', () => {
   if (navBar?.classList.contains('closed-nav')) {
     navBar?.classList.remove('closed-nav');
@@ -105,6 +115,20 @@ menuIcon?.addEventListener('click', () => {
     menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
   }
 });
+
+const menu = <HTMLElement>(document.querySelector('.menu'))
+const body = <HTMLElement>(document.querySelector('body'))
+
+if(getComputedStyle(menu).display == 'block'){
+  body.onclick = (e)=>{
+    if(e.target !== navBar){
+        if(e.target !== menuIcon){
+          navBar?.classList.add('closed-nav')
+          menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
+        }
+    }
+  }
+}
 
 for (let i = 0; i < generators.length; i++) {
   generators[i].addEventListener('click', () => {
@@ -250,9 +274,10 @@ function showResult(attribute: string | null) {
 
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
-    sidebar.style.display = 'none';
     const checking = generator.getAttribute('data-gen');
+
     if(checking === null) return;
+    sidebar.style.display = 'none';
     attributeValue = checking;
     showContent(attributeValue, 'flex');
   });
@@ -269,13 +294,27 @@ showResult(null);
 
 // onClick event listener for the closebar icon
 closeBar?.addEventListener('click', () => {
-  const sideBarSlide = [{left: '0%'}, {left: '100%'}];
-  sidebar.animate(sideBarSlide, sideBarTiming);
+  sidebar.animate(sideBarSlideOut, sideBarTiming);
   sidebar.style.left = '100%';
   showResult(null);
   setTimeout(() => {
-    sidebar.style.display = 'none'
+    sidebar.style.display = 'none';
   }, 600);
+});
+
+// display current gradient value for all range inputs
+const displayGradientValue = (gradientElement: HTMLInputElement) => {
+  gradientElement.addEventListener('input', (e) => {
+    const target = e.target as HTMLInputElement;
+    const degreeDisplayElement = <HTMLElement>(
+      target.parentElement?.querySelector('#degree-display')
+    );
+    degreeDisplayElement.innerText = `${target.value}deg`;
+  });
+};
+
+gradientRangeInputs.forEach((gradientRangeInput: HTMLInputElement) => {
+  displayGradientValue(gradientRangeInput);
 });
 
 for (let i = 0; i < gradientBackgroundInputs.length; i++) {

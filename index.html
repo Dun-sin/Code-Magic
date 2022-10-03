@@ -44,6 +44,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./src/style.css" />
 
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./assets/Favicon.png" type="image/x-icon">
+
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -177,13 +180,16 @@
           </div>
 
           <label id="degree">
-            <span>Degree</span>
+            <span class="label-title">
+              <span>Degree</span>
+              <span id="degree-display">deg</span>
+            </span>
             <input
               type="range"
               max="360"
               min="0"
               id="gradient-text-degree"
-              class="gradient-text-inputs"
+              class="gradient-text-inputs degree-range"
             />
           </label>
           <div class="btn" data-button="gradient-text">Get Results</div>
@@ -218,19 +224,29 @@
           <label class="radius" for="gradient-border-radius">
             <input type="checkbox" id="gradient-border-radius" name="check" />
             <span> Include Radius </span>
-          <label id="radius-input-label" for="gradient-border-input">
-            <input type="number" id="gradient-border-input" name="desired-radius" placeholder="Enter a number e.g. 50" autofocus required />
+            <label id="radius-input-label" for="gradient-border-input">
+              <input
+                type="number"
+                id="gradient-border-input"
+                name="desired-radius"
+                placeholder="Enter a number e.g. 50"
+                autofocus
+                required
+              />
+            </label>
           </label>
-          </label>
-          
+
           <label id="degree">
-            <span>Degree</span>
+            <span class="label-title">
+              <span>Degree</span>
+              <span id="degree-display">deg</span>
+            </span>
             <input
               type="range"
               max="360"
               min="0"
               id="gradient-border-degree"
-              class="gradient-border-inputs"
+              class="gradient-border-inputs degree-range"
             />
           </label>
 
@@ -264,13 +280,16 @@
           </div>
 
           <label id="degree">
-            <span>Degree</span>
+            <span class="label-title">
+              <span>Degree</span>
+              <span id="degree-display">deg</span>
+            </span>
             <input
               type="range"
               max="360"
               min="0"
               id="gradient-background-degree"
-              class="gradient-background-inputs"
+              class="gradient-background-inputs degree-range"
             />
           </label>
 
@@ -319,6 +338,7 @@
               type="number"
               name="duration"
               id="animation-duration"
+              class="styled-input"
               min="0"
               max="120"
               step="1"
@@ -327,12 +347,16 @@
           </label>
 
           <label id="degree">
-            <span>Speed</span>
+            <span class="label-title">
+              <span>Speed</span>
+              <span id="degree-display">deg</span>
+            </span>
             <input
               type="range"
               max="90"
               min="-90"
               value="50"
+              class="degree-range"
               id="animation-degree"
             />
           </label>
