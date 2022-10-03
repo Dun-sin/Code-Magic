@@ -18,7 +18,7 @@ export function gradientBorderGenerator(): void {
   const showRadiusInput = utils.showRadius;
   const hideRadiusInput = utils.hideRadius;
   const resultPage = utils.getResultPage();
-  
+
   resultPage.style.display = 'flex';
 
   getCheckboxElement.addEventListener('change', (e: Event): void => {
@@ -27,6 +27,14 @@ export function gradientBorderGenerator(): void {
       showRadiusInput(attribute);
     } else {
       hideRadiusInput(attribute);
+    }
+  });
+
+  utils.getCheckbox(attribute).addEventListener('change', () => {
+    if (utils.getCheckbox(attribute).checked) {
+      utils.getRadiusInput(attribute).value = getBorderRadiusInput.value;
+    } else {
+      utils.getRadiusInput(attribute).value = '0';
     }
   });
 
@@ -71,7 +79,10 @@ function getGradientBorderResult(
 
   outputElement.style.backgroundColor = 'transparent';
   outputElement.style.visibility = 'visible';
+
   utils.getCheckbox(attribute).checked = false;
+  utils.hideRadius(attribute);
+  utils.getRadiusInput(attribute).value = '0';
 
   const getCodeButtonElement = utils.getCopyCodeButton(attribute);
   getCodeButtonElement.addEventListener('click', () => {
