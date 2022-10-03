@@ -40,6 +40,7 @@ body {
   overflow: hidden;
   padding-bottom: var(--pseudo-footer-height);
   display: flex;
+  
 }
 
 nav {
@@ -93,10 +94,6 @@ nav ul > li {
   margin-bottom: 0.3rem;
 }
 
-nav ul > li span {
-  margin-left: 0.2rem;
-}
-
 nav ul > li:hover {
   background: linear-gradient(
     80deg,
@@ -114,7 +111,7 @@ main {
   align-items: center;
   background-color: var(--secondary-color);
   position: relative;
-  outline: 2px solid red;
+  /* outline: 2px solid red; */
 }
 
 .generators {
@@ -334,6 +331,10 @@ input[type=number]::-webkit-outer-spin-button {
   border: none;
 }
 
+.btn:hover {
+  background-color:#0c49b2;
+}
+
 /* Results */
 .side-results {
   display: none;
@@ -416,7 +417,7 @@ input[type=number]::-webkit-outer-spin-button {
       var(--gradient-border-color-2, blue)
     )
     border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 }
