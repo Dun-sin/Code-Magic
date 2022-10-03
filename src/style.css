@@ -281,9 +281,16 @@ input[type=number]::-webkit-outer-spin-button {
   width: min(45%, 55%);
 }
 
-#degree > span {
+#degree .label-title {
   margin-bottom: 0.6rem;
   font-size: 0.9em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#degree-display {
+  opacity: 0.7;
 }
 
 .duration-label {

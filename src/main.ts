@@ -103,6 +103,9 @@ const gradientBackgroundDegree = <HTMLInputElement>(
   document.querySelector('#gradient-background-degree')
 );
 
+// get all range inputs
+const gradientRangeInputs = document.querySelectorAll('.degree-range');
+
 menuIcon?.addEventListener('click', () => {
   if (navBar?.classList.contains('closed-nav')) {
     navBar?.classList.remove('closed-nav');
@@ -165,7 +168,6 @@ FilePond.create(getImageEntryElement, {
     enableImgResultBtn();
 
     // disable btn also when close btn clicked on image display
-
     const closeBtn = document.querySelector(
       '.filepond--action-remove-item'
     ) as HTMLButtonElement;
@@ -301,6 +303,21 @@ closeBar?.addEventListener('click', () => {
   setTimeout(() => {
     sidebar.style.display = 'none';
   }, 600);
+});
+
+// display current gradient value for all range inputs
+const displayGradientValue = (gradientElement: HTMLInputElement) => {
+  gradientElement.addEventListener('input', (e) => {
+    const target = e.target as HTMLInputElement;
+    const degreeDisplayElement = <HTMLElement>(
+      target.parentElement?.querySelector('#degree-display')
+    );
+    degreeDisplayElement.innerText = `${target.value}deg`;
+  });
+};
+
+gradientRangeInputs.forEach((gradientRangeInput: HTMLInputElement) => {
+  displayGradientValue(gradientRangeInput);
 });
 
 for (let i = 0; i < gradientBackgroundInputs.length; i++) {
