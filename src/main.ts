@@ -252,9 +252,7 @@ generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
     sidebar.style.display = 'none';
     const checking = generator.getAttribute('data-gen');
-
     if(checking === null) return;
-
     attributeValue = checking;
     showContent(attributeValue, 'flex');
   });
