@@ -4,8 +4,6 @@ import {gradientTextGenerator} from './pages/gradient-text';
 import {gradientBorderGenerator} from './pages/gradient-border';
 import {gradientBackgroundGenerator} from './pages/gradient-background';
 import {animationGenerator} from './pages/animation';
-
-// import * as FilePond from 'filepond';
 import * as FilePond from 'filepond';
 import 'filepond/dist/filepond.min.css';
 
@@ -25,14 +23,23 @@ FilePond.registerPlugin(
 /**
  * All Variables
  */
+const FINAL_WIDTH = 300;
 let attributeValue: string | null = null;
-let imageSRC = '';
-const sideBarSlide = [{left: '100%'}, {left: '0%'}];
+let imageSRC: string;
+let imageHeight: number;
+const sideBarSlide = [
+  {left: '30%', opacity: '0'},
+  {left: '0%', opacity: '1'},
+];
+const sideBarSlideOut = [
+  {left: '0%', opacity: '1'},
+  {left: '30%', opacity: '0'},
+];
 
 const sideBarTiming = {
-  duration: 500,
+  duration: 450,
   iterations: 1,
-  easing: 'ease-in',
+  easing: 'ease',
 };
 
 // Elements
@@ -109,6 +116,20 @@ menuIcon?.addEventListener('click', () => {
   }
 });
 
+const menu = <HTMLElement>(document.querySelector('.menu'))
+const body = <HTMLElement>(document.querySelector('body'))
+
+if(getComputedStyle(menu).display == 'block'){
+  body.onclick = (e)=>{
+    if(e.target !== navBar){
+        if(e.target !== menuIcon){
+          navBar?.classList.add('closed-nav')
+          menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
+        }
+    }
+  }
+}
+
 for (let i = 0; i < generators.length; i++) {
   generators[i].addEventListener('click', () => {
     navBar?.classList.add('closed-nav');
@@ -123,27 +144,36 @@ FilePond.create(getImageEntryElement, {
     // create a new image object
     const img = new Image();
 
+    // Dirty trick to get the final visible height of the picture
+    // Based on the knowledge the width will be 300px
+    img.onload = () => {
+      imageHeight = Math.floor(
+        img.naturalHeight / (img.naturalWidth / FINAL_WIDTH)
+      );
+    };
+
     // set the image source to the output of the Image Transform plugin
     img.src = URL.createObjectURL(output);
     imageSRC = img.src;
 
-    // function to enable the get result button once image uploade d
+    // function to enable the get result button once image uploaded
     function enableImgResultBtn() {
-      let getPicResultBtn = document.querySelector(
+      const getPicResultBtn = document.querySelector(
         '[data-button="pic-text"]'
       ) as HTMLButtonElement;
 
       getPicResultBtn.style.pointerEvents = '';
     }
+
     enableImgResultBtn();
 
     // disable btn also when close btn clicked on image display
-    let closeBtn = document.querySelector(
+    const closeBtn = document.querySelector(
       '.filepond--action-remove-item'
     ) as HTMLButtonElement;
 
     closeBtn.addEventListener('click', function () {
-      let getPicResultBtn = document.querySelector(
+      const getPicResultBtn = document.querySelector(
         '[data-button="pic-text"]'
       ) as HTMLButtonElement;
 
@@ -167,7 +197,7 @@ type Display = 'grid' | 'flex' | 'none';
 function generatorsFunction(attribute: string): void {
   switch (attribute) {
     case 'pic-text':
-      picTextGenerator(imageSRC);
+      picTextGenerator(imageSRC, imageHeight);
       break;
     case 'gradient-text':
       gradientTextGenerator();
@@ -185,7 +215,7 @@ function generatorsFunction(attribute: string): void {
 }
 
 /**
- * use to toggle visibilty of content in generators
+ * use to toggle visibility of content in generators
  *
  * @param attribute  The attribute name of the generator element
  * @param display  display type
@@ -244,14 +274,13 @@ function showResult(attribute: string | null) {
 
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
-    sidebar.style.left = '100%';
     const checking = generator.getAttribute('data-gen');
     if (checking === 'gradient-border') {
       generatorsFunction(checking);
     } else if (checking === null) {
       return;
     }
-
+    sidebar.style.display = 'none';
     attributeValue = checking;
     showContent(attributeValue, 'flex');
   });
@@ -268,10 +297,12 @@ showResult(null);
 
 // onClick event listener for the closebar icon
 closeBar?.addEventListener('click', () => {
-  const sideBarSlide = [{left: '0%'}, {left: '100%'}];
-  sidebar.animate(sideBarSlide, sideBarTiming);
+  sidebar.animate(sideBarSlideOut, sideBarTiming);
   sidebar.style.left = '100%';
   showResult(null);
+  setTimeout(() => {
+    sidebar.style.display = 'none';
+  }, 600);
 });
 
 // display current gradient value for all range inputs

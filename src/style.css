@@ -246,6 +246,23 @@ textarea {
   min-width: 0;
 }
 
+#animation-duration,
+#gradient-border-input {
+  border: 2px solid #2196f3;
+  border-radius: 5px;
+  padding: 4px;
+  margin-top: 8px;
+  font-family: inherit;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0; 
+}
+
 #degree {
   display: flex;
   flex-direction: column;
@@ -287,6 +304,25 @@ textarea {
   justify-content: space-between;
 }
 
+.styled-input {
+  background-color: var(--secondary-color);
+  border: 1px solid #010204;
+  border-radius: 5px;
+  caret-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 4px;
+}
+
+.styled-input:focus, .styled-input:focus-visible {
+  outline:none;
+}
+
+.styled-input::-webkit-inner-spin-button,
+.styled-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .duration-label > span {
   font-size: 0.9em;
 }
@@ -307,7 +343,7 @@ textarea {
 
 /* Results */
 .side-results {
-  display: flex;
+  display: none;
   background-color: var(--secondary-color);
   min-height: var(--content-container);
   min-width: var(--content-container);
@@ -333,6 +369,10 @@ textarea {
   word-wrap: break-word;
   margin-bottom: 1rem;
   background-color: var(--primary-color);
+}
+
+.output > p {
+  font-size: calc(1rem + 1vw) !important;
 }
 
 .download-output {
@@ -477,6 +517,7 @@ a {
     position: absolute;
   }
 
+  .output,
   .input {
     padding: 2rem 0.3rem 2rem 0.3rem;
   }
