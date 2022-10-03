@@ -340,6 +340,9 @@ input[type=number]::-webkit-outer-spin-button {
   margin-top: 2rem;
   border: none;
 }
+.btn:hover {
+  background-color: #0c49d2;
+}
 
 /* Results */
 .side-results {
