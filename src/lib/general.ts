@@ -57,10 +57,14 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
       element = outputElement.style;
       codeToCopy = `
         div {
-          border: ${element.border},
-          border-width: ${element.borderWidth},
-          border-image-slice: ${element.borderImageSlice},
-          border-image-source: ${element.borderImageSource},
+          border-width:8px;
+          border-style:solid;
+          border-radius:${element.getPropertyValue(`--${attribute}-radius`)};
+          border-image:linear-gradient(${element.getPropertyValue(
+            `--${attribute}-degree`
+          )}, ${element.getPropertyValue(
+        `--${attribute}-color-1`
+      )}, ${element.getPropertyValue(`--${attribute}-color-2`)}) 1;
         }
       `;
       break;
