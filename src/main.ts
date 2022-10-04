@@ -42,6 +42,22 @@ const sideBarTiming = {
   easing: 'ease',
 };
 
+const navBarSlideIn = [
+  {left: "-50%", opacity: '0', },
+  {left: "0%", opacity: '1'}
+]
+
+const navBarSlideOut = [
+  {left: "0%", opacity: '1'},
+  {left: "-50%", opacity: '0'}
+]
+
+const navBarAnimationOptions = {
+  duration: 300,
+  iterations: 1,
+  easing: 'ease'
+}
+
 // Elements
 const generators = document.querySelectorAll('[data-gen]');
 const sidebar = <HTMLElement>document.querySelector('.side-results');
@@ -108,9 +124,11 @@ const gradientRangeInputs = document.querySelectorAll('.degree-range');
 
 menuIcon?.addEventListener('click', () => {
   if (navBar?.classList.contains('closed-nav')) {
+    navBar?.animate(navBarSlideIn, navBarAnimationOptions)
     navBar?.classList.remove('closed-nav');
     menuIcon?.setAttribute('icon', 'ci:close-big');
   } else {
+    navBar?.animate(navBarSlideOut, navBarAnimationOptions)
     navBar?.classList.add('closed-nav');
     menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
   }
@@ -132,6 +150,7 @@ if(getComputedStyle(menu).display == 'block'){
 
 for (let i = 0; i < generators.length; i++) {
   generators[i].addEventListener('click', () => {
+    navBar?.animate(navBarSlideOut, navBarAnimationOptions)
     navBar?.classList.add('closed-nav');
     menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
   });
