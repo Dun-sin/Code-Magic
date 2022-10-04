@@ -222,7 +222,7 @@
           </div>
 
           <label class="radius" for="gradient-border-radius">
-            <input type="checkbox" id="gradient-border-radius" name="check" />
+            <input type="checkbox" id="gradient-border-radius" name="check" onclick="changeDisplay()"/>
             <span> Include Radius </span>
             <label id="radius-input-label" for="gradient-border-input">
               <input
@@ -232,6 +232,8 @@
                 placeholder="Enter a number e.g. 50"
                 autofocus
                 required
+                style="display: none;"
+                class="setRadiusBox"
               />
             </label>
           </label>
@@ -505,5 +507,16 @@
         </div>
       </div>
     </main>
+    <script>
+      function changeDisplay(){
+        var box = document.getElementById("gradient-border-input")
+        var chkBox = document.getElementById("gradient-border-radius");
+        if(chkBox.checked == true){
+          box.setAttribute("style", "display: inline");
+        }else if(chkBox.checked == false){
+          box.setAttribute("style", "display: none");
+        }
+      }
+    </script>
   </body>
 </html>
