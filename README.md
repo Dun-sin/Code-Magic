@@ -2,14 +2,14 @@
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Dun-sin/Code-Magic)
 
-Code Magic is a website where you can get simple css tricks to make your application elegant with just few clicks.
+Code Magic is a website where you can get simple CSS tricks to make your application elegant with just few clicks.
 
 ![code magic v2](https://user-images.githubusercontent.com/78784850/190919846-6bc18de7-34c4-4229-b6ea-d0160f8a0168.gif)
 
-### 🧙‍♀️ Magic options avaiable for you:
- - Pic Text - Convert images to css art. Just upload and get css art with just one click.
- - Gradient Text - 2-color gradient for your texts.
- - Gradient Border - Get 2-color gradient with desired radius.
+### 🧙‍♀️ Magic options available for you:
+ - Pic Text - Convert images to CSS art. Just upload and get CSS art with just one click.
+ - Gradient Text - Dual color gradient for your texts.
+ - Gradient Border - Get dual color gradient with desired radius.
  - Gradient Backgound - Make your backgrounds stand out by applying gradient colors.
  - Animations
     - Select one of the below options
