@@ -126,6 +126,7 @@ menuIcon?.addEventListener('click', () => {
 
 for (let i = 0; i < generators.length; i++) {
   generators[i].addEventListener('click', () => {
+    navBar?.animate(navBarSlideOut, navBarAnimationOptions)
     navBar?.classList.add('closed-nav');
     menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
   });
