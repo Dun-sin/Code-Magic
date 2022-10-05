@@ -101,7 +101,12 @@ const gradientBorderColor2 = <HTMLInputElement>(
 const gradientBorderDegree = <HTMLInputElement>(
   document.querySelector('#gradient-border-degree')
 );
-
+const gradientBorderRadius = <HTMLInputElement>(
+  document.querySelector('#gradient-border-radius')
+);
+const gradientBorderInput = <HTMLInputElement>(
+  document.querySelector('#gradient-border-input')
+)
 //gradient background color elements
 const gradientBackgroundInputs = document.querySelectorAll(
   '.gradient-background-inputs'
@@ -383,3 +388,8 @@ const createGradientPreview = (
   const fill = range?.value;
   preview.style.background = `linear-gradient(${fill}deg, ${colorFrom}, ${colorTo})`;
 };
+
+//Toggle gradient border radius input display
+gradientBorderRadius.addEventListener('change', function() {
+  gradientBorderInput.style.display = this.checked ? "inline" : "none"
+})
