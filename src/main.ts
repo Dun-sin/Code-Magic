@@ -116,18 +116,18 @@ menuIcon?.addEventListener('click', () => {
   }
 });
 
-const menu = <HTMLElement>(document.querySelector('.menu'))
-const body = <HTMLElement>(document.querySelector('body'))
+const menu = <HTMLElement>document.querySelector('.menu');
+const body = <HTMLElement>document.querySelector('body');
 
-if(getComputedStyle(menu).display == 'block'){
-  body.onclick = (e)=>{
-    if(e.target !== navBar){
-        if(e.target !== menuIcon){
-          navBar?.classList.add('closed-nav')
-          menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
-        }
+if (getComputedStyle(menu).display == 'block') {
+  body.onclick = (e) => {
+    if (e.target !== navBar) {
+      if (e.target !== menuIcon) {
+        navBar?.classList.add('closed-nav');
+        menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
+      }
     }
-  }
+  };
 }
 
 for (let i = 0; i < generators.length; i++) {
@@ -309,10 +309,10 @@ closeBar?.addEventListener('click', () => {
 const displayGradientValue = (gradientElement: HTMLInputElement) => {
   gradientElement.addEventListener('input', (e) => {
     const target = e.target as HTMLInputElement;
-    const degreeDisplayElement = <HTMLElement>(
-      target.parentElement?.querySelector('#degree-display')
+    const unitDisplayElement = <HTMLElement>(
+      target.parentElement?.querySelector('.unit-display')
     );
-    degreeDisplayElement.innerText = `${target.value}deg`;
+    unitDisplayElement.innerText = `${target.value}deg`;
   });
 };
 

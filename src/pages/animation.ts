@@ -12,26 +12,24 @@ type Values = {
 };
 
 const attribute = 'animation';
-let getCodeButtonElement =  utils.getCopyCodeButton(attribute);
+let getCodeButtonElement = utils.getCopyCodeButton(attribute);
+
+const OutputElement = utils.getOutput(attribute);
+const DegreeElement = utils.getRange(attribute);
+const radio_button_set = utils.getRadioButtonSet(attribute);
+
+initialConfiguration(radio_button_set, DegreeElement, OutputElement);
 
 export function animationGenerator() {
-  const DegreeElement = utils.getRange(attribute);
   const duration = utils.getInputSpinner(attribute);
-  const radio_button_set = utils.getRadioButtonSet(attribute);
-
-  const OutputElement = utils.getOutput(attribute);
 
   const Stylesheet = utils.getStyleSheet();
   // getCodeButtonElement = utils.getCopyCodeButton(attribute);
   const resultPage = utils.getResultPage();
-  
+
   resultPage.style.display = 'flex';
 
- 
-
   initial_length = Stylesheet.cssRules.length - 1;
-
-  initialConfiguration(radio_button_set, DegreeElement, OutputElement);
 
   if (OutputElement === null) return;
 
@@ -57,8 +55,6 @@ getCodeButtonElement.addEventListener('click', () => {
     'success'
   );
 });
-
-
 
 /**
  * sets the animation to the output element
@@ -166,6 +162,11 @@ function initialConfiguration(
 
   OutputElement.innerText = 'Lorem Ipsum';
 
+  // get the unit display element for animator
+  const unitDisplayElement = <HTMLElement>(
+    document.querySelector('.unit-display.animation')
+  );
+
   elements.forEach((el) =>
     el.addEventListener('click', () => {
       const type = el.value;
@@ -174,11 +175,14 @@ function initialConfiguration(
         DegreeElement.max = '90';
         DegreeElement.step = '1';
         DegreeElement.value = '50';
+        console.log(DegreeElement.value);
+        unitDisplayElement.innerText = `${DegreeElement.value}deg`;
       } else {
         DegreeElement.min = '0';
         DegreeElement.max = '1';
         DegreeElement.step = '.1';
         DegreeElement.value = '.5';
+        unitDisplayElement.innerText = `${DegreeElement.value}`;
       }
     })
   );
