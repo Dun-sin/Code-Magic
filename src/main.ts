@@ -42,6 +42,22 @@ const sideBarTiming = {
   easing: 'ease',
 };
 
+const navBarSlideIn = [
+  {left: "-50%", opacity: '0', },
+  {left: "0%", opacity: '1'}
+]
+
+const navBarSlideOut = [
+  {left: "0%", opacity: '1'},
+  {left: "-50%", opacity: '0'}
+]
+
+const navBarAnimationOptions = {
+  duration: 300,
+  iterations: 1,
+  easing: 'ease'
+}
+
 // Elements
 const generators = document.querySelectorAll('[data-gen]');
 const sidebar = <HTMLElement>document.querySelector('.side-results');
@@ -85,7 +101,12 @@ const gradientBorderColor2 = <HTMLInputElement>(
 const gradientBorderDegree = <HTMLInputElement>(
   document.querySelector('#gradient-border-degree')
 );
-
+const gradientBorderRadius = <HTMLInputElement>(
+  document.querySelector('#gradient-border-radius')
+);
+const gradientBorderInput = <HTMLInputElement>(
+  document.querySelector('#gradient-border-input')
+)
 //gradient background color elements
 const gradientBackgroundInputs = document.querySelectorAll(
   '.gradient-background-inputs'
@@ -106,6 +127,7 @@ const gradientBackgroundDegree = <HTMLInputElement>(
 // get all range inputs
 const gradientRangeInputs = document.querySelectorAll('.degree-range');
 
+
 // get title display element for animation
 const titleDisplayElement = <HTMLElement>(
   document.querySelector('.title-display')
@@ -113,9 +135,11 @@ const titleDisplayElement = <HTMLElement>(
 
 menuIcon?.addEventListener('click', () => {
   if (navBar?.classList.contains('closed-nav')) {
+    navBar?.animate(navBarSlideIn, navBarAnimationOptions)
     navBar?.classList.remove('closed-nav');
     menuIcon?.setAttribute('icon', 'ci:close-big');
   } else {
+    navBar?.animate(navBarSlideOut, navBarAnimationOptions)
     navBar?.classList.add('closed-nav');
     menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
   }
@@ -137,6 +161,7 @@ if (getComputedStyle(menu).display == 'block') {
 
 for (let i = 0; i < generators.length; i++) {
   generators[i].addEventListener('click', () => {
+    navBar?.animate(navBarSlideOut, navBarAnimationOptions)
     navBar?.classList.add('closed-nav');
     menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
   });
@@ -280,11 +305,8 @@ function showResult(attribute: string | null) {
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
     const checking = generator.getAttribute('data-gen');
-    if (checking === 'gradient-border') {
-      generatorsFunction(checking);
-    } else if (checking === null) {
-      return;
-    }
+
+    if(checking === null) return;
     sidebar.style.display = 'none';
     attributeValue = checking;
     showContent(attributeValue, 'flex');
@@ -323,6 +345,7 @@ const displayGradientValue = (gradientElement: HTMLInputElement) => {
       ? ''
       : 'deg';
     unitDisplayElement.innerText = `${target.value}${unit}`;
+
   });
 };
 
@@ -377,3 +400,8 @@ const createGradientPreview = (
   const fill = range?.value;
   preview.style.background = `linear-gradient(${fill}deg, ${colorFrom}, ${colorTo})`;
 };
+
+//Toggle gradient border radius input display
+gradientBorderRadius.addEventListener('change', function() {
+  gradientBorderInput.style.display = this.checked ? "inline" : "none"
+})
