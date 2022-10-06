@@ -3,7 +3,7 @@ import {picTextGenerator} from './pages/pic-text';
 import {gradientTextGenerator} from './pages/gradient-text';
 import {gradientBorderGenerator} from './pages/gradient-border';
 import {gradientBackgroundGenerator} from './pages/gradient-background';
-import {animationGenerator} from './pages/animation';
+import {animationGenerator, radio_button_set} from './pages/animation';
 import * as FilePond from 'filepond';
 import 'filepond/dist/filepond.min.css';
 
@@ -312,7 +312,11 @@ const displayGradientValue = (gradientElement: HTMLInputElement) => {
     const unitDisplayElement = <HTMLElement>(
       target.parentElement?.querySelector('.unit-display')
     );
-    unitDisplayElement.innerText = `${target.value}deg`;
+
+    // change the unit for opacity
+    let unit = 'deg';
+
+    unitDisplayElement.innerText = `${target.value}${unit}`;
   });
 };
 

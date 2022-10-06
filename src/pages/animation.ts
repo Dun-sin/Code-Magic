@@ -16,7 +16,7 @@ let getCodeButtonElement = utils.getCopyCodeButton(attribute);
 
 const OutputElement = utils.getOutput(attribute);
 const DegreeElement = utils.getRange(attribute);
-const radio_button_set = utils.getRadioButtonSet(attribute);
+export const radio_button_set = utils.getRadioButtonSet(attribute);
 
 initialConfiguration(radio_button_set, DegreeElement, OutputElement);
 
@@ -166,6 +166,9 @@ function initialConfiguration(
   const unitDisplayElement = <HTMLElement>(
     document.querySelector('.unit-display.animation')
   );
+  const titleDisplayElement = <HTMLElement>(
+    document.querySelector('.title-display')
+  );
 
   elements.forEach((el) =>
     el.addEventListener('click', () => {
@@ -175,14 +178,15 @@ function initialConfiguration(
         DegreeElement.max = '90';
         DegreeElement.step = '1';
         DegreeElement.value = '50';
-        console.log(DegreeElement.value);
         unitDisplayElement.innerText = `${DegreeElement.value}deg`;
+        titleDisplayElement.innerText = 'Angle';
       } else {
         DegreeElement.min = '0';
         DegreeElement.max = '1';
         DegreeElement.step = '.1';
         DegreeElement.value = '.5';
         unitDisplayElement.innerText = `${DegreeElement.value}`;
+        titleDisplayElement.innerText = 'Opacity';
       }
     })
   );
