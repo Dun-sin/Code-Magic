@@ -16,7 +16,7 @@ let getCodeButtonElement = utils.getCopyCodeButton(attribute);
 
 const OutputElement = utils.getOutput(attribute);
 const DegreeElement = utils.getRange(attribute);
-export const radio_button_set = utils.getRadioButtonSet(attribute);
+const radio_button_set = utils.getRadioButtonSet(attribute);
 
 initialConfiguration(radio_button_set, DegreeElement, OutputElement);
 

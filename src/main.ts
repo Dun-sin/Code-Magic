@@ -3,7 +3,7 @@ import {picTextGenerator} from './pages/pic-text';
 import {gradientTextGenerator} from './pages/gradient-text';
 import {gradientBorderGenerator} from './pages/gradient-border';
 import {gradientBackgroundGenerator} from './pages/gradient-background';
-import {animationGenerator, radio_button_set} from './pages/animation';
+import {animationGenerator} from './pages/animation';
 import * as FilePond from 'filepond';
 import 'filepond/dist/filepond.min.css';
 
@@ -105,6 +105,11 @@ const gradientBackgroundDegree = <HTMLInputElement>(
 
 // get all range inputs
 const gradientRangeInputs = document.querySelectorAll('.degree-range');
+
+// get title display element for animation
+const titleDisplayElement = <HTMLElement>(
+  document.querySelector('.title-display')
+);
 
 menuIcon?.addEventListener('click', () => {
   if (navBar?.classList.contains('closed-nav')) {
@@ -314,8 +319,9 @@ const displayGradientValue = (gradientElement: HTMLInputElement) => {
     );
 
     // change the unit for opacity
-    let unit = 'deg';
-
+    const unit = titleDisplayElement.innerText.toLowerCase().includes('opacity')
+      ? ''
+      : 'deg';
     unitDisplayElement.innerText = `${target.value}${unit}`;
   });
 };
