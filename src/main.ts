@@ -5,6 +5,20 @@ import {gradientBorderGenerator} from './pages/gradient-border';
 import {gradientBackgroundGenerator} from './pages/gradient-background';
 import {animationGenerator} from './pages/animation';
 import {boxShadowGenerator} from './pages/box-shadow';
+
+// Utils
+import {
+  createGradientPreview,
+  gradientElementInputs,
+  gradientPreview,
+  getColorInput1,
+  getColorInput2,
+  getRange,
+  getCheckbox,
+  getRadiusInput,
+} from './lib/general';
+
+// Packages
 import * as FilePond from 'filepond';
 import 'filepond/dist/filepond.min.css';
 
@@ -28,87 +42,105 @@ const FINAL_WIDTH = 300;
 let attributeValue: string | null = null;
 let imageSRC: string;
 let imageHeight: number;
-const sideBarSlide = [{left: '100%'}, {left: '0%'}];
+const sideBarSlide = [
+  {left: '30%', opacity: '0'},
+  {left: '0%', opacity: '1'},
+];
+const sideBarSlideOut = [
+  {left: '0%', opacity: '1'},
+  {left: '30%', opacity: '0'},
+];
 
 const sideBarTiming = {
-  duration: 500,
+  duration: 450,
   iterations: 1,
-  easing: 'ease-in',
+  easing: 'ease',
+};
+
+const navBarSlideIn = [
+  {left: '-50%', opacity: '0'},
+  {left: '0%', opacity: '1'},
+];
+
+const navBarSlideOut = [
+  {left: '0%', opacity: '1'},
+  {left: '-50%', opacity: '0'},
+];
+
+const navBarAnimationOptions = {
+  duration: 300,
+  iterations: 1,
+  easing: 'ease',
 };
 
 // Elements
 const generators = document.querySelectorAll('[data-gen]');
-const sidebar = <HTMLElement>document.querySelector('.side-results');
+const sidebar = document.querySelector('.side-results') as HTMLElement;
 const getResults = document.querySelectorAll('[data-button]');
 const results = document.querySelectorAll('[data-result]');
 const closeBar = document.getElementById('close-side-bar');
-const getImageEntryElement = <HTMLInputElement>(
-  document.getElementById(`pic-text-file`)
-);
+const getImageEntryElement = document.getElementById(
+  `pic-text-file`
+) as HTMLInputElement;
 const navBar = document.querySelector('#nav');
 const menuIcon = document.querySelector('#menu-icon');
 
 //gradient text color elements
-const gradientTextInputs = document.querySelectorAll('.gradient-text-inputs');
-const textPreview = <HTMLElement>(
-  document.querySelector('#gradient-text-color-preview')
-);
-const gradientTextColor1 = <HTMLInputElement>(
-  document.querySelector('#gradient-text-color1')
-);
-const gradientTextColor2 = <HTMLInputElement>(
-  document.querySelector('#gradient-text-color2')
-);
-const gradientTextDegree = <HTMLInputElement>(
-  document.querySelector('#gradient-text-degree')
-);
+const gradientTextInputs = gradientElementInputs('gradient-text');
+const textPreview = gradientPreview('gradient-text');
+const gradientTextColor1 = getColorInput1('gradient-text');
+const gradientTextColor2 = getColorInput2('gradient-text');
+const gradientTextDegree = getRange('gradient-text');
 
 //gradient border color element
-const gradientBorderInputs = document.querySelectorAll(
-  '.gradient-border-inputs'
-);
-const borderPreview = <HTMLElement>(
-  document.querySelector('#gradient-border-color-preview')
-);
-const gradientBorderColor1 = <HTMLInputElement>(
-  document.querySelector('#gradient-border-color1')
-);
-const gradientBorderColor2 = <HTMLInputElement>(
-  document.querySelector('#gradient-border-color2')
-);
-const gradientBorderDegree = <HTMLInputElement>(
-  document.querySelector('#gradient-border-degree')
-);
+const gradientBorderInputs = gradientElementInputs('gradient-border');
+const borderPreview = gradientPreview('gradient-border');
+const gradientBorderColor1 = getColorInput1('gradient-border');
+const gradientBorderColor2 = getColorInput2('gradient-border');
+const gradientBorderDegree = getRange('gradient-border');
+
+const gradientBorderRadius = getCheckbox('gradient-border');
+const gradientBorderInput = getRadiusInput('gradient-border');
 
 //gradient background color elements
-const gradientBackgroundInputs = document.querySelectorAll(
-  '.gradient-background-inputs'
-);
-const backgroundPreview = <HTMLElement>(
-  document.querySelector('#gradient-background-color-preview')
-);
-const gradientBackgroundColor1 = <HTMLInputElement>(
-  document.querySelector('#gradient-background-color1')
-);
-const gradientBackgroundColor2 = <HTMLInputElement>(
-  document.querySelector('#gradient-background-color2')
-);
-const gradientBackgroundDegree = <HTMLInputElement>(
-  document.querySelector('#gradient-background-degree')
-);
+const gradientBackgroundInputs = gradientElementInputs('gradient-background');
+const backgroundPreview = gradientPreview('gradient-background');
+const gradientBackgroundColor1 = getColorInput1('gradient-background');
+const gradientBackgroundColor2 = getColorInput2('gradient-background');
+const gradientBackgroundDegree = getRange('gradient-background');
+
+// get all range inputs
+const gradientRangeInputs = document.querySelectorAll('.degree-range');
 
 menuIcon?.addEventListener('click', () => {
   if (navBar?.classList.contains('closed-nav')) {
+    navBar?.animate(navBarSlideIn, navBarAnimationOptions);
     navBar?.classList.remove('closed-nav');
     menuIcon?.setAttribute('icon', 'ci:close-big');
   } else {
+    navBar?.animate(navBarSlideOut, navBarAnimationOptions);
     navBar?.classList.add('closed-nav');
     menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
   }
 });
 
+const menu = document.querySelector('.menu') as HTMLElement;
+const body = document.querySelector('body') as HTMLElement;
+
+if (getComputedStyle(menu).display == 'block') {
+  body.onclick = (e) => {
+    if (e.target !== navBar) {
+      if (e.target !== menuIcon) {
+        navBar?.classList.add('closed-nav');
+        menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
+      }
+    }
+  };
+}
+
 for (let i = 0; i < generators.length; i++) {
   generators[i].addEventListener('click', () => {
+    navBar?.animate(navBarSlideOut, navBarAnimationOptions);
     navBar?.classList.add('closed-nav');
     menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
   });
@@ -203,12 +235,12 @@ function generatorsFunction(attribute: string): void {
 function showContent(attribute: string, display: Display): void {
   const generators = document.querySelectorAll(`[data-content]`);
   const generatorsNav = document.querySelectorAll(`[data-gen]`);
-  const showGen = <HTMLElement>(
-    document.querySelector(`[data-content=${attribute}]`)
-  );
-  const highLightGen = <HTMLElement>(
-    document.querySelector(`[data-gen=${attribute}]`)
-  );
+  const showGen = document.querySelector(
+    `[data-content=${attribute}]`
+  ) as HTMLElement;
+  const highLightGen = document.querySelector(
+    `[data-gen=${attribute}]`
+  ) as HTMLElement;
 
   generators.forEach((item) => {
     const element = <HTMLElement>item;
@@ -238,25 +270,12 @@ function showResult(attribute: string | null) {
   generatorsFunction(attribute);
 }
 
-// function fixPicTextFile() {
-//   const getImageEntryElement = <HTMLInputElement>(
-//     document.getElementById(`pic-text-file`)
-//   );
-//   getImageEntryElement.setAttribute('value', '');
-//   getImageEntryElement.setAttribute('src', '');
-//   FilePond.destroy(getImageEntryElement);
-
-//   if (attributeValue === null) return;
-//   removeOrAddGeneratorContent(attributeValue, 'none');
-// }
-
-// add event listener to generator icons
-
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
-    sidebar.style.display = 'none';
     const checking = generator.getAttribute('data-gen');
-    if(checking === null) return;
+
+    if (checking === null) return;
+    sidebar.style.display = 'none';
     attributeValue = checking;
     showContent(attributeValue, 'flex');
   });
@@ -273,17 +292,31 @@ showResult(null);
 
 // onClick event listener for the closebar icon
 closeBar?.addEventListener('click', () => {
-  const sideBarSlide = [{left: '0%'}, {left: '100%'}];
-  sidebar.animate(sideBarSlide, sideBarTiming);
+  sidebar.animate(sideBarSlideOut, sideBarTiming);
   sidebar.style.left = '100%';
   showResult(null);
   setTimeout(() => {
-    sidebar.style.display = 'none'
+    sidebar.style.display = 'none';
   }, 600);
 });
 
+// display current gradient value for all range inputs
+const displayGradientValue = (gradientElement: HTMLInputElement) => {
+  gradientElement.addEventListener('input', (e) => {
+    const target = e.target as HTMLInputElement;
+    const degreeDisplayElement = <HTMLElement>(
+      target.parentElement?.querySelector('#degree-display')
+    );
+    degreeDisplayElement.innerText = `${target.value}px`;
+  });
+};
+
+gradientRangeInputs.forEach((gradientRangeInput: HTMLInputElement) => {
+  displayGradientValue(gradientRangeInput);
+});
+
 for (let i = 0; i < gradientBackgroundInputs.length; i++) {
-  gradientBackgroundInputs[i].addEventListener('input', () =>
+  gradientBackgroundInputs[i].addEventListener('change', () =>
     createGradientPreview(
       gradientBackgroundColor1,
       gradientBackgroundColor2,
@@ -295,7 +328,7 @@ for (let i = 0; i < gradientBackgroundInputs.length; i++) {
 
 //set gradient border preview
 for (let i = 0; i < gradientBorderInputs.length; i++) {
-  gradientBorderInputs[i].addEventListener('input', () =>
+  gradientBorderInputs[i].addEventListener('change', () =>
     createGradientPreview(
       gradientBorderColor1,
       gradientBorderColor2,
@@ -305,9 +338,8 @@ for (let i = 0; i < gradientBorderInputs.length; i++) {
   );
 }
 
-//set gradient text preview
 for (let i = 0; i < gradientTextInputs.length; i++) {
-  gradientTextInputs[i].addEventListener('input', () =>
+  gradientTextInputs[i].addEventListener('change', () =>
     createGradientPreview(
       gradientTextColor1,
       gradientTextColor2,
@@ -317,15 +349,7 @@ for (let i = 0; i < gradientTextInputs.length; i++) {
   );
 }
 
-//create gradient preview
-const createGradientPreview = (
-  color1: HTMLInputElement,
-  color2: HTMLInputElement,
-  range: HTMLInputElement,
-  preview: HTMLElement
-) => {
-  const colorFrom = color1?.value;
-  const colorTo = color2?.value;
-  const fill = range?.value;
-  preview.style.background = `linear-gradient(${fill}deg, ${colorFrom}, ${colorTo})`;
-};
+//Toggle gradient border radius input display
+gradientBorderRadius.addEventListener('change', function () {
+  gradientBorderInput.style.display = this.checked ? 'inline' : 'none';
+});
