@@ -150,6 +150,24 @@ export const getColorInput1 = (attribute: string): HTMLInputElement =>
 export const getColorInput2 = (attribute: string): HTMLInputElement =>
   <HTMLInputElement>document.getElementById(`${attribute}-color2`);
 
+export const gradientElementInputs = (attribute: string): NodeList =>
+  document.querySelectorAll(`.${attribute}-inputs`);
+
+export const gradientPreview = (attribute: string): HTMLElement =>
+  document.querySelector(`#${attribute}-color-preview`) as HTMLElement;
+
+export const createGradientPreview = (
+  color1: HTMLInputElement,
+  color2: HTMLInputElement,
+  range: HTMLInputElement,
+  preview: HTMLElement
+) => {
+  const colorFrom = color1?.value;
+  const colorTo = color2?.value;
+  const fill = range?.value;
+  preview.style.background = `linear-gradient(${fill}deg, ${colorFrom}, ${colorTo})`;
+};
+
 export const getOutput = (attribute: string): HTMLElement =>
   <HTMLElement>document.querySelector(`[data-result = ${attribute}] > .output`);
 
@@ -190,11 +208,6 @@ export const getStyleSheet = () => {
   );
   return <CSSStyleSheet>stylesheet[0];
 };
-
-/* ||||  CONSIDER RENAMING getOutput above TO getGradientBorder ||||
- * (for example) export const getGradientBorder = (attribute: string): HTMLElement =>
- * <HTMLElement>document.querySelector(`${attribute}`);
- */
 
 function createDownloadLink(fileName: string, url: string) {
   const link = document.createElement('a');
