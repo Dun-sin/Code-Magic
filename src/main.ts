@@ -4,6 +4,7 @@ import {gradientTextGenerator} from './pages/gradient-text';
 import {gradientBorderGenerator} from './pages/gradient-border';
 import {gradientBackgroundGenerator} from './pages/gradient-background';
 import {animationGenerator} from './pages/animation';
+import {boxShadowGenerator} from './pages/box-shadow';
 import * as FilePond from 'filepond';
 import 'filepond/dist/filepond.min.css';
 
@@ -186,6 +187,9 @@ function generatorsFunction(attribute: string): void {
       break;
     case 'animation':
       animationGenerator();
+      break;
+    case 'box-shadow': 
+      boxShadowGenerator();  
       break;
   }
 }
