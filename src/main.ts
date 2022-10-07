@@ -74,13 +74,13 @@ const navBarAnimationOptions = {
 
 // Elements
 const generators = document.querySelectorAll('[data-gen]');
-const sidebar = <HTMLElement>document.querySelector('.side-results');
+const sidebar = document.querySelector('.side-results') as HTMLElement;
 const getResults = document.querySelectorAll('[data-button]');
 const results = document.querySelectorAll('[data-result]');
 const closeBar = document.getElementById('close-side-bar');
-const getImageEntryElement = <HTMLInputElement>(
-  document.getElementById(`pic-text-file`)
-);
+const getImageEntryElement = document.getElementById(
+  `pic-text-file`
+) as HTMLInputElement;
 const navBar = document.querySelector('#nav');
 const menuIcon = document.querySelector('#menu-icon');
 
@@ -123,8 +123,8 @@ menuIcon?.addEventListener('click', () => {
   }
 });
 
-const menu = <HTMLElement>document.querySelector('.menu');
-const body = <HTMLElement>document.querySelector('body');
+const menu = document.querySelector('.menu') as HTMLElement;
+const body = document.querySelector('body') as HTMLElement;
 
 if (getComputedStyle(menu).display == 'block') {
   body.onclick = (e) => {
@@ -231,12 +231,12 @@ function generatorsFunction(attribute: string): void {
 function showContent(attribute: string, display: Display): void {
   const generators = document.querySelectorAll(`[data-content]`);
   const generatorsNav = document.querySelectorAll(`[data-gen]`);
-  const showGen = <HTMLElement>(
-    document.querySelector(`[data-content=${attribute}]`)
-  );
-  const highLightGen = <HTMLElement>(
-    document.querySelector(`[data-gen=${attribute}]`)
-  );
+  const showGen = document.querySelector(
+    `[data-content=${attribute}]`
+  ) as HTMLElement;
+  const highLightGen = document.querySelector(
+    `[data-gen=${attribute}]`
+  ) as HTMLElement;
 
   generators.forEach((item) => {
     const element = <HTMLElement>item;
