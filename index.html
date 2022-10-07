@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -44,6 +44,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./src/style.css" />
 
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./assets/Favicon.png" type="image/x-icon" />
+
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -52,7 +55,16 @@
       rel="stylesheet"
     />
 
+    <!-- Color Picker CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"
+    />
+
     <!-- Scripts -->
+    <!-- Color Picker JS -->
+    <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
+    <!-- Icon Js -->
     <script src="https://code.iconify.design/iconify-icon/1.0.0/iconify-icon.min.js"></script>
     <script type="module" src="./src/main.ts" defer></script>
 
@@ -351,67 +363,69 @@
         </div>
 
         <!-- Box Shadow -->
-        <div data-content="box-shadow">
+        <div data-content="box-shadow">      
           <label for="color" class="color">
               <input
-                type="color"
-                value="#fff"
+                type="text"
+                data-coloris
                 id="box-shadow-color"
                 class="box-shodow-inputs"
               />
               <span>Color</span>
-          </label>
+            </label>
 
-          <label id="degree">
-            <span>Horizontal offset</span>
-            <input
-              type="range"
-              max="50"
-              min="-20"
-              value="5"
-              id="box-shadow-h-offset"
-              class="box-shodow-inputs"
+            <div class="box-shadow-degrees">
+              <label id="degree">
+                <span>Horizontal offset</span>
+                <input
+                  type="range"
+                  max="50"
+                  min="-20"
+                  value="5"
+                  id="box-shadow-h-offset"
+                  class="box-shodow-inputs"
 
-            />
-          </label>
+                />
+              </label>
 
-          <label id="degree">
-            <span>Vertical offset</span>
-            <input
-              type="range"
-              max="50"
-              min="-20"
-              value="10"
-              id="box-shadow-v-offset"
-              class="box-shodow-inputs"
+              <label id="degree">
+                <span>Vertical offset</span>
+                <input
+                  type="range"
+                  max="50"
+                  min="-20"
+                  value="10"
+                  id="box-shadow-v-offset"
+                  class="box-shodow-inputs"
 
-            />
-          </label>
+                />
+              </label>
 
-          <label id="degree">
-            <span>Blur</span>
-            <input
-              type="range"
-              max="100"
-              min="-20"
-              value="18"
-              id="box-shadow-blur"
-              class="box-shodow-inputs"
+              <label id="degree">
+                <span>Blur</span>
+                <input
+                  type="range"
+                  max="100"
+                  min="-20"
+                  value="18"
+                  id="box-shadow-blur"
+                  class="box-shodow-inputs"
 
-            />
-          </label>
+                />
+              </label>
 
-          <label id="degree">
-            <span>Spread</span>
-            <input
-              type="range"
-              max="50"
-              min="-20"
-              value="5"
-              id="box-shadow-spread"
-              class="box-shodow-inputs"
-            />
-          </label>
+              <label id="degree">
+                <span>Spread</span>
+                <input
+                  type="range"
+                  max="50"
+                  min="-20"
+                  value="5"
+                  id="box-shadow-spread"
+                  class="box-shodow-inputs"
+                />
+              </label>
+            </div>
 
 
           <div class="btn" data-button="box-shadow">Get Results</div>
