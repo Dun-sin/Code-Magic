@@ -45,7 +45,7 @@
     <link rel="stylesheet" href="./src/style.css" />
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="./assets/Favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/Favicon.png" type="image/x-icon" />
 
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -55,7 +55,16 @@
       rel="stylesheet"
     />
 
+    <!-- Color Picker CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"
+    />
+
     <!-- Scripts -->
+    <!-- Color Picker JS -->
+    <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
+    <!-- Icon Js -->
     <script src="https://code.iconify.design/iconify-icon/1.0.0/iconify-icon.min.js"></script>
     <script type="module" src="./src/main.ts" defer></script>
 
@@ -157,24 +166,14 @@
 
           <div class="colors">
             <label for="color" class="color">
-              <input
-                type="color"
-                value="#000"
-                id="gradient-text-color1"
-                class="gradient-text-inputs"
-              />
+              <input type="text" data-coloris id="gradient-text-color1" />
               <span>First Color</span>
             </label>
 
             <div class="preview" id="gradient-text-color-preview"></div>
 
             <label for="color" class="color">
-              <input
-                type="color"
-                value="#000"
-                id="gradient-text-color2"
-                class="gradient-text-inputs"
-              />
+              <input type="text" data-coloris id="gradient-text-color2" />
               <span>Second Color</span>
             </label>
           </div>
@@ -199,24 +198,14 @@
         <div data-content="gradient-border">
           <div class="colors">
             <label for="color" class="color">
-              <input
-                type="color"
-                value="#000"
-                id="gradient-border-color1"
-                class="gradient-border-inputs"
-              />
+              <input type="text" data-coloris id="gradient-border-color1" />
               <span>First Color</span>
             </label>
 
             <div class="preview" id="gradient-border-color-preview"></div>
 
             <label for="color" class="color">
-              <input
-                type="color"
-                value="#000"
-                id="gradient-border-color2"
-                class="gradient-border-inputs"
-              />
+              <input type="text" data-coloris id="gradient-border-color2" />
               <span>Second Color</span>
             </label>
           </div>
@@ -257,24 +246,14 @@
         <div data-content="gradient-background">
           <div class="colors">
             <label for="color" class="color">
-              <input
-                type="color"
-                value="#000"
-                id="gradient-background-color1"
-                class="gradient-background-inputs"
-              />
+              <input type="text" data-coloris id="gradient-background-color1" />
               <span>First Color</span>
             </label>
 
             <div class="preview" id="gradient-background-color-preview"></div>
 
             <label for="color" class="color">
-              <input
-                type="color"
-                value="#000"
-                id="gradient-background-color2"
-                class="gradient-background-inputs"
-              />
+              <input type="text" data-coloris id="gradient-background-color2" />
               <span>Second Color</span>
             </label>
           </div>
