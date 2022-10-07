@@ -238,12 +238,6 @@ export const getBoxShadowSpread = (attribute: string): HTMLInputElement =>
 export const getBoxShadowColor = (attribute: string): HTMLInputElement =>
   <HTMLInputElement>document.getElementById(`${attribute}-color`);
 
-
-/* ||||  CONSIDER RENAMING getOutput above TO getGradientBorder ||||
- * (for example) export const getGradientBorder = (attribute: string): HTMLElement =>
- * <HTMLElement>document.querySelector(`${attribute}`);
- */
-
 function createDownloadLink(fileName: string, url: string) {
   const link = document.createElement('a');
   link.download = fileName;

@@ -307,7 +307,8 @@ const displayGradientValue = (gradientElement: HTMLInputElement) => {
     const degreeDisplayElement = <HTMLElement>(
       target.parentElement?.querySelector('#degree-display')
     );
-    degreeDisplayElement.innerText = `${target.value}px`;
+    
+    degreeDisplayElement.innerText = `${target.value}deg`;
   });
 };
 
