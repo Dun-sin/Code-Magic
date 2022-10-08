@@ -117,6 +117,31 @@ main {
   outline: 2px solid red;
 }
 
+main > section:first-of-type {
+  min-height: var(--content-container);
+  min-width: var(--content-container);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem 0 1rem;
+}
+
+main > section:first-of-type h1 {
+  font-size: clamp(1rem, 10vw, 2.5rem);
+  text-align: center;
+}
+
+main > section:first-of-type h2 {
+  margin-top: 10px;
+  font-size: clamp(0.5rem, 10vw, 1.5rem);
+  text-align: center;
+}
+
+main > section:first-of-type span {
+  color: var(--tertiary-color);
+}
+
 .generators {
   min-height: var(--content-container);
   min-width: var(--content-container);
@@ -255,12 +280,12 @@ textarea {
   font-family: inherit;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  margin: 0; 
+  margin: 0;
 }
 
 #degree {
@@ -313,8 +338,9 @@ input[type=number]::-webkit-outer-spin-button {
   padding: 4px;
 }
 
-.styled-input:focus, .styled-input:focus-visible {
-  outline:none;
+.styled-input:focus,
+.styled-input:focus-visible {
+  outline: none;
 }
 
 .styled-input::-webkit-inner-spin-button,
