@@ -55,7 +55,16 @@
       rel="stylesheet"
     />
 
+    <!-- Color Picker CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"
+    />
+
     <!-- Scripts -->
+    <!-- Color Picker JS -->
+    <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
+    <!-- Icon Js -->
     <script src="https://code.iconify.design/iconify-icon/1.0.0/iconify-icon.min.js"></script>
     <script type="module" src="./src/main.ts" defer></script>
 
@@ -158,8 +167,8 @@
           <div class="colors">
             <label for="color" class="color">
               <input
-                type="color"
-                value="#000"
+                type="text"
+                data-coloris
                 id="gradient-text-color1"
                 class="gradient-text-inputs"
               />
@@ -170,8 +179,8 @@
 
             <label for="color" class="color">
               <input
-                type="color"
-                value="#000"
+                type="text"
+                data-coloris
                 id="gradient-text-color2"
                 class="gradient-text-inputs"
               />
@@ -201,8 +210,8 @@
           <div class="colors">
             <label for="color" class="color">
               <input
-                type="color"
-                value="#000"
+                type="text"
+                data-coloris
                 id="gradient-border-color1"
                 class="gradient-border-inputs"
               />
@@ -213,8 +222,8 @@
 
             <label for="color" class="color">
               <input
-                type="color"
-                value="#000"
+                type="text"
+                data-coloris
                 id="gradient-border-color2"
                 class="gradient-border-inputs"
               />
@@ -261,8 +270,8 @@
           <div class="colors">
             <label for="color" class="color">
               <input
-                type="color"
-                value="#000"
+                type="text"
+                data-coloris
                 id="gradient-background-color1"
                 class="gradient-background-inputs"
               />
@@ -273,8 +282,8 @@
 
             <label for="color" class="color">
               <input
-                type="color"
-                value="#000"
+                type="text"
+                data-coloris
                 id="gradient-background-color2"
                 class="gradient-background-inputs"
               />

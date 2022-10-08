@@ -130,58 +130,78 @@ export function triggerEmptyAnimation(inputElement: HTMLInputElement): void {
 }
 
 export const getResultPage = (): HTMLElement =>
-  <HTMLElement>document.querySelector('.side-results');
+  document.querySelector('.side-results') as HTMLElement;
 
 export const getCopyCodeButton = (attribute: string): HTMLElement =>
-  <HTMLElement>document.querySelector(`[data-download = ${attribute}-code]`);
+  document.querySelector(`[data-download = ${attribute}-code]`) as HTMLElement;
 
 export const getPNGButton = (attribute: string): HTMLElement =>
-  <HTMLElement>document.querySelector(`[data-download=${attribute}-PNG]`);
+  document.querySelector(`[data-download=${attribute}-PNG]`) as HTMLElement;
 
 export const getSVGButton = (attribute: string): HTMLElement =>
-  <HTMLElement>document.querySelector(`[data-download=${attribute}-svg]`);
+  document.querySelector(`[data-download=${attribute}-svg]`) as HTMLElement;
 
 export const getResultButton = (attribute: string): HTMLElement =>
-  <HTMLElement>document.querySelector(`[data-button = ${attribute}]`);
+  document.querySelector(`[data-button = ${attribute}]`) as HTMLElement;
 
 export const getColorInput1 = (attribute: string): HTMLInputElement =>
-  <HTMLInputElement>document.getElementById(`${attribute}-color1`);
+  document.getElementById(`${attribute}-color1`) as HTMLInputElement;
 
 export const getColorInput2 = (attribute: string): HTMLInputElement =>
-  <HTMLInputElement>document.getElementById(`${attribute}-color2`);
+  document.getElementById(`${attribute}-color2`) as HTMLInputElement;
+
+export const gradientElementInputs = (attribute: string): NodeList =>
+  document.querySelectorAll(`.${attribute}-inputs`);
+
+export const gradientPreview = (attribute: string): HTMLElement =>
+  document.querySelector(`#${attribute}-color-preview`) as HTMLElement;
+
+export const createGradientPreview = (
+  color1: HTMLInputElement,
+  color2: HTMLInputElement,
+  range: HTMLInputElement,
+  preview: HTMLElement
+) => {
+  const colorFrom = color1?.value;
+  const colorTo = color2?.value;
+  const fill = range?.value;
+  preview.style.background = `linear-gradient(${fill}deg, ${colorFrom}, ${colorTo})`;
+};
 
 export const getOutput = (attribute: string): HTMLElement =>
-  <HTMLElement>document.querySelector(`[data-result = ${attribute}] > .output`);
+  document.querySelector(
+    `[data-result = ${attribute}] > .output`
+  ) as HTMLElement;
 
 export const getRange = (attribute: string): HTMLInputElement =>
-  <HTMLInputElement>document.getElementById(`${attribute}-degree`);
+  document.getElementById(`${attribute}-degree`) as HTMLInputElement;
 
 export const getInputText = (attribute: string) =>
-  <HTMLInputElement>document.getElementById(`${attribute}-text`);
+  document.getElementById(`${attribute}-text`) as HTMLInputElement;
 
 export const getCheckbox = (attribute: string): HTMLInputElement =>
-  <HTMLInputElement>document.getElementById(`${attribute}-radius`);
+  document.getElementById(`${attribute}-radius`) as HTMLInputElement;
 
 export const getRadiusInput = (attribute: string) =>
-  <HTMLInputElement>document.getElementById(`${attribute}-input`);
+  document.getElementById(`${attribute}-input`) as HTMLInputElement;
 
 export const showRadius = (attribute: string): void =>
-  document
-    .querySelectorAll<HTMLElement>(`#${attribute}-input`)[0]
-    .style.setProperty('display', 'inline');
+  (
+    document.querySelectorAll(`#${attribute}-input`) as NodeListOf<HTMLElement>
+  )[0].style.setProperty('display', 'inline');
 
 export const hideRadius = (attribute: string): void =>
-  document
-    .querySelectorAll<HTMLElement>(`#${attribute}-input`)[0]
-    .style.setProperty('display', 'none');
+  (
+    document.querySelectorAll(`#${attribute}-input`) as NodeListOf<HTMLElement>
+  )[0].style.setProperty('display', 'none');
 
 export const getInputSpinner = (attribute: string) =>
-  <HTMLInputElement>document.getElementById(`${attribute}-duration`);
+  document.getElementById(`${attribute}-duration`) as HTMLInputElement;
 
 export const getRadioButtonSet = (attribute: string) =>
-  <NodeListOf<HTMLInputElement>>(
-    document.querySelectorAll(`[name = ${attribute}-radio]`)
-  );
+  document.querySelectorAll(
+    `[name = ${attribute}-radio]`
+  ) as NodeListOf<HTMLInputElement>;
 
 export const getStyleSheet = () => {
   const stylesheet = Array.from(document.styleSheets).filter(
@@ -190,11 +210,6 @@ export const getStyleSheet = () => {
   );
   return <CSSStyleSheet>stylesheet[0];
 };
-
-/* ||||  CONSIDER RENAMING getOutput above TO getGradientBorder ||||
- * (for example) export const getGradientBorder = (attribute: string): HTMLElement =>
- * <HTMLElement>document.querySelector(`${attribute}`);
- */
 
 function createDownloadLink(fileName: string, url: string) {
   const link = document.createElement('a');
