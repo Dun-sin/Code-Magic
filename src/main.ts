@@ -139,7 +139,9 @@ if (getComputedStyle(menu).display == 'block') {
 
 for (let i = 0; i < generators.length; i++) {
   generators[i].addEventListener('click', () => {
-    navBar?.animate(navBarSlideOut, navBarAnimationOptions);
+    if (!navBar?.classList.contains('closed-nav')) {
+      navBar?.animate(navBarSlideOut, navBarAnimationOptions);
+    }
     navBar?.classList.add('closed-nav');
     menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
   });
