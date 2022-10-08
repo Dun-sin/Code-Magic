@@ -128,18 +128,27 @@ main > section:first-of-type {
 }
 
 main > section:first-of-type h1 {
-  font-size: clamp(1rem, 10vw, 2.5rem);
+  font-size: clamp(1rem, 10vw, 2rem);
   text-align: center;
 }
 
 main > section:first-of-type h2 {
   margin-top: 10px;
-  font-size: clamp(0.5rem, 10vw, 1.5rem);
+  font-size: clamp(0.5rem, 10vw, 1rem);
   text-align: center;
 }
 
 main > section:first-of-type span {
   color: var(--tertiary-color);
+}
+
+main > section:first-of-type video {
+  min-height: 20%;
+  min-width: 30%;
+  max-height: 30%;
+  max-width: 40%;
+  margin-top: 10px;
+  border: 2px solid var(--text-color);
 }
 
 .generators {
