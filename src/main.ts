@@ -150,6 +150,11 @@ for (let i = 0; i < generators.length; i++) {
 FilePond.create(getImageEntryElement, {
   imagePreviewMaxHeight: 200,
 
+  labelIdle:
+    window.innerWidth < 768
+      ? '<span class="filepond--label-action">Browse</span>'
+      : 'Drag & Drop your files or <span class="filepond--label-action"> Browse </span>',
+
   onpreparefile: (fileItem, output): void => {
     // create a new image object
     const img = new Image();
