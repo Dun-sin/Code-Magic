@@ -112,6 +112,12 @@ const gradientBackgroundDegree = getRange('gradient-background');
 // get all range inputs
 const gradientRangeInputs = document.querySelectorAll('.degree-range');
 
+
+// get title display element for animation
+const titleDisplayElement = <HTMLElement>(
+  document.querySelector('.title-display')
+);
+
 menuIcon?.addEventListener('click', () => {
   if (navBar?.classList.contains('closed-nav')) {
     navBar?.animate(navBarSlideIn, navBarAnimationOptions);
@@ -124,8 +130,10 @@ menuIcon?.addEventListener('click', () => {
   }
 });
 
+
 const menu = document.querySelector('.menu') as HTMLElement;
 const body = document.querySelector('body') as HTMLElement;
+
 
 if (getComputedStyle(menu).display == 'block') {
   body.onclick = (e) => {
@@ -140,7 +148,9 @@ if (getComputedStyle(menu).display == 'block') {
 
 for (let i = 0; i < generators.length; i++) {
   generators[i].addEventListener('click', () => {
-    navBar?.animate(navBarSlideOut, navBarAnimationOptions);
+    if (!navBar?.classList.contains('closed-nav')) {
+      navBar?.animate(navBarSlideOut, navBarAnimationOptions);
+    }
     navBar?.classList.add('closed-nav');
     menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
   });
@@ -148,6 +158,11 @@ for (let i = 0; i < generators.length; i++) {
 
 FilePond.create(getImageEntryElement, {
   imagePreviewMaxHeight: 200,
+
+  labelIdle:
+    window.innerWidth < 768
+      ? '<span class="filepond--label-action">Browse</span>'
+      : 'Drag & Drop your files or <span class="filepond--label-action"> Browse </span>',
 
   onpreparefile: (fileItem, output): void => {
     // create a new image object
@@ -304,11 +319,15 @@ closeBar?.addEventListener('click', () => {
 const displayGradientValue = (gradientElement: HTMLInputElement) => {
   gradientElement.addEventListener('input', (e) => {
     const target = e.target as HTMLInputElement;
-    const degreeDisplayElement = <HTMLElement>(
-      target.parentElement?.querySelector('#degree-display')
+    const unitDisplayElement = <HTMLElement>(
+      target.parentElement?.querySelector('.unit-display')
     );
     
-    degreeDisplayElement.innerText = `${target.value}deg`;
+    // change the unit for opacity
+    const unit = titleDisplayElement.innerText.toLowerCase().includes('opacity')
+      ? ''
+      : 'deg';
+    unitDisplayElement.innerText = `${target.value}${unit}`;
   });
 };
 
