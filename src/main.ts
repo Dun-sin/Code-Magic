@@ -111,6 +111,12 @@ const gradientBackgroundDegree = getRange('gradient-background');
 // get all range inputs
 const gradientRangeInputs = document.querySelectorAll('.degree-range');
 
+
+// get title display element for animation
+const titleDisplayElement = <HTMLElement>(
+  document.querySelector('.title-display')
+);
+
 menuIcon?.addEventListener('click', () => {
   if (navBar?.classList.contains('closed-nav')) {
     navBar?.animate(navBarSlideIn, navBarAnimationOptions);
@@ -123,8 +129,10 @@ menuIcon?.addEventListener('click', () => {
   }
 });
 
+
 const menu = document.querySelector('.menu') as HTMLElement;
 const body = document.querySelector('body') as HTMLElement;
+
 
 if (getComputedStyle(menu).display == 'block') {
   body.onclick = (e) => {
@@ -307,10 +315,16 @@ closeBar?.addEventListener('click', () => {
 const displayGradientValue = (gradientElement: HTMLInputElement) => {
   gradientElement.addEventListener('input', (e) => {
     const target = e.target as HTMLInputElement;
-    const degreeDisplayElement = <HTMLElement>(
-      target.parentElement?.querySelector('#degree-display')
+    const unitDisplayElement = <HTMLElement>(
+      target.parentElement?.querySelector('.unit-display')
     );
-    degreeDisplayElement.innerText = `${target.value}deg`;
+
+    // change the unit for opacity
+    const unit = titleDisplayElement.innerText.toLowerCase().includes('opacity')
+      ? ''
+      : 'deg';
+    unitDisplayElement.innerText = `${target.value}${unit}`;
+
   });
 };
 
