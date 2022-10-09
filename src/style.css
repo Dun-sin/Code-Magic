@@ -384,10 +384,26 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .box-shadow-degrees {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 2rem;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+}
+
+.box-shadow-degrees-group {
+  display: flex;
+  align-items: center;
+}
+
+.box-shadow-degrees hr {
+  width: 100%;
+  border-color: var(--text-color);
+}
+
+.box-shadow-degrees-group > #degree {
+  margin-top: 0;
 }
 
 /* Results */
@@ -441,19 +457,19 @@ input[type='number']::-webkit-outer-spin-button {
   margin-bottom: 1rem;
 }
 
-/*	
+/*
 * NOTE: The border-radius property is not supported with border-image, therefore,
 *	the css for the gradient-border below relies on CSS Mask property applied to a pseudo background.
 *
-* 	The code below uses a trick based on using a pseudo element to circumvent 
+* 	The code below uses a trick based on using a pseudo element to circumvent
 *	the restriction posed by using border-image.
 *	1. The before pseudo element represents the background-image placed on the .gradient-border div.
-*	   We apply a gradient as background and we make its origin the border box 
+*	   We apply a gradient as background and we make its origin the border box
 *      (by default it's the padding box).
 *	2. Using the mask property, we apply two opaque layers.
-*	   The bottom one will cover the whole element and 
+*	   The bottom one will cover the whole element and
 *	   the top one will cover only the content box (so it will not cover the border area).
-*	3. Using the mask-composite property, we exclude the content area from the border area 
+*	3. Using the mask-composite property, we exclude the content area from the border area
 *	   so that only the border will remain visible.
 *	4. -webkit-mask-composite: xor; this line is required for compatibility with Chrome browser.
 	@demo: https://stackoverflow.com/questions/51496204/border-gradient-with-border-radius
