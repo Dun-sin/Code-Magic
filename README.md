@@ -72,59 +72,59 @@ Before installation, please make sure you have already installed the following t
 1. [Fork](https://github.com/Dun-sin/Code-Magic/fork) the project. Click on the <a href="https://github.com/Dun-sin/Code-Magic/fork"><img src="https://i.imgur.com/G4z1kEe.png" height="15" width="15"></a> icon in the top right to get started
 2. Clone the project, you can use the following command:
 
-```bash
-git clone https://github.com/<your-github-username>/Code-Magic
-```
+	```bash
+	git clone https://github.com/<your-github-username>/Code-Magic
+	```
 
 3. Navigate to the project directory
 
-```bash
-cd Code-Magic
-```
+	```bash
+	cd Code-Magic
+	```
 
 4. Install dependencies with npm install
 
-```bash
-npm install
-```
+	```bash
+	npm install
+	```
 
-```bash
-npm install -g commitizen
-```
+	```bash
+	npm install -g commitizen
+	```
 
 5. Run the project
 
-```bash
-npm run dev
-```
+	```bash
+	npm run dev
+	```
 
 ## 🥂 After making a change
 
 1. Create a new branch
 
-```bash
-git checkout -b YourBranchName
-```
+	```bash
+	git checkout -b YourBranchName
+	```
 
 2. Add it to staging area
 
-> NOTE: don't commit the package.json
+	> NOTE: don't commit the package.json
 
-```bash
-git add <path to the file you worked on>
-```
+	```bash
+	git add <path to the file you worked on>
+	```
 
 3. Commit your changes with
 
-```bash
-git cz
-```
+	```bash
+	git cz
+	```
 
 4. Push your changes
 
-```bash
-git push
-```
+	```bash
+	git push
+	```
 
 ## 👨‍👩‍👦 Community
 
