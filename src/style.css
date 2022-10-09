@@ -101,8 +101,8 @@ nav ul > li span.tooltip{
   right:-140px;
   padding: 5px;
   width:145px;
-  background-color: var(--text-color);
   color: var(--input-color);
+  background-color: var(--text-color);
   border-radius: 5px;
   display: none;
 }
