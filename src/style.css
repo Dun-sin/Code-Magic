@@ -143,11 +143,11 @@ main > section:first-of-type span {
 }
 
 main > section:first-of-type video {
-  min-height: 20%;
-  min-width: 30%;
-  max-height: 30%;
-  max-width: 40%;
-  margin-top: 10px;
+  height: calc(50vw / 1.75);
+  max-height: calc(800px / 1.75);
+  width: 50vw;
+  max-width: 800px;
+  margin-top: 20px;
   border: 2px solid var(--text-color);
 }
 
