@@ -75,7 +75,10 @@ const navBarAnimationOptions = {
 // Elements
 const generators = document.querySelectorAll('[data-gen]');
 const sidebar = document.querySelector('.side-results') as HTMLElement;
+const getHeaderText = document.getElementById('head');
 const getResults = document.querySelectorAll('[data-button]');
+const getHomePage = document.getElementById('home-page');
+const getGeneratorSection = document.getElementById('generator');
 const results = document.querySelectorAll('[data-result]');
 const closeBar = document.getElementById('close-side-bar');
 const getImageEntryElement = document.getElementById(
@@ -266,13 +269,37 @@ function showResult(attribute: string | null) {
   generatorsFunction(attribute);
 }
 
+// display current gradient value for all range inputs
+const displayGradientValue = (gradientElement: HTMLInputElement) => {
+  gradientElement.addEventListener('input', (e) => {
+    const target = e.target as HTMLInputElement;
+    const degreeDisplayElement = <HTMLElement>(
+      target.parentElement?.querySelector('#degree-display')
+    );
+    degreeDisplayElement.innerText = `${target.value}deg`;
+  });
+};
+
+getHeaderText?.addEventListener('click', () => {
+  if (getHomePage === null || getGeneratorSection === null) return;
+  getHomePage.style.display = 'flex';
+  getGeneratorSection.style.display = 'none';
+});
+
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
     const checking = generator.getAttribute('data-gen');
 
-    if (checking === null) return;
+    if (
+      checking === null ||
+      getHomePage === null ||
+      getGeneratorSection === null
+    )
+      return;
     sidebar.style.display = 'none';
     attributeValue = checking;
+    getHomePage.style.display = 'none';
+    getGeneratorSection.style.display = 'flex';
     showContent(attributeValue, 'flex');
   });
 });
@@ -295,17 +322,6 @@ closeBar?.addEventListener('click', () => {
     sidebar.style.display = 'none';
   }, 600);
 });
-
-// display current gradient value for all range inputs
-const displayGradientValue = (gradientElement: HTMLInputElement) => {
-  gradientElement.addEventListener('input', (e) => {
-    const target = e.target as HTMLInputElement;
-    const degreeDisplayElement = <HTMLElement>(
-      target.parentElement?.querySelector('#degree-display')
-    );
-    degreeDisplayElement.innerText = `${target.value}deg`;
-  });
-};
 
 gradientRangeInputs.forEach((gradientRangeInput: HTMLInputElement) => {
   displayGradientValue(gradientRangeInput);
