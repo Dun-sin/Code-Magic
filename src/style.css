@@ -117,6 +117,44 @@ main {
   outline: 2px solid red;
 }
 
+main > section {
+  min-height: var(--content-container);
+  min-width: var(--content-container);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem 0 1rem;
+}
+
+main > section:first-of-type h1 {
+  font-size: clamp(1rem, 10vw, 2rem);
+  text-align: center;
+}
+
+main > section:first-of-type h2 {
+  margin-top: 10px;
+  font-size: clamp(0.5rem, 10vw, 1rem);
+  text-align: center;
+}
+
+main > section:first-of-type span {
+  color: var(--tertiary-color);
+}
+
+main > section:first-of-type video {
+  height: calc(50vw / 1.75);
+  max-height: calc(800px / 1.75);
+  width: 50vw;
+  max-width: 800px;
+  margin-top: 20px;
+  border: 2px solid var(--text-color);
+}
+
+main > section:last-of-type {
+  display: none;
+}
+
 .generators {
   min-height: var(--content-container);
   min-width: var(--content-container);
