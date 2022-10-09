@@ -559,6 +559,15 @@ a {
     position: absolute;
   }
 
+  .gradient-text-inputs {
+    width: 120px;
+  }
+
+  .colors .preview {
+    width: 50px;
+    height: 20px;
+  }
+
   .output,
   .input {
     padding: 2rem 0.3rem 2rem 0.3rem;
