@@ -85,7 +85,6 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
         div {
           height: '300px';
           width: '300px';
-          background: 'transparent';
           box-shadow: ${element.boxShadow};
         }
       `;  
