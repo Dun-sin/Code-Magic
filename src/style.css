@@ -559,13 +559,32 @@ a {
     position: absolute;
   }
 
+  .colors {
+    flex-direction: column;
+  }
+
   .gradient-text-inputs {
-    width: 120px;
+    width: 150px;
+    height: 30px;
+  }
+
+  #gradient-text-text {
+    width: 250px;
+  }
+
+  #degree {
+    width: 180px;
+  }
+
+  .degree-range {
+    width: 150px;
   }
 
   .colors .preview {
-    width: 100px;
-    height: 20px;
+    width: 150px;
+    height: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   .output,
