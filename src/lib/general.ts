@@ -78,6 +78,17 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
         }
       `;
       break;
+    case 'box-shadow':   
+      element = outputElement.style; 
+      console.log("element: ", element)
+      codeToCopy = `
+        div {
+          height: '300px';
+          width: '300px';
+          box-shadow: ${element.boxShadow};
+        }
+      `;  
+      break;
   }
 
   copy(codeToCopy);
@@ -210,6 +221,21 @@ export const getStyleSheet = () => {
   );
   return <CSSStyleSheet>stylesheet[0];
 };
+
+export const getBoxShadowHorizontalOffset = (attribute: string): HTMLInputElement =>
+  <HTMLInputElement>document.getElementById(`${attribute}-h-offset`);
+
+export const getBoxShadowVerticalOffset = (attribute: string): HTMLInputElement =>
+  <HTMLInputElement>document.getElementById(`${attribute}-v-offset`);
+
+export const getBoxShadowBlur = (attribute: string): HTMLInputElement =>
+  <HTMLInputElement>document.getElementById(`${attribute}-blur`);
+
+export const getBoxShadowSpread = (attribute: string): HTMLInputElement =>
+  <HTMLInputElement>document.getElementById(`${attribute}-spread`);
+
+export const getBoxShadowColor = (attribute: string): HTMLInputElement =>
+  <HTMLInputElement>document.getElementById(`${attribute}-color`);
 
 function createDownloadLink(fileName: string, url: string) {
   const link = document.createElement('a');

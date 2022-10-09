@@ -383,6 +383,13 @@ input[type='number']::-webkit-outer-spin-button {
   background-color: #0c49d2;
 }
 
+.box-shadow-degrees {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* Results */
 .side-results {
   display: none;

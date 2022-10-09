@@ -4,6 +4,7 @@ import {gradientTextGenerator} from './pages/gradient-text';
 import {gradientBorderGenerator} from './pages/gradient-border';
 import {gradientBackgroundGenerator} from './pages/gradient-background';
 import {animationGenerator} from './pages/animation';
+import {boxShadowGenerator} from './pages/box-shadow';
 
 // Utils
 import {
@@ -234,6 +235,9 @@ function generatorsFunction(attribute: string): void {
     case 'animation':
       animationGenerator();
       break;
+    case 'box-shadow': 
+      boxShadowGenerator();  
+      break;
   }
 }
 
@@ -331,7 +335,7 @@ const displayGradientValue = (gradientElement: HTMLInputElement) => {
     const unitDisplayElement = <HTMLElement>(
       target.parentElement?.querySelector('.unit-display')
     );
-
+    
     // change the unit for opacity
     const unit = titleDisplayElement.innerText.toLowerCase().includes('opacity')
       ? ''
