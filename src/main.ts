@@ -4,6 +4,7 @@ import {gradientTextGenerator} from './pages/gradient-text';
 import {gradientBorderGenerator} from './pages/gradient-border';
 import {gradientBackgroundGenerator} from './pages/gradient-background';
 import {animationGenerator} from './pages/animation';
+import {boxShadowGenerator} from './pages/box-shadow';
 
 // Utils
 import {
@@ -75,7 +76,10 @@ const navBarAnimationOptions = {
 // Elements
 const generators = document.querySelectorAll('[data-gen]');
 const sidebar = document.querySelector('.side-results') as HTMLElement;
+const getHeaderText = document.getElementById('head');
 const getResults = document.querySelectorAll('[data-button]');
+const getHomePage = document.getElementById('home-page');
+const getGeneratorSection = document.getElementById('generator');
 const results = document.querySelectorAll('[data-result]');
 const closeBar = document.getElementById('close-side-bar');
 const getImageEntryElement = document.getElementById(
@@ -111,7 +115,6 @@ const gradientBackgroundDegree = getRange('gradient-background');
 // get all range inputs
 const gradientRangeInputs = document.querySelectorAll('.degree-range');
 
-
 // get title display element for animation
 const titleDisplayElement = <HTMLElement>(
   document.querySelector('.title-display')
@@ -129,10 +132,8 @@ menuIcon?.addEventListener('click', () => {
   }
 });
 
-
 const menu = document.querySelector('.menu') as HTMLElement;
 const body = document.querySelector('body') as HTMLElement;
-
 
 if (getComputedStyle(menu).display == 'block') {
   body.onclick = (e) => {
@@ -234,6 +235,9 @@ function generatorsFunction(attribute: string): void {
     case 'animation':
       animationGenerator();
       break;
+    case 'box-shadow': 
+      boxShadowGenerator();  
+      break;
   }
 }
 
@@ -281,13 +285,26 @@ function showResult(attribute: string | null) {
   generatorsFunction(attribute);
 }
 
+getHeaderText?.addEventListener('click', () => {
+  if (getHomePage === null || getGeneratorSection === null) return;
+  getHomePage.style.display = 'flex';
+  getGeneratorSection.style.display = 'none';
+});
+
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
     const checking = generator.getAttribute('data-gen');
 
-    if (checking === null) return;
+    if (
+      checking === null ||
+      getHomePage === null ||
+      getGeneratorSection === null
+    )
+      return;
     sidebar.style.display = 'none';
     attributeValue = checking;
+    getHomePage.style.display = 'none';
+    getGeneratorSection.style.display = 'flex';
     showContent(attributeValue, 'flex');
   });
 });
@@ -318,13 +335,12 @@ const displayGradientValue = (gradientElement: HTMLInputElement) => {
     const unitDisplayElement = <HTMLElement>(
       target.parentElement?.querySelector('.unit-display')
     );
-
+    
     // change the unit for opacity
     const unit = titleDisplayElement.innerText.toLowerCase().includes('opacity')
       ? ''
       : 'deg';
     unitDisplayElement.innerText = `${target.value}${unit}`;
-
   });
 };
 
