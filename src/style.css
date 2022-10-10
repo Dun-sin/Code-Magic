@@ -563,23 +563,6 @@ a {
     flex-direction: column;
   }
 
-  .gradient-text-inputs {
-    width: 150px;
-    height: 30px;
-  }
-
-  #gradient-text-text {
-    width: 250px;
-  }
-
-  #degree {
-    width: 180px;
-  }
-
-  .degree-range {
-    width: 150px;
-  }
-
   .colors .preview {
     width: 150px;
     height: 20px;
