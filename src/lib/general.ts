@@ -57,10 +57,14 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
       element = outputElement.style;
       codeToCopy = `
         div {
-          border: ${element.border},
-          border-width: ${element.borderWidth},
-          border-image-slice: ${element.borderImageSlice},
-          border-image-source: ${element.borderImageSource},
+          border-width:8px;
+          border-style:solid;
+          border-radius:${element.getPropertyValue(`--${attribute}-radius`)};
+          border-image:linear-gradient(${element.getPropertyValue(
+            `--${attribute}-degree`
+          )}, ${element.getPropertyValue(
+        `--${attribute}-color-1`
+      )}, ${element.getPropertyValue(`--${attribute}-color-2`)}) 1;
         }
       `;
       break;
@@ -79,6 +83,17 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
       codeToCopy = `
           border-radius: ${element.borderRadius};
       `;
+      break;
+    case 'box-shadow':   
+      element = outputElement.style; 
+      console.log("element: ", element)
+      codeToCopy = `
+        div {
+          height: '300px';
+          width: '300px';
+          box-shadow: ${element.boxShadow};
+        }
+      `;  
       break;
   }
 
@@ -132,58 +147,78 @@ export function triggerEmptyAnimation(inputElement: HTMLInputElement): void {
 }
 
 export const getResultPage = (): HTMLElement =>
-  <HTMLElement>document.querySelector('.side-results');
+  document.querySelector('.side-results') as HTMLElement;
 
 export const getCopyCodeButton = (attribute: string): HTMLElement =>
-  <HTMLElement>document.querySelector(`[data-download = ${attribute}-code]`);
+  document.querySelector(`[data-download = ${attribute}-code]`) as HTMLElement;
 
 export const getPNGButton = (attribute: string): HTMLElement =>
-  <HTMLElement>document.querySelector(`[data-download=${attribute}-PNG]`);
+  document.querySelector(`[data-download=${attribute}-PNG]`) as HTMLElement;
 
 export const getSVGButton = (attribute: string): HTMLElement =>
-  <HTMLElement>document.querySelector(`[data-download=${attribute}-svg]`);
+  document.querySelector(`[data-download=${attribute}-svg]`) as HTMLElement;
 
 export const getResultButton = (attribute: string): HTMLElement =>
-  <HTMLElement>document.querySelector(`[data-button = ${attribute}]`);
+  document.querySelector(`[data-button = ${attribute}]`) as HTMLElement;
 
 export const getColorInput1 = (attribute: string): HTMLInputElement =>
-  <HTMLInputElement>document.getElementById(`${attribute}-color1`);
+  document.getElementById(`${attribute}-color1`) as HTMLInputElement;
 
 export const getColorInput2 = (attribute: string): HTMLInputElement =>
-  <HTMLInputElement>document.getElementById(`${attribute}-color2`);
+  document.getElementById(`${attribute}-color2`) as HTMLInputElement;
+
+export const gradientElementInputs = (attribute: string): NodeList =>
+  document.querySelectorAll(`.${attribute}-inputs`);
+
+export const gradientPreview = (attribute: string): HTMLElement =>
+  document.querySelector(`#${attribute}-color-preview`) as HTMLElement;
+
+export const createGradientPreview = (
+  color1: HTMLInputElement,
+  color2: HTMLInputElement,
+  range: HTMLInputElement,
+  preview: HTMLElement
+) => {
+  const colorFrom = color1?.value;
+  const colorTo = color2?.value;
+  const fill = range?.value;
+  preview.style.background = `linear-gradient(${fill}deg, ${colorFrom}, ${colorTo})`;
+};
 
 export const getOutput = (attribute: string): HTMLElement =>
-  <HTMLElement>document.querySelector(`[data-result = ${attribute}] > .output`);
+  document.querySelector(
+    `[data-result = ${attribute}] > .output`
+  ) as HTMLElement;
 
 export const getRange = (attribute: string): HTMLInputElement =>
-  <HTMLInputElement>document.getElementById(`${attribute}-degree`);
+  document.getElementById(`${attribute}-degree`) as HTMLInputElement;
 
 export const getInputText = (attribute: string) =>
-  <HTMLInputElement>document.getElementById(`${attribute}-text`);
+  document.getElementById(`${attribute}-text`) as HTMLInputElement;
 
 export const getCheckbox = (attribute: string): HTMLInputElement =>
-  <HTMLInputElement>document.getElementById(`${attribute}-radius`);
+  document.getElementById(`${attribute}-radius`) as HTMLInputElement;
 
 export const getRadiusInput = (attribute: string) =>
-  <HTMLInputElement>document.getElementById(`${attribute}-input`);
+  document.getElementById(`${attribute}-input`) as HTMLInputElement;
 
 export const showRadius = (attribute: string): void =>
-  document
-    .querySelectorAll<HTMLElement>(`#${attribute}-input`)[0]
-    .style.setProperty('display', 'inline');
+  (
+    document.querySelectorAll(`#${attribute}-input`) as NodeListOf<HTMLElement>
+  )[0].style.setProperty('display', 'inline');
 
 export const hideRadius = (attribute: string): void =>
-  document
-    .querySelectorAll<HTMLElement>(`#${attribute}-input`)[0]
-    .style.setProperty('display', 'none');
+  (
+    document.querySelectorAll(`#${attribute}-input`) as NodeListOf<HTMLElement>
+  )[0].style.setProperty('display', 'none');
 
 export const getInputSpinner = (attribute: string) =>
-  <HTMLInputElement>document.getElementById(`${attribute}-duration`);
+  document.getElementById(`${attribute}-duration`) as HTMLInputElement;
 
 export const getRadioButtonSet = (attribute: string) =>
-  <NodeListOf<HTMLInputElement>>(
-    document.querySelectorAll(`[name = ${attribute}-radio]`)
-  );
+  document.querySelectorAll(
+    `[name = ${attribute}-radio]`
+  ) as NodeListOf<HTMLInputElement>;
 
 export const getBorderTop = (attribute: string) =>
   <HTMLInputElement>document.getElementById(`${attribute}-top`);
@@ -205,10 +240,20 @@ export const getStyleSheet = () => {
   return <CSSStyleSheet>stylesheet[0];
 };
 
-/* ||||  CONSIDER RENAMING getOutput above TO getGradientBorder ||||
- * (for example) export const getGradientBorder = (attribute: string): HTMLElement =>
- * <HTMLElement>document.querySelector(`${attribute}`);
- */
+export const getBoxShadowHorizontalOffset = (attribute: string): HTMLInputElement =>
+  <HTMLInputElement>document.getElementById(`${attribute}-h-offset`);
+
+export const getBoxShadowVerticalOffset = (attribute: string): HTMLInputElement =>
+  <HTMLInputElement>document.getElementById(`${attribute}-v-offset`);
+
+export const getBoxShadowBlur = (attribute: string): HTMLInputElement =>
+  <HTMLInputElement>document.getElementById(`${attribute}-blur`);
+
+export const getBoxShadowSpread = (attribute: string): HTMLInputElement =>
+  <HTMLInputElement>document.getElementById(`${attribute}-spread`);
+
+export const getBoxShadowColor = (attribute: string): HTMLInputElement =>
+  <HTMLInputElement>document.getElementById(`${attribute}-color`);
 
 function createDownloadLink(fileName: string, url: string) {
   const link = document.createElement('a');
