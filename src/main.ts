@@ -235,8 +235,8 @@ function generatorsFunction(attribute: string): void {
     case 'animation':
       animationGenerator();
       break;
-    case 'box-shadow': 
-      boxShadowGenerator();  
+    case 'box-shadow':
+      boxShadowGenerator();
       break;
   }
 }
@@ -271,6 +271,16 @@ function showContent(attribute: string, display: Display): void {
   highLightGen.style.background = `linear-gradient(80deg,var(--primary-color), var(--secondary-color))`;
   highLightGen.style.border = '1px solid var(--tertiary-color)';
 }
+
+//event listener to clear styling on generator tabs when "Code magic is clicked"
+document.getElementById('head')?.addEventListener('click', () => {
+  const generatorsNav = document.querySelectorAll(`[data-gen]`);
+  generatorsNav.forEach((item) => {
+    const generatorNav = <HTMLElement>item;
+    generatorNav.style.border = 'none';
+    generatorNav.style.background = 'none';
+  });
+});
 
 function showResult(attribute: string | null) {
   results.forEach((item) => {
@@ -335,7 +345,7 @@ const displayGradientValue = (gradientElement: HTMLInputElement) => {
     const unitDisplayElement = <HTMLElement>(
       target.parentElement?.querySelector('.unit-display')
     );
-    
+
     // change the unit for opacity
     const unit = titleDisplayElement.innerText.toLowerCase().includes('opacity')
       ? ''
