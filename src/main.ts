@@ -124,10 +124,6 @@ const borderRadiusPreview = <HTMLElement>(
   document.querySelector('.border-radius-preview-box > .preview')
 );
 
-const boderRadiusCode = <HTMLElement>(
-  document.querySelector('#border-radius-code')
-);
-
 menuIcon?.addEventListener('click', () => {
   if (navBar?.classList.contains('closed-nav')) {
     navBar?.classList.remove('closed-nav');
@@ -350,8 +346,7 @@ for (let i = 0; i < borderRadiusInputs.length; i++) {
       borderLeft,
       borderBottom,
       borderRight,
-      borderRadiusPreview,
-      boderRadiusCode
+      borderRadiusPreview
     )
   );
 }
@@ -400,15 +395,8 @@ const BorderRadiusGenerator = (
   borderLeft: HTMLInputElement,
   borderBottom: HTMLInputElement,
   borderRight: HTMLInputElement,
-  borderRadiusPreview: HTMLElement,
-  boderRadiusCode: HTMLElement
+  borderRadiusPreview: HTMLElement
 ) => {
-  boderRadiusCode.innerHTML = `border-radius: 
-    ${borderTop.value}% ${100 - Number(borderTop.value)}%
-       ${borderBottom.value}% ${100 - Number(borderBottom.value)}% /
-       ${borderLeft.value}% ${borderRight.value}%
-       ${100 - Number(borderRight.value)}% ${100 - Number(borderLeft.value)}%`;
-
   borderRadiusPreview.style.borderRadius = `
     ${borderTop.value}% ${100 - Number(borderTop.value)}%
     ${borderBottom.value}% ${100 - Number(borderBottom.value)}% /
