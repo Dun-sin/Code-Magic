@@ -138,6 +138,16 @@
           ></iconify-icon>
           <span>Animator</span>
         </li>
+        <li data-gen="border-radius">
+          <iconify-icon
+            inline
+            icon="ic:twotone-rounded-corner"
+            style="color: white"
+            width="20"
+            height="20"
+          ></iconify-icon>
+          <span>Border Radius</span>
+        </li>
         <li data-gen="box-shadow">
           <iconify-icon
             inline
@@ -380,7 +390,6 @@
                 value="3"
               />
             </label>
-
             <label id="degree">
               <span class="label-title">
                 <span class="title-display">Angle</span>
@@ -463,8 +472,48 @@
 
             <div class="btn" data-button="box-shadow">Get Results</div>
           </div>
-        </div>
+          
+          
+          <!-- border radius generator -->
+          <div data-content="border-radius">
+            <div class="border-radius-preview-box">
+              <div class="preview"></div>
+              <div class="border-range-inputs">
+                <input
+                  type="range"
+                  max="100"
+                  min="0"
+                  id="border-radius-top"
+                  class="border-radius-inputs"
+                  />
+                <input
+                  type="range"
+                  max="100"
+                  min="0"
+                  id="border-radius-left"
+                  class="border-radius-inputs"
+                />
+                <input
+                  type="range"
+                  max="100"
+                  min="0"
+                  id="border-radius-right"
+                  class="border-radius-inputs"
+                />
+                <input
+                  type="range"
+                  max="100"
+                  min="0"
+                  id="border-radius-bottom"
+                  class="border-radius-inputs"
+                />
+              </div>
+            </div>
 
+            <div class="btn" data-button="border-radius">Get Results</div>
+          </div>
+        </div>
+        
         <div class="side-results">
           <div class="header">
             <iconify-icon
@@ -616,6 +665,22 @@
                   width="20"
                 ></iconify-icon>
                 Get Code
+              </button>
+            </div>
+          </div>
+          
+          <!-- border radius -->
+          <div class="download-output" data-result="border-radius">
+            <div class="output"></div>
+            <div class="download-btn">
+              <button class="btn" data-download="border-radius-code">
+                <iconify-icon
+                  inline
+                  icon="bx:code-alt"
+                  style="color: white; margin-right: 5px"
+                  width="20"
+                ></iconify-icon
+                >Get Code
               </button>
             </div>
           </div>

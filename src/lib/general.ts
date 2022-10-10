@@ -78,6 +78,12 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
         }
       `;
       break;
+    case 'border-radius':
+      element = outputElement.style;
+      codeToCopy = `
+          border-radius: ${element.borderRadius};
+      `;
+      break;
     case 'box-shadow':   
       element = outputElement.style; 
       console.log("element: ", element)
@@ -213,6 +219,18 @@ export const getRadioButtonSet = (attribute: string) =>
   document.querySelectorAll(
     `[name = ${attribute}-radio]`
   ) as NodeListOf<HTMLInputElement>;
+
+export const getBorderTop = (attribute: string) =>
+  <HTMLInputElement>document.getElementById(`${attribute}-top`);
+
+export const getBorderRight = (attribute: string) =>
+  <HTMLInputElement>document.getElementById(`${attribute}-right`);
+
+export const getBorderBottom = (attribute: string) =>
+  <HTMLInputElement>document.getElementById(`${attribute}-bottom`);
+
+export const getBorderLeft = (attribute: string) =>
+  <HTMLInputElement>document.getElementById(`${attribute}-left`);
 
 export const getStyleSheet = () => {
   const stylesheet = Array.from(document.styleSheets).filter(

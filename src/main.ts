@@ -4,6 +4,7 @@ import {gradientTextGenerator} from './pages/gradient-text';
 import {gradientBorderGenerator} from './pages/gradient-border';
 import {gradientBackgroundGenerator} from './pages/gradient-background';
 import {animationGenerator} from './pages/animation';
+import {borderRadiusGenerator} from './pages/border-radius';
 import {boxShadowGenerator} from './pages/box-shadow';
 
 // Utils
@@ -120,6 +121,26 @@ const titleDisplayElement = <HTMLElement>(
   document.querySelector('.title-display')
 );
 
+// border radius elements
+
+const borderRadiusInputs = document.querySelectorAll('.border-radius-inputs');
+const borderTop = <HTMLInputElement>(
+  document.querySelector('#border-radius-top')
+);
+const borderLeft = <HTMLInputElement>(
+  document.querySelector('#border-radius-left')
+);
+const borderBottom = <HTMLInputElement>(
+  document.querySelector('#border-radius-bottom')
+);
+const borderRight = <HTMLInputElement>(
+  document.querySelector('#border-radius-right')
+);
+
+const borderRadiusPreview = <HTMLElement>(
+  document.querySelector('.border-radius-preview-box > .preview')
+);
+
 menuIcon?.addEventListener('click', () => {
   if (navBar?.classList.contains('closed-nav')) {
     navBar?.animate(navBarSlideIn, navBarAnimationOptions);
@@ -234,6 +255,9 @@ function generatorsFunction(attribute: string): void {
       break;
     case 'animation':
       animationGenerator();
+      break;
+    case 'border-radius':
+      borderRadiusGenerator();
       break;
     case 'box-shadow':
       boxShadowGenerator();
@@ -369,6 +393,20 @@ for (let i = 0; i < gradientBackgroundInputs.length; i++) {
   );
 }
 
+// on change event handler for border radius generator range inputs
+
+for (let i = 0; i < borderRadiusInputs.length; i++) {
+  borderRadiusInputs[i].addEventListener('change', () =>
+    BorderRadiusGenerator(
+      borderTop,
+      borderLeft,
+      borderBottom,
+      borderRight,
+      borderRadiusPreview
+    )
+  );
+}
+
 //set gradient border preview
 for (let i = 0; i < gradientBorderInputs.length; i++) {
   gradientBorderInputs[i].addEventListener('change', () =>
@@ -391,6 +429,22 @@ for (let i = 0; i < gradientTextInputs.length; i++) {
     )
   );
 }
+
+// border radius generator preview
+
+const BorderRadiusGenerator = (
+  borderTop: HTMLInputElement,
+  borderLeft: HTMLInputElement,
+  borderBottom: HTMLInputElement,
+  borderRight: HTMLInputElement,
+  borderRadiusPreview: HTMLElement
+) => {
+  borderRadiusPreview.style.borderRadius = `
+    ${borderTop.value}% ${100 - Number(borderTop.value)}%
+    ${borderBottom.value}% ${100 - Number(borderBottom.value)}% /
+    ${borderLeft.value}% ${borderRight.value}%
+    ${100 - Number(borderRight.value)}% ${100 - Number(borderLeft.value)}%`;
+};
 
 //Toggle gradient border radius input display
 gradientBorderRadius.addEventListener('change', function () {
