@@ -566,6 +566,17 @@ a {
     position: absolute;
   }
 
+  .colors {
+    flex-direction: column;
+  }
+
+  .colors .preview {
+    width: 150px;
+    height: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
   .output,
   .input {
     padding: 2rem 0.3rem 2rem 0.3rem;
