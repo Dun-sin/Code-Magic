@@ -43,12 +43,10 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
       codeToCopy = `
       p{	
         font-size: ${(outputElement.children[0] as HTMLElement).style.fontSize};
-    background: ${
-      (outputElement.children[0] as HTMLElement).style.backgroundImage
-    };
-    background-clip: 'text';
-    -webkit-background-clip: 'text';
-    -webkit-text-fill-color: 'transparent';
+        background: ${(outputElement.children[0] as HTMLElement).style.background};
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
       `;
 
