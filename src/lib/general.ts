@@ -43,12 +43,10 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
       codeToCopy = `
       p{	
         font-size: ${(outputElement.children[0] as HTMLElement).style.fontSize};
-    background: ${
-      (outputElement.children[0] as HTMLElement).style.backgroundImage
-    };
-    background-clip: 'text';
-    -webkit-background-clip: 'text';
-    -webkit-text-fill-color: 'transparent';
+        background: ${(outputElement.children[0] as HTMLElement).style.background};
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
       `;
 
@@ -78,6 +76,12 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
         }
       `;
       break;
+    case 'border-radius':
+      element = outputElement.style;
+      codeToCopy = `
+          border-radius: ${element.borderRadius};
+      `;
+      break;
     case 'box-shadow':   
       element = outputElement.style; 
       console.log("element: ", element)
@@ -85,7 +89,6 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
         div {
           height: '300px';
           width: '300px';
-          background: 'transparent';
           box-shadow: ${element.boxShadow};
         }
       `;  
@@ -215,6 +218,18 @@ export const getRadioButtonSet = (attribute: string) =>
     `[name = ${attribute}-radio]`
   ) as NodeListOf<HTMLInputElement>;
 
+export const getBorderTop = (attribute: string) =>
+  <HTMLInputElement>document.getElementById(`${attribute}-top`);
+
+export const getBorderRight = (attribute: string) =>
+  <HTMLInputElement>document.getElementById(`${attribute}-right`);
+
+export const getBorderBottom = (attribute: string) =>
+  <HTMLInputElement>document.getElementById(`${attribute}-bottom`);
+
+export const getBorderLeft = (attribute: string) =>
+  <HTMLInputElement>document.getElementById(`${attribute}-left`);
+
 export const getStyleSheet = () => {
   const stylesheet = Array.from(document.styleSheets).filter(
     (styleSheet) =>
@@ -237,12 +252,6 @@ export const getBoxShadowSpread = (attribute: string): HTMLInputElement =>
 
 export const getBoxShadowColor = (attribute: string): HTMLInputElement =>
   <HTMLInputElement>document.getElementById(`${attribute}-color`);
-
-
-/* ||||  CONSIDER RENAMING getOutput above TO getGradientBorder ||||
- * (for example) export const getGradientBorder = (attribute: string): HTMLElement =>
- * <HTMLElement>document.querySelector(`${attribute}`);
- */
 
 function createDownloadLink(fileName: string, url: string) {
   const link = document.createElement('a');

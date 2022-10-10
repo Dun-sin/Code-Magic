@@ -4,6 +4,7 @@ import {gradientTextGenerator} from './pages/gradient-text';
 import {gradientBorderGenerator} from './pages/gradient-border';
 import {gradientBackgroundGenerator} from './pages/gradient-background';
 import {animationGenerator} from './pages/animation';
+import {borderRadiusGenerator} from './pages/border-radius';
 import {boxShadowGenerator} from './pages/box-shadow';
 
 // Utils
@@ -76,7 +77,10 @@ const navBarAnimationOptions = {
 // Elements
 const generators = document.querySelectorAll('[data-gen]');
 const sidebar = document.querySelector('.side-results') as HTMLElement;
+const getHeaderText = document.getElementById('head');
 const getResults = document.querySelectorAll('[data-button]');
+const getHomePage = document.getElementById('home-page');
+const getGeneratorSection = document.getElementById('generator');
 const results = document.querySelectorAll('[data-result]');
 const closeBar = document.getElementById('close-side-bar');
 const getImageEntryElement = document.getElementById(
@@ -112,6 +116,31 @@ const gradientBackgroundDegree = getRange('gradient-background');
 // get all range inputs
 const gradientRangeInputs = document.querySelectorAll('.degree-range');
 
+// get title display element for animation
+const titleDisplayElement = <HTMLElement>(
+  document.querySelector('.title-display')
+);
+
+// border radius elements
+
+const borderRadiusInputs = document.querySelectorAll('.border-radius-inputs');
+const borderTop = <HTMLInputElement>(
+  document.querySelector('#border-radius-top')
+);
+const borderLeft = <HTMLInputElement>(
+  document.querySelector('#border-radius-left')
+);
+const borderBottom = <HTMLInputElement>(
+  document.querySelector('#border-radius-bottom')
+);
+const borderRight = <HTMLInputElement>(
+  document.querySelector('#border-radius-right')
+);
+
+const borderRadiusPreview = <HTMLElement>(
+  document.querySelector('.border-radius-preview-box > .preview')
+);
+
 menuIcon?.addEventListener('click', () => {
   if (navBar?.classList.contains('closed-nav')) {
     navBar?.animate(navBarSlideIn, navBarAnimationOptions);
@@ -140,7 +169,9 @@ if (getComputedStyle(menu).display == 'block') {
 
 for (let i = 0; i < generators.length; i++) {
   generators[i].addEventListener('click', () => {
-    navBar?.animate(navBarSlideOut, navBarAnimationOptions);
+    if (!navBar?.classList.contains('closed-nav')) {
+      navBar?.animate(navBarSlideOut, navBarAnimationOptions);
+    }
     navBar?.classList.add('closed-nav');
     menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
   });
@@ -148,6 +179,11 @@ for (let i = 0; i < generators.length; i++) {
 
 FilePond.create(getImageEntryElement, {
   imagePreviewMaxHeight: 200,
+
+  labelIdle:
+    window.innerWidth < 768
+      ? '<span class="filepond--label-action">Browse</span>'
+      : 'Drag & Drop your files or <span class="filepond--label-action"> Browse </span>',
 
   onpreparefile: (fileItem, output): void => {
     // create a new image object
@@ -220,8 +256,11 @@ function generatorsFunction(attribute: string): void {
     case 'animation':
       animationGenerator();
       break;
-    case 'box-shadow': 
-      boxShadowGenerator();  
+    case 'border-radius':
+      borderRadiusGenerator();
+      break;
+    case 'box-shadow':
+      boxShadowGenerator();
       break;
   }
 }
@@ -257,6 +296,16 @@ function showContent(attribute: string, display: Display): void {
   highLightGen.style.border = '1px solid var(--tertiary-color)';
 }
 
+//event listener to clear styling on generator tabs when "Code magic is clicked"
+document.getElementById('head')?.addEventListener('click', () => {
+  const generatorsNav = document.querySelectorAll(`[data-gen]`);
+  generatorsNav.forEach((item) => {
+    const generatorNav = <HTMLElement>item;
+    generatorNav.style.border = 'none';
+    generatorNav.style.background = 'none';
+  });
+});
+
 function showResult(attribute: string | null) {
   results.forEach((item) => {
     const element = <HTMLElement>item;
@@ -270,13 +319,26 @@ function showResult(attribute: string | null) {
   generatorsFunction(attribute);
 }
 
+getHeaderText?.addEventListener('click', () => {
+  if (getHomePage === null || getGeneratorSection === null) return;
+  getHomePage.style.display = 'flex';
+  getGeneratorSection.style.display = 'none';
+});
+
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
     const checking = generator.getAttribute('data-gen');
 
-    if (checking === null) return;
+    if (
+      checking === null ||
+      getHomePage === null ||
+      getGeneratorSection === null
+    )
+      return;
     sidebar.style.display = 'none';
     attributeValue = checking;
+    getHomePage.style.display = 'none';
+    getGeneratorSection.style.display = 'flex';
     showContent(attributeValue, 'flex');
   });
 });
@@ -304,10 +366,15 @@ closeBar?.addEventListener('click', () => {
 const displayGradientValue = (gradientElement: HTMLInputElement) => {
   gradientElement.addEventListener('input', (e) => {
     const target = e.target as HTMLInputElement;
-    const degreeDisplayElement = <HTMLElement>(
-      target.parentElement?.querySelector('#degree-display')
+    const unitDisplayElement = <HTMLElement>(
+      target.parentElement?.querySelector('.unit-display')
     );
-    degreeDisplayElement.innerText = `${target.value}px`;
+
+    // change the unit for opacity
+    const unit = titleDisplayElement.innerText.toLowerCase().includes('opacity')
+      ? ''
+      : 'deg';
+    unitDisplayElement.innerText = `${target.value}${unit}`;
   });
 };
 
@@ -322,6 +389,20 @@ for (let i = 0; i < gradientBackgroundInputs.length; i++) {
       gradientBackgroundColor2,
       gradientBackgroundDegree,
       backgroundPreview
+    )
+  );
+}
+
+// on change event handler for border radius generator range inputs
+
+for (let i = 0; i < borderRadiusInputs.length; i++) {
+  borderRadiusInputs[i].addEventListener('change', () =>
+    BorderRadiusGenerator(
+      borderTop,
+      borderLeft,
+      borderBottom,
+      borderRight,
+      borderRadiusPreview
     )
   );
 }
@@ -348,6 +429,22 @@ for (let i = 0; i < gradientTextInputs.length; i++) {
     )
   );
 }
+
+// border radius generator preview
+
+const BorderRadiusGenerator = (
+  borderTop: HTMLInputElement,
+  borderLeft: HTMLInputElement,
+  borderBottom: HTMLInputElement,
+  borderRight: HTMLInputElement,
+  borderRadiusPreview: HTMLElement
+) => {
+  borderRadiusPreview.style.borderRadius = `
+    ${borderTop.value}% ${100 - Number(borderTop.value)}%
+    ${borderBottom.value}% ${100 - Number(borderBottom.value)}% /
+    ${borderLeft.value}% ${borderRight.value}%
+    ${100 - Number(borderRight.value)}% ${100 - Number(borderLeft.value)}%`;
+};
 
 //Toggle gradient border radius input display
 gradientBorderRadius.addEventListener('change', function () {
