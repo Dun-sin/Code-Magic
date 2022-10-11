@@ -684,7 +684,7 @@ a {
   }
 }
 
-@media screen and (max-width: 444px) {
+@media screen and (max-width: 650px) {
   nav {
     position: absolute;
   }
