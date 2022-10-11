@@ -51,7 +51,6 @@ nav {
   padding: 0 1.5rem;
   min-width: 15vw;
   height: 100vh;
-  overflow: hidden;
   background-color: var(--primary-color);
   z-index: 99;
 }
@@ -95,6 +94,32 @@ nav ul > li {
 
 nav ul > li span {
   margin-left: 0.2rem;
+}
+
+nav ul > li span.tooltip{
+  position: absolute;
+  right:-140px;
+  padding: 5px;
+  width:145px;
+  color: var(--input-color);
+  background-color: var(--text-color);
+  border-radius: 5px;
+  display: none;
+}
+
+nav ul > li .tooltip::before{
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -8%;
+  margin-top: -5px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent var(--text-color) transparent transparent ;
+}
+
+nav ul > li:hover .tooltip{
+  display: block;
 }
 
 nav ul > li:hover {
@@ -600,6 +625,10 @@ a {
   :root {
     --input-width: 100%;
     --modal-width: calc(var(--modal-container-width) - 10vw);
+  }
+
+  nav ul > li:hover .tooltip{
+    display: none;
   }
 
   .generator {
