@@ -96,29 +96,29 @@ nav ul > li span {
   margin-left: 0.2rem;
 }
 
-nav ul > li span.tooltip{
+nav ul > li span.tooltip {
   position: absolute;
-  right:-140px;
+  right: -140px;
   padding: 5px;
-  width:145px;
+  width: 145px;
   color: var(--input-color);
   background-color: var(--text-color);
   border-radius: 5px;
   display: none;
 }
 
-nav ul > li .tooltip::before{
-  content: "";
+nav ul > li .tooltip::before {
+  content: '';
   position: absolute;
   top: 50%;
   left: -8%;
   margin-top: -5px;
   border-width: 6px;
   border-style: solid;
-  border-color: transparent var(--text-color) transparent transparent ;
+  border-color: transparent var(--text-color) transparent transparent;
 }
 
-nav ul > li:hover .tooltip{
+nav ul > li:hover .tooltip {
   display: block;
 }
 
@@ -413,6 +413,28 @@ input[type='number']::-webkit-outer-spin-button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 2rem;
+  /* background-color:#000000; */
+}
+
+.box-shadow-row {
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+}
+
+.box-shadow-row label {
+  width: 40% !important;
+}
+
+.divider {
+  width: 60%;
+  border: none;
+  height: 0.03rem;
+  background-color: var(--text-color);
 }
 
 /* Results */
@@ -627,7 +649,7 @@ a {
     --modal-width: calc(var(--modal-container-width) - 10vw);
   }
 
-  nav ul > li:hover .tooltip{
+  nav ul > li:hover .tooltip {
     display: none;
   }
 
@@ -643,6 +665,18 @@ a {
 @media screen and (max-width: 650px) {
   :root {
     --output-width: 300px;
+  }
+
+  .box-shadow-row {
+    width: 80%;
+  }
+
+  .box-shadow-row label {
+    width: 50% !important;
+  }
+
+  .divider {
+    width: 80%;
   }
 }
 
