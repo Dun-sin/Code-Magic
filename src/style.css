@@ -571,6 +571,10 @@ a {
     --modal-width: calc(var(--modal-container-width) - 10vw);
   }
 
+  nav ul > li:hover .tooltip{
+    display: none;
+  }
+
   .generator {
     margin: 0.8rem auto;
   }
