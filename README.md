@@ -10,7 +10,7 @@ Code Magic is a website where you can get simple CSS tricks to make your applica
  - Pic Text - Convert images to CSS art. Just upload and get CSS art with just one click.
  - Gradient Text - Dual color gradient for your texts.
  - Gradient Border - Get dual color gradient with desired radius.
- - Gradient Backgound - Make your backgrounds stand out by applying gradient colors.
+ - Gradient Background - Make your backgrounds stand out by applying gradient colors.
  - Animations
     - Select one of the below options
       <table>
@@ -30,7 +30,7 @@ Code Magic is a website where you can get simple CSS tricks to make your applica
       </table>
     - Set duration and speed for the animations
     - And boom
-
+ - Box Shadow - Cast a shadow on your element.
 
 ### ⚒️ Languages / Tools
 
