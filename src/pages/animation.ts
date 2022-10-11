@@ -12,7 +12,7 @@ type Values = {
 };
 
 const attribute = 'animation';
-let getCodeButtonElement = utils.getCopyCodeButton(attribute);
+const getCodeButtonElement = utils.getCopyCodeButton(attribute);
 
 const OutputElement = utils.getOutput(attribute);
 const DegreeElement = utils.getRange(attribute);
@@ -138,6 +138,27 @@ function manageAnimation(
     OutputElement.style.animationDuration = `${values.duration}s`;
 
     // rule_added = true;
+  } else if (values.type === 'rotate') {
+    css =
+      `/*Copy and paste keyframe into your css file, and apply the animation property in the element of your choice*/\n` +
+      `@keyframes rotate { \n` +
+      `0%   { transform:rotate(0deg); }\n` +
+      `100% { transform:rotate(${values.degree}deg); }\n` +
+      `}\n` +
+      `animate: rotate ${values.duration}s infinite`;
+
+    stylesheet.insertRule(
+      `@keyframes rotate { \n` +
+        `0%   { transform:rotate(0deg); }\n` +
+        `100% { transform:rotate(${values.degree}deg); }\n` +
+        `}`,
+      initial_length + 1
+    );
+
+    OutputElement.style.animation = `rotate ease-in`;
+    OutputElement.style.animationDuration = `${values.duration}s`;
+
+    // rule_added = true;
   }
 }
 
@@ -180,6 +201,13 @@ function initialConfiguration(
         DegreeElement.value = '50';
         unitDisplayElement.innerText = `${DegreeElement.value}deg`;
         titleDisplayElement.innerText = 'Angle';
+      } else if (type === 'rotate') {
+        DegreeElement.min = '0';
+        DegreeElement.max = '360';
+        DegreeElement.step = '1';
+        DegreeElement.value = '45';
+        unitDisplayElement.innerText = `${DegreeElement.value}deg`;
+        titleDisplayElement.innerText = 'Degrees';
       } else {
         DegreeElement.min = '0';
         DegreeElement.max = '1';
