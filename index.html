@@ -97,9 +97,7 @@
             height="20"
           ></iconify-icon>
           <span>Pic-Text</span>
-          <span class="tooltip">
-            Convert Your Image to Character Art
-          </span>
+          <span class="tooltip"> Convert Your Image to Character Art </span>
         </li>
         <li data-gen="gradient-text">
           <iconify-icon
@@ -132,7 +130,9 @@
             height="20"
           ></iconify-icon>
           <span>Gradient Background</span>
-          <span class="tooltip">Create Gradient Background for your websites</span>
+          <span class="tooltip"
+            >Create Gradient Background for your websites</span
+          >
         </li>
         <li data-gen="animation">
           <iconify-icon
@@ -438,53 +438,57 @@
             </label>
 
             <div class="box-shadow-degrees">
-              <label id="degree">
-                <span>Horizontal offset</span>
-                <input
-                  type="range"
-                  max="50"
-                  min="-20"
-                  value="5"
-                  id="box-shadow-h-offset"
-                  class="box-shodow-inputs"
-                />
-              </label>
+              <div class="box-shadow-row">
+                <label id="degree">
+                  <span>Horizontal</span>
+                  <input
+                    type="range"
+                    max="50"
+                    min="-20"
+                    value="5"
+                    id="box-shadow-h-offset"
+                    class="box-shodow-inputs"
+                  />
+                </label>
 
-              <label id="degree">
-                <span>Vertical offset</span>
-                <input
-                  type="range"
-                  max="50"
-                  min="-20"
-                  value="10"
-                  id="box-shadow-v-offset"
-                  class="box-shodow-inputs"
-                />
-              </label>
+                <label id="degree">
+                  <span>Vertical</span>
+                  <input
+                    type="range"
+                    max="50"
+                    min="-20"
+                    value="10"
+                    id="box-shadow-v-offset"
+                    class="box-shodow-inputs"
+                  />
+                </label>
+              </div>
+              <hr class="divider" />
+              <div class="box-shadow-row">
+                <label id="degree">
+                  <span>Blur</span>
+                  <input
+                    type="range"
+                    max="100"
+                    min="-20"
+                    value="18"
+                    id="box-shadow-blur"
+                    class="box-shodow-inputs"
+                  />
+                </label>
 
-              <label id="degree">
-                <span>Blur</span>
-                <input
-                  type="range"
-                  max="100"
-                  min="-20"
-                  value="18"
-                  id="box-shadow-blur"
-                  class="box-shodow-inputs"
-                />
-              </label>
-
-              <label id="degree">
-                <span>Spread</span>
-                <input
-                  type="range"
-                  max="50"
-                  min="-20"
-                  value="5"
-                  id="box-shadow-spread"
-                  class="box-shodow-inputs"
-                />
-              </label>
+                <label id="degree">
+                  <span>Spread</span>
+                  <input
+                    type="range"
+                    max="50"
+                    min="-20"
+                    value="5"
+                    id="box-shadow-spread"
+                    class="box-shodow-inputs"
+                  />
+                </label>
+              </div>
             </div>
 
             <div class="btn" data-button="box-shadow">Get Results</div>
