@@ -284,9 +284,12 @@ textarea {
 .radio-group {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 #animation-radio-label {
+  display: flex;
+  width: 6rem;
   padding: 0;
   margin: 0;
   background: none;
@@ -296,7 +299,7 @@ textarea {
 }
 
 #animation-radio-label > span {
-  padding-right: 8px;
+  padding: 0 8px 0 4px;
 }
 
 #radius-input-label {
@@ -365,6 +368,7 @@ input[type='number']::-webkit-outer-spin-button {
   margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .styled-input {
