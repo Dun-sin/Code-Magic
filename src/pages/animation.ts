@@ -139,8 +139,6 @@ function manageAnimation(
 
     // rule_added = true;
   } else if (values.type === 'rotate') {
-    console.log(values);
-
     css =
       `/*Copy and paste keyframe into your css file, and apply the animation property in the element of your choice*/\n` +
       `@keyframes rotate { \n` +
