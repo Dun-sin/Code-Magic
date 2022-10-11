@@ -30,7 +30,7 @@ Code Magic is a website where you can get simple CSS tricks to make your applica
       </table>
     - Set duration and speed for the animations
     - And boom
- - Box Shadow - Cast a drop shadow on you element.
+ - Box Shadow - Cast a drop shadow on your element.
 
 ### ⚒️ Languages / Tools
 
