@@ -96,29 +96,29 @@ nav ul > li span {
   margin-left: 0.2rem;
 }
 
-nav ul > li span.tooltip{
+nav ul > li span.tooltip {
   position: absolute;
-  right:-140px;
+  right: -140px;
   padding: 5px;
-  width:145px;
+  width: 145px;
   color: var(--input-color);
   background-color: var(--text-color);
   border-radius: 5px;
   display: none;
 }
 
-nav ul > li .tooltip::before{
-  content: "";
+nav ul > li .tooltip::before {
+  content: '';
   position: absolute;
   top: 50%;
   left: -8%;
   margin-top: -5px;
   border-width: 6px;
   border-style: solid;
-  border-color: transparent var(--text-color) transparent transparent ;
+  border-color: transparent var(--text-color) transparent transparent;
 }
 
-nav ul > li:hover .tooltip{
+nav ul > li:hover .tooltip {
   display: block;
 }
 
@@ -284,9 +284,12 @@ textarea {
 .radio-group {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 #animation-radio-label {
+  display: flex;
+  width: 6rem;
   padding: 0;
   margin: 0;
   background: none;
@@ -296,7 +299,7 @@ textarea {
 }
 
 #animation-radio-label > span {
-  padding-right: 8px;
+  padding: 0 8px 0 4px;
 }
 
 #radius-input-label {
@@ -365,6 +368,7 @@ input[type='number']::-webkit-outer-spin-button {
   margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .styled-input {
@@ -627,7 +631,7 @@ a {
     --modal-width: calc(var(--modal-container-width) - 10vw);
   }
 
-  nav ul > li:hover .tooltip{
+  nav ul > li:hover .tooltip {
     display: none;
   }
 
