@@ -12,7 +12,7 @@ type Values = {
 };
 
 const attribute = 'animation';
-let getCodeButtonElement = utils.getCopyCodeButton(attribute);
+const getCodeButtonElement = utils.getCopyCodeButton(attribute);
 
 const OutputElement = utils.getOutput(attribute);
 const DegreeElement = utils.getRange(attribute);
