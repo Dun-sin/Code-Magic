@@ -67,6 +67,11 @@ Before installation, please make sure you have already installed the following t
 - [Git](https://git-scm.com/downloads)
 - [NodeJs](https://nodejs.org/en/download/)
 
+## 👌🏾 What you have to do to contribute
+ - [Read the rules](https://github.com/Dun-sin/Code-Magic/blob/main/CONTRIBUTING.md#rules)
+ - [Follow the installation Steps](#%EF%B8%8F-installation-steps)
+ - [Follow the contributing Steps](#-after-making-a-change)
+
 ## 🛠️ Installation Steps
 
 1. [Fork](https://github.com/Dun-sin/Code-Magic/fork) the project. Click on the <a href="https://github.com/Dun-sin/Code-Magic/fork"><img src="https://i.imgur.com/G4z1kEe.png" height="15" width="15"></a> icon in the top right to get started
