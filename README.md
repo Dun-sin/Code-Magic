@@ -1,16 +1,20 @@
-## Code-Magic
+## [<img src="assets/favicon.ico" width="25" height="25"> Code Magic ](https://code-magic.vercel.app/)
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Dun-sin/Code-Magic)
 
-Code Magic is a website where you can get simple CSS tricks to make your application elegant with just few clicks.
+ [Code Magic](https://code-magic.vercel.app/) is a website where you can get simple CSS tricks to make your application elegant with just few clicks.
 
 ![code magic v2](https://user-images.githubusercontent.com/78784850/190919846-6bc18de7-34c4-4229-b6ea-d0160f8a0168.gif)
 
-### 🧙‍♀️ Magic options available for you:
- - Pic Text - Convert images to CSS art. Just upload and get CSS art with just one click.
- - Gradient Text - Dual color gradient for your texts.
- - Gradient Border - Get dual color gradient with desired radius.
- - Gradient Background - Make your backgrounds stand out by applying gradient colors.
+## 🧑🏾‍💻 Demo
+
+Check out the website: [Code Magic](https://Code-Magic.vercel.app/)
+
+### 🧙‍♀️ Magical options available for you on [Code-Magic ](https://code-magic.vercel.app/):
+ - Pic Text - Convert images to CSS art. Just upload and get CSS art with just a click.
+ - Gradient Text - Generate Dual-colored gradients for any text.
+ - Gradient Border - Get wonderful dual-colored gradients with the desired radius for any element
+ - Gradient Background - Make your backgrounds stand out by using gradient colors.
  - Animations
     - Select one of the below options
       <table>
@@ -29,36 +33,19 @@ Code Magic is a website where you can get simple CSS tricks to make your applica
         </tbody>
       </table>
     - Set duration and speed for the animations
-    - And boom
- - Box Shadow - Cast a shadow on your element.
+    - And boom 💥
+ - Box Shadow - Casts a shadow for any of your elements.
 
 ### ⚒️ Languages / Tools
 
- <table>
-	 <tbody>
-  <tr>
-   <td align="Center" width="25%"> 
- <a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML5" target="_blank" rel="noreferrer"><img src="https://cdn.svgporn.com/logos/html-5.svg" width="36" height="36" alt="HTML" /></a>
-    <br>HTML
-    </td>   
-   
-   <td align="Center" width="25%">
-        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noreferrer"><img src="https://cdn.svgporn.com/logos/css-3.svg" width="36" height="36" alt="CSS" /></a>
-	<br>CSS
-    </td> 
-  <td align="Center" width="25%">
-	  <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"><img src="https://img.icons8.com/color/144/000000/typescript.png" width="36" height="36" alt="Typescript" /></a>
-	<br>TypeScript
-    </td>   
-	  </tr>
-</tbody>
-  </table>
-	
+![HTML](https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white)
+![TYPESCRIPT](https://img.shields.io/badge/typescript%20-%23323330.svg?&style=for-the-badge&logo=typescript&logoColor=%23F7DF1E)
+
+
 <br>
 
-## 🧑🏾‍💻 Demo
 
-Check out the website: [Code Magic](https://Code-Magic.vercel.app/)
 
 ## 👇🏽 Prerequisites
 
