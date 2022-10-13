@@ -7,30 +7,32 @@ Code Magic is a website where you can get simple CSS tricks to make your applica
 ![code magic v2](https://user-images.githubusercontent.com/86626640/195396501-ce16026b-9251-4c44-a658-de41d915545c.gif)
 
 ### 🧙‍♀️ Magic options available for you:
- - Pic Text - Convert images to CSS art. Just upload and get CSS art with just one click.
- - Gradient Text - Dual color gradient for your texts.
- - Gradient Border - Get dual color gradient with desired radius.
- - Gradient Background - Make your backgrounds stand out by applying gradient colors.
- - Animations
-    - Select one of the below options
-      <table>
-        <tbody>
-          <tr>
-            <td align="Center" width="25%">
-              <p>Skew</p>
-            <td>
-            <td align="Center" width="25%">
-              <p>Fade</p>
-            <td>
-            <td align="Center" width="25%">
-              <p>Spin</p>
-            <td>
-          </tr>
-        </tbody>
-      </table>
-    - Set duration and speed for the animations
-    - And boom
- - Box Shadow - Cast a shadow on your element.
+
+- Pic Text - Convert images to CSS art. Just upload and get CSS art with just one click.
+- Gradient Text - Dual color gradient for your texts.
+- Gradient Border - Get dual color gradient with desired radius.
+- Gradient Background - Make your backgrounds stand out by applying gradient colors.
+- Animations
+  - Select one of the below options
+    <table>
+      <tbody>
+        <tr>
+          <td align="Center" width="25%">
+            <p>Skew</p>
+          <td>
+          <td align="Center" width="25%">
+            <p>Fade</p>
+          <td>
+          <td align="Center" width="25%">
+            <p>Spin</p>
+          <td>
+        </tr>
+      </tbody>
+    </table>
+  - Set duration and speed for the animations
+  - And boom
+- Box Shadow - Cast a shadow on your element.
+- Border Radius - Get desired border radius for your element.
 
 ### ⚒️ Languages / Tools
 
@@ -68,9 +70,10 @@ Before installation, please make sure you have already installed the following t
 - [NodeJs](https://nodejs.org/en/download/)
 
 ## 👌🏾 What you have to do to contribute
- - [Read the rules](https://github.com/Dun-sin/Code-Magic/blob/main/CONTRIBUTING.md#rules)
- - [Follow the installation Steps](#%EF%B8%8F-installation-steps)
- - [Follow the contributing Steps](#-after-making-a-change)
+
+- [Read the rules](https://github.com/Dun-sin/Code-Magic/blob/main/CONTRIBUTING.md#rules)
+- [Follow the installation Steps](#%EF%B8%8F-installation-steps)
+- [Follow the contributing Steps](#-after-making-a-change)
 
 ## 🛠️ Installation Steps
 
