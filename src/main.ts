@@ -5,7 +5,7 @@ import {gradientBorderGenerator} from './pages/gradient-border';
 import {gradientBackgroundGenerator} from './pages/gradient-background';
 import {animationGenerator} from './pages/animation';
 import {borderRadiusGenerator} from './pages/border-radius';
-import {boxShadowGenerator} from './pages/box-shadow';
+import {boxShadowGenerator, addBoxShadowListener} from './pages/box-shadow';
 
 // Utils
 import {
@@ -450,3 +450,5 @@ const BorderRadiusGenerator = (
 gradientBorderRadius.addEventListener('change', function () {
   gradientBorderInput.style.display = this.checked ? 'inline' : 'none';
 });
+
+addBoxShadowListener();

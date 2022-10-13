@@ -43,7 +43,9 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
       codeToCopy = `
       p{	
         font-size: ${(outputElement.children[0] as HTMLElement).style.fontSize};
-        background: ${(outputElement.children[0] as HTMLElement).style.background};
+        background: ${
+          (outputElement.children[0] as HTMLElement).style.background
+        };
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -82,16 +84,16 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
           border-radius: ${element.borderRadius};
       `;
       break;
-    case 'box-shadow':   
-      element = outputElement.style; 
-      console.log("element: ", element)
+    case 'box-shadow':
+      element = outputElement.style;
+      console.log('element: ', element);
       codeToCopy = `
         div {
           height: '300px';
           width: '300px';
           box-shadow: ${element.boxShadow};
         }
-      `;  
+      `;
       break;
   }
 
@@ -238,10 +240,14 @@ export const getStyleSheet = () => {
   return <CSSStyleSheet>stylesheet[0];
 };
 
-export const getBoxShadowHorizontalOffset = (attribute: string): HTMLInputElement =>
+export const getBoxShadowHorizontalOffset = (
+  attribute: string
+): HTMLInputElement =>
   <HTMLInputElement>document.getElementById(`${attribute}-h-offset`);
 
-export const getBoxShadowVerticalOffset = (attribute: string): HTMLInputElement =>
+export const getBoxShadowVerticalOffset = (
+  attribute: string
+): HTMLInputElement =>
   <HTMLInputElement>document.getElementById(`${attribute}-v-offset`);
 
 export const getBoxShadowBlur = (attribute: string): HTMLInputElement =>
@@ -252,6 +258,15 @@ export const getBoxShadowSpread = (attribute: string): HTMLInputElement =>
 
 export const getBoxShadowColor = (attribute: string): HTMLInputElement =>
   <HTMLInputElement>document.getElementById(`${attribute}-color`);
+
+export const getBoxShadowFields = (...types: string[]): HTMLSpanElement[] =>
+  types.reduce(
+    (acc, type) => [
+      ...acc,
+      document.getElementById(`box-shadow-${type}-field`) as HTMLInputElement,
+    ],
+    []
+  );
 
 function createDownloadLink(fileName: string, url: string) {
   const link = document.createElement('a');
