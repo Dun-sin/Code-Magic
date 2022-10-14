@@ -19,6 +19,12 @@ export function gradientBorderGenerator(): void {
   const hideRadiusInput = utils.hideRadius;
   const resultPage = utils.getResultPage();
 
+  if (color1.value == '' || color2.value == '') {
+    if (color1.value == '') utils.triggerEmptyAnimation(color1);
+    if (color2.value == '') utils.triggerEmptyAnimation(color2);
+    return;
+  }
+
   resultPage.style.display = 'flex';
 
   getCheckboxElement.addEventListener('change', (e: Event): void => {
