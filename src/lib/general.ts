@@ -259,6 +259,9 @@ export const getBoxShadowSpread = (attribute: string): HTMLInputElement =>
 export const getBoxShadowColor = (attribute: string): HTMLInputElement =>
   <HTMLInputElement>document.getElementById(`${attribute}-color`);
 
+export const getBoxShadowPreview = (): HTMLInputElement =>
+  <HTMLInputElement>document.getElementById(`box-shadow-preview`);
+
 export const getBoxShadowFields = (...types: string[]): HTMLSpanElement[] =>
   types.reduce(
     (acc, type) => [
