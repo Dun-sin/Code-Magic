@@ -68,8 +68,17 @@ export function addBoxShadowListener(): void {
   const verticalOffset = utils.getBoxShadowVerticalOffset(attribute);
   const blur = utils.getBoxShadowBlur(attribute);
   const spread = utils.getBoxShadowSpread(attribute);
+  const color = utils.getBoxShadowColor(attribute);
 
-  const allBoxShadowInputs = [horizontalOffset, verticalOffset, blur, spread];
+  const preview = utils.getBoxShadowPreview();
+
+  const allBoxShadowInputs = [
+    horizontalOffset,
+    verticalOffset,
+    blur,
+    spread,
+    color,
+  ];
   const allBoxShadowInputsFields = utils.getBoxShadowFields(
     'h-offset',
     'v-offset',
@@ -77,11 +86,20 @@ export function addBoxShadowListener(): void {
     'spread'
   );
 
+  const getBoxShadowValue = () =>
+    `${horizontalOffset.value}px ${verticalOffset.value}px ${blur.value}px ${spread.value}px ${color.value}`;
+  preview.style.boxShadow = getBoxShadowValue();
+
   allBoxShadowInputs.forEach((input, idx) => {
     // default
-    allBoxShadowInputsFields[idx].textContent = `${input.value}px`;
-    input.addEventListener('input', () => {
+    if (idx < 4) {
       allBoxShadowInputsFields[idx].textContent = `${input.value}px`;
+    }
+    input.addEventListener('input', () => {
+      if (idx < 4) {
+        allBoxShadowInputsFields[idx].textContent = `${input.value}px`;
+      }
+      preview.style.boxShadow = getBoxShadowValue();
     });
   });
 }
