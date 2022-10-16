@@ -14,8 +14,14 @@ export function gradientBackgroundGenerator() {
   const getDegreeElement = utils.getRange(attribute);
 
   const getOutputElement = utils.getOutput(attribute);
+
+  if (color1.value == '' || color2.value == '') {
+    if (color1.value == '') utils.triggerEmptyAnimation(color1);
+    if (color2.value == '') utils.triggerEmptyAnimation(color2);
+    return;
+  }
   const resultPage = utils.getResultPage();
-  
+
   resultPage.style.display = 'flex';
 
   const values: Values = {
