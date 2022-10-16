@@ -488,7 +488,7 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .output {
-  width: var(--content-container);
+  width: var(--generator-width);
   height: 300px;
   word-wrap: break-word;
   margin-bottom: 1rem;
@@ -629,7 +629,6 @@ input[type='number']::-webkit-outer-spin-button {
 
 .image-download {
   display: flex;
-  margin-bottom: -1rem;
 }
 
 .image-download > button:first-of-type {
