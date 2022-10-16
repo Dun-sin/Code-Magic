@@ -328,7 +328,6 @@ getHeaderText?.addEventListener('click', () => {
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
     const checking = generator.getAttribute('data-gen');
-
     if (
       checking === null ||
       getHomePage === null ||
@@ -382,8 +381,15 @@ gradientRangeInputs.forEach((gradientRangeInput: HTMLInputElement) => {
   displayGradientValue(gradientRangeInput);
 });
 
+createGradientPreview(
+  gradientBackgroundColor1,
+  gradientBackgroundColor2,
+  gradientBackgroundDegree,
+  backgroundPreview
+);
+
 for (let i = 0; i < gradientBackgroundInputs.length; i++) {
-  gradientBackgroundInputs[i].addEventListener('change', () =>
+  gradientBackgroundInputs[i].addEventListener('input', () =>
     createGradientPreview(
       gradientBackgroundColor1,
       gradientBackgroundColor2,

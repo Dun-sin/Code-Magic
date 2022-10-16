@@ -309,6 +309,11 @@
 
           <!-- Gradient Background -->
           <div data-content="gradient-background">
+            <div
+              class="preview big-preview"
+              id="gradient-background-color-preview"
+            ></div>
+
             <div class="colors">
               <label for="color" class="color">
                 <input
@@ -316,11 +321,10 @@
                   data-coloris
                   id="gradient-background-color1"
                   class="gradient-background-inputs"
+                  value="lime"
                 />
                 <span>First Color</span>
               </label>
-
-              <div class="preview" id="gradient-background-color-preview"></div>
 
               <label for="color" class="color">
                 <input
@@ -328,6 +332,7 @@
                   data-coloris
                   id="gradient-background-color2"
                   class="gradient-background-inputs"
+                  value="cyan"
                 />
                 <span>Second Color</span>
               </label>
@@ -344,6 +349,7 @@
                 min="0"
                 id="gradient-background-degree"
                 class="gradient-background-inputs degree-range"
+                value="40"
               />
             </label>
 
