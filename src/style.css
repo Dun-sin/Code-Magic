@@ -651,7 +651,7 @@ input[type='range'] {
 input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 20px;
+  width: 40px;
   height: 20px;
   border-radius: 30%;
   background: #004c6d;
