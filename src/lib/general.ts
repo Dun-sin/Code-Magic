@@ -240,33 +240,34 @@ export const getStyleSheet = () => {
   return <CSSStyleSheet>stylesheet[0];
 };
 
-export const getBoxShadowHorizontalOffset = (
+export const getShadowHorizontalOffset = (
   attribute: string
 ): HTMLInputElement =>
   <HTMLInputElement>document.getElementById(`${attribute}-h-offset`);
 
-export const getBoxShadowVerticalOffset = (
-  attribute: string
-): HTMLInputElement =>
+export const getShadowVerticalOffset = (attribute: string): HTMLInputElement =>
   <HTMLInputElement>document.getElementById(`${attribute}-v-offset`);
 
-export const getBoxShadowBlur = (attribute: string): HTMLInputElement =>
+export const getShadowBlur = (attribute: string): HTMLInputElement =>
   <HTMLInputElement>document.getElementById(`${attribute}-blur`);
 
-export const getBoxShadowSpread = (attribute: string): HTMLInputElement =>
+export const getShadowSpread = (attribute: string): HTMLInputElement =>
   <HTMLInputElement>document.getElementById(`${attribute}-spread`);
 
-export const getBoxShadowColor = (attribute: string): HTMLInputElement =>
+export const getShadowColor = (attribute: string): HTMLInputElement =>
   <HTMLInputElement>document.getElementById(`${attribute}-color`);
 
-export const getBoxShadowPreview = (): HTMLInputElement =>
-  <HTMLInputElement>document.getElementById(`box-shadow-preview`);
+export const getShadowPreview = (attribute: string): HTMLInputElement =>
+  <HTMLInputElement>document.getElementById(`${attribute}-preview`);
 
-export const getBoxShadowFields = (...types: string[]): HTMLSpanElement[] =>
+export const getShadowFields = (
+  attribute: string,
+  types: string[]
+): HTMLSpanElement[] =>
   types.reduce(
     (acc, type) => [
       ...acc,
-      document.getElementById(`box-shadow-${type}-field`) as HTMLInputElement,
+      document.getElementById(`${attribute}-${type}-field`) as HTMLInputElement,
     ],
     []
   );

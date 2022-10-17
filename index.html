@@ -174,6 +174,17 @@
             <span>Box Shadow</span>
             <span class="tooltip">Create Box Shadow for your elements</span>
           </li>
+          <li data-gen="text-shadow">
+            <iconify-icon
+              inline
+              icon="mdi:text-shadow"
+              style="color: white"
+              width="20"
+              height="20"
+            ></iconify-icon>
+            <span>Text Shadow</span>
+            <span class="tooltip">Create Text Shadow for your texts</span>
+          </li>
         </ul>
         <footer>
           Contribute to the Project
@@ -443,12 +454,12 @@
                 data-coloris
                 placeholder="Tap to pick a color"
                 id="box-shadow-color"
-                class="box-shodow-inputs"
+                class="box-shadow-inputs"
               />
             </label>
 
-            <div class="box-shadow-degrees">
-              <div class="box-shadow-row">
+            <div class="degrees">
+              <div class="degrees-row">
                 <label id="degree">
                   <span>
                     <span>Horizontal</span>
@@ -460,7 +471,7 @@
                     min="-20"
                     value="5"
                     id="box-shadow-h-offset"
-                    class="box-shodow-inputs"
+                    class="box-shadow-inputs"
                   />
                 </label>
 
@@ -475,12 +486,12 @@
                     min="-20"
                     value="10"
                     id="box-shadow-v-offset"
-                    class="box-shodow-inputs"
+                    class="box-shadow-inputs"
                   />
                 </label>
               </div>
               <hr class="divider" />
-              <div class="box-shadow-row">
+              <div class="degrees-row">
                 <label id="degree">
                   <span>
                     <span>Blur</span>
@@ -489,10 +500,10 @@
                   <input
                     type="range"
                     max="100"
-                    min="-20"
+                    min="0"
                     value="18"
                     id="box-shadow-blur"
-                    class="box-shodow-inputs"
+                    class="box-shadow-inputs"
                   />
                 </label>
 
@@ -507,7 +518,7 @@
                     min="-20"
                     value="5"
                     id="box-shadow-spread"
-                    class="box-shodow-inputs"
+                    class="box-shadow-inputs"
                   />
                 </label>
               </div>
@@ -553,6 +564,77 @@
             </div>
 
             <div class="btn" data-button="border-radius">Get Results</div>
+          </div>
+
+          <!-- Text shadow generator -->
+          <div data-content="text-shadow">
+            <textarea
+              id="text-shadow-text"
+              placeholder="Enter the text"
+            ></textarea>
+
+            <label for="color" class="color">
+              <input
+                type="text"
+                data-coloris
+                placeholder="Tap to pick a color"
+                id="text-shadow-color"
+                class="text-shadow-inputs"
+              />
+            </label>
+
+            <div class="degrees">
+              <div class="degrees-row">
+                <label id="degree">
+                  <span>
+                    <span>Horizontal</span>
+                    <span id="text-shadow-h-offset-field">5px</span>
+                  </span>
+                  <input
+                    type="range"
+                    max="50"
+                    min="-20"
+                    value="5"
+                    id="text-shadow-h-offset"
+                    class="text-shadow-inputs"
+                  />
+                </label>
+
+                <label id="degree">
+                  <span>
+                    <span>Vertical</span>
+                    <span id="text-shadow-v-offset-field">5px</span>
+                  </span>
+                  <input
+                    type="range"
+                    max="50"
+                    min="-20"
+                    value="10"
+                    id="text-shadow-v-offset"
+                    class="text-shadow-inputs"
+                  />
+                </label>
+              </div>
+              <hr class="divider" />
+              <div class="degrees-row">
+                <label id="degree">
+                  <span>
+                    <span>Blur</span>
+                    <span id="text-shadow-blur-field">5px</span>
+                  </span>
+                  <input
+                    type="range"
+                    max="100"
+                    min="0"
+                    value="18"
+                    id="text-shadow-blur"
+                    class="text-shadow-inputs"
+                  />
+                </label>
+              </div>
+            </div>
+
+            <div class="btn" data-button="text-shadow">Get Results</div>
           </div>
         </div>
 
@@ -723,6 +805,44 @@
                   width="20"
                 ></iconify-icon
                 >Get Code
+              </button>
+            </div>
+          </div>
+
+          <!-- Text shadow -->
+          <div class="download-output" data-result="text-shadow">
+            <div class="output"></div>
+
+            <div class="download-btn">
+              <div class="image-download">
+                <button class="btn" data-download="text-shadow-PNG">
+                  <iconify-icon
+                    inline
+                    icon="bxs:download"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon>
+                  Download PNG
+                </button>
+                <button class="btn" data-download="text-shadow-svg">
+                  <iconify-icon
+                    inline
+                    icon="bxs:download"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon>
+                  Download Svg
+                </button>
+              </div>
+
+              <button class="btn" data-download="text-shadow-code">
+                <iconify-icon
+                  inline
+                  icon="bx:code-alt"
+                  style="color: white; margin-right: 5px"
+                  width="20"
+                ></iconify-icon>
+                Get Code
               </button>
             </div>
           </div>

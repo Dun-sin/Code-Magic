@@ -29,6 +29,7 @@ import FilePondPluginImageResize from 'filepond-plugin-image-resize';
 import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
 
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+import {addTextShadowListener, textShadowGenerator} from './pages/text-shadow';
 
 FilePond.registerPlugin(
   FilePondPluginImagePreview,
@@ -262,6 +263,9 @@ function generatorsFunction(attribute: string): void {
     case 'box-shadow':
       boxShadowGenerator();
       break;
+    case 'text-shadow':
+      textShadowGenerator();
+      break;
   }
 }
 
@@ -452,3 +456,4 @@ gradientBorderRadius.addEventListener('change', function () {
 });
 
 addBoxShadowListener();
+addTextShadowListener();

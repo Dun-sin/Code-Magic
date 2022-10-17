@@ -8,13 +8,14 @@ type Values = {
   color: string;
 };
 
+const attribute = 'box-shadow';
+
 export function boxShadowGenerator(): void {
-  const attribute = 'box-shadow';
-  const horizontalOffset = utils.getBoxShadowHorizontalOffset(attribute);
-  const verticalOffset = utils.getBoxShadowVerticalOffset(attribute);
-  const blur = utils.getBoxShadowBlur(attribute);
-  const spread = utils.getBoxShadowSpread(attribute);
-  const color = utils.getBoxShadowColor(attribute);
+  const horizontalOffset = utils.getShadowHorizontalOffset(attribute);
+  const verticalOffset = utils.getShadowVerticalOffset(attribute);
+  const blur = utils.getShadowBlur(attribute);
+  const spread = utils.getShadowSpread(attribute);
+  const color = utils.getShadowColor(attribute);
   const getOutputElement = utils.getOutput(attribute);
   const resultPage = utils.getResultPage();
 
@@ -28,7 +29,7 @@ export function boxShadowGenerator(): void {
     color: color.value,
   };
 
-  getBoxShadowResult(attribute, values, getOutputElement);
+  getBoxShadowResult(values, getOutputElement);
 }
 
 /**
@@ -38,12 +39,11 @@ export function boxShadowGenerator(): void {
  * @param values values entered by users
  * @param outputElement output element to display result
  */
-function getBoxShadowResult(
-  attribute: string,
-  values: Values,
-  outputElement: HTMLElement
-): void {
-  const createBoxShadowElement = (boxShadowElement: any, values: any) => {
+function getBoxShadowResult(values: Values, outputElement: HTMLElement): void {
+  const createBoxShadowElement = (
+    boxShadowElement: HTMLElement,
+    values: Values
+  ) => {
     boxShadowElement.style.height = '300px';
     boxShadowElement.style.width = '300px';
     boxShadowElement.style.background = 'transparent';
@@ -63,14 +63,13 @@ function getBoxShadowResult(
 }
 
 export function addBoxShadowListener(): void {
-  const attribute = 'box-shadow';
-  const horizontalOffset = utils.getBoxShadowHorizontalOffset(attribute);
-  const verticalOffset = utils.getBoxShadowVerticalOffset(attribute);
-  const blur = utils.getBoxShadowBlur(attribute);
-  const spread = utils.getBoxShadowSpread(attribute);
-  const color = utils.getBoxShadowColor(attribute);
+  const horizontalOffset = utils.getShadowHorizontalOffset(attribute);
+  const verticalOffset = utils.getShadowVerticalOffset(attribute);
+  const blur = utils.getShadowBlur(attribute);
+  const spread = utils.getShadowSpread(attribute);
+  const color = utils.getShadowColor(attribute);
 
-  const preview = utils.getBoxShadowPreview();
+  const preview = utils.getShadowPreview(attribute);
 
   const allBoxShadowInputs = [
     horizontalOffset,
@@ -79,16 +78,16 @@ export function addBoxShadowListener(): void {
     spread,
     color,
   ];
-  const allBoxShadowInputsFields = utils.getBoxShadowFields(
+  const allBoxShadowInputsFields = utils.getShadowFields(attribute, [
     'h-offset',
     'v-offset',
     'blur',
-    'spread'
-  );
+    'spread',
+  ]);
 
-  const getBoxShadowValue = () =>
+  const getShadowValue = () =>
     `${horizontalOffset.value}px ${verticalOffset.value}px ${blur.value}px ${spread.value}px ${color.value}`;
-  preview.style.boxShadow = getBoxShadowValue();
+  preview.style.boxShadow = getShadowValue();
 
   allBoxShadowInputs.forEach((input, idx) => {
     // default
@@ -99,7 +98,7 @@ export function addBoxShadowListener(): void {
       if (idx < 4) {
         allBoxShadowInputsFields[idx].textContent = `${input.value}px`;
       }
-      preview.style.boxShadow = getBoxShadowValue();
+      preview.style.boxShadow = getShadowValue();
     });
   });
 }

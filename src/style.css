@@ -207,20 +207,20 @@ main > section:last-of-type {
 }
 
 [data-content='pic-text'] > div:first-of-type {
-  width: var(--content-container);
-  height: 250px;
+  width: var(--generator-width);
   border: 2px dashed var(--tertiary-color);
 }
 
 textarea {
   border-radius: 5px;
-  width: var(--content-container);
+  width: var(--generator-width);
   height: 150px;
   border: none;
   background-color: var(--primary-color);
   color: var(--text-color);
   resize: none;
   padding: 1rem;
+  margin-bottom: var(--spacing);
 }
 
 ::placeholder {
@@ -414,16 +414,15 @@ input[type='number']::-webkit-outer-spin-button {
   background-color: #0c49d2;
 }
 
-.box-shadow-degrees {
+.degrees {
   width: var(--generator-width);
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2rem;
-  /* background-color:#000000; */
+  margin-top: var(--spacing);
 }
 
-.box-shadow-row {
+.degrees-row {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -432,18 +431,18 @@ input[type='number']::-webkit-outer-spin-button {
   width: var(--content-container);
 }
 
-.box-shadow-row label {
+.degrees-row label {
   width: 40% !important;
 }
 
-.box-shadow-row label > span:nth-of-type(1) {
+.degrees-row label > span:nth-of-type(1) {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.3rem;
 }
 
-.box-shadow-row label > span:nth-of-type(1) > span:nth-last-of-type(1) {
+.degrees-row label > span:nth-of-type(1) > span:nth-last-of-type(1) {
   opacity: 0.8;
   font-size: 12px;
 }
@@ -493,6 +492,9 @@ input[type='number']::-webkit-outer-spin-button {
   word-wrap: break-word;
   margin-bottom: 1rem;
   background-color: var(--primary-color);
+  display: grid;
+  place-items: center;
+  font-size: clamp(20px, 1vw + 1rem, 3vw);
 }
 
 .output > p {
