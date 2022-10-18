@@ -224,8 +224,8 @@ textarea {
 }
 
 ::placeholder {
-  color: #a5a5a7;
-  font-size: 1rem;
+  color: ##484848;
+  font-size: 0.875rem;
 }
 
 .colors {
