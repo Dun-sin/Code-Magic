@@ -224,8 +224,8 @@ textarea {
 }
 
 ::placeholder {
-  color: #a5a5a7;
-  font-size: 1rem;
+  color: ##484848;
+  font-size: 0.875rem;
 }
 
 .colors {
@@ -477,14 +477,49 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .side-results .header {
-  height: 10vh;
-  display: flex;
-  align-items: center;
   padding: 3rem;
 }
 
+.side-results .header,
+.go-back-icon {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+}
+
 .side-results .header > h2 {
-  margin-left: 1rem;
+  margin-left: 3rem;
+}
+
+.go-back-icon span.tooltip {
+  position: relative;
+  bottom: -20px;
+  right: 40px;
+  padding: 5px;
+  width: 50px;
+  margin-top: 35px;
+  margin-right: -50px;
+  font-size: 15px;
+  text-align: center;
+  color: var(--input-color);
+  background-color: var(--text-color);
+  border-radius: 5px;
+  display: none;
+}
+
+.go-back-icon .tooltip::before {
+  content: '';
+  position: absolute;
+  top: -15%;
+  left: 8%;
+  margin-top: -5px;
+  border-width: 12px;
+  border-style: solid;
+  border-color: transparent var(--text-color) transparent transparent;
+}
+
+.go-back-icon:hover .tooltip {
+  display: block;
 }
 
 .output {
