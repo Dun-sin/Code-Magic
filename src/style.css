@@ -183,6 +183,12 @@ main > section:last-of-type {
   display: none;
 }
 
+.open-sidebar {
+  position: absolute;
+  top: 10px;
+  right: 50px;
+}
+
 .generators {
   min-height: var(--content-container);
   min-width: var(--content-container);
@@ -224,7 +230,7 @@ textarea {
 }
 
 ::placeholder {
-  color: ##484848;
+  color: #484848;
   font-size: 0.875rem;
 }
 
@@ -481,7 +487,8 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .side-results .header,
-.go-back-icon {
+.close-sideBar,
+.open-sidebar {
   height: 10vh;
   display: flex;
   align-items: center;
@@ -491,7 +498,8 @@ input[type='number']::-webkit-outer-spin-button {
   margin-left: 3rem;
 }
 
-.go-back-icon span.tooltip {
+.close-sideBar span.tooltip,
+.open-sidebar > span.tooltip {
   position: relative;
   bottom: -20px;
   right: 40px;
@@ -507,7 +515,13 @@ input[type='number']::-webkit-outer-spin-button {
   display: none;
 }
 
-.go-back-icon .tooltip::before {
+.open-sidebar > span.tooltip {
+  top: 38%;
+  left: -45px;
+}
+
+.close-sideBar .tooltip::before,
+.open-sidebar > span.tooltip::before {
   content: '';
   position: absolute;
   top: -15%;
@@ -518,7 +532,12 @@ input[type='number']::-webkit-outer-spin-button {
   border-color: transparent var(--text-color) transparent transparent;
 }
 
-.go-back-icon:hover .tooltip {
+.open-sidebar > span.tooltip::before {
+  top: 10%;
+}
+
+.close-sideBar:hover .tooltip,
+.open-sidebar:hover > span.tooltip {
   display: block;
 }
 

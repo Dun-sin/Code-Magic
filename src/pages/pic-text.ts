@@ -4,7 +4,13 @@ import * as utils from '../lib/general';
  * @param image - image inputed string
  * @param imageHeight - image height number
  */
-export function picTextGenerator(image: string, imageHeight: number): void {
+export function picTextGenerator(
+  image: string,
+  imageHeight: number,
+  type: 'newResults' | 'oldResults' | null
+): void {
+  if (type === null) return;
+
   const attribute = 'pic-text';
   const outputNode = utils.getOutput(attribute);
   const resultPage = utils.getResultPage();
@@ -18,6 +24,7 @@ export function picTextGenerator(image: string, imageHeight: number): void {
   );
 
   resultPage.style.display = 'flex';
+  if (type === 'oldResults') return;
   outputNode.style.background = `url(${image}) center no-repeat`;
   outputNode.style.width = 'var(--output-width)';
   outputNode.style.height = `${imageHeight}px`;
