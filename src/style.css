@@ -224,7 +224,7 @@ textarea {
 }
 
 ::placeholder {
-  color: ##484848;
+  color: #484848;
   font-size: 0.875rem;
 }
 
@@ -805,5 +805,8 @@ a {
 @media screen and (max-width: 500px) {
   .box-shadow-preview {
     --box-size: 70px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
