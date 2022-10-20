@@ -451,7 +451,7 @@ input[type='number']::-webkit-outer-spin-button {
   --box-size: 100px;
   position: absolute;
   top: 1rem;
-  left: 2.2rem;
+  left: 3.2rem;
   width: var(--box-size);
   height: var(--box-size);
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -805,8 +805,5 @@ a {
 @media screen and (max-width: 500px) {
   .box-shadow-preview {
     --box-size: 70px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
   }
 }
