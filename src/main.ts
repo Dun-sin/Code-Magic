@@ -37,6 +37,32 @@ FilePond.registerPlugin(
   FilePondPluginImageTransform
 );
 
+// get the element with data-button="open-side-panel" attribute and make it hidden
+const openSidePanelButton = document.getElementsByClassName(
+  'open-sidebar'
+)[0] as HTMLElement;
+if (openSidePanelButton) {
+  openSidePanelButton.style.display = 'none';
+}
+
+const gradientGenerator = document.querySelectorAll('[data-gen]');
+gradientGenerator.forEach((item) => {
+  item.addEventListener('click', () => {
+    if (openSidePanelButton) {
+      openSidePanelButton.style.display = 'none';
+    }
+  });
+});
+
+const getResultButtons = document.querySelectorAll('[data-button]');
+getResultButtons.forEach((item) => {
+  item.addEventListener('click', () => {
+    if (openSidePanelButton) {
+      openSidePanelButton.style.display = 'block';
+    }
+  });
+});
+
 /**
  * All Variables
  */
