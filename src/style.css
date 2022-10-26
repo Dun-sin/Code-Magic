@@ -255,6 +255,16 @@ textarea {
   align-items: center;
 }
 
+@media only screen and (max-width: 650px) {
+  .clr-field {
+    width: var(--generator-width);
+  }
+  [data-coloris] {
+    width: 100%;
+    height: 25px;
+  }
+}
+
 [type='color'] {
   width: 30px;
   height: 30px;
