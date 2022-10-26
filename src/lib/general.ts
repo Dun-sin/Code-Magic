@@ -101,17 +101,21 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
 }
 
 export function downloadPNG(attribute: string, outputImage: HTMLElement): void {
-  domtoimage.toPng(outputImage, {quality: 0.95}).then((dataUrl) => {
-    const link = createDownloadLink(`${attribute}.png`, dataUrl);
-    link.click();
-  });
+  if(navigator.userAgent.match(/firefox|fxios/i)){
+      domtoimage.toPng(outputImage, {quality: 0.95}).then((dataUrl) => {
+        const link = createDownloadLink(`${attribute}.png`, dataUrl);
+        link.click();
+      });
+  }
 }
 
 export function downloadSVG(attribute: string, outputImage: HTMLElement): void {
-  domtoimage.toSvg(outputImage).then((dataUrl) => {
-    const link = createDownloadLink(`${attribute}.svg`, dataUrl);
-    link.click();
-  });
+  if(navigator.userAgent.match(/firefox|fxios/i)){
+      domtoimage.toSvg(outputImage).then((dataUrl) => {
+        const link = createDownloadLink(`${attribute}.svg`, dataUrl);
+        link.click();
+      }); 
+  }
 }
 
 /**
