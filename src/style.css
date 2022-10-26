@@ -260,6 +260,7 @@ textarea {
     width: var(--generator-width);
   }
   [data-coloris] {
+    width: 100%;
     height: 25px;
   }
 }
