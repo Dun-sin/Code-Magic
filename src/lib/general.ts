@@ -86,12 +86,20 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
       break;
     case 'box-shadow':
       element = outputElement.style;
-      console.log('element: ', element);
       codeToCopy = `
         div {
           height: '300px';
           width: '300px';
           box-shadow: ${element.boxShadow};
+        }
+      `;
+      break;
+    case 'text-shadow':
+      element = outputElement.style;
+      console.log('element: ', element.textShadow);
+      codeToCopy = `
+        div {
+          text-shadow: ${element.textShadow};
         }
       `;
       break;
