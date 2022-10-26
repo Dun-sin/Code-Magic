@@ -256,7 +256,7 @@ textarea {
 }
 
 @media only screen and (max-width: 650px) {
-  .clr-field {
+  .color {
     width: var(--generator-width);
   }
   [data-coloris] {
