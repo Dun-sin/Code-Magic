@@ -255,6 +255,41 @@ textarea {
   align-items: center;
 }
 
+@media only screen and (max-width: 600px) {
+  #gradient-text-color1 {
+    width: 300px;
+    height: 25px;
+  }
+  #gradient-text-color2 {
+    width: 300px;
+    height: 25px;
+  }
+  #gradient-border-color1 {
+    width: 300px;
+    height: 25px;
+  }
+  #gradient-border-color2 {
+    width: 300px;
+    height: 25px;
+  }
+  #gradient-background-color1 {
+    width: 300px;
+    height: 25px;
+  }
+  #gradient-background-color2 {
+    width: 300px;
+    height: 25px;
+  }
+  #box-shadow-color {
+    width: 300px;
+    height: 25px;
+  }
+  #text-shadow-color {
+    width: 300px;
+    height: 25px;
+  }
+}
+
 [type='color'] {
   width: 30px;
   height: 30px;
