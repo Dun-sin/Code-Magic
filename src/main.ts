@@ -6,6 +6,7 @@ import {gradientBackgroundGenerator} from './pages/gradient-background';
 import {animationGenerator} from './pages/animation';
 import {borderRadiusGenerator} from './pages/border-radius';
 import {boxShadowGenerator, addBoxShadowListener} from './pages/box-shadow';
+import {addTextShadowListener, textShadowGenerator} from './pages/text-shadow';
 
 // Utils
 import {
@@ -29,13 +30,38 @@ import FilePondPluginImageResize from 'filepond-plugin-image-resize';
 import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
 
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
-import {addTextShadowListener, textShadowGenerator} from './pages/text-shadow';
 
 FilePond.registerPlugin(
   FilePondPluginImagePreview,
   FilePondPluginImageResize,
   FilePondPluginImageTransform
 );
+
+// get the element with data-button="open-side-panel" attribute and make it hidden
+const openSidePanelButton = document.getElementsByClassName(
+  'open-sidebar'
+)[0] as HTMLElement;
+if (openSidePanelButton) {
+  openSidePanelButton.style.display = 'none';
+}
+
+const gradientGenerator = document.querySelectorAll('[data-gen]');
+gradientGenerator.forEach((item) => {
+  item.addEventListener('click', () => {
+    if (openSidePanelButton) {
+      openSidePanelButton.style.display = 'none';
+    }
+  });
+});
+
+const getResultButtons = document.querySelectorAll('[data-button]');
+getResultButtons.forEach((item) => {
+  item.addEventListener('click', () => {
+    if (openSidePanelButton) {
+      openSidePanelButton.style.display = 'block';
+    }
+  });
+});
 
 /**
  * All Variables
@@ -75,11 +101,14 @@ const navBarAnimationOptions = {
   easing: 'ease',
 };
 
+type openResults = 'newResults' | 'oldResults' | null;
+
 // Elements
 const generators = document.querySelectorAll('[data-gen]');
 const sidebar = document.querySelector('.side-results') as HTMLElement;
 const getHeaderText = document.getElementById('head');
-const getResults = document.querySelectorAll('[data-button]');
+const getResultsButton = document.querySelectorAll('[data-button]');
+const getResultIcon = document.querySelector('.open-sidebar');
 const getHomePage = document.getElementById('home-page');
 const getGeneratorSection = document.getElementById('generator');
 const results = document.querySelectorAll('[data-result]');
@@ -240,31 +269,31 @@ type Display = 'grid' | 'flex' | 'none';
  *
  * @param attribute - The attribute name of the generator element
  */
-function generatorsFunction(attribute: string): void {
+function generatorsFunction(attribute: string, type: openResults): void {
   switch (attribute) {
     case 'pic-text':
-      picTextGenerator(imageSRC, imageHeight);
+      picTextGenerator(imageSRC, imageHeight, type);
       break;
     case 'gradient-text':
-      gradientTextGenerator();
+      gradientTextGenerator(type);
       break;
     case 'gradient-border':
-      gradientBorderGenerator();
+      gradientBorderGenerator(type);
       break;
     case 'gradient-background':
-      gradientBackgroundGenerator();
+      gradientBackgroundGenerator(type);
       break;
     case 'animation':
-      animationGenerator();
+      animationGenerator(type);
       break;
     case 'border-radius':
-      borderRadiusGenerator();
+      borderRadiusGenerator(type);
       break;
     case 'box-shadow':
-      boxShadowGenerator();
+      boxShadowGenerator(type);
       break;
     case 'text-shadow':
-      textShadowGenerator();
+      textShadowGenerator(type);
       break;
   }
 }
@@ -310,7 +339,7 @@ document.getElementById('head')?.addEventListener('click', () => {
   });
 });
 
-function showResult(attribute: string | null) {
+function showResult(attribute: string | null, type: openResults) {
   results.forEach((item) => {
     const element = <HTMLElement>item;
     if (element.getAttribute('data-result') === attribute) {
@@ -319,8 +348,9 @@ function showResult(attribute: string | null) {
       element.style.display = 'none';
     }
   });
-  if (attribute === null) return;
-  generatorsFunction(attribute);
+  if (attribute === null || type === null) return;
+
+  generatorsFunction(attribute, type);
 }
 
 getHeaderText?.addEventListener('click', () => {
@@ -347,20 +377,25 @@ generators.forEach((generator) => {
   });
 });
 
-getResults.forEach((getResult) => {
+getResultsButton.forEach((getResult) => {
   getResult?.addEventListener('click', () => {
-    showResult(getResult.getAttribute('data-button'));
+    showResult(getResult.getAttribute('data-button'), 'newResults');
     sidebar.animate(sideBarSlide, sideBarTiming);
     sidebar.style.left = '0%';
   });
 });
-showResult(null);
+
+getResultIcon?.addEventListener('click', () => {
+  showResult(attributeValue, 'oldResults');
+  sidebar.animate(sideBarSlide, sideBarTiming);
+  sidebar.style.left = '0%';
+});
 
 // onClick event listener for the closebar icon
 closeBar?.addEventListener('click', () => {
   sidebar.animate(sideBarSlideOut, sideBarTiming);
   sidebar.style.left = '100%';
-  showResult(null);
+  showResult(null, null);
   setTimeout(() => {
     sidebar.style.display = 'none';
   }, 600);
@@ -457,3 +492,5 @@ gradientBorderRadius.addEventListener('change', function () {
 
 addBoxShadowListener();
 addTextShadowListener();
+
+showResult(null, null);

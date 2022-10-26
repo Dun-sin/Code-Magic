@@ -183,6 +183,12 @@ main > section:last-of-type {
   display: none;
 }
 
+.open-sidebar {
+  position: absolute;
+  top: 10px;
+  right: 50px;
+}
+
 .generators {
   min-height: var(--content-container);
   min-width: var(--content-container);
@@ -224,8 +230,8 @@ textarea {
 }
 
 ::placeholder {
-  color: #a5a5a7;
-  font-size: 1rem;
+  color: #484848;
+  font-size: 0.875rem;
 }
 
 .colors {
@@ -247,6 +253,16 @@ textarea {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+@media only screen and (max-width: 650px) {
+  .clr-field {
+    width: var(--generator-width);
+  }
+  [data-coloris] {
+    width: 100%;
+    height: 25px;
+  }
 }
 
 [type='color'] {
@@ -336,7 +352,7 @@ input[type='number']::-webkit-outer-spin-button {
   background-color: var(--primary-color);
   padding: 0.8rem;
   border-radius: 5px;
-  width: var(--content-container);
+  width: var(--generator-width);
   margin-top: var(--spacing);
 }
 
@@ -390,6 +406,7 @@ input[type='number']::-webkit-outer-spin-button {
 .styled-input::-webkit-inner-spin-button,
 .styled-input::-webkit-outer-spin-button {
   -webkit-appearance: none;
+  appearance: none;
   margin: 0;
 }
 
@@ -451,7 +468,7 @@ input[type='number']::-webkit-outer-spin-button {
   --box-size: 100px;
   position: absolute;
   top: 1rem;
-  left: 2.2rem;
+  left: 3.2rem;
   width: var(--box-size);
   height: var(--box-size);
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -480,14 +497,83 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .side-results .header,
-.go-back-icon {
+.close-sideBar,
+.open-sidebar {
   height: 10vh;
   display: flex;
   align-items: center;
 }
 
 .side-results .header > h2 {
-  margin-left: 1rem;
+  margin-left: 3rem;
+}
+
+.close-sideBar span.tooltip {
+  position: relative;
+  bottom: -20px;
+  right: 40px;
+  padding: 5px;
+  width: 50px;
+  margin-top: 35px;
+  margin-right: -50px;
+  font-size: 15px;
+  text-align: center;
+  color: var(--input-color);
+  background-color: var(--text-color);
+  border-radius: 5px;
+  display: none;
+}
+
+.open-sidebar > span.tooltip {
+  position: relative;
+  bottom: -20px;
+  right: 40px;
+  padding: 5px;
+  width: 50px;
+  margin-top: 10px;
+  margin-right: -50px;
+  font-size: 15px;
+  text-align: center;
+  color: var(--input-color);
+  background-color: var(--text-color);
+  border-radius: 5px;
+  display: none;
+}
+
+.open-sidebar > span.tooltip {
+  top: 5%;
+  left: -10px;
+}
+
+.close-sideBar .tooltip::before {
+  content: '';
+  position: absolute;
+  top: -15%;
+  left: 8%;
+  margin-top: -5px;
+  border-width: 12px;
+  border-style: solid;
+  border-color: transparent var(--text-color) transparent transparent;
+}
+
+.open-sidebar > span.tooltip::before {
+  content: '';
+  position: absolute;
+  top: -15%;
+  left: 5%;
+  margin-top: -5px;
+  border-width: 12px;
+  border-style: solid;
+  border-color: transparent var(--text-color) transparent transparent;
+}
+
+.open-sidebar > span.tooltip::before {
+  top: -26%;
+}
+
+.close-sideBar:hover .tooltip,
+.open-sidebar:hover > span.tooltip {
+  display: block;
 }
 
 .go-back-icon span.tooltip {
@@ -527,13 +613,12 @@ input[type='number']::-webkit-outer-spin-button {
   word-wrap: break-word;
   margin-bottom: 1rem;
   background-color: var(--primary-color);
+}
+
+.output:not([data-result='pic-text'] > .output) {
   display: grid;
   place-items: center;
   font-size: clamp(20px, 1vw + 1rem, 3vw);
-}
-
-.output > p {
-  font-size: calc(1rem + 1vw) !important;
 }
 
 .download-output {
@@ -642,6 +727,7 @@ input[type='number']::-webkit-outer-spin-button {
     )
     border-box;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 }
@@ -677,6 +763,7 @@ input[type='number']::-webkit-outer-spin-button {
 
 input[type='range'] {
   -webkit-appearance: none;
+  appearance: none;
   margin: 2px;
   background: #cecece;
   border-radius: 5px;
@@ -697,6 +784,7 @@ input[type='range']::-webkit-slider-thumb {
 
 input[type='range']::-webkit-slider-runnable-track {
   -webkit-appearance: none;
+  appearance: none;
   box-shadow: none;
   border: none;
   background: transparent;

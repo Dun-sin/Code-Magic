@@ -10,13 +10,13 @@ type Values = {
 
 const attribute = 'text-shadow';
 
-export function textShadowGenerator(): void {
+export function textShadowGenerator(
+  type: 'newResults' | 'oldResults' | null
+): void {
+  if (type === null) return;
+
   const getInputElement = utils.getInputText(attribute);
 
-  if (getInputElement.value.length === 0) {
-    utils.triggerEmptyAnimation(getInputElement);
-    return;
-  }
   const horizontalOffset = utils.getShadowHorizontalOffset(attribute);
   const verticalOffset = utils.getShadowVerticalOffset(attribute);
   const blur = utils.getShadowBlur(attribute);
@@ -24,7 +24,12 @@ export function textShadowGenerator(): void {
   const getOutputElement = utils.getOutput(attribute);
   const resultPage = utils.getResultPage();
 
+  if (getInputElement.value.length === 0) {
+    utils.triggerEmptyAnimation(getInputElement);
+    return;
+  }
   resultPage.style.display = 'flex';
+  if (type === 'oldResults') return;
 
   const values: Values = {
     hOffset: horizontalOffset.value,

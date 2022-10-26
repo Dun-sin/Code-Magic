@@ -6,7 +6,11 @@ type Values = {
   degree: string;
 };
 
-export function gradientTextGenerator(): void {
+export function gradientTextGenerator(
+  type: 'newResults' | 'oldResults' | null
+): void {
+  if (type === null) return;
+
   const attribute = 'gradient-text';
   const getInputElement = utils.getInputText(attribute);
 
@@ -19,7 +23,7 @@ export function gradientTextGenerator(): void {
   const resultPage = utils.getResultPage();
 
   resultPage.style.display = 'flex';
-  if (getOutputElement === null) return;
+  if (getOutputElement === null || type === 'oldResults') return;
   getOutputElement.style.display = 'grid';
   getOutputElement.style.placeItems = 'center';
 

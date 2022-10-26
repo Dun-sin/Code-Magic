@@ -7,13 +7,17 @@ type Values = {
   borderBottom: string;
 };
 
-export function borderRadiusGenerator(): void {
+export function borderRadiusGenerator(
+  type: 'newResults' | 'oldResults' | null
+): void {
+  if (type === null) return;
+
   const attribute = 'border-radius';
   const getOutputElement = utils.getOutput(attribute);
   const resultPage = utils.getResultPage();
 
   resultPage.style.display = 'flex';
-  if (getOutputElement === null) return;
+  if (getOutputElement === null || type === 'oldResults') return;
   getOutputElement.style.display = 'grid';
   getOutputElement.style.placeItems = 'center';
 
