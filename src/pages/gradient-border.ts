@@ -7,8 +7,22 @@ type Values = {
   radius: string;
 };
 
-export function gradientBorderGenerator(): void {
-  const attribute = 'gradient-border';
+const attribute = 'gradient-border';
+function copyHandler() {
+  const outputElement = utils.getOutput(attribute);
+  utils.copyCodeToClipboard(attribute, outputElement);
+  utils.showPopup(
+    'Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
+}
+
+export function gradientBorderGenerator(
+  type: 'newResults' | 'oldResults' | null
+): void {
+  if (type === null) return;
+
   const color1 = utils.getColorInput1(attribute);
   const color2 = utils.getColorInput2(attribute);
   const getOutputElement = utils.getOutput(attribute);
@@ -26,6 +40,7 @@ export function gradientBorderGenerator(): void {
   }
 
   resultPage.style.display = 'flex';
+  if (type === 'oldResults') return;
 
   getCheckboxElement.addEventListener('change', (e: Event): void => {
     const target = e.target as HTMLInputElement;
@@ -91,12 +106,5 @@ function getGradientBorderResult(
   utils.getRadiusInput(attribute).value = '0';
 
   const getCodeButtonElement = utils.getCopyCodeButton(attribute);
-  getCodeButtonElement.addEventListener('click', () => {
-    utils.copyCodeToClipboard(attribute, outputElement);
-    utils.showPopup(
-      'Code Copied',
-      'Code has been successfully copied to clipboard',
-      'success'
-    );
-  });
+  getCodeButtonElement.addEventListener('click', copyHandler);
 }

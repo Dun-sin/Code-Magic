@@ -4,11 +4,11 @@ type Values = {
   hOffset: string;
   vOffset: string;
   blur: string;
-  spread: string;
   color: string;
+  text: string;
 };
 
-const attribute = 'box-shadow';
+const attribute = 'text-shadow';
 
 function copyHandler() {
   const outputElement = utils.getOutput(attribute);
@@ -20,19 +20,24 @@ function copyHandler() {
   );
 }
 
-export function boxShadowGenerator(
+export function textShadowGenerator(
   type: 'newResults' | 'oldResults' | null
 ): void {
   if (type === null) return;
 
+  const getInputElement = utils.getInputText(attribute);
+
   const horizontalOffset = utils.getShadowHorizontalOffset(attribute);
   const verticalOffset = utils.getShadowVerticalOffset(attribute);
   const blur = utils.getShadowBlur(attribute);
-  const spread = utils.getShadowSpread(attribute);
   const color = utils.getShadowColor(attribute);
   const getOutputElement = utils.getOutput(attribute);
   const resultPage = utils.getResultPage();
 
+  if (getInputElement.value.length === 0) {
+    utils.triggerEmptyAnimation(getInputElement);
+    return;
+  }
   resultPage.style.display = 'flex';
   if (type === 'oldResults') return;
 
@@ -40,73 +45,55 @@ export function boxShadowGenerator(
     hOffset: horizontalOffset.value,
     vOffset: verticalOffset.value,
     blur: blur.value,
-    spread: spread.value,
     color: color.value,
+    text: getInputElement.value,
   };
 
-  getBoxShadowResult(values, getOutputElement);
+  getTextShadowResult(values, getOutputElement);
 }
 
 /**
  * sets the result to the output element
  *
- * @param attribute attribute name of the generator
  * @param values values entered by users
  * @param outputElement output element to display result
  */
-function getBoxShadowResult(values: Values, outputElement: HTMLElement): void {
-  const createBoxShadowElement = (
-    boxShadowElement: HTMLElement,
+function getTextShadowResult(values: Values, outputElement: HTMLElement): void {
+  const createTextShadowElement = (
+    textShadowElement: HTMLElement,
     values: Values
   ) => {
-    boxShadowElement.style.height = '300px';
-    boxShadowElement.style.width = '300px';
-    boxShadowElement.style.background = 'transparent';
-    boxShadowElement.style.boxShadow = `${values.hOffset}px ${values.vOffset}px ${values.blur}px ${values.spread}px ${values.color}`;
+    textShadowElement.innerText = values.text;
+    textShadowElement.style.textShadow = `${values.hOffset}px ${values.vOffset}px ${values.blur}px ${values.color}`;
   };
-  createBoxShadowElement(outputElement, values);
+  createTextShadowElement(outputElement, values);
 
   const getCodeButtonElement = utils.getCopyCodeButton(attribute);
   getCodeButtonElement.addEventListener('click', copyHandler);
 }
 
-export function addBoxShadowListener(): void {
+export function addTextShadowListener(): void {
   const horizontalOffset = utils.getShadowHorizontalOffset(attribute);
   const verticalOffset = utils.getShadowVerticalOffset(attribute);
   const blur = utils.getShadowBlur(attribute);
-  const spread = utils.getShadowSpread(attribute);
   const color = utils.getShadowColor(attribute);
 
-  const preview = utils.getShadowPreview(attribute);
-
-  const allBoxShadowInputs = [
-    horizontalOffset,
-    verticalOffset,
-    blur,
-    spread,
-    color,
-  ];
-  const allBoxShadowInputsFields = utils.getShadowFields(attribute, [
+  const allTextShadowInputs = [horizontalOffset, verticalOffset, blur, color];
+  const allTextShadowInputsFields = utils.getShadowFields(attribute, [
     'h-offset',
     'v-offset',
     'blur',
-    'spread',
   ]);
 
-  const getShadowValue = () =>
-    `${horizontalOffset.value}px ${verticalOffset.value}px ${blur.value}px ${spread.value}px ${color.value}`;
-  preview.style.boxShadow = getShadowValue();
-
-  allBoxShadowInputs.forEach((input, idx) => {
+  allTextShadowInputs.forEach((input, idx) => {
     // default
-    if (idx < 4) {
-      allBoxShadowInputsFields[idx].textContent = `${input.value}px`;
+    if (idx < 3) {
+      allTextShadowInputsFields[idx].textContent = `${input.value}px`;
     }
     input.addEventListener('input', () => {
-      if (idx < 4) {
-        allBoxShadowInputsFields[idx].textContent = `${input.value}px`;
+      if (idx < 3) {
+        allTextShadowInputsFields[idx].textContent = `${input.value}px`;
       }
-      preview.style.boxShadow = getShadowValue();
     });
   });
 }

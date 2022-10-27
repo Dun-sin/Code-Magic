@@ -1,11 +1,38 @@
 import * as utils from '../lib/general';
 
+const attribute = 'pic-text';
+
+function copyHandler() {
+  const outputElement = utils.getOutput(attribute);
+  utils.copyCodeToClipboard(attribute, outputElement);
+  utils.showPopup(
+    'Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
+}
+
+function pngDownloadHandler() {
+  const outputElement = utils.getOutput(attribute);
+  utils.downloadPNG(attribute, outputElement);
+}
+
+function svgDownloadHanlder() {
+  const outputElement = utils.getOutput(attribute);
+  utils.downloadSVG(attribute, outputElement);
+}
+
 /**
  * @param image - image inputed string
  * @param imageHeight - image height number
  */
-export function picTextGenerator(image: string, imageHeight: number): void {
-  const attribute = 'pic-text';
+export function picTextGenerator(
+  image: string,
+  imageHeight: number,
+  type: 'newResults' | 'oldResults' | null
+): void {
+  if (type === null) return;
+
   const outputNode = utils.getOutput(attribute);
   const resultPage = utils.getResultPage();
 
@@ -18,6 +45,7 @@ export function picTextGenerator(image: string, imageHeight: number): void {
   );
 
   resultPage.style.display = 'flex';
+  if (type === 'oldResults') return;
   outputNode.style.background = `url(${image}) center no-repeat`;
   outputNode.style.width = 'var(--output-width)';
   outputNode.style.height = `${imageHeight}px`;
@@ -56,18 +84,7 @@ function getPicTextResult(attribute: string, outputNode: HTMLElement): void {
   const getPNGButtonElement = utils.getPNGButton(attribute);
   const getSVGButtonElement = utils.getSVGButton(attribute);
 
-  getPNGButtonElement.addEventListener('click', () => {
-    utils.downloadPNG(attribute, outputNode);
-  });
-  getSVGButtonElement.addEventListener('click', () => {
-    utils.downloadSVG(attribute, outputNode);
-  });
-  getCodeButtonElement.addEventListener('click', () => {
-    utils.copyCodeToClipboard(attribute, outputNode);
-    utils.showPopup(
-      'Code Copied',
-      'Code has been successfully copied to clipboard',
-      'success'
-    );
-  });
+  getPNGButtonElement.addEventListener('click', pngDownloadHandler);
+  getSVGButtonElement.addEventListener('click', svgDownloadHanlder);
+  getCodeButtonElement.addEventListener('click', copyHandler);
 }

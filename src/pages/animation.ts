@@ -20,7 +20,9 @@ const radio_button_set = utils.getRadioButtonSet(attribute);
 
 initialConfiguration(radio_button_set, DegreeElement, OutputElement);
 
-export function animationGenerator() {
+export function animationGenerator(type: 'newResults' | 'oldResults' | null) {
+  if (type === null) return;
+
   const duration = utils.getInputSpinner(attribute);
 
   const Stylesheet = utils.getStyleSheet();
@@ -31,7 +33,7 @@ export function animationGenerator() {
 
   initial_length = Stylesheet.cssRules.length - 1;
 
-  if (OutputElement === null) return;
+  if (OutputElement === null || type === 'oldResults') return;
 
   let i = 0;
 
