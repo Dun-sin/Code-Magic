@@ -10,6 +10,16 @@ type Values = {
 
 const attribute = 'text-shadow';
 
+function copyHandler() {
+  const outputElement = utils.getOutput(attribute);
+  utils.copyCodeToClipboard(attribute, outputElement);
+  utils.showPopup(
+    'Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
+}
+
 export function textShadowGenerator(
   type: 'newResults' | 'oldResults' | null
 ): void {
@@ -59,14 +69,7 @@ function getTextShadowResult(values: Values, outputElement: HTMLElement): void {
   createTextShadowElement(outputElement, values);
 
   const getCodeButtonElement = utils.getCopyCodeButton(attribute);
-  getCodeButtonElement.addEventListener('click', () => {
-    utils.copyCodeToClipboard(attribute, outputElement);
-    utils.showPopup(
-      'Code Copied',
-      'Code has been successfully copied to clipboard',
-      'success'
-    );
-  });
+  getCodeButtonElement.addEventListener('click', copyHandler);
 }
 
 export function addTextShadowListener(): void {

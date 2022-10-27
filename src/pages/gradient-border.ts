@@ -7,12 +7,22 @@ type Values = {
   radius: string;
 };
 
+const attribute = 'gradient-border';
+function copyHandler() {
+  const outputElement = utils.getOutput(attribute);
+  utils.copyCodeToClipboard(attribute, outputElement);
+  utils.showPopup(
+    'Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
+}
+
 export function gradientBorderGenerator(
   type: 'newResults' | 'oldResults' | null
 ): void {
   if (type === null) return;
 
-  const attribute = 'gradient-border';
   const color1 = utils.getColorInput1(attribute);
   const color2 = utils.getColorInput2(attribute);
   const getOutputElement = utils.getOutput(attribute);
@@ -96,12 +106,5 @@ function getGradientBorderResult(
   utils.getRadiusInput(attribute).value = '0';
 
   const getCodeButtonElement = utils.getCopyCodeButton(attribute);
-  getCodeButtonElement.addEventListener('click', () => {
-    utils.copyCodeToClipboard(attribute, outputElement);
-    utils.showPopup(
-      'Code Copied',
-      'Code has been successfully copied to clipboard',
-      'success'
-    );
-  });
+  getCodeButtonElement.addEventListener('click', copyHandler);
 }
