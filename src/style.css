@@ -236,15 +236,15 @@ textarea {
 
 .colors {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  margin: var(--spacing) 0 var(--spacing);
+  margin: var(--spacing) 0 var(--spacing) 0;
 }
 
 .colors .preview {
-  margin-left: 10px;
-  margin-right: 10px;
-  width: 100px;
-  height: 10px;
+  margin: var(--spacing) 0 var(--spacing) 0;
+  width: calc(var(--generator-width) / 2);
+  height: 20px;
   background-color: var(--primary-color);
 }
 
@@ -255,14 +255,13 @@ textarea {
   align-items: center;
 }
 
-@media only screen and (max-width: 650px) {
-  .clr-field {
-    width: var(--generator-width);
-  }
-  [data-coloris] {
-    width: 100%;
-    height: 25px;
-  }
+.clr-field {
+  width: var(--generator-width);
+}
+
+[data-coloris] {
+  width: 100%;
+  height: 25px;
 }
 
 [type='color'] {
@@ -852,16 +851,6 @@ a {
 
   nav {
     position: absolute;
-  }
-
-  .colors {
-    flex-direction: column;
-  }
-
-  .colors .preview {
-    width: 150px;
-    height: 20px;
-    margin: calc(var(--spacing) + 2px) 0 calc(var(--spacing) + 2px) 0;
   }
 
   .output,
