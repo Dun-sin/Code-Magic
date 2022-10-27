@@ -141,10 +141,7 @@ const gradientBackgroundInputs = gradientElementInputs('gradient-background');
 const backgroundPreview = gradientPreview('gradient-background');
 const gradientBackgroundColor1 = getColorInput1('gradient-background');
 const gradientBackgroundColor2 = getColorInput2('gradient-background');
-// const gradientBackgroundDegree = getRange('gradient-background');
-const gradientBackgroundDegree = document.getElementById(
-  'gradient-background-degree'
-);
+const gradientBackgroundDegree = getRange('gradient-background');
 
 // get all range inputs
 const gradientRangeInputs = document.querySelectorAll('.degree-range');
