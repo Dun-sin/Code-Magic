@@ -7,7 +7,11 @@ type Values = {
   radius: string;
 };
 
-export function gradientBorderGenerator(): void {
+export function gradientBorderGenerator(
+  type: 'newResults' | 'oldResults' | null
+): void {
+  if (type === null) return;
+
   const attribute = 'gradient-border';
   const color1 = utils.getColorInput1(attribute);
   const color2 = utils.getColorInput2(attribute);
@@ -26,6 +30,7 @@ export function gradientBorderGenerator(): void {
   }
 
   resultPage.style.display = 'flex';
+  if (type === 'oldResults') return;
 
   getCheckboxElement.addEventListener('change', (e: Event): void => {
     const target = e.target as HTMLInputElement;

@@ -6,7 +6,11 @@ type Values = {
   degree: string;
 };
 
-export function gradientBackgroundGenerator() {
+export function gradientBackgroundGenerator(
+  type: 'newResults' | 'oldResults' | null
+) {
+  if (type === null) return;
+
   const attribute = 'gradient-background';
   // Inputs
   const color1 = utils.getColorInput1(attribute);
@@ -23,6 +27,7 @@ export function gradientBackgroundGenerator() {
   const resultPage = utils.getResultPage();
 
   resultPage.style.display = 'flex';
+  if (type === 'oldResults') return;
 
   const values: Values = {
     firstColor: color1.value,

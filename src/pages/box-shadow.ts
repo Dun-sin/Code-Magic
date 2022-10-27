@@ -10,7 +10,11 @@ type Values = {
 
 const attribute = 'box-shadow';
 
-export function boxShadowGenerator(): void {
+export function boxShadowGenerator(
+  type: 'newResults' | 'oldResults' | null
+): void {
+  if (type === null) return;
+
   const horizontalOffset = utils.getShadowHorizontalOffset(attribute);
   const verticalOffset = utils.getShadowVerticalOffset(attribute);
   const blur = utils.getShadowBlur(attribute);
@@ -20,6 +24,7 @@ export function boxShadowGenerator(): void {
   const resultPage = utils.getResultPage();
 
   resultPage.style.display = 'flex';
+  if (type === 'oldResults') return;
 
   const values: Values = {
     hOffset: horizontalOffset.value,
