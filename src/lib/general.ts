@@ -95,6 +95,15 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
         }
       `;
       break;
+    case 'text-shadow':
+      element = outputElement.style;
+      console.log('element: ', element.textShadow);
+      codeToCopy = `
+        div {
+          text-shadow: ${element.textShadow};
+        }
+      `;
+      break;
   }
 
   copy(codeToCopy);
