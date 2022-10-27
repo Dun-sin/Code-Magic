@@ -7,12 +7,22 @@ type Values = {
   borderBottom: string;
 };
 
+const attribute = 'border-radius';
+function copyHandler() {
+  const outputElement = utils.getOutput(attribute);
+  utils.copyCodeToClipboard(attribute, outputElement);
+  utils.showPopup(
+    'Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
+}
+
 export function borderRadiusGenerator(
   type: 'newResults' | 'oldResults' | null
 ): void {
   if (type === null) return;
 
-  const attribute = 'border-radius';
   const getOutputElement = utils.getOutput(attribute);
   const resultPage = utils.getResultPage();
 
@@ -51,12 +61,5 @@ function getBorderRadiusResult(
   ${100 - Number(values.borderRight)}% ${100 - Number(values.borderLeft)}%`;
 
   const getCodeButtonElement = utils.getCopyCodeButton(attribute);
-  getCodeButtonElement.addEventListener('click', () => {
-    utils.copyCodeToClipboard(attribute, outputElement);
-    utils.showPopup(
-      'Code Copied',
-      'Code has been successfully copied to clipboard',
-      'success'
-    );
-  });
+  getCodeButtonElement.addEventListener('click', copyHandler);
 }

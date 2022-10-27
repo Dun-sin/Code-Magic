@@ -6,12 +6,33 @@ type Values = {
   degree: string;
 };
 
+const attribute = 'gradient-text';
+
+function copyHandler() {
+  const outputElement = utils.getOutput(attribute);
+  utils.copyCodeToClipboard(attribute, outputElement);
+  utils.showPopup(
+    'Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
+}
+
+function pngDownloadHandler() {
+  const outputElement = utils.getOutput(attribute);
+  utils.downloadPNG(attribute, outputElement);
+}
+
+function svgDownloadHanlder() {
+  const outputElement = utils.getOutput(attribute);
+  utils.downloadSVG(attribute, outputElement);
+}
+
 export function gradientTextGenerator(
   type: 'newResults' | 'oldResults' | null
 ): void {
   if (type === null) return;
 
-  const attribute = 'gradient-text';
   const getInputElement = utils.getInputText(attribute);
 
   if (getInputElement.value.length === 0) {
@@ -82,20 +103,9 @@ function getGradientTextResult(
     createTextElement();
   }
 
-  getPNGButtonElement.addEventListener('click', () => {
-    utils.downloadPNG(attribute, outputElement);
-  });
+  getPNGButtonElement.addEventListener('click', pngDownloadHandler);
 
-  getSVGButtonElement.addEventListener('click', () => {
-    utils.downloadSVG(attribute, outputElement);
-  });
+  getSVGButtonElement.addEventListener('click', svgDownloadHanlder);
 
-  getCodeButtonElement.addEventListener('click', () => {
-    utils.copyCodeToClipboard(attribute, outputElement);
-    utils.showPopup(
-      'Code Copied',
-      'Code has been successfully copied to clipboard',
-      'success'
-    );
-  });
+  getCodeButtonElement.addEventListener('click', copyHandler);
 }
