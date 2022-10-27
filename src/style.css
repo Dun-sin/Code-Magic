@@ -63,9 +63,11 @@ nav {
 .menu {
   display: none;
 }
+
 #menu-btn {
   display: none;
 }
+
 #menu-icon {
   cursor: pointer;
 }
@@ -212,9 +214,13 @@ main > section:last-of-type {
   display: flex;
 }
 
+.filepond--drop-label {
+  border-radius: 8px;
+  border: 2px dashed var(--tertiary-color);
+}
+
 [data-content='pic-text'] > div:first-of-type {
   width: var(--generator-width);
-  border: 2px dashed var(--tertiary-color);
 }
 
 textarea {
@@ -426,6 +432,7 @@ input[type='number']::-webkit-outer-spin-button {
   margin-top: calc(var(--spacing) + 10px);
   border: none;
 }
+
 .btn:hover {
   background-color: #0c49d2;
 }
@@ -657,6 +664,7 @@ input[type='number']::-webkit-outer-spin-button {
   height: 100%;
   background: var(--primary-color);
 }
+
 .border-range-inputs input {
   width: 100%;
   cursor: pointer;
@@ -680,12 +688,14 @@ input[type='number']::-webkit-outer-spin-button {
   top: 7rem;
   left: -9rem;
 }
+
 .border-range-inputs input:nth-child(3) {
   position: absolute;
   transform: rotate(90deg);
   top: 7rem;
   left: 9rem;
 }
+
 .border-range-inputs input:nth-child(4) {
   position: absolute;
   bottom: -2rem;
@@ -809,6 +819,7 @@ a {
   0% {
     background-position-x: -500%;
   }
+
   100% {
     background-position-x: 500%;
   }
