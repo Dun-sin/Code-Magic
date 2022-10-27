@@ -432,6 +432,15 @@ for (let i = 0; i < gradientBackgroundInputs.length; i++) {
   );
 }
 
+gradientBackgroundDegree.addEventListener('input', () => {
+  createGradientPreview(
+    gradientBackgroundColor1,
+    gradientBackgroundColor2,
+    gradientBackgroundDegree,
+    backgroundPreview
+  );
+});
+
 // on change event handler for border radius generator range inputs
 
 for (let i = 0; i < borderRadiusInputs.length; i++) {
