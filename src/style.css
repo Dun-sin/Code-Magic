@@ -256,8 +256,8 @@ input::placeholder {
   border-radius: 5px;
 }
 
-.colors > .color:first-of-type {
-  margin-right: 10px;
+.colors > .color:last-of-type:not(.colors > .color:only-of-type) {
+  margin-left: 10px;
 }
 
 .color {
@@ -276,7 +276,6 @@ input::placeholder {
 }
 
 .clr-field > button {
-  top: 49% !important;
   width: 40px !important;
 }
 
