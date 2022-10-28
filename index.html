@@ -249,8 +249,6 @@
                 />
               </label>
 
-              <div class="preview" id="gradient-text-color-preview"></div>
-
               <label for="color" class="color">
                 <input
                   type="text"
@@ -261,6 +259,8 @@
                 />
               </label>
             </div>
+
+            <div class="preview" id="gradient-text-color-preview"></div>
 
             <label id="degree">
               <span class="label-title">
@@ -291,8 +291,6 @@
                 />
               </label>
 
-              <div class="preview" id="gradient-border-color-preview"></div>
-
               <label for="color" class="color">
                 <input
                   type="text"
@@ -303,6 +301,8 @@
                 />
               </label>
             </div>
+
+            <div class="preview" id="gradient-border-color-preview"></div>
 
             <label class="radius" for="gradient-border-radius">
               <input type="checkbox" id="gradient-border-radius" name="check" />
@@ -349,8 +349,6 @@
                 />
               </label>
 
-              <div class="preview" id="gradient-background-color-preview"></div>
-
               <label for="color" class="color">
                 <input
                   type="text"
@@ -361,6 +359,8 @@
                 />
               </label>
             </div>
+
+            <div class="preview" id="gradient-background-color-preview"></div>
 
             <label id="degree">
               <span class="label-title">
@@ -458,15 +458,17 @@
           <!-- Box Shadow -->
           <div data-content="box-shadow">
             <div class="box-shadow-preview" id="box-shadow-preview"></div>
-            <label for="color" class="color">
-              <input
-                type="text"
-                data-coloris
-                placeholder="Tap to pick a color"
-                id="box-shadow-color"
-                class="box-shadow-inputs"
-              />
-            </label>
+            <div class="colors">
+              <label for="color" class="color">
+                <input
+                  type="text"
+                  data-coloris
+                  placeholder="Tap to pick a color"
+                  id="box-shadow-color"
+                  class="box-shadow-inputs"
+                />
+              </label>
+            </div>
 
             <div class="degrees">
               <div class="degrees-row">
@@ -583,15 +585,17 @@
               placeholder="Enter the text"
             ></textarea>
 
-            <label for="color" class="color">
-              <input
-                type="text"
-                data-coloris
-                placeholder="Tap to pick a color"
-                id="text-shadow-color"
-                class="text-shadow-inputs"
-              />
-            </label>
+            <div class="colors">
+              <label for="color" class="color">
+                <input
+                  type="text"
+                  data-coloris
+                  placeholder="Tap to pick a color"
+                  id="text-shadow-color"
+                  class="text-shadow-inputs"
+                />
+              </label>
+            </div>
 
             <div class="degrees">
               <div class="degrees-row">
