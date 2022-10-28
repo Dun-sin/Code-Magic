@@ -233,11 +233,12 @@ textarea {
   resize: none;
   padding: 1rem;
   margin-bottom: var(--spacing);
+  outline: none;
 }
 
-::placeholder {
+input::placeholder {
   color: #484848;
-  font-size: 0.875rem;
+  font-size: 1.175rem;
 }
 
 .colors {
