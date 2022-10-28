@@ -64,10 +64,6 @@ nav {
   display: none;
 }
 
-#menu-btn {
-  display: none;
-}
-
 #menu-icon {
   cursor: pointer;
 }
@@ -187,7 +183,7 @@ main > section:last-of-type {
 
 .open-sidebar {
   position: absolute;
-  top: 10px;
+  top: 20px;
   right: 50px;
 }
 
@@ -238,7 +234,6 @@ textarea {
 
 input::placeholder {
   color: #484848;
-  font-size: 1.175rem;
 }
 
 .colors {
@@ -292,12 +287,6 @@ input::placeholder {
 
 [data-coloris]::placeholder {
   color: #fff;
-}
-
-#radio-group {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
 }
 
 .animation-type {
@@ -713,25 +702,6 @@ input[type='number']::-webkit-outer-spin-button {
   margin: 6px auto;
 }
 
-/*	
-* NOTE: The border-radius property is not supported with border-image, therefore,
-*	the css for the gradient-border below relies on CSS Mask property applied to a pseudo background.
-*
-* 	The code below uses a trick based on using a pseudo element to circumvent 
-*	the restriction posed by using border-image.
-*	1. The before pseudo element represents the background-image placed on the .gradient-border div.
-*	   We apply a gradient as background and we make its origin the border box 
-*      (by default it's the padding box).
-*	2. Using the mask property, we apply two opaque layers.
-*	   The bottom one will cover the whole element and 
-*	   the top one will cover only the content box (so it will not cover the border area).
-*	3. Using the mask-composite property, we exclude the content area from the border area 
-*	   so that only the border will remain visible.
-*	4. -webkit-mask-composite: xor; this line is required for compatibility with Chrome browser.
-	@demo: https://stackoverflow.com/questions/51496204/border-gradient-with-border-radius
-	@credit: https://dev.to/afif/border-with-gradient-and-radius-387f
-*/
-
 .gradient-border::before {
   content: '';
   position: absolute;
@@ -748,13 +718,6 @@ input[type='number']::-webkit-outer-spin-button {
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-}
-
-.bg-output {
-  width: var(--output-width);
-  height: 300px;
-  word-wrap: break-word;
-  margin-bottom: 1rem;
 }
 
 .download-output > p {

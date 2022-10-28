@@ -37,31 +37,10 @@ FilePond.registerPlugin(
   FilePondPluginImageTransform
 );
 
-// get the element with data-button="open-side-panel" attribute and make it hidden
-const openSidePanelButton = document.getElementsByClassName(
-  'open-sidebar'
-)[0] as HTMLElement;
-if (openSidePanelButton) {
-  openSidePanelButton.style.display = 'none';
-}
-
-const gradientGenerator = document.querySelectorAll('[data-gen]');
-gradientGenerator.forEach((item) => {
-  item.addEventListener('click', () => {
-    if (openSidePanelButton) {
-      openSidePanelButton.style.display = 'none';
-    }
-  });
-});
-
-const getResultButtons = document.querySelectorAll('[data-button]');
-getResultButtons.forEach((item) => {
-  item.addEventListener('click', () => {
-    if (openSidePanelButton) {
-      openSidePanelButton.style.display = 'block';
-    }
-  });
-});
+/**
+ * All types
+ */
+type Display = 'grid' | 'flex' | 'none';
 
 /**
  * All Variables
@@ -147,64 +126,38 @@ const gradientBackgroundDegree = getRange('gradient-background');
 const gradientRangeInputs = document.querySelectorAll('.degree-range');
 
 // get title display element for animation
-const titleDisplayElement = <HTMLElement>(
-  document.querySelector('.title-display')
-);
+const titleDisplayElement = document.querySelector(
+  '.title-display'
+) as HTMLElement;
 
 // border radius elements
-
 const borderRadiusInputs = document.querySelectorAll('.border-radius-inputs');
-const borderTop = <HTMLInputElement>(
-  document.querySelector('#border-radius-top')
-);
-const borderLeft = <HTMLInputElement>(
-  document.querySelector('#border-radius-left')
-);
-const borderBottom = <HTMLInputElement>(
-  document.querySelector('#border-radius-bottom')
-);
-const borderRight = <HTMLInputElement>(
-  document.querySelector('#border-radius-right')
-);
+const borderTop = document.querySelector(
+  '#border-radius-top'
+) as HTMLInputElement;
+const borderLeft = document.querySelector(
+  '#border-radius-left'
+) as HTMLInputElement;
+const borderBottom = document.querySelector(
+  '#border-radius-bottom'
+) as HTMLInputElement;
+const borderRight = document.querySelector(
+  '#border-radius-right'
+) as HTMLInputElement;
 
-const borderRadiusPreview = <HTMLElement>(
-  document.querySelector('.border-radius-preview-box > .preview')
-);
-
-menuIcon?.addEventListener('click', () => {
-  if (navBar?.classList.contains('closed-nav')) {
-    navBar?.animate(navBarSlideIn, navBarAnimationOptions);
-    navBar?.classList.remove('closed-nav');
-    menuIcon?.setAttribute('icon', 'ci:close-big');
-  } else {
-    navBar?.animate(navBarSlideOut, navBarAnimationOptions);
-    navBar?.classList.add('closed-nav');
-    menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
-  }
-});
+const borderRadiusPreview = document.querySelector(
+  '.border-radius-preview-box > .preview'
+) as HTMLElement;
 
 const menu = document.querySelector('.menu') as HTMLElement;
 const body = document.querySelector('body') as HTMLElement;
 
-if (getComputedStyle(menu).display == 'block') {
-  body.onclick = (e) => {
-    if (e.target !== navBar) {
-      if (e.target !== menuIcon) {
-        navBar?.classList.add('closed-nav');
-        menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
-      }
-    }
-  };
-}
-
-for (let i = 0; i < generators.length; i++) {
-  generators[i].addEventListener('click', () => {
-    if (!navBar?.classList.contains('closed-nav')) {
-      navBar?.animate(navBarSlideOut, navBarAnimationOptions);
-    }
-    navBar?.classList.add('closed-nav');
-    menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
-  });
+// get the element with data-button="open-side-panel" attribute and make it hidden
+const openSidePanelButton = document.getElementsByClassName(
+  'open-sidebar'
+)[0] as HTMLElement;
+if (openSidePanelButton) {
+  openSidePanelButton.style.display = 'none';
 }
 
 FilePond.create(getImageEntryElement, {
@@ -258,11 +211,6 @@ FilePond.create(getImageEntryElement, {
     console.log(fileItem);
   },
 });
-
-/**
- * All types
- */
-type Display = 'grid' | 'flex' | 'none';
 
 /**
  * sets which generator to call
@@ -329,16 +277,6 @@ function showContent(attribute: string, display: Display): void {
   highLightGen.style.border = '1px solid var(--tertiary-color)';
 }
 
-//event listener to clear styling on generator tabs when "Code magic is clicked"
-document.getElementById('head')?.addEventListener('click', () => {
-  const generatorsNav = document.querySelectorAll(`[data-gen]`);
-  generatorsNav.forEach((item) => {
-    const generatorNav = <HTMLElement>item;
-    generatorNav.style.border = 'none';
-    generatorNav.style.background = 'none';
-  });
-});
-
 function showResult(attribute: string | null, type: openResults) {
   results.forEach((item) => {
     const element = <HTMLElement>item;
@@ -353,10 +291,112 @@ function showResult(attribute: string | null, type: openResults) {
   generatorsFunction(attribute, type);
 }
 
+// border radius generator preview
+
+const BorderRadiusGenerator = (
+  borderTop: HTMLInputElement,
+  borderLeft: HTMLInputElement,
+  borderBottom: HTMLInputElement,
+  borderRight: HTMLInputElement,
+  borderRadiusPreview: HTMLElement
+) => {
+  borderRadiusPreview.style.borderRadius = `
+    ${borderTop.value}% ${100 - Number(borderTop.value)}%
+    ${borderBottom.value}% ${100 - Number(borderBottom.value)}% /
+    ${borderLeft.value}% ${borderRight.value}%
+    ${100 - Number(borderRight.value)}% ${100 - Number(borderLeft.value)}%`;
+};
+
+//Toggle gradient border radius input display
+gradientBorderRadius.addEventListener('change', function () {
+  gradientBorderInput.style.display = this.checked ? 'inline' : 'none';
+});
+
+menuIcon?.addEventListener('click', () => {
+  if (navBar?.classList.contains('closed-nav')) {
+    navBar?.animate(navBarSlideIn, navBarAnimationOptions);
+    navBar?.classList.remove('closed-nav');
+    menuIcon?.setAttribute('icon', 'ci:close-big');
+  } else {
+    navBar?.animate(navBarSlideOut, navBarAnimationOptions);
+    navBar?.classList.add('closed-nav');
+    menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
+  }
+});
+
+//event listener to clear styling on generator tabs when "Code magic is clicked"
+document.getElementById('head')?.addEventListener('click', () => {
+  const generatorsNav = document.querySelectorAll(`[data-gen]`);
+  generatorsNav.forEach((item) => {
+    const generatorNav = <HTMLElement>item;
+    generatorNav.style.border = 'none';
+    generatorNav.style.background = 'none';
+  });
+});
+
 getHeaderText?.addEventListener('click', () => {
   if (getHomePage === null || getGeneratorSection === null) return;
   getHomePage.style.display = 'flex';
   getGeneratorSection.style.display = 'none';
+});
+
+getResultIcon?.addEventListener('click', () => {
+  showResult(attributeValue, 'oldResults');
+  sidebar.animate(sideBarSlide, sideBarTiming);
+  sidebar.style.left = '0%';
+});
+
+// onClick event listener for the closebar icon
+closeBar?.addEventListener('click', () => {
+  sidebar.animate(sideBarSlideOut, sideBarTiming);
+  sidebar.style.left = '100%';
+  showResult(null, null);
+  setTimeout(() => {
+    sidebar.style.display = 'none';
+  }, 600);
+});
+
+gradientBackgroundDegree.addEventListener('input', () => {
+  createGradientPreview(
+    gradientBackgroundColor1,
+    gradientBackgroundColor2,
+    gradientBackgroundDegree,
+    backgroundPreview
+  );
+});
+
+// display current gradient value for all range inputs
+const displayGradientValue = (gradientElement: HTMLInputElement) => {
+  gradientElement.addEventListener('input', (e) => {
+    const target = e.target as HTMLInputElement;
+    const unitDisplayElement = <HTMLElement>(
+      target.parentElement?.querySelector('.unit-display')
+    );
+
+    // change the unit for opacity
+    const unit = titleDisplayElement.innerText.toLowerCase().includes('opacity')
+      ? ''
+      : 'deg';
+    unitDisplayElement.innerText = `${target.value}${unit}`;
+  });
+};
+
+const gradientGenerator = document.querySelectorAll('[data-gen]');
+gradientGenerator.forEach((item) => {
+  item.addEventListener('click', () => {
+    if (openSidePanelButton) {
+      openSidePanelButton.style.display = 'none';
+    }
+  });
+});
+
+const getResultButtons = document.querySelectorAll('[data-button]');
+getResultButtons.forEach((item) => {
+  item.addEventListener('click', () => {
+    if (openSidePanelButton) {
+      openSidePanelButton.style.display = 'block';
+    }
+  });
 });
 
 generators.forEach((generator) => {
@@ -385,41 +425,19 @@ getResultsButton.forEach((getResult) => {
   });
 });
 
-getResultIcon?.addEventListener('click', () => {
-  showResult(attributeValue, 'oldResults');
-  sidebar.animate(sideBarSlide, sideBarTiming);
-  sidebar.style.left = '0%';
-});
-
-// onClick event listener for the closebar icon
-closeBar?.addEventListener('click', () => {
-  sidebar.animate(sideBarSlideOut, sideBarTiming);
-  sidebar.style.left = '100%';
-  showResult(null, null);
-  setTimeout(() => {
-    sidebar.style.display = 'none';
-  }, 600);
-});
-
-// display current gradient value for all range inputs
-const displayGradientValue = (gradientElement: HTMLInputElement) => {
-  gradientElement.addEventListener('input', (e) => {
-    const target = e.target as HTMLInputElement;
-    const unitDisplayElement = <HTMLElement>(
-      target.parentElement?.querySelector('.unit-display')
-    );
-
-    // change the unit for opacity
-    const unit = titleDisplayElement.innerText.toLowerCase().includes('opacity')
-      ? ''
-      : 'deg';
-    unitDisplayElement.innerText = `${target.value}${unit}`;
-  });
-};
-
 gradientRangeInputs.forEach((gradientRangeInput: HTMLInputElement) => {
   displayGradientValue(gradientRangeInput);
 });
+
+for (let i = 0; i < generators.length; i++) {
+  generators[i].addEventListener('click', () => {
+    if (!navBar?.classList.contains('closed-nav')) {
+      navBar?.animate(navBarSlideOut, navBarAnimationOptions);
+    }
+    navBar?.classList.add('closed-nav');
+    menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
+  });
+}
 
 for (let i = 0; i < gradientBackgroundInputs.length; i++) {
   gradientBackgroundInputs[i].addEventListener('change', () =>
@@ -432,17 +450,7 @@ for (let i = 0; i < gradientBackgroundInputs.length; i++) {
   );
 }
 
-gradientBackgroundDegree.addEventListener('input', () => {
-  createGradientPreview(
-    gradientBackgroundColor1,
-    gradientBackgroundColor2,
-    gradientBackgroundDegree,
-    backgroundPreview
-  );
-});
-
 // on change event handler for border radius generator range inputs
-
 for (let i = 0; i < borderRadiusInputs.length; i++) {
   borderRadiusInputs[i].addEventListener('change', () =>
     BorderRadiusGenerator(
@@ -478,26 +486,16 @@ for (let i = 0; i < gradientTextInputs.length; i++) {
   );
 }
 
-// border radius generator preview
-
-const BorderRadiusGenerator = (
-  borderTop: HTMLInputElement,
-  borderLeft: HTMLInputElement,
-  borderBottom: HTMLInputElement,
-  borderRight: HTMLInputElement,
-  borderRadiusPreview: HTMLElement
-) => {
-  borderRadiusPreview.style.borderRadius = `
-    ${borderTop.value}% ${100 - Number(borderTop.value)}%
-    ${borderBottom.value}% ${100 - Number(borderBottom.value)}% /
-    ${borderLeft.value}% ${borderRight.value}%
-    ${100 - Number(borderRight.value)}% ${100 - Number(borderLeft.value)}%`;
-};
-
-//Toggle gradient border radius input display
-gradientBorderRadius.addEventListener('change', function () {
-  gradientBorderInput.style.display = this.checked ? 'inline' : 'none';
-});
+if (getComputedStyle(menu).display == 'block') {
+  body.onclick = (e) => {
+    if (e.target !== navBar) {
+      if (e.target !== menuIcon) {
+        navBar?.classList.add('closed-nav');
+        menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
+      }
+    }
+  };
+}
 
 addBoxShadowListener();
 addTextShadowListener();

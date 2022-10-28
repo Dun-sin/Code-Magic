@@ -186,12 +186,13 @@ function initialConfiguration(
   OutputElement.innerText = 'Lorem Ipsum';
 
   // get the unit display element for animator
-  const unitDisplayElement = <HTMLElement>(
-    document.querySelector('.unit-display.animation')
-  );
-  const titleDisplayElement = <HTMLElement>(
-    document.querySelector('.title-display')
-  );
+  const unitDisplayElement = document.querySelector(
+    '.unit-display.animation'
+  ) as HTMLElement;
+
+  const titleDisplayElement = document.querySelector(
+    '.title-display'
+  ) as HTMLElement;
 
   elements.forEach((el) =>
     el.addEventListener('click', () => {

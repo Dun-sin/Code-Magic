@@ -230,44 +230,44 @@ export const getRadioButtonSet = (attribute: string) =>
   ) as NodeListOf<HTMLInputElement>;
 
 export const getBorderTop = (attribute: string) =>
-  <HTMLInputElement>document.getElementById(`${attribute}-top`);
+  document.getElementById(`${attribute}-top`) as HTMLInputElement;
 
 export const getBorderRight = (attribute: string) =>
-  <HTMLInputElement>document.getElementById(`${attribute}-right`);
+  document.getElementById(`${attribute}-right`) as HTMLInputElement;
 
 export const getBorderBottom = (attribute: string) =>
-  <HTMLInputElement>document.getElementById(`${attribute}-bottom`);
+  document.getElementById(`${attribute}-bottom`) as HTMLInputElement;
 
 export const getBorderLeft = (attribute: string) =>
-  <HTMLInputElement>document.getElementById(`${attribute}-left`);
+  document.getElementById(`${attribute}-left`) as HTMLInputElement;
 
 export const getStyleSheet = () => {
   const stylesheet = Array.from(document.styleSheets).filter(
     (styleSheet) =>
       !styleSheet.href || styleSheet.href.startsWith(location.origin)
   );
-  return <CSSStyleSheet>stylesheet[0];
+  return stylesheet[0] as CSSStyleSheet;
 };
 
 export const getShadowHorizontalOffset = (
   attribute: string
 ): HTMLInputElement =>
-  <HTMLInputElement>document.getElementById(`${attribute}-h-offset`);
+  document.getElementById(`${attribute}-h-offset`) as HTMLInputElement;
 
 export const getShadowVerticalOffset = (attribute: string): HTMLInputElement =>
-  <HTMLInputElement>document.getElementById(`${attribute}-v-offset`);
+  document.getElementById(`${attribute}-v-offset`) as HTMLInputElement;
 
 export const getShadowBlur = (attribute: string): HTMLInputElement =>
-  <HTMLInputElement>document.getElementById(`${attribute}-blur`);
+  document.getElementById(`${attribute}-blur`) as HTMLInputElement;
 
 export const getShadowSpread = (attribute: string): HTMLInputElement =>
-  <HTMLInputElement>document.getElementById(`${attribute}-spread`);
+  document.getElementById(`${attribute}-spread`) as HTMLInputElement;
 
 export const getShadowColor = (attribute: string): HTMLInputElement =>
-  <HTMLInputElement>document.getElementById(`${attribute}-color`);
+  document.getElementById(`${attribute}-color`) as HTMLInputElement;
 
 export const getShadowPreview = (attribute: string): HTMLInputElement =>
-  <HTMLInputElement>document.getElementById(`${attribute}-preview`);
+  document.getElementById(`${attribute}-preview`) as HTMLInputElement;
 
 export const getShadowFields = (
   attribute: string,
