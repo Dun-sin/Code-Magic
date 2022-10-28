@@ -97,6 +97,9 @@ const getImageEntryElement = document.getElementById(
 ) as HTMLInputElement;
 const navBar = document.querySelector('#nav');
 const menuIcon = document.querySelector('#menu-icon');
+const downloadButtons = document.querySelectorAll(
+  '.image-download'
+) as NodeListOf<HTMLElement>;
 
 //gradient text color elements
 const gradientTextInputs = gradientElementInputs('gradient-text');
@@ -156,8 +159,13 @@ const body = document.querySelector('body') as HTMLElement;
 const openSidePanelButton = document.getElementsByClassName(
   'open-sidebar'
 )[0] as HTMLElement;
+
 if (openSidePanelButton) {
   openSidePanelButton.style.display = 'none';
+}
+
+if (!navigator.userAgent.match(/firefox|fxios/i)) {
+  downloadButtons.forEach((item) => (item.style.display = 'none'));
 }
 
 FilePond.create(getImageEntryElement, {
