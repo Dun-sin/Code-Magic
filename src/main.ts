@@ -155,6 +155,9 @@ const borderRadiusPreview = document.querySelector(
 const menu = document.querySelector('.menu') as HTMLElement;
 const body = document.querySelector('body') as HTMLElement;
 
+const gradientGenerator = document.querySelectorAll('[data-gen]');
+const getResultButtons = document.querySelectorAll('[data-button]');
+
 // get the element with data-button="open-side-panel" attribute and make it hidden
 const openSidePanelButton = document.getElementsByClassName(
   'open-sidebar'
@@ -389,7 +392,6 @@ const displayGradientValue = (gradientElement: HTMLInputElement) => {
   });
 };
 
-const gradientGenerator = document.querySelectorAll('[data-gen]');
 gradientGenerator.forEach((item) => {
   item.addEventListener('click', () => {
     if (openSidePanelButton) {
@@ -398,7 +400,6 @@ gradientGenerator.forEach((item) => {
   });
 });
 
-const getResultButtons = document.querySelectorAll('[data-button]');
 getResultButtons.forEach((item) => {
   item.addEventListener('click', () => {
     if (openSidePanelButton) {

@@ -89,7 +89,8 @@ function getGradientTextResult(
     wordElement.style.backgroundClip = 'text';
     wordElement.style.webkitBackgroundClip = 'text';
     wordElement.style.webkitTextFillColor = 'transparent';
-    outputElement.appendChild(wordElement);
+
+    return wordElement;
   };
 
   const getCodeButtonElement = utils.getCopyCodeButton(attribute);
@@ -98,9 +99,9 @@ function getGradientTextResult(
 
   if (outputElement.childElementCount >= 1) {
     outputElement.innerHTML = '';
-    createTextElement();
+    outputElement.appendChild(createTextElement());
   } else {
-    createTextElement();
+    outputElement.appendChild(createTextElement());
   }
 
   getPNGButtonElement.addEventListener('click', pngDownloadHandler);

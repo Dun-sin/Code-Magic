@@ -9,6 +9,7 @@ type Values = {
 };
 
 const attribute = 'box-shadow';
+let isSliderOpen = false;
 
 function copyHandler() {
   const outputElement = utils.getOutput(attribute);
@@ -77,7 +78,7 @@ export function addBoxShadowListener(): void {
   const spread = utils.getShadowSpread(attribute);
   const color = utils.getShadowColor(attribute);
 
-  const preview = utils.getShadowPreview(attribute);
+  const preview = utils.getPreviewSlider(attribute);
 
   const allBoxShadowInputs = [
     horizontalOffset,
@@ -103,6 +104,9 @@ export function addBoxShadowListener(): void {
       allBoxShadowInputsFields[idx].textContent = `${input.value}px`;
     }
     input.addEventListener('input', () => {
+      utils.slideIn(preview, isSliderOpen);
+
+      isSliderOpen = true;
       if (idx < 4) {
         allBoxShadowInputsFields[idx].textContent = `${input.value}px`;
       }

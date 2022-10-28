@@ -194,14 +194,37 @@ main > section:last-of-type {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 /* inputs */
-
 .generators > div {
   display: none;
   width: var(--generator-width);
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.preview-slider {
+  height: 80px;
+  width: 200px;
+
+  position: absolute;
+  left: -300px;
+  border: 1px solid #fff;
+  background: transparent;
+}
+
+[data-content='box-shadow'] .preview-slider {
+  top: -79%;
+}
+
+[data-content='text-shadow'] .preview-slider {
+  top: -30%;
+  word-wrap: break-word;
+  font-size: 0.8rem;
+  display: flex;
   justify-content: center;
   align-items: center;
 }

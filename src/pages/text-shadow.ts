@@ -8,6 +8,7 @@ type Values = {
   text: string;
 };
 
+let isSliderOpen = false;
 const attribute = 'text-shadow';
 
 function copyHandler() {
@@ -78,22 +79,41 @@ export function addTextShadowListener(): void {
   const blur = utils.getShadowBlur(attribute);
   const color = utils.getShadowColor(attribute);
 
+  const getInputElement = utils.getInputText(attribute);
+  const preview = utils.getPreviewSlider(attribute);
+
   const allTextShadowInputs = [horizontalOffset, verticalOffset, blur, color];
   const allTextShadowInputsFields = utils.getShadowFields(attribute, [
     'h-offset',
     'v-offset',
     'blur',
+    'text',
   ]);
+
+  const getShadowValue = () =>
+    `${horizontalOffset.value}px ${verticalOffset.value}px ${blur.value}px ${color.value}`;
+
+  preview.innerText = getInputElement.value;
+  preview.style.textShadow = getShadowValue();
 
   allTextShadowInputs.forEach((input, idx) => {
     // default
     if (idx < 3) {
       allTextShadowInputsFields[idx].textContent = `${input.value}px`;
     }
+    getInputElement.addEventListener('input', () => {
+      preview.innerText = getInputElement.value;
+      preview.style.textShadow = getShadowValue();
+    });
     input.addEventListener('input', () => {
+      utils.slideIn(preview, isSliderOpen);
+
+      isSliderOpen = true;
+
       if (idx < 3) {
         allTextShadowInputsFields[idx].textContent = `${input.value}px`;
       }
+      preview.style.textShadow = getShadowValue();
     });
   });
 }

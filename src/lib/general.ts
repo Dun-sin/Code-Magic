@@ -159,7 +159,7 @@ export const getResultPage = (): HTMLElement =>
   document.querySelector('.side-results') as HTMLElement;
 
 export const getCopyCodeButton = (attribute: string): HTMLElement =>
-  document.querySelector(`[data-download = ${attribute}-code]`) as HTMLElement;
+  document.querySelector(`[data-download=${attribute}-code]`) as HTMLElement;
 
 export const getPNGButton = (attribute: string): HTMLElement =>
   document.querySelector(`[data-download=${attribute}-PNG]`) as HTMLElement;
@@ -280,6 +280,24 @@ export const getShadowFields = (
     ],
     []
   );
+
+export const getPreviewSlider = (attribute: string): HTMLElement =>
+  document.querySelector(
+    `[data-content=${attribute}] .preview-slider`
+  ) as HTMLElement;
+
+export function slideIn(slider: HTMLElement, isOpen: boolean) {
+  if (isOpen) return;
+
+  const slideIn = [{left: '-300px'}, {left: '-10px'}];
+  const slideInTiming = {
+    duration: 500,
+    iterations: 1,
+    fill: 'both' as FillMode,
+  };
+
+  slider.animate(slideIn, slideInTiming);
+}
 
 function createDownloadLink(fileName: string, url: string) {
   const link = document.createElement('a');
