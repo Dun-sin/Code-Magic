@@ -308,7 +308,7 @@ const BorderRadiusGenerator = (
 };
 
 //Toggle gradient border radius input display
-gradientBorderRadius.addEventListener('change', function () {
+gradientBorderRadius.addEventListener('input', function () {
   gradientBorderInput.style.display = this.checked ? 'inline' : 'none';
 });
 
@@ -440,7 +440,7 @@ for (let i = 0; i < generators.length; i++) {
 }
 
 for (let i = 0; i < gradientBackgroundInputs.length; i++) {
-  gradientBackgroundInputs[i].addEventListener('change', () =>
+  gradientBackgroundInputs[i].addEventListener('input', () =>
     createGradientPreview(
       gradientBackgroundColor1,
       gradientBackgroundColor2,
@@ -452,7 +452,7 @@ for (let i = 0; i < gradientBackgroundInputs.length; i++) {
 
 // on change event handler for border radius generator range inputs
 for (let i = 0; i < borderRadiusInputs.length; i++) {
-  borderRadiusInputs[i].addEventListener('change', () =>
+  borderRadiusInputs[i].addEventListener('input', () =>
     BorderRadiusGenerator(
       borderTop,
       borderLeft,
@@ -476,7 +476,7 @@ for (let i = 0; i < gradientBorderInputs.length; i++) {
 }
 
 for (let i = 0; i < gradientTextInputs.length; i++) {
-  gradientTextInputs[i].addEventListener('change', () =>
+  gradientTextInputs[i].addEventListener('input', () =>
     createGradientPreview(
       gradientTextColor1,
       gradientTextColor2,
