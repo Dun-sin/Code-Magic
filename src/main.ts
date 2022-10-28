@@ -457,7 +457,7 @@ for (let i = 0; i < borderRadiusInputs.length; i++) {
 
 //set gradient border preview
 for (let i = 0; i < gradientBorderInputs.length; i++) {
-  gradientBorderInputs[i].addEventListener('change', () =>
+  gradientBorderInputs[i].addEventListener('input', () =>
     createGradientPreview(
       gradientBorderColor1,
       gradientBorderColor2,
