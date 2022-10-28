@@ -646,6 +646,7 @@ input[type='number']::-webkit-outer-spin-button {
   display: grid;
   place-items: center;
   font-size: clamp(20px, 1vw + 1rem, 3vw);
+  text-align: center;
 }
 
 .download-output {
