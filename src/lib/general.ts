@@ -89,8 +89,8 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
       console.log('element: ', element);
       codeToCopy = `
         div {
-          height: '300px';
-          width: '300px';
+          height: 300px;
+          width: 300px;
           box-shadow: ${element.boxShadow};
         }
       `;
