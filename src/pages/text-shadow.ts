@@ -93,7 +93,6 @@ export function addTextShadowListener(): void {
   const getShadowValue = () =>
     `${horizontalOffset.value}px ${verticalOffset.value}px ${blur.value}px ${color.value}`;
 
-  preview.innerText = getInputElement.value;
   preview.style.textShadow = getShadowValue();
 
   allTextShadowInputs.forEach((input, idx) => {
@@ -106,6 +105,8 @@ export function addTextShadowListener(): void {
       preview.style.textShadow = getShadowValue();
     });
     input.addEventListener('input', () => {
+      if (getInputElement.value === '' || color.value === '') return;
+      preview.innerText = getInputElement.value;
       utils.slideIn(preview, isSliderOpen);
 
       isSliderOpen = true;
