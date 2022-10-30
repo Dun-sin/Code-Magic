@@ -21,6 +21,16 @@ function copyHandler() {
   );
 }
 
+function pngDownloadHandler() {
+  const outputElement = utils.getOutput(attribute);
+  utils.downloadPNG(attribute, outputElement);
+}
+
+function svgDownloadHanlder() {
+  const outputElement = utils.getOutput(attribute);
+  utils.downloadSVG(attribute, outputElement);
+}
+
 export function textShadowGenerator(
   type: 'newResults' | 'oldResults' | null
 ): void {
@@ -80,6 +90,8 @@ export function addTextShadowListener(): void {
   const color = utils.getShadowColor(attribute);
 
   const getInputElement = utils.getInputText(attribute);
+  const getPNGButtonElement = utils.getPNGButton(attribute);
+  const getSVGButtonElement = utils.getSVGButton(attribute);
   const preview = utils.getPreviewSlider(attribute);
 
   const allTextShadowInputs = [horizontalOffset, verticalOffset, blur, color];
@@ -116,5 +128,9 @@ export function addTextShadowListener(): void {
       }
       preview.style.textShadow = getShadowValue();
     });
+
+    getPNGButtonElement.addEventListener('click', pngDownloadHandler);
+
+    getSVGButtonElement.addEventListener('click', svgDownloadHanlder);
   });
 }
