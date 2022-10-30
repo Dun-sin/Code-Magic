@@ -33,6 +33,7 @@ Code Magic is a website where you can get simple CSS tricks to make your applica
   - And boom
 - Box Shadow - Cast a shadow on your element.
 - Border Radius - Get desired border radius for your element.
+- Text Shadow - Cast a shadow on your text.
 
 ### ⚒️ Languages / Tools
 
