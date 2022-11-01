@@ -1,11 +1,7 @@
 name: 💡 General Feature Request
 description: Have a new idea/feature for this project? Would love to hear it!
 title: "[FEATURE] <what do you have to add>"
-labels:
-  [
-    "feature",
-    "hacktoberfest",
-  ]
+labels: ["feature"]
 body:
   - type: textarea
     id: description
