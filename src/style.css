@@ -689,7 +689,6 @@ input[type='number']::-webkit-outer-spin-button {
 
 .border-range-inputs input {
   width: 100%;
-  cursor: pointer;
 }
 
 #border-radius-code {
@@ -771,22 +770,41 @@ input[type='range'] {
   cursor: pointer;
 }
 
-input[type='range']::-webkit-slider-runnable-track,
+input[type='range']::-webkit-slider-runnable-track {
+  background: var(--secondary-color);
+  height: 0.5rem;
+  border-radius: 10px;
+}
+
 input[type='range']::-moz-range-track {
   background: var(--secondary-color);
   height: 0.5rem;
   border-radius: 10px;
 }
 
-input[type='range']::-webkit-slider-thumb,
-input[type='range']::-moz-range-thumb {
+.border-range-inputs input[type='range']::-webkit-slider-runnable-track {
+  background-color: var(--primary-color);
+}
+
+.border-range-inputs input[type='range']::-moz-range-track {
+  background-color: var(--primary-color);
+}
+
+input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   margin-top: -12px;
   background-color: var(--tertiary-color);
   height: 1rem;
   width: 1rem;
+  border-radius: 10px;
+}
+
+input[type='range']::-moz-range-thumb {
   border: none;
+  background-color: var(--tertiary-color);
+  height: 1rem;
+  width: 1rem;
   border-radius: 10px;
 }
 
