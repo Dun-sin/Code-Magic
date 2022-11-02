@@ -4,7 +4,7 @@
   --text-color: #edf2f4;
   --input-color: #000000;
   --secondary-color: #0e213c;
-  --tertiary-color: #2196f3;
+  --tertiary-color: #6c9dc5;
   --gradient-border-color-1: red;
   --gradient-border-color-2: blue;
 
@@ -764,35 +764,41 @@ input[type='number']::-webkit-outer-spin-button {
   margin-right: 1rem;
 }
 
-/* RANGE INPUTS */
-
 input[type='range'] {
   -webkit-appearance: none;
   appearance: none;
-  margin: 2px;
-  background: #cecece;
-  border-radius: 5px;
-  outline: none;
-  -webkit-transition: 0.2s;
-  transition: opacity 0.2s;
-}
-
-input[type='range']::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 40px;
-  height: 20px;
-  border-radius: 30%;
-  background: #004c6d;
+  background: transparent;
   cursor: pointer;
 }
 
-input[type='range']::-webkit-slider-runnable-track {
+input[type='range']::-webkit-slider-runnable-track,
+input[type='range']::-moz-range-track {
+  background: var(--secondary-color);
+  height: 0.5rem;
+  border-radius: 10px;
+}
+
+input[type='range']::-webkit-slider-thumb,
+input[type='range']::-moz-range-thumb {
   -webkit-appearance: none;
   appearance: none;
-  box-shadow: none;
+  margin-top: -12px;
+  background-color: var(--tertiary-color);
+  height: 1rem;
+  width: 1rem;
   border: none;
-  background: transparent;
+  border-radius: 10px;
+}
+
+input[type='range']:focus {
+  outline: none;
+}
+
+input[type='range']:focus::-webkit-slider-thumb,
+input[type='range']:focus::-moz-range-thumb {
+  border: 1px solid #053a5f;
+  outline: 3px solid #053a5f;
+  outline-offset: 0.125rem;
 }
 
 /* FOOTER SECTION */
