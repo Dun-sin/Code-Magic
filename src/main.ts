@@ -101,6 +101,8 @@ const downloadButtons = document.querySelectorAll(
   '.image-download'
 ) as NodeListOf<HTMLElement>;
 
+const generatorCategories = document.getElementById('category');
+
 //gradient text color elements
 const gradientTextInputs = gradientElementInputs('gradient-text');
 const textPreview = gradientPreview('gradient-text');
@@ -497,11 +499,13 @@ for (let i = 0; i < gradientTextInputs.length; i++) {
 
 if (getComputedStyle(menu).display == 'block') {
   body.onclick = (e) => {
-    if (e.target !== navBar) {
-      if (e.target !== menuIcon) {
-        navBar?.classList.add('closed-nav');
-        menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
-      }
+    if (
+      e.target !== navBar ||
+      e.target !== menuIcon ||
+      e.target !== generatorCategories
+    ) {
+      navBar?.classList.add('closed-nav');
+      menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
     }
   };
 }
