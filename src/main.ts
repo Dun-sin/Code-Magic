@@ -499,13 +499,13 @@ for (let i = 0; i < gradientTextInputs.length; i++) {
 
 if (getComputedStyle(menu).display == 'block') {
   body.onclick = (e) => {
-    if (
-      e.target !== navBar ||
-      e.target !== menuIcon ||
-      e.target !== generatorCategories
-    ) {
-      navBar?.classList.add('closed-nav');
-      menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
+    if (e.target !== navBar) {
+      if (e.target !== menuIcon) {
+        if (e.target !== generatorCategories) {
+          navBar?.classList.add('closed-nav');
+          menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
+        }
+      }
     }
   };
 }
