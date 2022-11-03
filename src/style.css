@@ -69,7 +69,7 @@ nav {
 }
 
 nav h1 {
-  margin: 4rem 0;
+  margin: 4rem 0 1rem 0;
   font-size: 1.5rem;
   background: linear-gradient(90deg, #ffffff, var(--secondary-color), #fff);
   -webkit-background-clip: text;
@@ -86,20 +86,60 @@ nav ul {
   list-style: none;
 }
 
-nav ul > li {
-  font-size: 0.8rem;
-  padding: 0.6rem 0.5rem;
-  border-radius: 3px;
+.dropdown > div {
   display: flex;
   align-items: center;
-  margin-bottom: 0.3rem;
+  cursor: pointer;
+  height: 20px;
 }
 
-nav ul > li span {
+.dropdown > ul {
+  visibility: hidden;
+  position: relative;
+  height: 0px;
+  transition: 200ms transform;
+}
+
+.dropdown:hover > ul {
+  visibility: visible;
+  height: fit-content;
+  transform: translateX(10px);
+}
+
+#category {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#category > li {
+  font-size: 0.8rem;
+  padding-left: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 1rem;
+}
+
+#category ul {
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.7rem;
+}
+
+#category ul > li {
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+  padding: 0.2rem;
+}
+
+#category ul > li span {
   margin-left: 0.2rem;
 }
 
-nav ul > li span.tooltip {
+#category ul > li span.tooltip {
   position: absolute;
   right: -140px;
   padding: 5px;
@@ -110,7 +150,7 @@ nav ul > li span.tooltip {
   display: none;
 }
 
-nav ul > li .tooltip::before {
+#category ul > li.tooltip::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -121,16 +161,16 @@ nav ul > li .tooltip::before {
   border-color: transparent var(--text-color) transparent transparent;
 }
 
-nav ul > li:hover .tooltip {
+#category ul > li:hover .tooltip {
   display: block;
 }
 
-nav ul > li:hover {
+#category ul > li:hover {
   background: linear-gradient(
-    80deg,
+    90deg,
     var(--primary-color),
     var(--secondary-color)
-  );
+  ) !important;
   cursor: pointer;
 }
 
@@ -832,6 +872,17 @@ footer {
 
 a {
   color: var(--tertiary-color);
+}
+
+@keyframes openDropDown {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    top: 0;
+    opacity: 1;
+  }
 }
 
 @keyframes moveColor {
