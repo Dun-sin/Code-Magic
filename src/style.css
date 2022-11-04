@@ -54,7 +54,7 @@ nav {
   font-size: 1.3rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 0 1.5rem;
-  min-width: 15vw;
+  min-width: 20vw;
   height: 100vh;
   background-color: var(--primary-color);
   z-index: 99;
@@ -93,6 +93,10 @@ nav ul {
   height: 20px;
 }
 
+.dropdown > div > iconify-icon:first-of-type {
+  margin-right: 5px;
+}
+
 .dropdown > ul {
   visibility: hidden;
   position: relative;
@@ -116,7 +120,7 @@ nav ul {
   padding-left: 0.2rem;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
 }
 
 #category ul {
