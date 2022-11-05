@@ -257,6 +257,39 @@
             </ul>
           </li>
 
+          <li id="input" class="dropdown">
+            <div>
+              <iconify-icon
+                inline
+                icon="material-symbols:input"
+                style="color: white"
+                width="20"
+                height="20"
+              ></iconify-icon>
+              <span>Input Generators</span>
+              <iconify-icon
+                inline
+                icon="material-symbols:arrow-drop-down-rounded"
+                style="color: white"
+                width="20"
+              ></iconify-icon>
+            </div>
+            <ul>
+              <li data-gen="input-range">
+                <iconify-icon
+                  inline
+                  icon="uil:slider-h-range"
+                  style="color: white"
+                  width="20"
+                  height="20"
+                ></iconify-icon>
+                <span>Input Range</span>
+                <span class="tooltip">
+                  Get styling for input element type range
+                </span>
+              </li>
+            </ul>
+          </li>
           <li id="random" class="dropdown">
             <div>
               <iconify-icon
@@ -757,6 +790,152 @@
             </div>
 
             <div class="btn" data-button="text-shadow">Get Results</div>
+          </div>
+
+          <div data-content="input-range">
+            <div>
+              <p>Preview</p>
+              <input type="range" min="3" max="20" name="" id="preview-range" />
+            </div>
+
+            <!-- Color for track and thumbs -->
+            <div class="colors">
+              <label for="color" class="color">
+                Track Color
+                <input
+                  type="text"
+                  data-coloris
+                  placeholder="Tap to pick a color"
+                  id="input-range-color1"
+                  class="input-range-inputs"
+                />
+              </label>
+
+              <label for="color" class="color">
+                Thumb Color
+                <input
+                  type="text"
+                  data-coloris
+                  placeholder="Tap to pick a color"
+                  id="input-range-color2"
+                  class="input-range-inputs"
+                />
+              </label>
+            </div>
+
+            <!-- Height for Tracks and Thumbs -->
+            <div class="size">
+              <div>
+                <label for="thumb-height">
+                  <div>
+                    <span> Thumb Height </span>
+                    <span id="thumb-height-label"></span>
+                  </div>
+                  <input
+                    type="range"
+                    min="5"
+                    max="20"
+                    name="thumb-height"
+                    id="thumb-height"
+                  />
+                </label>
+                <label for="thumb-width">
+                  <div>
+                    <span> Thumb Width </span>
+                    <span id="thumb-width-label"></span>
+                  </div>
+                  <input
+                    type="range"
+                    min="20"
+                    max="100"
+                    name="thumb-width"
+                    id="thumb-width"
+                  />
+                </label>
+              </div>
+              <div>
+                <label for="track-height">
+                  <div>
+                    <span> Track Height </span>
+                    <span id="track-height-label"></span>
+                  </div>
+
+                  <input
+                    type="range"
+                    min="5"
+                    max="20"
+                    name="track-height"
+                    id="track-height"
+                  />
+                </label>
+                <label for="track-width">
+                  <div>
+                    <span> Track Width </span>
+
+                    <span id="track-width-label"></span>
+                  </div>
+
+                  <input
+                    type="range"
+                    min="20"
+                    max="100"
+                    name="track-width"
+                    id="track-width"
+                  />
+                </label>
+              </div>
+            </div>
+
+            <!-- Border Radius for Tracks and Thumbs -->
+            <div class="radius">
+              <label for="input-range-thumb-radius">
+                <input
+                  type="checkbox"
+                  id="input-range-thumb-radius"
+                  name="check"
+                />
+                <span> Include Thumb Radius </span>
+                <label id="radius-input-label" for="input-range-thumb-input">
+                  <input
+                    type="number"
+                    id="input-range-thumb-input"
+                    name="desired-radius"
+                    placeholder="Enter a number e.g. 50"
+                    autofocus
+                    required
+                  />
+                </label>
+              </label>
+              <label for="input-range-track-radius">
+                <input
+                  type="checkbox"
+                  id="input-range-track-radius"
+                  name="check"
+                />
+                <span> Include Track Radius </span>
+                <label id="radius-input-label" for="input-range-track-input">
+                  <input
+                    type="number"
+                    id="input-range-track-input"
+                    name="desired-radius"
+                    placeholder="Enter a number e.g. 50"
+                    autofocus
+                    required
+                  />
+                </label>
+              </label>
+            </div>
+
+            <!-- Copy Code Button -->
+            <div class="btn" data-download="pic-text-code">
+              <iconify-icon
+                inline
+                icon="bx:code-alt"
+                style="color: white; margin-right: 5px"
+                width="20"
+              ></iconify-icon>
+              Get Code
+            </div>
           </div>
         </div>
 

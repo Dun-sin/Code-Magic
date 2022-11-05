@@ -285,6 +285,50 @@ main > section:last-of-type {
   width: var(--generator-width);
 }
 
+[data-content='input-range'] {
+  gap: 5px;
+}
+
+[data-content='input-range'] > div:first-of-type {
+  background-color: var(--primary-color);
+  width: var(--generator-width);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  justify-content: center;
+  height: fit-content;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+[data-content='input-range'] > div:first-of-type p {
+  font-size: 0.7em;
+}
+
+.radius,
+.size {
+  background-color: var(--primary-color);
+  padding: 0.8rem;
+  border-radius: 5px;
+  width: var(--generator-width);
+}
+
+.size > div {
+  display: flex;
+  justify-content: space-between;
+  min-width: 100%;
+}
+
+.size label {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
+
+.size > div div {
+  font-size: 0.8rem;
+}
+
 textarea {
   border-radius: 5px;
   width: var(--generator-width);
@@ -405,7 +449,6 @@ input::placeholder {
   margin-top: 8px;
   font-family: inherit;
 }
-
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -422,14 +465,6 @@ input[type='number']::-webkit-outer-spin-button {
   border-radius: 5px;
   width: var(--generator-width);
   margin-top: var(--spacing);
-}
-
-.radius {
-  text-align: center;
-  background-color: var(--primary-color);
-  padding: 0.8rem;
-  border-radius: 5px;
-  width: var(--generator-width);
 }
 
 #degree .label-title {

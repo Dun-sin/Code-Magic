@@ -117,7 +117,7 @@ const gradientBorderColor1 = getColorInput1('gradient-border');
 const gradientBorderColor2 = getColorInput2('gradient-border');
 const gradientBorderDegree = getRange('gradient-border');
 
-const gradientBorderRadius = getCheckbox('gradient-border');
+const toggleRadiusInputForGradientBorder = getCheckbox('gradient-border');
 const gradientBorderInput = getRadiusInput('gradient-border');
 
 //gradient background color elements
@@ -126,6 +126,12 @@ const backgroundPreview = gradientPreview('gradient-background');
 const gradientBackgroundColor1 = getColorInput1('gradient-background');
 const gradientBackgroundColor2 = getColorInput2('gradient-background');
 const gradientBackgroundDegree = getRange('gradient-background');
+
+// range input
+const toggleRadiusInputForRangeThumb = getCheckbox('input-range-thumb');
+const toggleRadiusInputForRangeTrack = getCheckbox('input-range-track');
+const rangeRadiusThumbInput = getRadiusInput('input-range-thumb');
+const rangeRadiusTrackInput = getRadiusInput('input-range-track');
 
 // get all range inputs
 const gradientRangeInputs = document.querySelectorAll('.degree-range');
@@ -321,8 +327,16 @@ const BorderRadiusGenerator = (
 };
 
 //Toggle gradient border radius input display
-gradientBorderRadius.addEventListener('input', function () {
+toggleRadiusInputForGradientBorder.addEventListener('input', function () {
   gradientBorderInput.style.display = this.checked ? 'inline' : 'none';
+});
+
+toggleRadiusInputForRangeThumb.addEventListener('input', function () {
+  rangeRadiusThumbInput.style.display = this.checked ? 'inline' : 'none';
+});
+
+toggleRadiusInputForRangeTrack.addEventListener('input', function () {
+  rangeRadiusTrackInput.style.display = this.checked ? 'inline' : 'none';
 });
 
 menuIcon?.addEventListener('click', () => {
