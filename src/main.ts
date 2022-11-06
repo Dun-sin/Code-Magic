@@ -325,6 +325,22 @@ gradientBorderRadius.addEventListener('input', function () {
   gradientBorderInput.style.display = this.checked ? 'inline' : 'none';
 });
 
+// Trigger the nav bar to close when user clicks on body
+
+document.addEventListener("click", (e:Event) => {
+  const event = e.target as HTMLElement;
+
+  if( !event.matches("nav")) {
+    if(!event.matches("#menu-icon")) {
+      if (!navBar?.classList.contains('closed-nav')) {
+        navBar?.animate(navBarSlideOut, navBarAnimationOptions);
+      }
+      navBar?.classList.add('closed-nav');
+      menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
+    }
+  }
+})
+
 menuIcon?.addEventListener('click', () => {
   if (navBar?.classList.contains('closed-nav')) {
     navBar?.animate(navBarSlideIn, navBarAnimationOptions);
