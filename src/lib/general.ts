@@ -86,7 +86,6 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
       break;
     case 'box-shadow':
       element = outputElement.style;
-      console.log('element: ', element);
       codeToCopy = `
         div {
           height: 300px;
@@ -97,11 +96,58 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
       break;
     case 'text-shadow':
       element = outputElement.style;
-      console.log('element: ', element.textShadow);
       codeToCopy = `
         div {
           text-shadow: ${element.textShadow};
         }
+      `;
+      break;
+    case 'input-range':
+      element = outputElement.style;
+      codeToCopy = `
+      input[type='range'] {
+        -webkit-appearance: none;
+        appearance: none;
+        background: transparent;
+        cursor: pointer;
+        width: ${element.getPropertyValue('--preview-track-width')};
+      }
+
+      input[type='range']::-webkit-slider-runnable-track {
+        background-color: ${element.getPropertyValue('--preview-track-color')};
+        height: ${element.getPropertyValue('--preview-track-height')};
+        width: 100%;
+        border-radius: ${element.getPropertyValue('--preview-track-radius')};
+      }
+
+      input[type='range']::-moz-range-track {
+        background-color: ${element.getPropertyValue('--preview-track-color')};
+        height: ${element.getPropertyValue('--preview-track-height')};
+        width: 100%;
+        border-radius: ${element.getPropertyValue('--preview-track-radius')};
+      }
+
+      input[type='range']::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: ${element.getPropertyValue('--preview-thumb-color')};
+        height: ${element.getPropertyValue('--preview-thumb-height')};
+        width: ${element.getPropertyValue('--preview-thumb-width')};
+        margin-top: -3.2px;
+        border-radius: ${element.getPropertyValue('--preview-thumb-radius')};
+      }
+
+      input[type='range']::-moz-range-thumb {
+        border: none;
+        background-color: ${element.getPropertyValue('--preview-thumb-color')};
+        height: ${element.getPropertyValue('--preview-thumb-height')};
+        width: ${element.getPropertyValue('--preview-thumb-width')};
+        border-radius: ${element.getPropertyValue('--preview-thumb-radius')};
+      }
+
+      input[type='range']:focus {
+        outline: none;
+      }
       `;
       break;
   }
@@ -176,7 +222,7 @@ export const getColorInput1 = (attribute: string): HTMLInputElement =>
 export const getColorInput2 = (attribute: string): HTMLInputElement =>
   document.getElementById(`${attribute}-color2`) as HTMLInputElement;
 
-export const gradientElementInputs = (attribute: string): NodeList =>
+export const getAllInputElements = (attribute: string): NodeList =>
   document.querySelectorAll(`.${attribute}-inputs`);
 
 export const gradientPreview = (attribute: string): HTMLElement =>
@@ -210,16 +256,6 @@ export const getCheckbox = (attribute: string): HTMLInputElement =>
 
 export const getRadiusInput = (attribute: string) =>
   document.getElementById(`${attribute}-input`) as HTMLInputElement;
-
-export const showRadius = (attribute: string): void =>
-  (
-    document.querySelectorAll(`#${attribute}-input`) as NodeListOf<HTMLElement>
-  )[0].style.setProperty('display', 'inline');
-
-export const hideRadius = (attribute: string): void =>
-  (
-    document.querySelectorAll(`#${attribute}-input`) as NodeListOf<HTMLElement>
-  )[0].style.setProperty('display', 'none');
 
 export const getInputSpinner = (attribute: string) =>
   document.getElementById(`${attribute}-duration`) as HTMLInputElement;
