@@ -102,7 +102,6 @@ nav ul {
   display: flex;
   align-items: center;
   cursor: pointer;
-  height: 10px;
 }
 
 .dropdown > div > iconify-icon:first-of-type {
