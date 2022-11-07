@@ -102,7 +102,7 @@ nav ul {
   display: flex;
   align-items: center;
   cursor: pointer;
-  height: 20px;
+  height: 10px;
 }
 
 .dropdown > div > iconify-icon:first-of-type {
@@ -133,7 +133,7 @@ nav ul {
   padding-left: 0.2rem;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 
 #category ul {
@@ -148,6 +148,7 @@ nav ul {
   align-items: center;
   border-radius: 3px;
   padding: 0.35rem;
+  margin-bottom: 0.7rem;
 }
 
 #category ul > li span {
