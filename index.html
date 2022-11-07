@@ -451,6 +451,7 @@
                   id="gradient-border-input"
                   name="desired-radius"
                   placeholder="Enter a number e.g. 50"
+                  class="toggle-radius"
                   autofocus
                   required
                 />
@@ -837,6 +838,7 @@
                     max="20"
                     name="thumb-height"
                     id="thumb-height"
+                    class="input-range-inputs"
                   />
                 </label>
                 <label for="thumb-width">
@@ -846,10 +848,11 @@
                   </div>
                   <input
                     type="range"
-                    min="20"
+                    min="5"
                     max="100"
                     name="thumb-width"
                     id="thumb-width"
+                    class="input-range-inputs"
                   />
                 </label>
               </div>
@@ -866,6 +869,7 @@
                     max="20"
                     name="track-height"
                     id="track-height"
+                    class="input-range-inputs"
                   />
                 </label>
                 <label for="track-width">
@@ -877,10 +881,11 @@
 
                   <input
                     type="range"
-                    min="20"
-                    max="100"
+                    min="100"
+                    max="300"
                     name="track-width"
                     id="track-width"
+                    class="input-range-inputs"
                   />
                 </label>
               </div>
@@ -893,6 +898,7 @@
                   type="checkbox"
                   id="input-range-thumb-radius"
                   name="check"
+                  class="input-range-inputs"
                 />
                 <span> Include Thumb Radius </span>
                 <label id="radius-input-label" for="input-range-thumb-input">
@@ -900,6 +906,7 @@
                     type="number"
                     id="input-range-thumb-input"
                     name="desired-radius"
+                    class="toggle-radius input-range-inputs"
                     placeholder="Enter a number e.g. 50"
                     autofocus
                     required
@@ -911,6 +918,7 @@
                   type="checkbox"
                   id="input-range-track-radius"
                   name="check"
+                  class="input-range-inputs"
                 />
                 <span> Include Track Radius </span>
                 <label id="radius-input-label" for="input-range-track-input">
@@ -918,6 +926,7 @@
                     type="number"
                     id="input-range-track-input"
                     name="desired-radius"
+                    class="toggle-radius input-range-inputs"
                     placeholder="Enter a number e.g. 50"
                     autofocus
                     required
@@ -927,7 +936,7 @@
             </div>
 
             <!-- Copy Code Button -->
-            <div class="btn" data-download="pic-text-code">
+            <div class="btn" data-download="input-range-code">
               <iconify-icon
                 inline
                 icon="bx:code-alt"

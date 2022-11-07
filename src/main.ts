@@ -7,11 +7,12 @@ import {animationGenerator} from './pages/animation';
 import {borderRadiusGenerator} from './pages/border-radius';
 import {boxShadowGenerator, addBoxShadowListener} from './pages/box-shadow';
 import {addTextShadowListener, textShadowGenerator} from './pages/text-shadow';
+import {rangeGenerator} from './pages/input-range';
 
 // Utils
 import {
   createGradientPreview,
-  gradientElementInputs,
+  getAllInputElements,
   gradientPreview,
   getColorInput1,
   getColorInput2,
@@ -104,14 +105,14 @@ const downloadButtons = document.querySelectorAll(
 const generatorCategories = document.getElementById('category');
 
 //gradient text color elements
-const gradientTextInputs = gradientElementInputs('gradient-text');
+const gradientTextInputs = getAllInputElements('gradient-text');
 const textPreview = gradientPreview('gradient-text');
 const gradientTextColor1 = getColorInput1('gradient-text');
 const gradientTextColor2 = getColorInput2('gradient-text');
 const gradientTextDegree = getRange('gradient-text');
 
 //gradient border color element
-const gradientBorderInputs = gradientElementInputs('gradient-border');
+const gradientBorderInputs = getAllInputElements('gradient-border');
 const borderPreview = gradientPreview('gradient-border');
 const gradientBorderColor1 = getColorInput1('gradient-border');
 const gradientBorderColor2 = getColorInput2('gradient-border');
@@ -121,7 +122,7 @@ const toggleRadiusInputForGradientBorder = getCheckbox('gradient-border');
 const gradientBorderInput = getRadiusInput('gradient-border');
 
 //gradient background color elements
-const gradientBackgroundInputs = gradientElementInputs('gradient-background');
+const gradientBackgroundInputs = getAllInputElements('gradient-background');
 const backgroundPreview = gradientPreview('gradient-background');
 const gradientBackgroundColor1 = getColorInput1('gradient-background');
 const gradientBackgroundColor2 = getColorInput2('gradient-background');
@@ -294,6 +295,8 @@ function showContent(attribute: string, display: Display): void {
   showGen.style.display = `${display}`;
   highLightGen.style.background = `linear-gradient(80deg,var(--primary-color), var(--secondary-color))`;
   highLightGen.style.border = '1px solid var(--tertiary-color)';
+
+  attribute === 'input-range' && rangeGenerator();
 }
 
 function showResult(attribute: string | null, type: openResults) {
