@@ -152,7 +152,15 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
       break;
   }
 
-  copy(codeToCopy);
+  try {
+    copy(codeToCopy);
+  } catch {
+    Eggy({
+      title: `Whoops`,
+      message: `Can't copy, try again`,
+      type: 'error',
+    });
+  }
 }
 
 export function downloadPNG(attribute: string, outputImage: HTMLElement): void {
