@@ -101,11 +101,6 @@ const downloadButtons = document.querySelectorAll(
   '.image-download'
 ) as NodeListOf<HTMLElement>;
 
-const generatorCategories = document.getElementById('category');
-
-const menu = document.querySelector('.menu') as HTMLElement;
-const body = document.querySelector('body') as HTMLElement;
-
 // get the element with data-button="open-side-panel" attribute and make it hidden
 const openSidePanelButton = document.getElementsByClassName(
   'open-sidebar'
@@ -284,11 +279,11 @@ document.addEventListener('click', (e: Event) => {
 
   if (!event.matches('nav')) {
     if (!event.matches('#menu-icon')) {
-      if (!navBar?.classList.contains('closed-nav')) {
+      if (event.matches('.dropdown > div')) {
         navBar?.animate(navBarSlideOut, navBarAnimationOptions);
+        navBar?.classList.add('closed-nav');
+        menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
       }
-      navBar?.classList.add('closed-nav');
-      menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
     }
   }
 });
@@ -366,18 +361,5 @@ getResultsButton.forEach((getResult) => {
     sidebar.style.left = '0%';
   });
 });
-
-if (getComputedStyle(menu).display == 'block') {
-  body.onclick = (e) => {
-    if (e.target !== navBar) {
-      if (e.target !== menuIcon) {
-        if (e.target === generatorCategories) {
-          navBar?.classList.add('closed-nav');
-          menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
-        }
-      }
-    }
-  };
-}
 
 showResult(null, null);
