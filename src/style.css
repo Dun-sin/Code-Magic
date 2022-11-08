@@ -223,6 +223,8 @@ main > section:first-of-type h2 {
 
 main > section:first-of-type span {
   color: var(--tertiary-color);
+  font-style: italic;
+  text-transform: uppercase;
 }
 
 main > section:first-of-type video {
