@@ -4,7 +4,7 @@
 
 Code Magic is a website where you can get simple CSS tricks to make your application elegant with just few clicks.
 
-![code magic v2](https://user-images.githubusercontent.com/86626640/195396501-ce16026b-9251-4c44-a658-de41d915545c.gif)
+![code magic v2](https://user-images.githubusercontent.com/78784850/200561173-5d359f26-0d9a-4da5-b8b2-d1e2472cb835.gif)
 
 ### 🧙‍♀️ Magic options available for you:
 
