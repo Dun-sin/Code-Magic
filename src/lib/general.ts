@@ -313,6 +313,20 @@ export const getShadowColor = (attribute: string): HTMLInputElement =>
 export const getShadowPreview = (attribute: string): HTMLInputElement =>
   document.getElementById(`${attribute}-preview`) as HTMLInputElement;
 
+export const setGradientDegreeValue = (degreeElement: HTMLElement): void =>
+  degreeElement.addEventListener('input', (e) => {
+    const target = e.target as HTMLInputElement;
+    const unitDisplayElement = target.parentElement?.querySelector(
+      '.unit-display'
+    ) as HTMLElement;
+
+    // change the unit for opacity
+    const unit = unitDisplayElement.innerText.toLowerCase().includes('opacity')
+      ? ''
+      : 'deg';
+    unitDisplayElement.innerText = `${target.value}${unit}`;
+  });
+
 export const getShadowFields = (
   attribute: string,
   types: string[]

@@ -8,6 +8,12 @@ type Values = {
 
 const attribute = 'gradient-text';
 
+const gradientTextInputs = utils.getAllInputElements(attribute);
+const textPreview = utils.gradientPreview(attribute);
+const getFirstColor = utils.getColorInput1(attribute);
+const getSecondColor = utils.getColorInput2(attribute);
+const getDegreeElement = utils.getRange(attribute);
+
 function copyHandler() {
   const outputElement = utils.getOutput(attribute);
   utils.copyCodeToClipboard(attribute, outputElement);
@@ -48,14 +54,10 @@ export function gradientTextGenerator(
   getOutputElement.style.display = 'grid';
   getOutputElement.style.placeItems = 'center';
 
-  const getFirstColor = utils.getColorInput1(attribute);
-  const getSecondColor = utils.getColorInput2(attribute);
-  const getRangeElement = utils.getRange(attribute);
-
   const values = {
     firstColor: getFirstColor.value,
     secondColor: getSecondColor.value,
-    degree: getRangeElement.value,
+    degree: getDegreeElement.value,
   };
 
   getGradientTextResult(
@@ -64,7 +66,6 @@ export function gradientTextGenerator(
     values,
     getOutputElement
   );
-  // getInputElement.value = '';
 }
 
 /**
@@ -109,4 +110,19 @@ function getGradientTextResult(
   getSVGButtonElement.addEventListener('click', svgDownloadHanlder);
 
   getCodeButtonElement.addEventListener('click', copyHandler);
+}
+
+export function addGradientTextListener() {
+  gradientTextInputs.forEach((inputElement) => {
+    inputElement.addEventListener('input', () =>
+      utils.createGradientPreview(
+        getFirstColor,
+        getSecondColor,
+        getDegreeElement,
+        textPreview
+      )
+    );
+  });
+
+  utils.setGradientDegreeValue(getDegreeElement);
 }

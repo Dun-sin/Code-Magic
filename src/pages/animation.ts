@@ -14,11 +14,11 @@ type Values = {
 const attribute = 'animation';
 const getCodeButtonElement = utils.getCopyCodeButton(attribute);
 
-const OutputElement = utils.getOutput(attribute);
-const DegreeElement = utils.getRange(attribute);
-const radio_button_set = utils.getRadioButtonSet(attribute);
+const getOutputElement = utils.getOutput(attribute);
+const getDegreeElement = utils.getRange(attribute);
+const getRadioButtonSet = utils.getRadioButtonSet(attribute);
 
-initialConfiguration(radio_button_set, DegreeElement, OutputElement);
+initialConfiguration(getRadioButtonSet, getDegreeElement, getOutputElement);
 
 export function animationGenerator(type: 'newResults' | 'oldResults' | null) {
   if (type === null) return;
@@ -33,41 +33,40 @@ export function animationGenerator(type: 'newResults' | 'oldResults' | null) {
 
   initial_length = Stylesheet.cssRules.length - 1;
 
-  if (OutputElement === null || type === 'oldResults') return;
+  if (getOutputElement === null || type === 'oldResults') return;
 
   let i = 0;
 
-  for (i = 0; i < radio_button_set.length; i++)
-    if (radio_button_set[i].checked) break;
+  for (i = 0; i < getRadioButtonSet.length; i++)
+    if (getRadioButtonSet[i].checked) break;
 
   const values: Values = {
-    type: radio_button_set[i].value,
-    degree: DegreeElement.value,
+    type: getRadioButtonSet[i].value,
+    degree: getDegreeElement.value,
     duration: duration.value,
   };
-  manageAnimation(values, OutputElement, Stylesheet);
-}
 
-// set event listener for copy code btn
-getCodeButtonElement.addEventListener('click', () => {
-  copy(css);
-  utils.showPopup(
-    'Code Copied',
-    'Code has been successfully copied to clipboard',
-    'success'
-  );
-});
+  getCodeButtonElement.addEventListener('click', () => {
+    copy(css);
+    utils.showPopup(
+      'Code Copied',
+      'Code has been successfully copied to clipboard',
+      'success'
+    );
+  });
+  manageAnimation(values, getOutputElement, Stylesheet);
+}
 
 /**
  * sets the animation to the output element
  *
  * @param values object that contains all values entered by users
- * @param OutputElement output element to display result
+ * @param getOutputElement output element to display result
  * @param stylesheet css stylesheet
  */
 function manageAnimation(
   values: Values,
-  OutputElement: HTMLElement,
+  getOutputElement: HTMLElement,
   stylesheet: CSSStyleSheet
 ) {
   // if (rule_added) {
@@ -92,9 +91,8 @@ function manageAnimation(
       initial_length + 1
     );
 
-    OutputElement.style.animation = `flickerAnimation ease-in`;
-    OutputElement.style.animationDuration = `${values.duration}s`;
-    // rule_added = true;
+    getOutputElement.style.animation = `flickerAnimation ease-in`;
+    getOutputElement.style.animationDuration = `${values.duration}s`;
   } else if (values.type === 'skew') {
     css =
       `/*Copy and paste keyframe into your css file, and apply the animation property in the element of your choice*/\n` +
@@ -114,8 +112,8 @@ function manageAnimation(
       initial_length + 1
     );
 
-    OutputElement.style.animation = `skewAnimation ease-in`;
-    OutputElement.style.animationDuration = `${values.duration}s`;
+    getOutputElement.style.animation = `skewAnimation ease-in`;
+    getOutputElement.style.animationDuration = `${values.duration}s`;
     // rule_added = true;
   } else if (values.type === 'flip') {
     css =
@@ -136,8 +134,8 @@ function manageAnimation(
       initial_length + 1
     );
 
-    OutputElement.style.animation = `turnaround ease-in`;
-    OutputElement.style.animationDuration = `${values.duration}s`;
+    getOutputElement.style.animation = `turnaround ease-in`;
+    getOutputElement.style.animationDuration = `${values.duration}s`;
 
     // rule_added = true;
   } else if (values.type === 'rotate') {
@@ -157,10 +155,8 @@ function manageAnimation(
       initial_length + 1
     );
 
-    OutputElement.style.animation = `rotate ease-in`;
-    OutputElement.style.animationDuration = `${values.duration}s`;
-
-    // rule_added = true;
+    getOutputElement.style.animation = `rotate ease-in`;
+    getOutputElement.style.animationDuration = `${values.duration}s`;
   }
 }
 
@@ -168,22 +164,22 @@ function manageAnimation(
  * sets the inital configuration of the elements
  *
  * @param elements radio elements
- * @param DegreeElement degree element
- * @param OutputElement output element to display result
+ * @param getDegreeElement degree element
+ * @param getOutputElement output element to display result
  */
 function initialConfiguration(
   elements: NodeListOf<HTMLInputElement>,
-  DegreeElement: HTMLInputElement,
-  OutputElement: HTMLElement
+  getDegreeElement: HTMLInputElement,
+  getOutputElement: HTMLElement
 ): void {
-  if (OutputElement === null) return;
-  OutputElement.style.display = 'flex';
-  OutputElement.style.justifyContent = 'center';
-  OutputElement.style.alignItems = 'center';
-  OutputElement.style.fontSize = '1.1em';
-  OutputElement.style.fontWeight = '700';
+  if (getOutputElement === null) return;
+  getOutputElement.style.display = 'flex';
+  getOutputElement.style.justifyContent = 'center';
+  getOutputElement.style.alignItems = 'center';
+  getOutputElement.style.fontSize = '1.1em';
+  getOutputElement.style.fontWeight = '700';
 
-  OutputElement.innerText = 'Lorem Ipsum';
+  getOutputElement.innerText = 'Lorem Ipsum';
 
   // get the unit display element for animator
   const unitDisplayElement = document.querySelector(
@@ -198,27 +194,31 @@ function initialConfiguration(
     el.addEventListener('click', () => {
       const type = el.value;
       if (type === 'skew' || type === 'flip') {
-        DegreeElement.min = '-90';
-        DegreeElement.max = '90';
-        DegreeElement.step = '1';
-        DegreeElement.value = '50';
-        unitDisplayElement.innerText = `${DegreeElement.value}deg`;
+        getDegreeElement.min = '-90';
+        getDegreeElement.max = '90';
+        getDegreeElement.step = '1';
+        getDegreeElement.value = '50';
+        unitDisplayElement.innerText = `${getDegreeElement.value}deg`;
         titleDisplayElement.innerText = 'Angle';
       } else if (type === 'rotate') {
-        DegreeElement.min = '0';
-        DegreeElement.max = '360';
-        DegreeElement.step = '1';
-        DegreeElement.value = '45';
-        unitDisplayElement.innerText = `${DegreeElement.value}deg`;
+        getDegreeElement.min = '0';
+        getDegreeElement.max = '360';
+        getDegreeElement.step = '1';
+        getDegreeElement.value = '45';
+        unitDisplayElement.innerText = `${getDegreeElement.value}deg`;
         titleDisplayElement.innerText = 'Degrees';
       } else {
-        DegreeElement.min = '0';
-        DegreeElement.max = '1';
-        DegreeElement.step = '.1';
-        DegreeElement.value = '.5';
-        unitDisplayElement.innerText = `${DegreeElement.value}`;
+        getDegreeElement.min = '0';
+        getDegreeElement.max = '1';
+        getDegreeElement.step = '.1';
+        getDegreeElement.value = '.5';
+        unitDisplayElement.innerText = `${getDegreeElement.value}`;
         titleDisplayElement.innerText = 'Opacity';
       }
     })
   );
+}
+
+export function addAnimationListener() {
+  utils.setGradientDegreeValue(getDegreeElement);
 }

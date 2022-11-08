@@ -8,6 +8,19 @@ type Values = {
 };
 
 const attribute = 'gradient-border';
+const getBorderRadiusInput = utils.getRadiusInput(attribute);
+const toggleRadiusInputForGradientBorder = utils.getCheckbox(attribute);
+const getOutputElement = utils.getOutput(attribute);
+
+const color1 = utils.getColorInput1(attribute);
+const color2 = utils.getColorInput2(attribute);
+const getDegreeElement = utils.getRange(attribute);
+
+const gradientBorderInputs = utils.getAllInputElements('gradient-border');
+const borderPreview = utils.gradientPreview('gradient-border');
+
+const resultPage = utils.getResultPage();
+
 function copyHandler() {
   const outputElement = utils.getOutput(attribute);
   utils.copyCodeToClipboard(attribute, outputElement);
@@ -16,44 +29,6 @@ function copyHandler() {
     'Code has been successfully copied to clipboard',
     'success'
   );
-}
-
-export function gradientBorderGenerator(
-  type: 'newResults' | 'oldResults' | null
-): void {
-  if (type === null) return;
-
-  const color1 = utils.getColorInput1(attribute);
-  const color2 = utils.getColorInput2(attribute);
-  const getOutputElement = utils.getOutput(attribute);
-  const getRangeElement = utils.getRange(attribute);
-  const getBorderRadiusInput = utils.getRadiusInput(attribute);
-  const resultPage = utils.getResultPage();
-
-  if (color1.value == '' || color2.value == '') {
-    if (color1.value == '') utils.triggerEmptyAnimation(color1);
-    if (color2.value == '') utils.triggerEmptyAnimation(color2);
-    return;
-  }
-
-  resultPage.style.display = 'flex';
-  if (type === 'oldResults') return;
-
-  utils.getCheckbox(attribute).addEventListener('change', () => {
-    if (utils.getCheckbox(attribute).checked) {
-      utils.getRadiusInput(attribute).value = getBorderRadiusInput.value;
-    } else {
-      utils.getRadiusInput(attribute).value = '0';
-    }
-  });
-
-  const values: Values = {
-    firstColor: color1.value,
-    secondColor: color2.value,
-    degree: getRangeElement.value,
-    radius: getBorderRadiusInput.value,
-  };
-  getGradientBorderResult(attribute, values, getOutputElement);
 }
 
 /**
@@ -91,4 +66,53 @@ function getGradientBorderResult(
 
   const getCodeButtonElement = utils.getCopyCodeButton(attribute);
   getCodeButtonElement.addEventListener('click', copyHandler);
+}
+
+export function gradientBorderGenerator(
+  type: 'newResults' | 'oldResults' | null
+): void {
+  if (type === null) return;
+  resultPage.style.display = 'flex';
+
+  if (type === 'oldResults') return;
+
+  if (color1.value == '' || color2.value == '') {
+    if (color1.value == '') utils.triggerEmptyAnimation(color1);
+    if (color2.value == '') utils.triggerEmptyAnimation(color2);
+    return;
+  }
+
+  if (toggleRadiusInputForGradientBorder.checked) {
+    getBorderRadiusInput.value = getBorderRadiusInput.value;
+  } else {
+    getBorderRadiusInput.value = '0';
+  }
+
+  const values: Values = {
+    firstColor: color1.value,
+    secondColor: color2.value,
+    degree: getDegreeElement.value,
+    radius: getBorderRadiusInput.value,
+  };
+  getGradientBorderResult(attribute, values, getOutputElement);
+}
+
+export function addGradientBorderListener() {
+  toggleRadiusInputForGradientBorder.addEventListener('input', function () {
+    getBorderRadiusInput.style.display = this.checked ? 'inline' : 'none';
+  });
+
+  //set gradient border preview
+  gradientBorderInputs.forEach((input) => {
+    input.addEventListener('input', () => {
+      utils.createGradientPreview(
+        color1,
+        color2,
+        getDegreeElement,
+        borderPreview
+      );
+    });
+  });
+
+  utils.setGradientDegreeValue(getDegreeElement);
 }

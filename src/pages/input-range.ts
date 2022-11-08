@@ -1,17 +1,18 @@
 import * as utils from '../lib/general';
 
-const attribute = 'input-range';
-type Range = 'track' | 'thumb';
-type rangeValues = {
+type RangeType = 'track' | 'thumb';
+type RangeValues = {
   height: string;
   width: string;
   radius: string | number;
   color: string;
 };
 type Values = {
-  thumb: rangeValues;
-  track: rangeValues;
+  thumb: RangeValues;
+  track: RangeValues;
 };
+
+const attribute = 'input-range';
 
 function setLabelValue() {
   const getThumbHeightLabel = document.getElementById(
@@ -51,7 +52,7 @@ function setLabelValue() {
   getTrackWidthLabel.innerText = `${getTrackWidthElement.value}px`;
 }
 
-function setBorderRadiusValue(element: Range) {
+function setBorderRadiusValue(element: RangeType) {
   const range = `${attribute}-${element}`;
   const getBorderRadiusInput = utils.getRadiusInput(range);
 
@@ -160,11 +161,13 @@ export const rangeGenerator = () => {
     });
   });
 
-  trackCheckBox.addEventListener('change', () => {
+  trackCheckBox.addEventListener('input', () => {
     setBorderRadiusValue('track');
+    getTrackRadius.style.display = trackCheckBox.checked ? 'inline' : 'none';
   });
-  thumbCheckBox.addEventListener('change', () => {
+  thumbCheckBox.addEventListener('input', () => {
     setBorderRadiusValue('thumb');
+    getThumbRadius.style.display = thumbCheckBox.checked ? 'inline' : 'none';
   });
 
   getCodeButton.addEventListener('click', copyHandler);

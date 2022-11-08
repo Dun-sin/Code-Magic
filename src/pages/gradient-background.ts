@@ -8,6 +8,15 @@ type Values = {
 
 const attribute = 'gradient-background';
 
+const gradientBackgroundInputs = utils.getAllInputElements(
+  'gradient-background'
+);
+
+const backgroundPreview = utils.gradientPreview('gradient-background');
+const getFirstColor = utils.getColorInput1(attribute);
+const getSecondColor = utils.getColorInput2(attribute);
+const getDegreeElement = utils.getRange(attribute);
+
 function copyHandler() {
   const outputElement = utils.getOutput(attribute);
   utils.copyCodeToClipboard(attribute, outputElement);
@@ -16,36 +25,6 @@ function copyHandler() {
     'Code has been successfully copied to clipboard',
     'success'
   );
-}
-
-export function gradientBackgroundGenerator(
-  type: 'newResults' | 'oldResults' | null
-) {
-  if (type === null) return;
-
-  // Inputs
-  const color1 = utils.getColorInput1(attribute);
-  const color2 = utils.getColorInput2(attribute);
-  const getDegreeElement = utils.getRange(attribute);
-
-  const getOutputElement = utils.getOutput(attribute);
-
-  if (color1.value == '' || color2.value == '') {
-    if (color1.value == '') utils.triggerEmptyAnimation(color1);
-    if (color2.value == '') utils.triggerEmptyAnimation(color2);
-    return;
-  }
-  const resultPage = utils.getResultPage();
-
-  resultPage.style.display = 'flex';
-  if (type === 'oldResults') return;
-
-  const values: Values = {
-    firstColor: color1.value,
-    secondColor: color2.value,
-    degree: getDegreeElement.value,
-  };
-  getGradientBackgroundResult(attribute, values, getOutputElement);
 }
 
 /**
@@ -64,4 +43,44 @@ function getGradientBackgroundResult(
 
   const getCodeButtonElement = utils.getCopyCodeButton(attribute);
   getCodeButtonElement.addEventListener('click', copyHandler);
+}
+
+export function gradientBackgroundGenerator(
+  type: 'newResults' | 'oldResults' | null
+) {
+  if (type === null) return;
+
+  const getOutputElement = utils.getOutput(attribute);
+
+  if (getFirstColor.value == '' || getSecondColor.value == '') {
+    getFirstColor.value == '' && utils.triggerEmptyAnimation(getFirstColor);
+    getSecondColor.value == '' && utils.triggerEmptyAnimation(getSecondColor);
+    return;
+  }
+  const resultPage = utils.getResultPage();
+
+  resultPage.style.display = 'flex';
+  if (type === 'oldResults') return;
+
+  const values: Values = {
+    firstColor: getFirstColor.value,
+    secondColor: getSecondColor.value,
+    degree: getDegreeElement.value,
+  };
+  getGradientBackgroundResult(attribute, values, getOutputElement);
+}
+
+export function addGradientBackgroundListener() {
+  gradientBackgroundInputs.forEach((inputElement) => {
+    inputElement.addEventListener('input', () => {
+      utils.createGradientPreview(
+        getFirstColor,
+        getSecondColor,
+        getDegreeElement,
+        backgroundPreview
+      );
+    });
+  });
+
+  utils.setGradientDegreeValue(getDegreeElement);
 }

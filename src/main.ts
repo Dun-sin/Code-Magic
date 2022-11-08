@@ -1,25 +1,25 @@
 // Generator Modules
 import {picTextGenerator} from './pages/pic-text';
-import {gradientTextGenerator} from './pages/gradient-text';
-import {gradientBorderGenerator} from './pages/gradient-border';
-import {gradientBackgroundGenerator} from './pages/gradient-background';
-import {animationGenerator} from './pages/animation';
-import {borderRadiusGenerator} from './pages/border-radius';
+import {
+  addGradientTextListener,
+  gradientTextGenerator,
+} from './pages/gradient-text';
+import {
+  gradientBorderGenerator,
+  addGradientBorderListener,
+} from './pages/gradient-border';
+import {
+  addGradientBackgroundListener,
+  gradientBackgroundGenerator,
+} from './pages/gradient-background';
+import {addAnimationListener, animationGenerator} from './pages/animation';
+import {
+  addBorderRadiusListener,
+  borderRadiusGenerator,
+} from './pages/border-radius';
 import {boxShadowGenerator, addBoxShadowListener} from './pages/box-shadow';
 import {addTextShadowListener, textShadowGenerator} from './pages/text-shadow';
 import {rangeGenerator} from './pages/input-range';
-
-// Utils
-import {
-  createGradientPreview,
-  getAllInputElements,
-  gradientPreview,
-  getColorInput1,
-  getColorInput2,
-  getRange,
-  getCheckbox,
-  getRadiusInput,
-} from './lib/general';
 
 // Packages
 import * as FilePond from 'filepond';
@@ -42,6 +42,7 @@ FilePond.registerPlugin(
  * All types
  */
 type Display = 'grid' | 'flex' | 'none';
+type openResults = 'newResults' | 'oldResults' | null;
 
 /**
  * All Variables
@@ -81,8 +82,6 @@ const navBarAnimationOptions = {
   easing: 'ease',
 };
 
-type openResults = 'newResults' | 'oldResults' | null;
-
 // Elements
 const generators = document.querySelectorAll('[data-gen]');
 const sidebar = document.querySelector('.side-results') as HTMLElement;
@@ -104,68 +103,8 @@ const downloadButtons = document.querySelectorAll(
 
 const generatorCategories = document.getElementById('category');
 
-//gradient text color elements
-const gradientTextInputs = getAllInputElements('gradient-text');
-const textPreview = gradientPreview('gradient-text');
-const gradientTextColor1 = getColorInput1('gradient-text');
-const gradientTextColor2 = getColorInput2('gradient-text');
-const gradientTextDegree = getRange('gradient-text');
-
-//gradient border color element
-const gradientBorderInputs = getAllInputElements('gradient-border');
-const borderPreview = gradientPreview('gradient-border');
-const gradientBorderColor1 = getColorInput1('gradient-border');
-const gradientBorderColor2 = getColorInput2('gradient-border');
-const gradientBorderDegree = getRange('gradient-border');
-
-const toggleRadiusInputForGradientBorder = getCheckbox('gradient-border');
-const gradientBorderInput = getRadiusInput('gradient-border');
-
-//gradient background color elements
-const gradientBackgroundInputs = getAllInputElements('gradient-background');
-const backgroundPreview = gradientPreview('gradient-background');
-const gradientBackgroundColor1 = getColorInput1('gradient-background');
-const gradientBackgroundColor2 = getColorInput2('gradient-background');
-const gradientBackgroundDegree = getRange('gradient-background');
-
-// range input
-const toggleRadiusInputForRangeThumb = getCheckbox('input-range-thumb');
-const toggleRadiusInputForRangeTrack = getCheckbox('input-range-track');
-const rangeRadiusThumbInput = getRadiusInput('input-range-thumb');
-const rangeRadiusTrackInput = getRadiusInput('input-range-track');
-
-// get all range inputs
-const gradientRangeInputs = document.querySelectorAll('.degree-range');
-
-// get title display element for animation
-const titleDisplayElement = document.querySelector(
-  '.title-display'
-) as HTMLElement;
-
-// border radius elements
-const borderRadiusInputs = document.querySelectorAll('.border-radius-inputs');
-const borderTop = document.querySelector(
-  '#border-radius-top'
-) as HTMLInputElement;
-const borderLeft = document.querySelector(
-  '#border-radius-left'
-) as HTMLInputElement;
-const borderBottom = document.querySelector(
-  '#border-radius-bottom'
-) as HTMLInputElement;
-const borderRight = document.querySelector(
-  '#border-radius-right'
-) as HTMLInputElement;
-
-const borderRadiusPreview = document.querySelector(
-  '.border-radius-preview-box > .preview'
-) as HTMLElement;
-
 const menu = document.querySelector('.menu') as HTMLElement;
 const body = document.querySelector('body') as HTMLElement;
-
-const gradientGenerator = document.querySelectorAll('[data-gen]');
-const getResultButtons = document.querySelectorAll('[data-button]');
 
 // get the element with data-button="open-side-panel" attribute and make it hidden
 const openSidePanelButton = document.getElementsByClassName(
@@ -273,8 +212,7 @@ function generatorsFunction(attribute: string, type: openResults): void {
  * @param display  display type
  */
 function showContent(attribute: string, display: Display): void {
-  const generators = document.querySelectorAll(`[data-content]`);
-  const generatorsNav = document.querySelectorAll(`[data-gen]`);
+  const generatorsContent = document.querySelectorAll(`[data-content]`);
   const showGen = document.querySelector(
     `[data-content=${attribute}]`
   ) as HTMLElement;
@@ -282,11 +220,11 @@ function showContent(attribute: string, display: Display): void {
     `[data-gen=${attribute}]`
   ) as HTMLElement;
 
-  generators.forEach((item) => {
+  generatorsContent.forEach((item) => {
     const element = <HTMLElement>item;
     element.style.display = 'none';
   });
-  generatorsNav.forEach((item) => {
+  generators.forEach((item) => {
     const generatorNav = <HTMLElement>item;
     generatorNav.style.border = 'none';
     generatorNav.style.background = 'none';
@@ -296,7 +234,32 @@ function showContent(attribute: string, display: Display): void {
   highLightGen.style.background = `linear-gradient(80deg,var(--primary-color), var(--secondary-color))`;
   highLightGen.style.border = '1px solid var(--tertiary-color)';
 
-  attribute === 'input-range' && rangeGenerator();
+  switch (attribute) {
+    case 'input-range':
+      rangeGenerator();
+      break;
+    case 'gradient-border':
+      addGradientBorderListener();
+      break;
+    case 'gradient-text':
+      addGradientTextListener();
+      break;
+    case 'border-radius':
+      addBorderRadiusListener();
+      break;
+    case 'text-shadow':
+      addTextShadowListener();
+      break;
+    case 'box-shadow':
+      addBoxShadowListener();
+      break;
+    case 'gradient-background':
+      addGradientBackgroundListener();
+      break;
+    case 'animation':
+      addAnimationListener();
+      break;
+  }
 }
 
 function showResult(attribute: string | null, type: openResults) {
@@ -315,40 +278,12 @@ function showResult(attribute: string | null, type: openResults) {
 
 // border radius generator preview
 
-const BorderRadiusGenerator = (
-  borderTop: HTMLInputElement,
-  borderLeft: HTMLInputElement,
-  borderBottom: HTMLInputElement,
-  borderRight: HTMLInputElement,
-  borderRadiusPreview: HTMLElement
-) => {
-  borderRadiusPreview.style.borderRadius = `
-    ${borderTop.value}% ${100 - Number(borderTop.value)}%
-    ${borderBottom.value}% ${100 - Number(borderBottom.value)}% /
-    ${borderLeft.value}% ${borderRight.value}%
-    ${100 - Number(borderRight.value)}% ${100 - Number(borderLeft.value)}%`;
-};
-
-//Toggle gradient border radius input display
-toggleRadiusInputForGradientBorder.addEventListener('input', function () {
-  gradientBorderInput.style.display = this.checked ? 'inline' : 'none';
-});
-
-toggleRadiusInputForRangeThumb.addEventListener('input', function () {
-  rangeRadiusThumbInput.style.display = this.checked ? 'inline' : 'none';
-});
-
-toggleRadiusInputForRangeTrack.addEventListener('input', function () {
-  rangeRadiusTrackInput.style.display = this.checked ? 'inline' : 'none';
-});
-
 // Trigger the nav bar to close when user clicks on body
-
-document.addEventListener("click", (e:Event) => {
+document.addEventListener('click', (e: Event) => {
   const event = e.target as HTMLElement;
 
-  if( !event.matches("nav")) {
-    if(!event.matches("#menu-icon")) {
+  if (!event.matches('nav')) {
+    if (!event.matches('#menu-icon')) {
       if (!navBar?.classList.contains('closed-nav')) {
         navBar?.animate(navBarSlideOut, navBarAnimationOptions);
       }
@@ -356,7 +291,7 @@ document.addEventListener("click", (e:Event) => {
       menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
     }
   }
-})
+});
 
 menuIcon?.addEventListener('click', () => {
   if (navBar?.classList.contains('closed-nav')) {
@@ -371,17 +306,13 @@ menuIcon?.addEventListener('click', () => {
 });
 
 //event listener to clear styling on generator tabs when "Code magic is clicked"
-document.getElementById('head')?.addEventListener('click', () => {
-  const generatorsNav = document.querySelectorAll(`[data-gen]`);
-  generatorsNav.forEach((item) => {
+getHeaderText?.addEventListener('click', () => {
+  if (getHomePage === null || getGeneratorSection === null) return;
+  generators.forEach((item) => {
     const generatorNav = <HTMLElement>item;
     generatorNav.style.border = 'none';
     generatorNav.style.background = 'none';
   });
-});
-
-getHeaderText?.addEventListener('click', () => {
-  if (getHomePage === null || getGeneratorSection === null) return;
   getHomePage.style.display = 'flex';
   getGeneratorSection.style.display = 'none';
 });
@@ -402,57 +333,22 @@ closeBar?.addEventListener('click', () => {
   }, 600);
 });
 
-gradientBackgroundDegree.addEventListener('input', () => {
-  createGradientPreview(
-    gradientBackgroundColor1,
-    gradientBackgroundColor2,
-    gradientBackgroundDegree,
-    backgroundPreview
-  );
-});
-
-// display current gradient value for all range inputs
-const displayGradientValue = (gradientElement: HTMLInputElement) => {
-  gradientElement.addEventListener('input', (e) => {
-    const target = e.target as HTMLInputElement;
-    const unitDisplayElement = <HTMLElement>(
-      target.parentElement?.querySelector('.unit-display')
-    );
-
-    // change the unit for opacity
-    const unit = titleDisplayElement.innerText.toLowerCase().includes('opacity')
-      ? ''
-      : 'deg';
-    unitDisplayElement.innerText = `${target.value}${unit}`;
-  });
-};
-
-gradientGenerator.forEach((item) => {
-  item.addEventListener('click', () => {
-    if (openSidePanelButton) {
-      openSidePanelButton.style.display = 'none';
-    }
-  });
-});
-
-getResultButtons.forEach((item) => {
-  item.addEventListener('click', () => {
-    if (openSidePanelButton) {
-      openSidePanelButton.style.display = 'block';
-    }
-  });
-});
-
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
     const checking = generator.getAttribute('data-gen');
-
+    openSidePanelButton.style.display = 'none';
     if (
       checking === null ||
       getHomePage === null ||
       getGeneratorSection === null
     )
       return;
+
+    !navBar?.classList.contains('closed-nav') &&
+      navBar?.animate(navBarSlideOut, navBarAnimationOptions);
+    navBar?.classList.add('closed-nav');
+    menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
+
     sidebar.style.display = 'none';
     attributeValue = checking;
     getHomePage.style.display = 'none';
@@ -463,72 +359,13 @@ generators.forEach((generator) => {
 
 getResultsButton.forEach((getResult) => {
   getResult?.addEventListener('click', () => {
+    openSidePanelButton.style.display = 'block';
+
     showResult(getResult.getAttribute('data-button'), 'newResults');
     sidebar.animate(sideBarSlide, sideBarTiming);
     sidebar.style.left = '0%';
   });
 });
-
-gradientRangeInputs.forEach((gradientRangeInput: HTMLInputElement) => {
-  displayGradientValue(gradientRangeInput);
-});
-
-for (let i = 0; i < generators.length; i++) {
-  generators[i].addEventListener('click', () => {
-    if (!navBar?.classList.contains('closed-nav')) {
-      navBar?.animate(navBarSlideOut, navBarAnimationOptions);
-    }
-    navBar?.classList.add('closed-nav');
-    menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
-  });
-}
-
-for (let i = 0; i < gradientBackgroundInputs.length; i++) {
-  gradientBackgroundInputs[i].addEventListener('input', () =>
-    createGradientPreview(
-      gradientBackgroundColor1,
-      gradientBackgroundColor2,
-      gradientBackgroundDegree,
-      backgroundPreview
-    )
-  );
-}
-
-// on change event handler for border radius generator range inputs
-for (let i = 0; i < borderRadiusInputs.length; i++) {
-  borderRadiusInputs[i].addEventListener('input', () =>
-    BorderRadiusGenerator(
-      borderTop,
-      borderLeft,
-      borderBottom,
-      borderRight,
-      borderRadiusPreview
-    )
-  );
-}
-
-//set gradient border preview
-for (let i = 0; i < gradientBorderInputs.length; i++) {
-  gradientBorderInputs[i].addEventListener('input', () =>
-    createGradientPreview(
-      gradientBorderColor1,
-      gradientBorderColor2,
-      gradientBorderDegree,
-      borderPreview
-    )
-  );
-}
-
-for (let i = 0; i < gradientTextInputs.length; i++) {
-  gradientTextInputs[i].addEventListener('input', () =>
-    createGradientPreview(
-      gradientTextColor1,
-      gradientTextColor2,
-      gradientTextDegree,
-      textPreview
-    )
-  );
-}
 
 if (getComputedStyle(menu).display == 'block') {
   body.onclick = (e) => {
@@ -542,8 +379,5 @@ if (getComputedStyle(menu).display == 'block') {
     }
   };
 }
-
-addBoxShadowListener();
-addTextShadowListener();
 
 showResult(null, null);
