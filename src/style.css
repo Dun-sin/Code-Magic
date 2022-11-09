@@ -123,6 +123,7 @@ nav ul {
 }
 
 #category {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
 }
@@ -211,13 +212,13 @@ main > section {
 }
 
 main > section:first-of-type h1 {
-  font-size: clamp(1rem, 10vw, 2rem);
+  font-size: clamp(1rem, 2.5vw, 2rem);
   text-align: center;
 }
 
 main > section:first-of-type h2 {
   margin-top: 10px;
-  font-size: clamp(0.5rem, 10vw, 1rem);
+  font-size: clamp(0.7rem, 1vw, 1.7rem);
   text-align: center;
 }
 
