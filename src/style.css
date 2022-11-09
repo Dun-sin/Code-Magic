@@ -229,8 +229,8 @@ main > section:first-of-type span {
 }
 
 main > section:first-of-type video {
-  width: clamp(300px, 50vw, 800px);
-  height: clamp(300px / 1.75, 50vw / 1.75, 800px / 1.75);
+  width: clamp(300px, 40vw, 800px);
+  height: clamp(300px / 1.75, 40vw / 1.75, 800px / 1.75);
   margin-top: 20px;
   border: 2px solid var(--text-color);
 }
