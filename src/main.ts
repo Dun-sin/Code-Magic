@@ -271,32 +271,45 @@ function showResult(attribute: string | null, type: openResults) {
   generatorsFunction(attribute, type);
 }
 
-// border radius generator preview
+function openOrCloseNavigationBar(state: 'open' | 'close') {
+  if (state === 'open') {
+    navBar?.animate(navBarSlideIn, navBarAnimationOptions);
+    navBar?.classList.remove('closed-nav');
+    menuIcon?.setAttribute('icon', 'ci:close-big');
+  } else if (state === 'close') {
+    navBar?.animate(navBarSlideOut, navBarAnimationOptions);
+    navBar?.classList.add('closed-nav');
+    menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
+  }
+}
 
-// Trigger the nav bar to close when user clicks on body
 document.addEventListener('click', (e: Event) => {
   const event = e.target as HTMLElement;
 
-  if (!event.matches('nav')) {
-    if (!event.matches('#menu-icon')) {
-      if (event.matches('.dropdown > div')) {
-        navBar?.animate(navBarSlideOut, navBarAnimationOptions);
-        navBar?.classList.add('closed-nav');
-        menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
-      }
-    }
+  const areasNotAllowedToCloseNavigationBar = {
+    isNotNavigationBar: !event.matches('nav'),
+    isNotDropDownLabel: !event.matches('.dropdown'),
+    isNotMenuIcon: !event.matches('#menu-icon'),
+    isParentNotDropDownLabel:
+      !event.parentElement?.parentElement?.matches('.dropdown'),
+    doesNotHaveAClosedClass: !navBar?.classList.contains('closed-nav'),
+    isNotFooter: !event.matches('footer'),
+  };
+
+  const isAllValidationTrue = Object.values(
+    areasNotAllowedToCloseNavigationBar
+  ).every((value) => value === true);
+
+  if (isAllValidationTrue) {
+    openOrCloseNavigationBar('close');
   }
 });
 
 menuIcon?.addEventListener('click', () => {
   if (navBar?.classList.contains('closed-nav')) {
-    navBar?.animate(navBarSlideIn, navBarAnimationOptions);
-    navBar?.classList.remove('closed-nav');
-    menuIcon?.setAttribute('icon', 'ci:close-big');
+    openOrCloseNavigationBar('open');
   } else {
-    navBar?.animate(navBarSlideOut, navBarAnimationOptions);
-    navBar?.classList.add('closed-nav');
-    menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
+    openOrCloseNavigationBar('close');
   }
 });
 
@@ -340,9 +353,7 @@ generators.forEach((generator) => {
       return;
 
     !navBar?.classList.contains('closed-nav') &&
-      navBar?.animate(navBarSlideOut, navBarAnimationOptions);
-    navBar?.classList.add('closed-nav');
-    menuIcon?.setAttribute('icon', 'dashicons:menu-alt');
+      openOrCloseNavigationBar('close');
 
     sidebar.style.display = 'none';
     attributeValue = checking;
