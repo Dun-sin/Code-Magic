@@ -150,6 +150,10 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
       }
       `;
       break;
+    default:
+      codeToCopy = `
+          Couldn't copy, please try again :(
+        `;
   }
 
   try {
