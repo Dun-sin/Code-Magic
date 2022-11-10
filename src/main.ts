@@ -169,7 +169,8 @@ FilePond.create(getImageEntryElement, {
 /**
  * sets which generator to call
  *
- * @param attribute - The attribute name of the generator element
+ * @param attribute The attribute name of the generator element
+ * @param type type of result to get back
  */
 function generatorsFunction(attribute: string, type: openResults): void {
   switch (attribute) {
@@ -203,8 +204,8 @@ function generatorsFunction(attribute: string, type: openResults): void {
 /**
  * use to toggle visibility of content in generators
  *
- * @param attribute  The attribute name of the generator element
- * @param display  display type
+ * @param attribute The attribute name of the generator element
+ * @param display display type
  */
 function showContent(attribute: string, display: Display): void {
   const generatorsContent = document.querySelectorAll(`[data-content]`);
@@ -257,7 +258,13 @@ function showContent(attribute: string, display: Display): void {
   }
 }
 
-function showResult(attribute: string | null, type: openResults) {
+/**
+ * Which generator result should show
+ *
+ * @param attribute The attribute name of the generator element
+ * @param type type of result to get back
+ */
+function showResult(attribute: string | null, type: openResults): void {
   results.forEach((item) => {
     const element = <HTMLElement>item;
     if (element.getAttribute('data-result') === attribute) {
@@ -271,6 +278,11 @@ function showResult(attribute: string | null, type: openResults) {
   generatorsFunction(attribute, type);
 }
 
+/**
+ * Control Visibility of the Navigation Bar
+ *
+ * @param state state of visibility
+ */
 function openOrCloseNavigationBar(state: 'open' | 'close') {
   if (state === 'open') {
     navBar?.animate(navBarSlideIn, navBarAnimationOptions);

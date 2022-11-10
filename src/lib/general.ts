@@ -1,8 +1,164 @@
-import domtoimage from 'dom-to-image';
+import DomToImage from 'dom-to-image';
 import copy from 'copy-to-clipboard';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {Eggy} from '@s-r0/eggy-js';
+
+// Functions for getting elements
+export const getResultPage = (): HTMLElement =>
+  document.querySelector('.side-results') as HTMLElement;
+
+export const getCopyCodeButton = (attribute: string): HTMLElement =>
+  document.querySelector(`[data-download=${attribute}-code]`) as HTMLElement;
+
+export const getPNGButton = (attribute: string): HTMLElement =>
+  document.querySelector(`[data-download=${attribute}-PNG]`) as HTMLElement;
+
+export const getSVGButton = (attribute: string): HTMLElement =>
+  document.querySelector(`[data-download=${attribute}-svg]`) as HTMLElement;
+
+export const getResultButton = (attribute: string): HTMLElement =>
+  document.querySelector(`[data-button = ${attribute}]`) as HTMLElement;
+
+export const getColorInput1 = (attribute: string): HTMLInputElement =>
+  document.getElementById(`${attribute}-color1`) as HTMLInputElement;
+
+export const getColorInput2 = (attribute: string): HTMLInputElement =>
+  document.getElementById(`${attribute}-color2`) as HTMLInputElement;
+
+export const getAllInputElements = (attribute: string): NodeList =>
+  document.querySelectorAll(`.${attribute}-inputs`);
+
+export const gradientPreview = (attribute: string): HTMLElement =>
+  document.querySelector(`#${attribute}-color-preview`) as HTMLElement;
+
+export const getOutput = (attribute: string): HTMLElement =>
+  document.querySelector(
+    `[data-result = ${attribute}] > .output`
+  ) as HTMLElement;
+
+export const getRange = (attribute: string): HTMLInputElement =>
+  document.getElementById(`${attribute}-degree`) as HTMLInputElement;
+
+export const getInputText = (attribute: string) =>
+  document.getElementById(`${attribute}-text`) as HTMLInputElement;
+
+export const getCheckbox = (attribute: string): HTMLInputElement =>
+  document.getElementById(`${attribute}-radius`) as HTMLInputElement;
+
+export const getRadiusInput = (attribute: string) =>
+  document.getElementById(`${attribute}-input`) as HTMLInputElement;
+
+export const getInputSpinner = (attribute: string) =>
+  document.getElementById(`${attribute}-duration`) as HTMLInputElement;
+
+export const getRadioButtonSet = (attribute: string) =>
+  document.querySelectorAll(
+    `[name = ${attribute}-radio]`
+  ) as NodeListOf<HTMLInputElement>;
+
+export const getBorderTop = (attribute: string) =>
+  document.getElementById(`${attribute}-top`) as HTMLInputElement;
+
+export const getBorderRight = (attribute: string) =>
+  document.getElementById(`${attribute}-right`) as HTMLInputElement;
+
+export const getBorderBottom = (attribute: string) =>
+  document.getElementById(`${attribute}-bottom`) as HTMLInputElement;
+
+export const getBorderLeft = (attribute: string) =>
+  document.getElementById(`${attribute}-left`) as HTMLInputElement;
+
+export const getStyleSheet = () => {
+  const stylesheet = Array.from(document.styleSheets).filter(
+    (styleSheet) =>
+      !styleSheet.href || styleSheet.href.startsWith(location.origin)
+  );
+  return stylesheet[0] as CSSStyleSheet;
+};
+
+export const getShadowHorizontalOffset = (
+  attribute: string
+): HTMLInputElement =>
+  document.getElementById(`${attribute}-h-offset`) as HTMLInputElement;
+
+export const getShadowVerticalOffset = (attribute: string): HTMLInputElement =>
+  document.getElementById(`${attribute}-v-offset`) as HTMLInputElement;
+
+export const getShadowBlur = (attribute: string): HTMLInputElement =>
+  document.getElementById(`${attribute}-blur`) as HTMLInputElement;
+
+export const getShadowSpread = (attribute: string): HTMLInputElement =>
+  document.getElementById(`${attribute}-spread`) as HTMLInputElement;
+
+export const getShadowColor = (attribute: string): HTMLInputElement =>
+  document.getElementById(`${attribute}-color`) as HTMLInputElement;
+
+export const getShadowPreview = (attribute: string): HTMLInputElement =>
+  document.getElementById(`${attribute}-preview`) as HTMLInputElement;
+
+export const setGradientDegreeValue = (degreeElement: HTMLElement): void =>
+  degreeElement.addEventListener('input', (e) => {
+    const target = e.target as HTMLInputElement;
+    const unitDisplayElement = target.parentElement?.querySelector(
+      '.unit-display'
+    ) as HTMLElement;
+
+    // change the unit for opacity
+    const unit = unitDisplayElement.innerText.toLowerCase().includes('opacity')
+      ? ''
+      : 'deg';
+    unitDisplayElement.innerText = `${target.value}${unit}`;
+  });
+
+export const getShadowFields = (
+  attribute: string,
+  types: string[]
+): HTMLSpanElement[] =>
+  types.reduce(
+    (acc, type) => [
+      ...acc,
+      document.getElementById(`${attribute}-${type}-field`) as HTMLInputElement,
+    ],
+    []
+  );
+
+export const getPreviewSlider = (attribute: string): HTMLElement =>
+  document.querySelector(
+    `[data-content=${attribute}] .preview-slider`
+  ) as HTMLElement;
+
+export function slideIn(slider: HTMLElement, isOpen: boolean) {
+  if (isOpen) return;
+
+  const slideIn = [{left: '-300px'}, {left: '-10px'}];
+  const slideInTiming = {
+    duration: 500,
+    iterations: 1,
+    fill: 'both' as FillMode,
+  };
+
+  slider.animate(slideIn, slideInTiming);
+}
+
+export const createGradientPreview = (
+  color1: HTMLInputElement,
+  color2: HTMLInputElement,
+  range: HTMLInputElement,
+  preview: HTMLElement
+) => {
+  const colorFrom = color1?.value;
+  const colorTo = color2?.value;
+  const fill = range?.value;
+  preview.style.background = `linear-gradient(${fill}deg, ${colorFrom}, ${colorTo})`;
+};
+
+function createDownloadLink(fileName: string, url: string) {
+  const link = document.createElement('a');
+  link.download = fileName;
+  link.href = url;
+  return link;
+}
 
 /**
  * Allows you to copy to clipboard
@@ -168,14 +324,14 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
 }
 
 export function downloadPNG(attribute: string, outputImage: HTMLElement): void {
-  domtoimage.toPng(outputImage, {quality: 0.95}).then((dataUrl) => {
+  DomToImage.toPng(outputImage, {quality: 1}).then((dataUrl) => {
     const link = createDownloadLink(`${attribute}.png`, dataUrl);
     link.click();
   });
 }
 
 export function downloadSVG(attribute: string, outputImage: HTMLElement): void {
-  domtoimage.toSvg(outputImage).then((dataUrl) => {
+  DomToImage.toSvg(outputImage).then((dataUrl) => {
     const link = createDownloadLink(`${attribute}.svg`, dataUrl);
     link.click();
   });
@@ -211,159 +367,4 @@ export function triggerEmptyAnimation(inputElement: HTMLInputElement): void {
   setTimeout(() => {
     inputElement.style.borderColor = 'white';
   }, 1000);
-}
-
-export const getResultPage = (): HTMLElement =>
-  document.querySelector('.side-results') as HTMLElement;
-
-export const getCopyCodeButton = (attribute: string): HTMLElement =>
-  document.querySelector(`[data-download=${attribute}-code]`) as HTMLElement;
-
-export const getPNGButton = (attribute: string): HTMLElement =>
-  document.querySelector(`[data-download=${attribute}-PNG]`) as HTMLElement;
-
-export const getSVGButton = (attribute: string): HTMLElement =>
-  document.querySelector(`[data-download=${attribute}-svg]`) as HTMLElement;
-
-export const getResultButton = (attribute: string): HTMLElement =>
-  document.querySelector(`[data-button = ${attribute}]`) as HTMLElement;
-
-export const getColorInput1 = (attribute: string): HTMLInputElement =>
-  document.getElementById(`${attribute}-color1`) as HTMLInputElement;
-
-export const getColorInput2 = (attribute: string): HTMLInputElement =>
-  document.getElementById(`${attribute}-color2`) as HTMLInputElement;
-
-export const getAllInputElements = (attribute: string): NodeList =>
-  document.querySelectorAll(`.${attribute}-inputs`);
-
-export const gradientPreview = (attribute: string): HTMLElement =>
-  document.querySelector(`#${attribute}-color-preview`) as HTMLElement;
-
-export const createGradientPreview = (
-  color1: HTMLInputElement,
-  color2: HTMLInputElement,
-  range: HTMLInputElement,
-  preview: HTMLElement
-) => {
-  const colorFrom = color1?.value;
-  const colorTo = color2?.value;
-  const fill = range?.value;
-  preview.style.background = `linear-gradient(${fill}deg, ${colorFrom}, ${colorTo})`;
-};
-
-export const getOutput = (attribute: string): HTMLElement =>
-  document.querySelector(
-    `[data-result = ${attribute}] > .output`
-  ) as HTMLElement;
-
-export const getRange = (attribute: string): HTMLInputElement =>
-  document.getElementById(`${attribute}-degree`) as HTMLInputElement;
-
-export const getInputText = (attribute: string) =>
-  document.getElementById(`${attribute}-text`) as HTMLInputElement;
-
-export const getCheckbox = (attribute: string): HTMLInputElement =>
-  document.getElementById(`${attribute}-radius`) as HTMLInputElement;
-
-export const getRadiusInput = (attribute: string) =>
-  document.getElementById(`${attribute}-input`) as HTMLInputElement;
-
-export const getInputSpinner = (attribute: string) =>
-  document.getElementById(`${attribute}-duration`) as HTMLInputElement;
-
-export const getRadioButtonSet = (attribute: string) =>
-  document.querySelectorAll(
-    `[name = ${attribute}-radio]`
-  ) as NodeListOf<HTMLInputElement>;
-
-export const getBorderTop = (attribute: string) =>
-  document.getElementById(`${attribute}-top`) as HTMLInputElement;
-
-export const getBorderRight = (attribute: string) =>
-  document.getElementById(`${attribute}-right`) as HTMLInputElement;
-
-export const getBorderBottom = (attribute: string) =>
-  document.getElementById(`${attribute}-bottom`) as HTMLInputElement;
-
-export const getBorderLeft = (attribute: string) =>
-  document.getElementById(`${attribute}-left`) as HTMLInputElement;
-
-export const getStyleSheet = () => {
-  const stylesheet = Array.from(document.styleSheets).filter(
-    (styleSheet) =>
-      !styleSheet.href || styleSheet.href.startsWith(location.origin)
-  );
-  return stylesheet[0] as CSSStyleSheet;
-};
-
-export const getShadowHorizontalOffset = (
-  attribute: string
-): HTMLInputElement =>
-  document.getElementById(`${attribute}-h-offset`) as HTMLInputElement;
-
-export const getShadowVerticalOffset = (attribute: string): HTMLInputElement =>
-  document.getElementById(`${attribute}-v-offset`) as HTMLInputElement;
-
-export const getShadowBlur = (attribute: string): HTMLInputElement =>
-  document.getElementById(`${attribute}-blur`) as HTMLInputElement;
-
-export const getShadowSpread = (attribute: string): HTMLInputElement =>
-  document.getElementById(`${attribute}-spread`) as HTMLInputElement;
-
-export const getShadowColor = (attribute: string): HTMLInputElement =>
-  document.getElementById(`${attribute}-color`) as HTMLInputElement;
-
-export const getShadowPreview = (attribute: string): HTMLInputElement =>
-  document.getElementById(`${attribute}-preview`) as HTMLInputElement;
-
-export const setGradientDegreeValue = (degreeElement: HTMLElement): void =>
-  degreeElement.addEventListener('input', (e) => {
-    const target = e.target as HTMLInputElement;
-    const unitDisplayElement = target.parentElement?.querySelector(
-      '.unit-display'
-    ) as HTMLElement;
-
-    // change the unit for opacity
-    const unit = unitDisplayElement.innerText.toLowerCase().includes('opacity')
-      ? ''
-      : 'deg';
-    unitDisplayElement.innerText = `${target.value}${unit}`;
-  });
-
-export const getShadowFields = (
-  attribute: string,
-  types: string[]
-): HTMLSpanElement[] =>
-  types.reduce(
-    (acc, type) => [
-      ...acc,
-      document.getElementById(`${attribute}-${type}-field`) as HTMLInputElement,
-    ],
-    []
-  );
-
-export const getPreviewSlider = (attribute: string): HTMLElement =>
-  document.querySelector(
-    `[data-content=${attribute}] .preview-slider`
-  ) as HTMLElement;
-
-export function slideIn(slider: HTMLElement, isOpen: boolean) {
-  if (isOpen) return;
-
-  const slideIn = [{left: '-300px'}, {left: '-10px'}];
-  const slideInTiming = {
-    duration: 500,
-    iterations: 1,
-    fill: 'both' as FillMode,
-  };
-
-  slider.animate(slideIn, slideInTiming);
-}
-
-function createDownloadLink(fileName: string, url: string) {
-  const link = document.createElement('a');
-  link.download = fileName;
-  link.href = url;
-  return link;
 }
