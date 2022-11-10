@@ -8,8 +8,6 @@
   --gradient-border-color-1: red;
   --gradient-border-color-2: blue;
 
-  /* Heights */
-
   /* Widths */
   --generator-width: clamp(300px, 80%, 50vw);
   --content-container: 100%;
@@ -237,12 +235,19 @@ main > section:first-of-type video {
 
 main > section:last-of-type {
   display: none;
+  position: relative;
 }
 
-.open-sidebar {
+.open {
+  display: flex;
+  align-items: center;
   position: absolute;
-  top: 20px;
+  top: 10px;
   right: 50px;
+}
+
+.open p {
+  opacity: 0;
 }
 
 .generators {
@@ -651,7 +656,7 @@ input[type='number']::-webkit-outer-spin-button {
 
 .open-sidebar > span.tooltip {
   position: relative;
-  bottom: -20px;
+  bottom: -35px;
   right: 40px;
   padding: 5px;
   width: 50px;
@@ -664,12 +669,6 @@ input[type='number']::-webkit-outer-spin-button {
   border-radius: 5px;
   display: none;
 }
-
-.open-sidebar > span.tooltip {
-  top: 5%;
-  left: -10px;
-}
-
 .close-sideBar .tooltip::before {
   content: '';
   position: absolute;
@@ -995,6 +994,15 @@ a {
 
 .eggy {
   z-index: 10;
+}
+
+@keyframes showOpenPreviousResultText {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @media screen and (max-width: 1010px) {

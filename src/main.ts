@@ -51,6 +51,7 @@ const FINAL_WIDTH = 300;
 let attributeValue: string | null = null;
 let imageSRC: string;
 let imageHeight: number;
+
 const sideBarSlide = [
   {left: '30%', opacity: '0'},
   {left: '0%', opacity: '1'},
@@ -90,6 +91,9 @@ const getResultsButton = document.querySelectorAll('[data-button]');
 const getResultIcon = document.querySelector('.open-sidebar');
 const getHomePage = document.getElementById('home-page');
 const getGeneratorSection = document.getElementById('generator');
+const getOpenPreviousResult = document.querySelector(
+  '.open > p'
+) as HTMLElement;
 const results = document.querySelectorAll('[data-result]');
 const closeBar = document.getElementById('close-side-bar');
 const getImageEntryElement = document.getElementById(
@@ -295,6 +299,14 @@ function openOrCloseNavigationBar(state: 'open' | 'close') {
   }
 }
 
+function showOpenPreviousResultText() {
+  getOpenPreviousResult.style.display = 'block';
+  getOpenPreviousResult.style.animationName = 'showOpenPreviousResultText';
+  getOpenPreviousResult.style.animationDuration = '1500ms';
+  getOpenPreviousResult.style.animationTimingFunction = 'ease-in';
+  getOpenPreviousResult.style.animationFillMode = 'backwards';
+}
+
 document.addEventListener('click', (e: Event) => {
   const event = e.target as HTMLElement;
 
@@ -351,12 +363,17 @@ closeBar?.addEventListener('click', () => {
   setTimeout(() => {
     sidebar.style.display = 'none';
   }, 600);
+
+  setTimeout(() => {
+    showOpenPreviousResultText();
+  }, 200);
 });
 
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
     const checking = generator.getAttribute('data-gen');
     openSidePanelButton.style.display = 'none';
+
     if (
       checking === null ||
       getHomePage === null ||
@@ -377,7 +394,7 @@ generators.forEach((generator) => {
 
 getResultsButton.forEach((getResult) => {
   getResult?.addEventListener('click', () => {
-    openSidePanelButton.style.display = 'block';
+    openSidePanelButton.style.display = 'flex';
 
     showResult(getResult.getAttribute('data-button'), 'newResults');
     sidebar.animate(sideBarSlide, sideBarTiming);
