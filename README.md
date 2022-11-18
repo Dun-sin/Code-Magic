@@ -32,6 +32,7 @@ Code Magic is a website where you can get simple CSS tricks to make your applica
   - Set duration and speed for the animations
   - And boom
 - Box Shadow - Cast a shadow on your element.
+- Input Range - Ability to enter a range as an input.
 - Border Radius - Get desired border radius for your element.
 - Text Shadow - Create a cool shadow for your text.
 
