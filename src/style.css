@@ -373,12 +373,31 @@ input::placeholder {
 
 .colors {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   margin: var(--spacing) 0 var(--spacing) 0;
   width: var(--generator-width);
 }
 
-.colors + .preview {
+.add-remove-color {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.add-remove-color > div:nth-of-type(even) {
+  margin-left: 5px;
+}
+
+.newColor {
+  display: flex;
+  background-color: var(--primary-color);
+  padding: 5px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.preview {
   margin: var(--spacing) 0 var(--spacing) 0;
   width: var(--generator-width);
   height: 50px;
@@ -386,7 +405,7 @@ input::placeholder {
   border-radius: 5px;
 }
 
-.colors > .color:last-of-type:not(.colors > .color:only-of-type) {
+.colors > .color:nth-of-type(even) {
   margin-left: 10px;
 }
 
@@ -395,7 +414,12 @@ input::placeholder {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 48%;
+  margin-bottom: 5px;
+}
+
+.full-page {
+  width: 100% !important;
 }
 
 .clr-field {
@@ -826,14 +850,7 @@ input[type='number']::-webkit-outer-spin-button {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: var(--gradient-border-radius);
   padding: 6px;
-  background: linear-gradient(
-      var(--gradient-border-degree, 45deg),
-      var(--gradient-border-color-1, red),
-      var(--gradient-border-color-2, blue)
-    )
-    border-box;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;

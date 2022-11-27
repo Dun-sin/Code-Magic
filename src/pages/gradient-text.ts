@@ -1,17 +1,16 @@
 import * as utils from '../lib/general';
 
 type Values = {
-  firstColor: string;
-  secondColor: string;
   degree: string;
 };
 
 const attribute = 'gradient-text';
 
-const gradientTextInputs = utils.getAllInputElements(attribute);
-const textPreview = utils.gradientPreview(attribute);
-const getFirstColor = utils.getColorInput1(attribute);
-const getSecondColor = utils.getColorInput2(attribute);
+let gradientTextInputs = utils.getAllInputElements(attribute);
+
+const getNewColorButton = utils.getNewColorButton(attribute);
+const getRemoveColorButton = utils.removeNewColorButton(attribute);
+
 const getDegreeElement = utils.getRange(attribute);
 
 function copyHandler() {
@@ -55,8 +54,6 @@ export function gradientTextGenerator(
   getOutputElement.style.placeItems = 'center';
 
   const values = {
-    firstColor: getFirstColor.value,
-    secondColor: getSecondColor.value,
     degree: getDegreeElement.value,
   };
 
@@ -86,7 +83,9 @@ function getGradientTextResult(
     const wordElement = document.createElement('p');
     wordElement.innerText = text;
     wordElement.style.fontSize = '2rem';
-    wordElement.style.background = `linear-gradient(${values.degree}deg, ${values.firstColor}, ${values.secondColor})`;
+    wordElement.style.background = `linear-gradient(${values.degree}deg, ${utils
+      .getColorsValue(attribute)
+      .join(', ')})`;
     wordElement.style.backgroundClip = 'text';
     wordElement.style.webkitBackgroundClip = 'text';
     wordElement.style.webkitTextFillColor = 'transparent';
@@ -113,16 +112,32 @@ function getGradientTextResult(
 }
 
 export function addGradientTextListener() {
-  gradientTextInputs.forEach((inputElement) => {
-    inputElement.addEventListener('input', () =>
-      utils.createGradientPreview(
-        getFirstColor,
-        getSecondColor,
-        getDegreeElement,
-        textPreview
-      )
-    );
+  utils.whatColorButtonShouldShow(attribute);
+
+  getNewColorButton.addEventListener('click', () => {
+    utils.addNewColorPicker(attribute);
+    addEventListenerToTheNewColorPicker();
   });
 
+  getRemoveColorButton.addEventListener('click', () => {
+    utils.removeColorPicker(attribute);
+    addEventListenerToTheNewColorPicker();
+  });
+
+  inputEventListner();
+
   utils.setGradientDegreeValue(getDegreeElement);
+}
+
+function addEventListenerToTheNewColorPicker() {
+  gradientTextInputs = utils.getAllInputElements(attribute);
+  inputEventListner();
+}
+
+function inputEventListner() {
+  gradientTextInputs.forEach((inputElement) => {
+    inputElement.addEventListener('input', () => {
+      utils.createGradientPreview(getDegreeElement, attribute);
+    });
+  });
 }
