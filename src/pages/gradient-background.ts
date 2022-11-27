@@ -1,20 +1,16 @@
 import * as utils from '../lib/general';
 
 type Values = {
-  firstColor: string;
-  secondColor: string;
   degree: string;
 };
 
 const attribute = 'gradient-background';
 
-const gradientBackgroundInputs = utils.getAllInputElements(
-  'gradient-background'
-);
+const getNewColorButton = utils.getNewColorButton(attribute);
+const getRemoveColorButton = utils.removeNewColorButton(attribute);
 
-const backgroundPreview = utils.gradientPreview('gradient-background');
-const getFirstColor = utils.getColorInput1(attribute);
-const getSecondColor = utils.getColorInput2(attribute);
+let gradientBackgroundInputs = utils.getAllInputElements('gradient-background');
+
 const getDegreeElement = utils.getRange(attribute);
 
 function copyHandler() {
@@ -39,7 +35,9 @@ function getGradientBackgroundResult(
   values: Values,
   outputElement: HTMLElement
 ): void {
-  outputElement.style.background = `linear-gradient(${values.degree}deg, ${values.firstColor}, ${values.secondColor})`;
+  outputElement.style.background = `linear-gradient(${values.degree}deg, ${utils
+    .getColorsValue(attribute)
+    .join(', ')})`;
 
   const getCodeButtonElement = utils.getCopyCodeButton(attribute);
   getCodeButtonElement.addEventListener('click', copyHandler);
@@ -51,36 +49,43 @@ export function gradientBackgroundGenerator(
   if (type === null) return;
 
   const getOutputElement = utils.getOutput(attribute);
-
-  if (getFirstColor.value == '' || getSecondColor.value == '') {
-    getFirstColor.value == '' && utils.triggerEmptyAnimation(getFirstColor);
-    getSecondColor.value == '' && utils.triggerEmptyAnimation(getSecondColor);
-    return;
-  }
   const resultPage = utils.getResultPage();
 
   resultPage.style.display = 'flex';
   if (type === 'oldResults') return;
 
   const values: Values = {
-    firstColor: getFirstColor.value,
-    secondColor: getSecondColor.value,
     degree: getDegreeElement.value,
   };
   getGradientBackgroundResult(attribute, values, getOutputElement);
 }
 
 export function addGradientBackgroundListener() {
-  gradientBackgroundInputs.forEach((inputElement) => {
-    inputElement.addEventListener('input', () => {
-      utils.createGradientPreview(
-        getFirstColor,
-        getSecondColor,
-        getDegreeElement,
-        backgroundPreview
-      );
-    });
+  utils.whatColorButtonShouldShow(attribute);
+  getNewColorButton.addEventListener('click', () => {
+    utils.addNewColorPicker(attribute);
+    addEventListenerToTheNewColorPicker();
   });
 
+  getRemoveColorButton.addEventListener('click', () => {
+    utils.removeColorPicker(attribute);
+    addEventListenerToTheNewColorPicker();
+  });
+
+  inputEventListner();
+
   utils.setGradientDegreeValue(getDegreeElement);
+}
+
+function addEventListenerToTheNewColorPicker() {
+  gradientBackgroundInputs = utils.getAllInputElements(attribute);
+  inputEventListner();
+}
+
+function inputEventListner() {
+  gradientBackgroundInputs.forEach((inputElement) => {
+    inputElement.addEventListener('input', () => {
+      utils.createGradientPreview(getDegreeElement, attribute);
+    });
+  });
 }
