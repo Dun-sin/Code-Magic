@@ -88,7 +88,7 @@ const generators = document.querySelectorAll('[data-gen]');
 const sidebar = document.querySelector('.side-results') as HTMLElement;
 const getHeaderText = document.getElementById('head');
 const getResultsButton = document.querySelectorAll('[data-button]');
-const getResultIcon = document.querySelector('.open-sidebar');
+const getOldResultIcon = document.querySelector('.open-sidebar');
 const getHomePage = document.getElementById('home-page');
 const getGeneratorSection = document.getElementById('generator');
 const getOpenPreviousResult = document.querySelector(
@@ -177,32 +177,15 @@ FilePond.create(getImageEntryElement, {
  * @param type type of result to get back
  */
 function generatorsFunction(attribute: string, type: openResults): void {
-  switch (attribute) {
-    case 'pic-text':
-      picTextGenerator(imageSRC, imageHeight, type);
-      break;
-    case 'gradient-text':
-      gradientTextGenerator(type);
-      break;
-    case 'gradient-border':
-      gradientBorderGenerator(type);
-      break;
-    case 'gradient-background':
-      gradientBackgroundGenerator(type);
-      break;
-    case 'animation':
-      animationGenerator(type);
-      break;
-    case 'border-radius':
-      borderRadiusGenerator(type);
-      break;
-    case 'box-shadow':
-      boxShadowGenerator(type);
-      break;
-    case 'text-shadow':
-      textShadowGenerator(type);
-      break;
-  }
+  // function to call based on generator
+  attribute === 'pic-text' && picTextGenerator(imageSRC, imageHeight, type);
+  attribute === 'gradient-text' && gradientTextGenerator(type);
+  attribute === 'gradient-border' && gradientBorderGenerator(type);
+  attribute === 'gradient-background' && gradientBackgroundGenerator(type);
+  attribute === 'animation' && animationGenerator(type);
+  attribute === 'border-radius' && borderRadiusGenerator(type);
+  attribute === 'box-shadow' && boxShadowGenerator(type);
+  attribute === 'text-shadow' && textShadowGenerator(type);
 }
 
 /**
@@ -234,32 +217,15 @@ function showContent(attribute: string, display: Display): void {
   highLightGen.style.background = `linear-gradient(80deg,var(--primary-color), var(--secondary-color))`;
   highLightGen.style.border = '1px solid var(--tertiary-color)';
 
-  switch (attribute) {
-    case 'input-range':
-      rangeGenerator();
-      break;
-    case 'gradient-border':
-      addGradientBorderListener();
-      break;
-    case 'gradient-text':
-      addGradientTextListener();
-      break;
-    case 'border-radius':
-      addBorderRadiusListener();
-      break;
-    case 'text-shadow':
-      addTextShadowListener();
-      break;
-    case 'box-shadow':
-      addBoxShadowListener();
-      break;
-    case 'gradient-background':
-      addGradientBackgroundListener();
-      break;
-    case 'animation':
-      addAnimationListener();
-      break;
-  }
+  // function to call based on generator
+  attribute === 'input-range' && rangeGenerator();
+  attribute === 'gradient-border' && addGradientBorderListener();
+  attribute === 'gradient-text' && addGradientTextListener();
+  attribute === 'border-radius' && addBorderRadiusListener();
+  attribute === 'text-shadow' && addTextShadowListener();
+  attribute === 'box-shadow' && addBoxShadowListener();
+  attribute === 'gradient-background' && addGradientBackgroundListener();
+  attribute === 'animation' && addAnimationListener();
 }
 
 /**
@@ -307,6 +273,7 @@ function showOpenPreviousResultText() {
   getOpenPreviousResult.style.animationFillMode = 'backwards';
 }
 
+// clicking outside the nav bar should close the nav abr
 document.addEventListener('click', (e: Event) => {
   const event = e.target as HTMLElement;
 
@@ -329,6 +296,7 @@ document.addEventListener('click', (e: Event) => {
   }
 });
 
+// clicking on the menu icon should close the nav bar
 menuIcon?.addEventListener('click', () => {
   if (navBar?.classList.contains('closed-nav')) {
     openOrCloseNavigationBar('open');
@@ -349,7 +317,8 @@ getHeaderText?.addEventListener('click', () => {
   getGeneratorSection.style.display = 'none';
 });
 
-getResultIcon?.addEventListener('click', () => {
+// clicking on the get result icon should show the old results
+getOldResultIcon?.addEventListener('click', () => {
   showResult(attributeValue, 'oldResults');
   sidebar.animate(sideBarSlide, sideBarTiming);
   sidebar.style.left = '0%';
@@ -369,6 +338,7 @@ closeBar?.addEventListener('click', () => {
   }, 200);
 });
 
+// adds event listner for which generator should show
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
     const checking = generator.getAttribute('data-gen');
@@ -392,6 +362,7 @@ generators.forEach((generator) => {
   });
 });
 
+//  event listener for get result button
 getResultsButton.forEach((getResult) => {
   getResult?.addEventListener('click', () => {
     openSidePanelButton.style.display = 'flex';

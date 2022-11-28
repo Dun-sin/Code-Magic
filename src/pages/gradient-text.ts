@@ -128,7 +128,6 @@ export function addGradientTextListener() {
 
   utils.setGradientDegreeValue(getDegreeElement);
 }
-
 function addEventListenerToTheNewColorPicker() {
   gradientTextInputs = utils.getAllInputElements(attribute);
   inputEventListner();

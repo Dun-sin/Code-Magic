@@ -357,7 +357,7 @@ main > section:last-of-type {
 textarea {
   border-radius: 5px;
   width: var(--generator-width);
-  height: 150px;
+  height: 50px;
   border: none;
   background-color: var(--primary-color);
   color: var(--text-color);
