@@ -1,11 +1,23 @@
-import * as utils from '../lib/general';
+import {
+  getOutput,
+  getResultPage,
+  getCopyCodeButton,
+  getPNGButton,
+  getSVGButton,
+} from '../lib/getElements';
+import {
+  copyCodeToClipboard,
+  showPopup,
+  downloadPNG,
+  downloadSVG,
+} from '../lib/packages';
 
 const attribute = 'pic-text';
 
 function copyHandler() {
-  const outputElement = utils.getOutput(attribute);
-  utils.copyCodeToClipboard(attribute, outputElement);
-  utils.showPopup(
+  const outputElement = getOutput(attribute);
+  copyCodeToClipboard(attribute, outputElement);
+  showPopup(
     'Code Copied',
     'Code has been successfully copied to clipboard',
     'success'
@@ -13,13 +25,13 @@ function copyHandler() {
 }
 
 function pngDownloadHandler() {
-  const outputElement = utils.getOutput(attribute);
-  utils.downloadPNG(attribute, outputElement);
+  const outputElement = getOutput(attribute);
+  downloadPNG(attribute, outputElement);
 }
 
 function svgDownloadHanlder() {
-  const outputElement = utils.getOutput(attribute);
-  utils.downloadSVG(attribute, outputElement);
+  const outputElement = getOutput(attribute);
+  downloadSVG(attribute, outputElement);
 }
 
 /**
@@ -33,8 +45,8 @@ export function picTextGenerator(
 ): void {
   if (type === null) return;
 
-  const outputNode = utils.getOutput(attribute);
-  const resultPage = utils.getResultPage();
+  const outputNode = getOutput(attribute);
+  const resultPage = getResultPage();
 
   // The value 19 is the result I got by dividing the height of the image by
   // the number of lines of text necessary to cover its full height.
@@ -80,9 +92,9 @@ function getPicTextResult(attribute: string, outputNode: HTMLElement): void {
     return;
   }
 
-  const getCodeButtonElement = utils.getCopyCodeButton(attribute);
-  const getPNGButtonElement = utils.getPNGButton(attribute);
-  const getSVGButtonElement = utils.getSVGButton(attribute);
+  const getCodeButtonElement = getCopyCodeButton(attribute);
+  const getPNGButtonElement = getPNGButton(attribute);
+  const getSVGButtonElement = getSVGButton(attribute);
 
   getPNGButtonElement.addEventListener('click', pngDownloadHandler);
   getSVGButtonElement.addEventListener('click', svgDownloadHanlder);

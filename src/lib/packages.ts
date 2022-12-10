@@ -1,114 +1,15 @@
 import DomToImage from 'dom-to-image';
 import copy from 'copy-to-clipboard';
+
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import {Eggy} from '@s-r0/eggy-js';
-
-// Functions for getting elements
-export const getResultPage = (): HTMLElement =>
-  document.querySelector('.side-results') as HTMLElement;
-
-export const getCopyCodeButton = (attribute: string): HTMLElement =>
-  document.querySelector(`[data-download=${attribute}-code]`) as HTMLElement;
-
-export const getPNGButton = (attribute: string): HTMLElement =>
-  document.querySelector(`[data-download=${attribute}-PNG]`) as HTMLElement;
-
-export const getSVGButton = (attribute: string): HTMLElement =>
-  document.querySelector(`[data-download=${attribute}-svg]`) as HTMLElement;
-
-export const getResultButton = (attribute: string): HTMLElement =>
-  document.querySelector(`[data-button = ${attribute}]`) as HTMLElement;
-
-export const getColorInput1 = (attribute: string): HTMLInputElement =>
-  document.getElementById(`${attribute}-color1`) as HTMLInputElement;
-
-export const getColorInput2 = (attribute: string): HTMLInputElement =>
-  document.getElementById(`${attribute}-color2`) as HTMLInputElement;
-
-export const getAllInputElements = (attribute: string): NodeList =>
-  document.querySelectorAll(`.${attribute}-inputs`);
-
-export const gradientPreview = (attribute: string): HTMLElement =>
-  document.querySelector(`#${attribute}-color-preview`) as HTMLElement;
-
-export const getOutput = (attribute: string): HTMLElement =>
-  document.querySelector(
-    `[data-result = ${attribute}] > .output`
-  ) as HTMLElement;
-
-export const getRange = (attribute: string): HTMLInputElement =>
-  document.getElementById(`${attribute}-degree`) as HTMLInputElement;
-
-export const getInputText = (attribute: string) =>
-  document.getElementById(`${attribute}-text`) as HTMLInputElement;
-
-export const getCheckbox = (attribute: string): HTMLInputElement =>
-  document.getElementById(`${attribute}-radius`) as HTMLInputElement;
-
-export const getRadiusInput = (attribute: string) =>
-  document.getElementById(`${attribute}-input`) as HTMLInputElement;
-
-export const getInputSpinner = (attribute: string) =>
-  document.getElementById(`${attribute}-duration`) as HTMLInputElement;
-
-export const getRadioButtonSet = (attribute: string) =>
-  document.querySelectorAll(
-    `[name = ${attribute}-radio]`
-  ) as NodeListOf<HTMLInputElement>;
-
-export const getBorderTop = (attribute: string) =>
-  document.getElementById(`${attribute}-top`) as HTMLInputElement;
-
-export const getBorderRight = (attribute: string) =>
-  document.getElementById(`${attribute}-right`) as HTMLInputElement;
-
-export const getBorderBottom = (attribute: string) =>
-  document.getElementById(`${attribute}-bottom`) as HTMLInputElement;
-
-export const getBorderLeft = (attribute: string) =>
-  document.getElementById(`${attribute}-left`) as HTMLInputElement;
-
-export const getStyleSheet = () => {
-  const stylesheet = Array.from(document.styleSheets).filter(
-    (styleSheet) =>
-      !styleSheet.href || styleSheet.href.startsWith(location.origin)
-  );
-  return stylesheet[0] as CSSStyleSheet;
-};
-
-export const getShadowHorizontalOffset = (
-  attribute: string
-): HTMLInputElement =>
-  document.getElementById(`${attribute}-h-offset`) as HTMLInputElement;
-
-export const getShadowVerticalOffset = (attribute: string): HTMLInputElement =>
-  document.getElementById(`${attribute}-v-offset`) as HTMLInputElement;
-
-export const getShadowBlur = (attribute: string): HTMLInputElement =>
-  document.getElementById(`${attribute}-blur`) as HTMLInputElement;
-
-export const getShadowSpread = (attribute: string): HTMLInputElement =>
-  document.getElementById(`${attribute}-spread`) as HTMLInputElement;
-
-export const getShadowColor = (attribute: string): HTMLInputElement =>
-  document.getElementById(`${attribute}-color`) as HTMLInputElement;
-
-export const getShadowPreview = (attribute: string): HTMLInputElement =>
-  document.getElementById(`${attribute}-preview`) as HTMLInputElement;
-
-export const getParentElementOfColors = (attribute: string): HTMLElement =>
-  document.querySelector(`[data-content=${attribute}] .colors`) as HTMLElement;
-
-export const getNewColorButton = (attribute: string): HTMLElement =>
-  document.querySelector(
-    `[data-content=${attribute}] .addNewColor`
-  ) as HTMLElement;
-
-export const removeNewColorButton = (attribute: string): HTMLElement =>
-  document.querySelector(
-    `[data-content=${attribute}] .removeNewColor`
-  ) as HTMLElement;
+import * as eggyJs from '@s-r0/eggy-js';
+import {
+  getGradientPreview,
+  getNewColorButton,
+  getParentElementOfColors,
+  getRemoveNewColorButton,
+} from './getElements';
 
 export const setGradientDegreeValue = (degreeElement: HTMLElement): void =>
   degreeElement.addEventListener('input', (e) => {
@@ -123,23 +24,6 @@ export const setGradientDegreeValue = (degreeElement: HTMLElement): void =>
       : 'deg';
     unitDisplayElement.innerText = `${target.value}${unit}`;
   });
-
-export const getShadowFields = (
-  attribute: string,
-  types: string[]
-): HTMLSpanElement[] =>
-  types.reduce(
-    (acc, type) => [
-      ...acc,
-      document.getElementById(`${attribute}-${type}-field`) as HTMLInputElement,
-    ],
-    []
-  );
-
-export const getPreviewSlider = (attribute: string): HTMLElement =>
-  document.querySelector(
-    `[data-content=${attribute}] .preview-slider`
-  ) as HTMLElement;
 
 export function slideIn(slider: HTMLElement, isOpen: boolean) {
   if (isOpen) return;
@@ -159,7 +43,7 @@ export const createGradientPreview = (
   attribute: string
 ) => {
   const fill = range?.value;
-  gradientPreview(
+  getGradientPreview(
     attribute
   ).style.background = `linear-gradient(${fill}deg, ${getColorsValue(
     attribute
@@ -188,7 +72,7 @@ export function copyCodeToClipboard(
 
 export const addRule = (function (style) {
   const sheet = document.head.appendChild(style).sheet;
-  return function (selector: string, css: {[x: string]: any}) {
+  return function (selector: string, css: {[x: string]: string}) {
     const propText =
       typeof css === 'string'
         ? css
@@ -207,7 +91,7 @@ export const addRule = (function (style) {
  * @param attribute attribute of the clicked generator
  * @param outputElement output element to display result
  */
-function actOnGenerator(attribute: string, outputElement: HTMLElement) {
+const actOnGenerator = (attribute: string, outputElement: HTMLElement) => {
   let codeToCopy = '';
   let element;
   switch (attribute) {
@@ -343,13 +227,13 @@ function actOnGenerator(attribute: string, outputElement: HTMLElement) {
   try {
     copy(codeToCopy);
   } catch {
-    Eggy({
+    eggyJs.Eggy({
       title: `Whoops`,
       message: `Can't copy, try again`,
       type: 'error',
     });
   }
-}
+};
 
 export function downloadPNG(attribute: string, outputImage: HTMLElement): void {
   DomToImage.toPng(outputImage, {quality: 1}).then((dataUrl) => {
@@ -374,7 +258,7 @@ export function downloadSVG(attribute: string, outputImage: HTMLElement): void {
  */
 
 export function showPopup(title: string, message: string, type: string): void {
-  Eggy({
+  eggyJs.Eggy({
     title: title,
     message: message,
     type: type,
@@ -456,7 +340,7 @@ export function removeColorPicker(attribute: string): void {
   whatColorButtonShouldShow(attribute);
 }
 
-export function whatColorButtonShouldShow(attribute: string): void {
+export const whatColorButtonShouldShow = (attribute: string): void => {
   const getNumberOfChildren =
     getParentElementOfColors(attribute).childElementCount;
 
@@ -469,8 +353,8 @@ export function whatColorButtonShouldShow(attribute: string): void {
 
   // display remove color button
   if (getNumberOfChildren > 2) {
-    removeNewColorButton(attribute).style.display = 'flex';
+    getRemoveNewColorButton(attribute).style.display = 'flex';
   } else {
-    removeNewColorButton(attribute).style.display = 'none';
+    getRemoveNewColorButton(attribute).style.display = 'none';
   }
-}
+};

@@ -31,6 +31,11 @@ import FilePondPluginImageResize from 'filepond-plugin-image-resize';
 import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
 
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+import {
+  getGeneratorsElement,
+  getOpenSideBarButton,
+  getResultPage,
+} from './lib/getElements';
 
 FilePond.registerPlugin(
   FilePondPluginImagePreview,
@@ -83,12 +88,12 @@ const navBarAnimationOptions = {
   easing: 'ease',
 };
 
-// Elements
-const generators = document.querySelectorAll('[data-gen]');
-const sidebar = document.querySelector('.side-results') as HTMLElement;
+const generators = getGeneratorsElement();
+const sidebar = getResultPage();
+const openSidePanelButton = getOpenSideBarButton();
+
 const getHeaderText = document.getElementById('head');
 const getResultsButton = document.querySelectorAll('[data-button]');
-const getOldResultIcon = document.querySelector('.open-sidebar');
 const getHomePage = document.getElementById('home-page');
 const getGeneratorSection = document.getElementById('generator');
 const getOpenPreviousResult = document.querySelector(
@@ -104,11 +109,6 @@ const menuIcon = document.querySelector('#menu-icon');
 const downloadButtons = document.querySelectorAll(
   '.image-download'
 ) as NodeListOf<HTMLElement>;
-
-// get the element with data-button="open-side-panel" attribute and make it hidden
-const openSidePanelButton = document.getElementsByClassName(
-  'open-sidebar'
-)[0] as HTMLElement;
 
 if (openSidePanelButton) {
   openSidePanelButton.style.display = 'none';
@@ -207,6 +207,7 @@ function showContent(attribute: string, display: Display): void {
     const element = <HTMLElement>item;
     element.style.display = 'none';
   });
+
   generators.forEach((item) => {
     const generatorNav = <HTMLElement>item;
     generatorNav.style.border = 'none';
@@ -318,7 +319,7 @@ getHeaderText?.addEventListener('click', () => {
 });
 
 // clicking on the get result icon should show the old results
-getOldResultIcon?.addEventListener('click', () => {
+openSidePanelButton?.addEventListener('click', () => {
   showResult(attributeValue, 'oldResults');
   sidebar.animate(sideBarSlide, sideBarTiming);
   sidebar.style.left = '0%';

@@ -1,4 +1,16 @@
-import * as utils from '../lib/general';
+import {
+  getOutput,
+  getShadowHorizontalOffset,
+  getShadowVerticalOffset,
+  getShadowBlur,
+  getShadowSpread,
+  getShadowColor,
+  getResultPage,
+  getCopyCodeButton,
+  getPreviewSlider,
+  getShadowFields,
+} from '../lib/getElements';
+import {copyCodeToClipboard, showPopup, slideIn} from '../lib/packages';
 
 type Values = {
   hOffset: string;
@@ -12,9 +24,9 @@ const attribute = 'box-shadow';
 let isSliderOpen = false;
 
 function copyHandler() {
-  const outputElement = utils.getOutput(attribute);
-  utils.copyCodeToClipboard(attribute, outputElement);
-  utils.showPopup(
+  const outputElement = getOutput(attribute);
+  copyCodeToClipboard(attribute, outputElement);
+  showPopup(
     'Code Copied',
     'Code has been successfully copied to clipboard',
     'success'
@@ -26,13 +38,13 @@ export function boxShadowGenerator(
 ): void {
   if (type === null) return;
 
-  const horizontalOffset = utils.getShadowHorizontalOffset(attribute);
-  const verticalOffset = utils.getShadowVerticalOffset(attribute);
-  const blur = utils.getShadowBlur(attribute);
-  const spread = utils.getShadowSpread(attribute);
-  const color = utils.getShadowColor(attribute);
-  const getOutputElement = utils.getOutput(attribute);
-  const resultPage = utils.getResultPage();
+  const horizontalOffset = getShadowHorizontalOffset(attribute);
+  const verticalOffset = getShadowVerticalOffset(attribute);
+  const blur = getShadowBlur(attribute);
+  const spread = getShadowSpread(attribute);
+  const color = getShadowColor(attribute);
+  const getOutputElement = getOutput(attribute);
+  const resultPage = getResultPage();
 
   resultPage.style.display = 'flex';
   if (type === 'oldResults') return;
@@ -67,18 +79,18 @@ function getBoxShadowResult(values: Values, outputElement: HTMLElement): void {
   };
   createBoxShadowElement(outputElement, values);
 
-  const getCodeButtonElement = utils.getCopyCodeButton(attribute);
+  const getCodeButtonElement = getCopyCodeButton(attribute);
   getCodeButtonElement.addEventListener('click', copyHandler);
 }
 
 export function addBoxShadowListener(): void {
-  const horizontalOffset = utils.getShadowHorizontalOffset(attribute);
-  const verticalOffset = utils.getShadowVerticalOffset(attribute);
-  const blur = utils.getShadowBlur(attribute);
-  const spread = utils.getShadowSpread(attribute);
-  const color = utils.getShadowColor(attribute);
+  const horizontalOffset = getShadowHorizontalOffset(attribute);
+  const verticalOffset = getShadowVerticalOffset(attribute);
+  const blur = getShadowBlur(attribute);
+  const spread = getShadowSpread(attribute);
+  const color = getShadowColor(attribute);
 
-  const preview = utils.getPreviewSlider(attribute);
+  const preview = getPreviewSlider(attribute);
 
   const allBoxShadowInputs = [
     horizontalOffset,
@@ -87,7 +99,7 @@ export function addBoxShadowListener(): void {
     spread,
     color,
   ];
-  const allBoxShadowInputsFields = utils.getShadowFields(attribute, [
+  const allBoxShadowInputsFields = getShadowFields(attribute, [
     'h-offset',
     'v-offset',
     'blur',
@@ -105,7 +117,7 @@ export function addBoxShadowListener(): void {
     }
     input.addEventListener('input', () => {
       if (color.value === '') return;
-      utils.slideIn(preview, isSliderOpen);
+      slideIn(preview, isSliderOpen);
 
       isSliderOpen = true;
       if (idx < 4) {

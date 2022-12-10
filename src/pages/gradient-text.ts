@@ -1,4 +1,28 @@
-import * as utils from '../lib/general';
+import {
+  getAllInputElements,
+  getCopyCodeButton,
+  getInputText,
+  getNewColorButton,
+  getOutput,
+  getPNGButton,
+  getRange,
+  getRemoveNewColorButton,
+  getResultPage,
+  getSVGButton,
+} from '../lib/getElements';
+import {
+  copyCodeToClipboard,
+  showPopup,
+  downloadPNG,
+  downloadSVG,
+  triggerEmptyAnimation,
+  whatColorButtonShouldShow,
+  addNewColorPicker,
+  removeColorPicker,
+  setGradientDegreeValue,
+  createGradientPreview,
+  getColorsValue,
+} from '../lib/packages';
 
 type Values = {
   degree: string;
@@ -6,17 +30,17 @@ type Values = {
 
 const attribute = 'gradient-text';
 
-let gradientTextInputs = utils.getAllInputElements(attribute);
+let gradientTextInputs = getAllInputElements(attribute);
 
-const getNewColorButton = utils.getNewColorButton(attribute);
-const getRemoveColorButton = utils.removeNewColorButton(attribute);
+const getNewColorButtonElement = getNewColorButton(attribute);
+const getRemoveColorButtonElement = getRemoveNewColorButton(attribute);
 
-const getDegreeElement = utils.getRange(attribute);
+const getDegreeElement = getRange(attribute);
 
 function copyHandler() {
-  const outputElement = utils.getOutput(attribute);
-  utils.copyCodeToClipboard(attribute, outputElement);
-  utils.showPopup(
+  const outputElement = getOutput(attribute);
+  copyCodeToClipboard(attribute, outputElement);
+  showPopup(
     'Code Copied',
     'Code has been successfully copied to clipboard',
     'success'
@@ -24,13 +48,13 @@ function copyHandler() {
 }
 
 function pngDownloadHandler() {
-  const outputElement = utils.getOutput(attribute);
-  utils.downloadPNG(attribute, outputElement);
+  const outputElement = getOutput(attribute);
+  downloadPNG(attribute, outputElement);
 }
 
 function svgDownloadHanlder() {
-  const outputElement = utils.getOutput(attribute);
-  utils.downloadSVG(attribute, outputElement);
+  const outputElement = getOutput(attribute);
+  downloadSVG(attribute, outputElement);
 }
 
 export function gradientTextGenerator(
@@ -38,15 +62,15 @@ export function gradientTextGenerator(
 ): void {
   if (type === null) return;
 
-  const getInputElement = utils.getInputText(attribute);
+  const getInputElement = getInputText(attribute);
 
   if (getInputElement.value.length === 0) {
-    utils.triggerEmptyAnimation(getInputElement);
+    triggerEmptyAnimation(getInputElement);
     return;
   }
 
-  const getOutputElement = utils.getOutput(attribute);
-  const resultPage = utils.getResultPage();
+  const getOutputElement = getOutput(attribute);
+  const resultPage = getResultPage();
 
   resultPage.style.display = 'flex';
   if (getOutputElement === null || type === 'oldResults') return;
@@ -83,9 +107,9 @@ function getGradientTextResult(
     const wordElement = document.createElement('p');
     wordElement.innerText = text;
     wordElement.style.fontSize = '2rem';
-    wordElement.style.background = `linear-gradient(${values.degree}deg, ${utils
-      .getColorsValue(attribute)
-      .join(', ')})`;
+    wordElement.style.background = `linear-gradient(${
+      values.degree
+    }deg, ${getColorsValue(attribute).join(', ')})`;
     wordElement.style.backgroundClip = 'text';
     wordElement.style.webkitBackgroundClip = 'text';
     wordElement.style.webkitTextFillColor = 'transparent';
@@ -93,9 +117,9 @@ function getGradientTextResult(
     return wordElement;
   };
 
-  const getCodeButtonElement = utils.getCopyCodeButton(attribute);
-  const getPNGButtonElement = utils.getPNGButton(attribute);
-  const getSVGButtonElement = utils.getSVGButton(attribute);
+  const getCodeButtonElement = getCopyCodeButton(attribute);
+  const getPNGButtonElement = getPNGButton(attribute);
+  const getSVGButtonElement = getSVGButton(attribute);
 
   if (outputElement.childElementCount >= 1) {
     outputElement.innerHTML = '';
@@ -112,31 +136,31 @@ function getGradientTextResult(
 }
 
 export function addGradientTextListener() {
-  utils.whatColorButtonShouldShow(attribute);
+  whatColorButtonShouldShow(attribute);
 
-  getNewColorButton.addEventListener('click', () => {
-    utils.addNewColorPicker(attribute);
+  getNewColorButtonElement.addEventListener('click', () => {
+    addNewColorPicker(attribute);
     addEventListenerToTheNewColorPicker();
   });
 
-  getRemoveColorButton.addEventListener('click', () => {
-    utils.removeColorPicker(attribute);
+  getRemoveColorButtonElement.addEventListener('click', () => {
+    removeColorPicker(attribute);
     addEventListenerToTheNewColorPicker();
   });
 
   inputEventListner();
 
-  utils.setGradientDegreeValue(getDegreeElement);
+  setGradientDegreeValue(getDegreeElement);
 }
 function addEventListenerToTheNewColorPicker() {
-  gradientTextInputs = utils.getAllInputElements(attribute);
+  gradientTextInputs = getAllInputElements(attribute);
   inputEventListner();
 }
 
 function inputEventListner() {
   gradientTextInputs.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      utils.createGradientPreview(getDegreeElement, attribute);
+      createGradientPreview(getDegreeElement, attribute);
     });
   });
 }

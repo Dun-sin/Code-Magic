@@ -1,4 +1,13 @@
-import * as utils from '../lib/general';
+import {
+  getBorderTop,
+  getBorderRight,
+  getBorderLeft,
+  getBorderBottom,
+  getOutput,
+  getCopyCodeButton,
+  getResultPage,
+} from '../lib/getElements';
+import {copyCodeToClipboard, showPopup} from '../lib/packages';
 
 type Values = {
   BorderTop: string;
@@ -10,19 +19,19 @@ type Values = {
 const attribute = 'border-radius';
 
 const borderRadiusInputs = document.querySelectorAll('.border-radius-inputs');
-const borderTop = utils.getBorderTop(attribute);
-const borderRight = utils.getBorderRight(attribute);
-const borderLeft = utils.getBorderLeft(attribute);
-const borderBottom = utils.getBorderBottom(attribute);
+const borderTop = getBorderTop(attribute);
+const borderRight = getBorderRight(attribute);
+const borderLeft = getBorderLeft(attribute);
+const borderBottom = getBorderBottom(attribute);
 
 const borderRadiusPreview = document.querySelector(
   '.border-radius-preview-box > .preview'
 ) as HTMLElement;
 
 function copyHandler() {
-  const outputElement = utils.getOutput(attribute);
-  utils.copyCodeToClipboard(attribute, outputElement);
-  utils.showPopup(
+  const outputElement = getOutput(attribute);
+  copyCodeToClipboard(attribute, outputElement);
+  showPopup(
     'Code Copied',
     'Code has been successfully copied to clipboard',
     'success'
@@ -43,7 +52,7 @@ function getBorderRadiusResult(
   ${values.borderLeft}% ${values.borderRight}%
   ${100 - Number(values.borderRight)}% ${100 - Number(values.borderLeft)}%`;
 
-  const getCodeButtonElement = utils.getCopyCodeButton(attribute);
+  const getCodeButtonElement = getCopyCodeButton(attribute);
   getCodeButtonElement.addEventListener('click', copyHandler);
 }
 
@@ -52,8 +61,8 @@ export function borderRadiusGenerator(
 ): void {
   if (type === null) return;
 
-  const getOutputElement = utils.getOutput(attribute);
-  const resultPage = utils.getResultPage();
+  const getOutputElement = getOutput(attribute);
+  const resultPage = getResultPage();
 
   resultPage.style.display = 'flex';
   if (getOutputElement === null || type === 'oldResults') return;

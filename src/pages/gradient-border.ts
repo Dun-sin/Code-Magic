@@ -1,4 +1,25 @@
-import * as utils from '../lib/general';
+import {
+  getNewColorButton,
+  getRemoveNewColorButton,
+  getRadiusInput,
+  getCheckbox,
+  getOutput,
+  getRange,
+  getAllInputElements,
+  getResultPage,
+  getCopyCodeButton,
+} from '../lib/getElements';
+import {
+  copyCodeToClipboard,
+  showPopup,
+  addRule,
+  whatColorButtonShouldShow,
+  addNewColorPicker,
+  removeColorPicker,
+  setGradientDegreeValue,
+  createGradientPreview,
+  getColorsValue,
+} from '../lib/packages';
 
 type Values = {
   degree: string;
@@ -7,23 +28,23 @@ type Values = {
 
 const attribute = 'gradient-border';
 
-const getNewColorButton = utils.getNewColorButton(attribute);
-const getRemoveColorButton = utils.removeNewColorButton(attribute);
+const getNewColorButtonElement = getNewColorButton(attribute);
+const getRemoveColorButtonElement = getRemoveNewColorButton(attribute);
 
-const getBorderRadiusInput = utils.getRadiusInput(attribute);
-const toggleRadiusInputForGradientBorder = utils.getCheckbox(attribute);
-const getOutputElement = utils.getOutput(attribute);
+const getBorderRadiusInput = getRadiusInput(attribute);
+const toggleRadiusInputForGradientBorder = getCheckbox(attribute);
+const getOutputElement = getOutput(attribute);
 
-const getDegreeElement = utils.getRange(attribute);
+const getDegreeElement = getRange(attribute);
 
-let gradientBorderInputs = utils.getAllInputElements('gradient-border');
+let gradientBorderInputs = getAllInputElements('gradient-border');
 
-const resultPage = utils.getResultPage();
+const resultPage = getResultPage();
 
 function copyHandler() {
-  const outputElement = utils.getOutput(attribute);
-  utils.copyCodeToClipboard(attribute, outputElement);
-  utils.showPopup(
+  const outputElement = getOutput(attribute);
+  copyCodeToClipboard(attribute, outputElement);
+  showPopup(
     'Code Copied',
     'Code has been successfully copied to clipboard',
     'success'
@@ -42,10 +63,10 @@ function getGradientBorderResult(
   values: Values,
   outputElement: HTMLElement
 ): void {
-  utils.addRule('.gradient-border::before', {
-    background: `linear-gradient(${values.degree}deg, ${utils
-      .getColorsValue(attribute)
-      .join(', ')})`,
+  addRule('.gradient-border::before', {
+    background: `linear-gradient(${values.degree}deg, ${getColorsValue(
+      attribute
+    ).join(', ')})`,
     'background-clip': 'border-box',
     'border-radius': `${values.radius}px`,
   });
@@ -53,7 +74,7 @@ function getGradientBorderResult(
   outputElement.style.backgroundColor = 'transparent';
   outputElement.style.visibility = 'visible';
 
-  const getCodeButtonElement = utils.getCopyCodeButton(attribute);
+  const getCodeButtonElement = getCopyCodeButton(attribute);
   getCodeButtonElement.addEventListener('click', copyHandler);
 }
 
@@ -77,28 +98,28 @@ export function gradientBorderGenerator(
 }
 
 export function addGradientBorderListener() {
-  utils.whatColorButtonShouldShow(attribute);
+  whatColorButtonShouldShow(attribute);
   toggleRadiusInputForGradientBorder.addEventListener('input', function () {
     getBorderRadiusInput.style.display = this.checked ? 'inline' : 'none';
   });
 
-  getNewColorButton.addEventListener('click', () => {
-    utils.addNewColorPicker(attribute);
+  getNewColorButtonElement.addEventListener('click', () => {
+    addNewColorPicker(attribute);
     addEventListenerToTheNewColorPicker();
   });
 
-  getRemoveColorButton.addEventListener('click', () => {
-    utils.removeColorPicker(attribute);
+  getRemoveColorButtonElement.addEventListener('click', () => {
+    removeColorPicker(attribute);
     addEventListenerToTheNewColorPicker();
   });
 
   addEventListenerToTheNewColorPicker();
 
-  utils.setGradientDegreeValue(getDegreeElement);
+  setGradientDegreeValue(getDegreeElement);
 }
 
 function addEventListenerToTheNewColorPicker() {
-  gradientBorderInputs = utils.getAllInputElements(attribute);
+  gradientBorderInputs = getAllInputElements(attribute);
   inputEventListner();
 }
 
@@ -106,7 +127,7 @@ function inputEventListner() {
   //set gradient border preview
   gradientBorderInputs.forEach((input) => {
     input.addEventListener('input', () => {
-      utils.createGradientPreview(getDegreeElement, attribute);
+      createGradientPreview(getDegreeElement, attribute);
     });
   });
 }

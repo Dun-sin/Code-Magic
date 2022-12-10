@@ -1,4 +1,22 @@
-import * as utils from '../lib/general';
+import {
+  getNewColorButton,
+  getAllInputElements,
+  getRange,
+  getOutput,
+  getCopyCodeButton,
+  getResultPage,
+  getRemoveNewColorButton,
+} from '../lib/getElements';
+import {
+  copyCodeToClipboard,
+  showPopup,
+  whatColorButtonShouldShow,
+  addNewColorPicker,
+  removeColorPicker,
+  setGradientDegreeValue,
+  createGradientPreview,
+  getColorsValue,
+} from '../lib/packages';
 
 type Values = {
   degree: string;
@@ -6,17 +24,17 @@ type Values = {
 
 const attribute = 'gradient-background';
 
-const getNewColorButton = utils.getNewColorButton(attribute);
-const getRemoveColorButton = utils.removeNewColorButton(attribute);
+const getNewColorButtonElement = getNewColorButton(attribute);
+const getRemoveColorButtonElement = getRemoveNewColorButton(attribute);
 
-let gradientBackgroundInputs = utils.getAllInputElements('gradient-background');
+let gradientBackgroundInputs = getAllInputElements('gradient-background');
 
-const getDegreeElement = utils.getRange(attribute);
+const getDegreeElement = getRange(attribute);
 
 function copyHandler() {
-  const outputElement = utils.getOutput(attribute);
-  utils.copyCodeToClipboard(attribute, outputElement);
-  utils.showPopup(
+  const outputElement = getOutput(attribute);
+  copyCodeToClipboard(attribute, outputElement);
+  showPopup(
     'Code Copied',
     'Code has been successfully copied to clipboard',
     'success'
@@ -35,11 +53,11 @@ function getGradientBackgroundResult(
   values: Values,
   outputElement: HTMLElement
 ): void {
-  outputElement.style.background = `linear-gradient(${values.degree}deg, ${utils
-    .getColorsValue(attribute)
-    .join(', ')})`;
+  outputElement.style.background = `linear-gradient(${
+    values.degree
+  }deg, ${getColorsValue(attribute).join(', ')})`;
 
-  const getCodeButtonElement = utils.getCopyCodeButton(attribute);
+  const getCodeButtonElement = getCopyCodeButton(attribute);
   getCodeButtonElement.addEventListener('click', copyHandler);
 }
 
@@ -48,8 +66,8 @@ export function gradientBackgroundGenerator(
 ) {
   if (type === null) return;
 
-  const getOutputElement = utils.getOutput(attribute);
-  const resultPage = utils.getResultPage();
+  const getOutputElement = getOutput(attribute);
+  const resultPage = getResultPage();
 
   resultPage.style.display = 'flex';
   if (type === 'oldResults') return;
@@ -61,31 +79,31 @@ export function gradientBackgroundGenerator(
 }
 
 export function addGradientBackgroundListener() {
-  utils.whatColorButtonShouldShow(attribute);
-  getNewColorButton.addEventListener('click', () => {
-    utils.addNewColorPicker(attribute);
+  whatColorButtonShouldShow(attribute);
+  getNewColorButtonElement.addEventListener('click', () => {
+    addNewColorPicker(attribute);
     addEventListenerToTheNewColorPicker();
   });
 
-  getRemoveColorButton.addEventListener('click', () => {
-    utils.removeColorPicker(attribute);
+  getRemoveColorButtonElement.addEventListener('click', () => {
+    removeColorPicker(attribute);
     addEventListenerToTheNewColorPicker();
   });
 
   inputEventListner();
 
-  utils.setGradientDegreeValue(getDegreeElement);
+  setGradientDegreeValue(getDegreeElement);
 }
 
 function addEventListenerToTheNewColorPicker() {
-  gradientBackgroundInputs = utils.getAllInputElements(attribute);
+  gradientBackgroundInputs = getAllInputElements(attribute);
   inputEventListner();
 }
 
 function inputEventListner() {
   gradientBackgroundInputs.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      utils.createGradientPreview(getDegreeElement, attribute);
+      createGradientPreview(getDegreeElement, attribute);
     });
   });
 }

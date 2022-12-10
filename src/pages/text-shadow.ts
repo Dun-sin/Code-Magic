@@ -1,4 +1,25 @@
-import * as utils from '../lib/general';
+import {
+  getOutput,
+  getInputText,
+  getShadowHorizontalOffset,
+  getShadowVerticalOffset,
+  getShadowBlur,
+  getShadowColor,
+  getResultPage,
+  getCopyCodeButton,
+  getPNGButton,
+  getSVGButton,
+  getPreviewSlider,
+  getShadowFields,
+} from '../lib/getElements';
+import {
+  copyCodeToClipboard,
+  showPopup,
+  downloadPNG,
+  downloadSVG,
+  triggerEmptyAnimation,
+  slideIn,
+} from '../lib/packages';
 
 type Values = {
   hOffset: string;
@@ -12,9 +33,9 @@ let isSliderOpen = false;
 const attribute = 'text-shadow';
 
 function copyHandler() {
-  const outputElement = utils.getOutput(attribute);
-  utils.copyCodeToClipboard(attribute, outputElement);
-  utils.showPopup(
+  const outputElement = getOutput(attribute);
+  copyCodeToClipboard(attribute, outputElement);
+  showPopup(
     'Code Copied',
     'Code has been successfully copied to clipboard',
     'success'
@@ -22,13 +43,13 @@ function copyHandler() {
 }
 
 function pngDownloadHandler() {
-  const outputElement = utils.getOutput(attribute);
-  utils.downloadPNG(attribute, outputElement);
+  const outputElement = getOutput(attribute);
+  downloadPNG(attribute, outputElement);
 }
 
 function svgDownloadHanlder() {
-  const outputElement = utils.getOutput(attribute);
-  utils.downloadSVG(attribute, outputElement);
+  const outputElement = getOutput(attribute);
+  downloadSVG(attribute, outputElement);
 }
 
 export function textShadowGenerator(
@@ -36,17 +57,17 @@ export function textShadowGenerator(
 ): void {
   if (type === null) return;
 
-  const getInputElement = utils.getInputText(attribute);
+  const getInputElement = getInputText(attribute);
 
-  const horizontalOffset = utils.getShadowHorizontalOffset(attribute);
-  const verticalOffset = utils.getShadowVerticalOffset(attribute);
-  const blur = utils.getShadowBlur(attribute);
-  const color = utils.getShadowColor(attribute);
-  const getOutputElement = utils.getOutput(attribute);
-  const resultPage = utils.getResultPage();
+  const horizontalOffset = getShadowHorizontalOffset(attribute);
+  const verticalOffset = getShadowVerticalOffset(attribute);
+  const blur = getShadowBlur(attribute);
+  const color = getShadowColor(attribute);
+  const getOutputElement = getOutput(attribute);
+  const resultPage = getResultPage();
 
   if (getInputElement.value.length === 0) {
-    utils.triggerEmptyAnimation(getInputElement);
+    triggerEmptyAnimation(getInputElement);
     return;
   }
   resultPage.style.display = 'flex';
@@ -79,23 +100,23 @@ function getTextShadowResult(values: Values, outputElement: HTMLElement): void {
   };
   createTextShadowElement(outputElement, values);
 
-  const getCodeButtonElement = utils.getCopyCodeButton(attribute);
+  const getCodeButtonElement = getCopyCodeButton(attribute);
   getCodeButtonElement.addEventListener('click', copyHandler);
 }
 
 export function addTextShadowListener(): void {
-  const horizontalOffset = utils.getShadowHorizontalOffset(attribute);
-  const verticalOffset = utils.getShadowVerticalOffset(attribute);
-  const blur = utils.getShadowBlur(attribute);
-  const color = utils.getShadowColor(attribute);
+  const horizontalOffset = getShadowHorizontalOffset(attribute);
+  const verticalOffset = getShadowVerticalOffset(attribute);
+  const blur = getShadowBlur(attribute);
+  const color = getShadowColor(attribute);
 
-  const getInputElement = utils.getInputText(attribute);
-  const getPNGButtonElement = utils.getPNGButton(attribute);
-  const getSVGButtonElement = utils.getSVGButton(attribute);
-  const preview = utils.getPreviewSlider(attribute);
+  const getInputElement = getInputText(attribute);
+  const getPNGButtonElement = getPNGButton(attribute);
+  const getSVGButtonElement = getSVGButton(attribute);
+  const preview = getPreviewSlider(attribute);
 
   const allTextShadowInputs = [horizontalOffset, verticalOffset, blur, color];
-  const allTextShadowInputsFields = utils.getShadowFields(attribute, [
+  const allTextShadowInputsFields = getShadowFields(attribute, [
     'h-offset',
     'v-offset',
     'blur',
@@ -119,7 +140,7 @@ export function addTextShadowListener(): void {
     input.addEventListener('input', () => {
       if (getInputElement.value === '' || color.value === '') return;
       preview.innerText = getInputElement.value;
-      utils.slideIn(preview, isSliderOpen);
+      slideIn(preview, isSliderOpen);
 
       isSliderOpen = true;
 

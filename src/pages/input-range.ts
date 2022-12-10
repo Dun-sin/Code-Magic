@@ -1,4 +1,12 @@
-import * as utils from '../lib/general';
+import {
+  getRadiusInput,
+  getCheckbox,
+  getCopyCodeButton,
+  getColorInput1,
+  getColorInput2,
+  getAllInputElements,
+} from '../lib/getElements';
+import {copyCodeToClipboard, showPopup} from '../lib/packages';
 
 type RangeType = 'track' | 'thumb';
 type RangeValues = {
@@ -54,12 +62,12 @@ function setLabelValue() {
 
 function setBorderRadiusValue(element: RangeType) {
   const range = `${attribute}-${element}`;
-  const getBorderRadiusInput = utils.getRadiusInput(range);
+  const getBorderRadiusInput = getRadiusInput(range);
 
-  if (utils.getCheckbox(range).checked) {
-    utils.getRadiusInput(range).value = getBorderRadiusInput.value;
+  if (getCheckbox(range).checked) {
+    getRadiusInput(range).value = getBorderRadiusInput.value;
   } else {
-    utils.getRadiusInput(range).value = '10';
+    getRadiusInput(range).value = '10';
   }
 }
 
@@ -107,8 +115,8 @@ function copyHandler() {
   const previewElement = document.getElementById(
     'preview-range'
   ) as HTMLInputElement;
-  utils.copyCodeToClipboard(attribute, previewElement);
-  utils.showPopup(
+  copyCodeToClipboard(attribute, previewElement);
+  showPopup(
     'Code Copied',
     'Code has been successfully copied to clipboard',
     'success'
@@ -116,10 +124,10 @@ function copyHandler() {
 }
 
 export const rangeGenerator = () => {
-  const getCodeButton = utils.getCopyCodeButton(attribute);
+  const getCodeButton = getCopyCodeButton(attribute);
 
-  const getTrackColor = utils.getColorInput1(attribute);
-  const getThumbColor = utils.getColorInput2(attribute);
+  const getTrackColor = getColorInput1(attribute);
+  const getThumbColor = getColorInput2(attribute);
 
   const getTrackHeightElement = document.getElementById(
     'track-height'
@@ -134,12 +142,12 @@ export const rangeGenerator = () => {
     'thumb-width'
   ) as HTMLInputElement;
 
-  const trackCheckBox = utils.getCheckbox(`${attribute}-track`);
-  const thumbCheckBox = utils.getCheckbox(`${attribute}-thumb`);
-  const getTrackRadius = utils.getRadiusInput(`${attribute}-track`);
-  const getThumbRadius = utils.getRadiusInput(`${attribute}-thumb`);
+  const trackCheckBox = getCheckbox(`${attribute}-track`);
+  const thumbCheckBox = getCheckbox(`${attribute}-thumb`);
+  const getTrackRadius = getRadiusInput(`${attribute}-track`);
+  const getThumbRadius = getRadiusInput(`${attribute}-thumb`);
 
-  const allRangeInputElements = utils.getAllInputElements(attribute);
+  const allRangeInputElements = getAllInputElements(attribute);
 
   allRangeInputElements.forEach((item) => {
     item.addEventListener('input', () => {

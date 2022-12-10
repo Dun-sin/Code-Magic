@@ -1,5 +1,14 @@
-import * as utils from '../lib/general';
 import copy from 'copy-to-clipboard';
+import {
+  getCopyCodeButton,
+  getOutput,
+  getRange,
+  getInputSpinner,
+  getStyleSheet,
+  getResultPage,
+  getRadioButtonSet,
+} from '../lib/getElements';
+import {showPopup, setGradientDegreeValue} from '../lib/packages';
 
 let initial_length = 0;
 // let rule_added = false;
@@ -12,22 +21,25 @@ type Values = {
 };
 
 const attribute = 'animation';
-const getCodeButtonElement = utils.getCopyCodeButton(attribute);
+const getCodeButtonElement = getCopyCodeButton(attribute);
 
-const getOutputElement = utils.getOutput(attribute);
-const getDegreeElement = utils.getRange(attribute);
-const getRadioButtonSet = utils.getRadioButtonSet(attribute);
+const getOutputElement = getOutput(attribute);
+const getDegreeElement = getRange(attribute);
+const getRadioButtonSetElement = getRadioButtonSet(attribute);
 
-initialConfiguration(getRadioButtonSet, getDegreeElement, getOutputElement);
+initialConfiguration(
+  getRadioButtonSetElement,
+  getDegreeElement,
+  getOutputElement
+);
 
 export function animationGenerator(type: 'newResults' | 'oldResults' | null) {
   if (type === null) return;
 
-  const duration = utils.getInputSpinner(attribute);
+  const duration = getInputSpinner(attribute);
 
-  const Stylesheet = utils.getStyleSheet();
-  // getCodeButtonElement = utils.getCopyCodeButton(attribute);
-  const resultPage = utils.getResultPage();
+  const Stylesheet = getStyleSheet();
+  const resultPage = getResultPage();
 
   resultPage.style.display = 'flex';
 
@@ -37,18 +49,18 @@ export function animationGenerator(type: 'newResults' | 'oldResults' | null) {
 
   let i = 0;
 
-  for (i = 0; i < getRadioButtonSet.length; i++)
-    if (getRadioButtonSet[i].checked) break;
+  for (i = 0; i < getRadioButtonSetElement.length; i++)
+    if (getRadioButtonSetElement[i].checked) break;
 
   const values: Values = {
-    type: getRadioButtonSet[i].value,
+    type: getRadioButtonSetElement[i].value,
     degree: getDegreeElement.value,
     duration: duration.value,
   };
 
   getCodeButtonElement.addEventListener('click', () => {
     copy(css);
-    utils.showPopup(
+    showPopup(
       'Code Copied',
       'Code has been successfully copied to clipboard',
       'success'
@@ -220,5 +232,5 @@ function initialConfiguration(
 }
 
 export function addAnimationListener() {
-  utils.setGradientDegreeValue(getDegreeElement);
+  setGradientDegreeValue(getDegreeElement);
 }
