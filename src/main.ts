@@ -206,17 +206,20 @@ function showContent(attribute: string, display: Display): void {
   generatorsContent.forEach((item) => {
     const element = <HTMLElement>item;
     element.style.display = 'none';
+    console.log(item);
   });
 
   generators.forEach((item) => {
     const generatorNav = <HTMLElement>item;
     generatorNav.style.border = 'none';
     generatorNav.style.background = 'none';
+    console.log(item.style.visibility);
   });
 
   showGen.style.display = `${display}`;
   highLightGen.style.background = `linear-gradient(80deg,var(--primary-color), var(--secondary-color))`;
   highLightGen.style.border = '1px solid var(--tertiary-color)';
+  highLightGen.style.visibility = 'visible';
 
   // function to call based on generator
   attribute === 'input-range' && rangeGenerator();
