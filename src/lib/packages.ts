@@ -3,7 +3,7 @@ import copy from 'copy-to-clipboard';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import * as eggyJs from '@s-r0/eggy-js';
+import {Eggy} from '@s-r0/eggy-js';
 import {
   getGradientPreview,
   getNewColorButton,
@@ -227,7 +227,7 @@ const actOnGenerator = (attribute: string, outputElement: HTMLElement) => {
   try {
     copy(codeToCopy);
   } catch {
-    eggyJs.Eggy({
+    Eggy({
       title: `Whoops`,
       message: `Can't copy, try again`,
       type: 'error',
@@ -258,10 +258,10 @@ export function downloadSVG(attribute: string, outputImage: HTMLElement): void {
  */
 
 export function showPopup(title: string, message: string, type: string): void {
-  eggyJs.Eggy({
-    title: title,
-    message: message,
-    type: type,
+  Eggy({
+    title,
+    message,
+    type,
   });
 }
 
