@@ -246,7 +246,7 @@ main > section:last-of-type {
   right: 50px;
 }
 
-.open p {
+.open > p {
   opacity: 0;
 }
 
