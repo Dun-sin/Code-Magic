@@ -982,8 +982,8 @@ footer {
   flex-direction: column;
   justify-content: center;
   font-size: 0.7rem;
-  position: absolute;
-  bottom: 2rem;
+  position: relative;
+  top: 2rem;
   color: var(--text-color);
 }
 
