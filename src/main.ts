@@ -109,7 +109,7 @@ const menuIcon = document.querySelector('#menu-icon');
 const downloadButtons = document.querySelectorAll(
   '.image-download'
 ) as NodeListOf<HTMLElement>;
-
+const dropDownElements = document.querySelectorAll('.dropdown');
 if (openSidePanelButton) {
   openSidePanelButton.style.display = 'none';
 }
@@ -372,6 +372,33 @@ getResultsButton.forEach((getResult) => {
     sidebar.animate(sideBarSlide, sideBarTiming);
     sidebar.style.left = '0%';
   });
+});
+
+dropDownElements.forEach((dropDown) => {
+  const listElement = dropDown.lastElementChild as HTMLElement;
+
+  // loop through children of dropdown and add event listener to each child
+  for (let i = 0; i < listElement.children.length; i++) {
+    const child = listElement.children[i] as HTMLElement;
+    child.addEventListener('click', () => {
+      listElement.id = 'showList';
+      // loop through all dropdown elements and check border of children
+      dropDownElements.forEach((dropDown) => {
+        const currentListElement = dropDown.lastElementChild as HTMLElement;
+        let hasBorder = false;
+        for (let i = 0; i < currentListElement.children.length; i++) {
+          const currentChild = currentListElement.children[i] as HTMLElement;
+          if (currentChild.style.border === '1px solid var(--tertiary-color)') {
+            hasBorder = true;
+            break;
+          }
+        }
+        if (!hasBorder) {
+          currentListElement.id = '';
+        }
+      });
+    });
+  }
 });
 
 showResult(null, null);

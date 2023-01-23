@@ -110,11 +110,14 @@ nav ul {
   visibility: hidden;
   position: relative;
   height: 0px;
+}
+
+.dropdown > ul {
   transition: 200ms transform;
 }
 
 .dropdown:hover > ul,
-.dropdown:active > ul {
+#showList {
   visibility: visible;
   height: fit-content;
   transform: translateX(10px);
