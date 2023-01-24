@@ -376,10 +376,6 @@
           <br />
           and more for your applications <span>With Just One Click</span>
         </h2>
-        <video autoplay muted loop>
-          <source src="./assets/CodeMagic.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
       </section>
       <!-- End of Home Page -->
 
@@ -405,9 +401,9 @@
         <div class="generators">
           <!-- Pic Text -->
           <div data-content="pic-text">
-            <div>
+            <label for="pic-text-file">
               <input type="file" id="pic-text-file" required />
-            </div>
+            </label>
             <div class="btn" data-button="pic-text">Get Results</div>
           </div>
           <!-- End of Pic Text -->
@@ -683,7 +679,7 @@
                 value="3"
               />
             </label>
-            <label id="degree">
+            <label id="degree" for="animation-degree">
               <span class="label-title">
                 <span class="title-display">Angle</span>
                 <span class="unit-display animation">deg</span>
@@ -707,34 +703,42 @@
             <div class="border-radius-preview-box">
               <div class="preview"></div>
               <div class="border-range-inputs">
-                <input
-                  type="range"
-                  max="100"
-                  min="0"
-                  id="border-radius-top"
-                  class="border-radius-inputs"
-                />
-                <input
-                  type="range"
-                  max="100"
-                  min="0"
-                  id="border-radius-left"
-                  class="border-radius-inputs"
-                />
-                <input
-                  type="range"
-                  max="100"
-                  min="0"
-                  id="border-radius-right"
-                  class="border-radius-inputs"
-                />
-                <input
-                  type="range"
-                  max="100"
-                  min="0"
-                  id="border-radius-bottom"
-                  class="border-radius-inputs"
-                />
+                <label for="border-radius-top">
+                  <input
+                    type="range"
+                    max="100"
+                    min="0"
+                    id="border-radius-top"
+                    class="border-radius-inputs"
+                  />
+                </label>
+                <label for="border-radius-left">
+                  <input
+                    type="range"
+                    max="100"
+                    min="0"
+                    id="border-radius-left"
+                    class="border-radius-inputs"
+                  />
+                </label>
+                <label for="border-radius-right">
+                  <input
+                    type="range"
+                    max="100"
+                    min="0"
+                    id="border-radius-right"
+                    class="border-radius-inputs"
+                  />
+                </label>
+                <label for="border-radius-bottom">
+                  <input
+                    type="range"
+                    max="100"
+                    min="0"
+                    id="border-radius-bottom"
+                    class="border-radius-inputs"
+                  />
+                </label>
               </div>
             </div>
 
@@ -760,7 +764,7 @@
 
             <div class="degrees">
               <div class="degrees-row">
-                <label id="degree">
+                <label id="degree" for="box-shadow-h-offset">
                   <span>
                     <span>Horizontal</span>
                     <span id="box-shadow-h-offset-field">5px</span>
@@ -775,7 +779,7 @@
                   />
                 </label>
 
-                <label id="degree">
+                <label id="degree" for="box-shadow-v-offset">
                   <span>
                     <span>Vertical</span>
                     <span id="box-shadow-v-offset-field">5px</span>
@@ -792,7 +796,7 @@
               </div>
               <hr class="divider" />
               <div class="degrees-row">
-                <label id="degree">
+                <label id="degree" for="box-shadow-blur">
                   <span>
                     <span>Blur</span>
                     <span id="box-shadow-blur-field">5px</span>
@@ -807,7 +811,7 @@
                   />
                 </label>
 
-                <label id="degree">
+                <label id="degree" for="box-shadow-spread">
                   <span>
                     <span>Spread</span>
                     <span id="box-shadow-spread-field">5px</span>
@@ -883,7 +887,7 @@
               </div>
               <hr class="divider" />
               <div class="degrees-row">
-                <label id="degree">
+                <label id="degree" for="text-shadow-blur">
                   <span>
                     <span>Blur</span>
                     <span id="text-shadow-blur-field">5px</span>
@@ -906,10 +910,10 @@
 
           <!-- Input Type Range Generator -->
           <div data-content="input-range">
-            <div>
+            <label for="preview-range">
               <p>Preview</p>
               <input type="range" min="3" max="20" name="" id="preview-range" />
-            </div>
+            </label>
 
             <!-- Color for track and thumbs -->
             <div class="colors">

@@ -134,6 +134,7 @@ nav ul {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
+  gap: 5px;
 }
 
 #category > li {
@@ -141,7 +142,6 @@ nav ul {
   padding-left: 0.2rem;
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 #category ul {
@@ -156,7 +156,6 @@ nav ul {
   align-items: center;
   border-radius: 3px;
   padding: 0.35rem;
-  margin-bottom: 0.7rem;
 }
 
 #category ul > li span {
@@ -220,27 +219,22 @@ main > section {
 }
 
 main > section:first-of-type h1 {
-  font-size: clamp(1rem, 2.5vw, 2rem);
+  font-size: clamp(1rem, 2.5vw, 3rem);
   text-align: center;
+  font-weight: 600;
 }
 
 main > section:first-of-type h2 {
   margin-top: 10px;
-  font-size: clamp(0.7rem, 1vw, 1.7rem);
+  font-size: clamp(0.7rem, 1vw, 2.7rem);
   text-align: center;
+  font-weight: 500;
 }
 
 main > section:first-of-type span {
   color: var(--tertiary-color);
   font-style: italic;
   text-transform: uppercase;
-}
-
-main > section:first-of-type video {
-  width: clamp(300px, 40vw, 800px);
-  height: clamp(300px / 1.75, 40vw / 1.75, 800px / 1.75);
-  margin-top: 20px;
-  border: 2px solid var(--text-color);
 }
 
 main > section:last-of-type {
@@ -311,7 +305,7 @@ main > section:last-of-type {
   border: 2px dashed var(--tertiary-color);
 }
 
-[data-content='pic-text'] > div:first-of-type {
+[data-content='pic-text'] > label:first-of-type {
   width: var(--generator-width);
 }
 
@@ -319,7 +313,7 @@ main > section:last-of-type {
   gap: 5px;
 }
 
-[data-content='input-range'] > div:first-of-type {
+[data-content='input-range'] > label:first-of-type {
   background-color: var(--primary-color);
   width: var(--generator-width);
   display: flex;
@@ -331,7 +325,7 @@ main > section:last-of-type {
   margin-bottom: 20px;
 }
 
-[data-content='input-range'] > div:first-of-type p {
+[data-content='input-range'] > label:first-of-type p {
   font-size: 0.7em;
 }
 
@@ -996,17 +990,6 @@ footer {
 
 a {
   color: var(--tertiary-color);
-}
-
-@keyframes openDropDown {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    top: 0;
-    opacity: 1;
-  }
 }
 
 @keyframes moveColor {
