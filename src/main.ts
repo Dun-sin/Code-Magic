@@ -314,6 +314,8 @@ getHeaderText?.addEventListener('click', () => {
     const generatorNav = <HTMLElement>item;
     generatorNav.style.border = 'none';
     generatorNav.style.background = 'none';
+    if (generatorNav.parentElement === null) return;
+    generatorNav.parentElement.id = '';
   });
   getHomePage.style.display = 'flex';
   getGeneratorSection.style.display = 'none';
