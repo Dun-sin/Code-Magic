@@ -286,6 +286,7 @@ document.addEventListener('click', (e: Event) => {
       !event.parentElement?.parentElement?.matches('.dropdown'),
     doesNotHaveAClosedClass: !navBar?.classList.contains('closed-nav'),
     isNotFooter: !event.matches('footer'),
+    isNotCategoryName: !event.matches('.dropdown > div'),
   };
 
   const isAllValidationTrue = Object.values(
