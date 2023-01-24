@@ -96,13 +96,19 @@ nav ul {
   list-style: none;
 }
 
-.dropdown > div {
+.dropdown {
+  display: flex;
+  justify-content: center;
+}
+
+.dropdown div {
   display: flex;
   align-items: center;
   cursor: pointer;
+  justify-content: space-between;
 }
 
-.dropdown > div > iconify-icon:first-of-type {
+.dropdown > div iconify-icon:first-of-type {
   margin-right: 5px;
 }
 
@@ -113,7 +119,8 @@ nav ul {
 }
 
 .dropdown > ul {
-  transition: 200ms transform;
+  transition: 350ms transform;
+  transition-timing-function: ease-in-out;
 }
 
 .dropdown:hover > ul,
