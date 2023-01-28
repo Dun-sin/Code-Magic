@@ -25,11 +25,19 @@ export const getColorInput1 = (attribute: string): HTMLInputElement =>
 export const getColorInput2 = (attribute: string): HTMLInputElement =>
   document.getElementById(`${attribute}-color2`) as HTMLInputElement;
 
+export const getAnimationPreview = (): HTMLDivElement =>
+  document.getElementById('animation-preview') as HTMLDivElement;
+
 export const getAllInputElements = (attribute: string): NodeList =>
   document.querySelectorAll(`.${attribute}-inputs`);
 
 export const getGradientPreview = (attribute: string): HTMLElement =>
   document.querySelector(`#${attribute}-color-preview`) as HTMLElement;
+
+export const getAnimationPreviewVisibilityToggler = (): HTMLButtonElement =>
+  document.querySelector(
+    '#animationPreviewVisibilityToggler'
+  ) as HTMLButtonElement;
 
 export const getOutput = (attribute: string): HTMLElement =>
   document.querySelector(
