@@ -1,25 +1,29 @@
 // Generator Modules
-import {picTextGenerator} from './pages/pic-text';
 import {
-  addGradientTextListener,
-  gradientTextGenerator,
-} from './pages/gradient-text';
-import {
-  gradientBorderGenerator,
-  addGradientBorderListener,
-} from './pages/gradient-border';
-import {
-  addGradientBackgroundListener,
-  gradientBackgroundGenerator,
-} from './pages/gradient-background';
-import {addAnimationListener, animationGenerator} from './pages/animation';
+  addAnimationListener,
+  animationGenerator,
+  displayAnimationPreview,
+} from './pages/animation';
 import {
   addBorderRadiusListener,
   borderRadiusGenerator,
 } from './pages/border-radius';
-import {boxShadowGenerator, addBoxShadowListener} from './pages/box-shadow';
-import {addTextShadowListener, textShadowGenerator} from './pages/text-shadow';
+import {addBoxShadowListener, boxShadowGenerator} from './pages/box-shadow';
+import {
+  addGradientBackgroundListener,
+  gradientBackgroundGenerator,
+} from './pages/gradient-background';
+import {
+  addGradientBorderListener,
+  gradientBorderGenerator,
+} from './pages/gradient-border';
+import {
+  addGradientTextListener,
+  gradientTextGenerator,
+} from './pages/gradient-text';
 import {rangeGenerator} from './pages/input-range';
+import {picTextGenerator} from './pages/pic-text';
+import {addTextShadowListener, textShadowGenerator} from './pages/text-shadow';
 
 // Packages
 import * as FilePond from 'filepond';
@@ -32,8 +36,13 @@ import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
 
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import {
+  getAnimationPreview,
+  getAnimationPreviewVisibilityToggler,
   getGeneratorsElement,
+  getInputSpinner,
   getOpenSideBarButton,
+  getRadioButtonSet,
+  getRange,
   getResultPage,
 } from './lib/getElements';
 
@@ -377,6 +386,41 @@ getResultsButton.forEach((getResult) => {
   });
 });
 
+// event listener for animation inputs to display animation preview
+const attribute = 'animation';
+
+const getDegreeElement = getRange(attribute);
+const getRadioButtonSetElement = getRadioButtonSet(attribute);
+const getDurationElement = getInputSpinner(attribute);
+
+getDegreeElement?.addEventListener('change', () => displayAnimationPreview());
+getRadioButtonSetElement.forEach((radioButton: HTMLInputElement) => {
+  radioButton.onclick = () => {
+    displayAnimationPreview();
+  };
+});
+getDurationElement?.addEventListener('change', () => {
+  displayAnimationPreview();
+});
+
+// configuring animation preview container visibility toggler
+const visibilityToggler = getAnimationPreviewVisibilityToggler();
+
+visibilityToggler.onclick = () => {
+  if (visibilityToggler.getAttribute('data-selected') === 'true') {
+    getAnimationPreview().style.display = 'none';
+    visibilityToggler.innerText = 'Show Preview';
+    visibilityToggler.setAttribute('data-selected', 'false');
+    visibilityToggler.setAttribute('aria-selected', 'false');
+  } else {
+    getAnimationPreview().style.display = 'grid';
+    visibilityToggler.innerText = 'Hide Preview';
+    visibilityToggler.setAttribute('data-selected', 'true');
+    visibilityToggler.setAttribute('aria-selected', 'true');
+  }
+};
+
+// configuring dropdown menu
 dropDownElements.forEach((dropDown) => {
   const listElement = dropDown.lastElementChild as HTMLElement;
 
