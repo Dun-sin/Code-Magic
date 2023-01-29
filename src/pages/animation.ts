@@ -1,17 +1,19 @@
 import copy from 'copy-to-clipboard';
 import {
   getCopyCodeButton,
-  getOutput,
-  getRange,
   getInputSpinner,
-  getStyleSheet,
-  getResultPage,
+  getOutput,
+  getPreviewSlider,
   getRadioButtonSet,
+  getRange,
+  getResultPage,
+  getStyleSheet,
 } from '../lib/getElements';
-import {showPopup, setGradientDegreeValue} from '../lib/packages';
+import {setGradientDegreeValue, showPopup, slideIn} from '../lib/packages';
 
 let initial_length = 0;
 // let rule_added = false;
+let isAnimationSliderOpen = false;
 let css = '';
 
 type Values = {
@@ -26,6 +28,8 @@ const getCodeButtonElement = getCopyCodeButton(attribute);
 const getOutputElement = getOutput(attribute);
 const getDegreeElement = getRange(attribute);
 const getRadioButtonSetElement = getRadioButtonSet(attribute);
+
+const preview = getPreviewSlider(attribute);
 
 initialConfiguration(
   getRadioButtonSetElement,
@@ -67,6 +71,39 @@ export function animationGenerator(type: 'newResults' | 'oldResults' | null) {
     );
   });
   manageAnimation(values, getOutputElement, Stylesheet);
+}
+
+// configuring animation preview
+export function displayAnimationPreview() {
+  slideIn(preview, isAnimationSliderOpen);
+  isAnimationSliderOpen = true;
+
+  if (preview.getAttribute('data-running') !== 'true') {
+    const duration = getInputSpinner(attribute);
+
+    const Stylesheet = getStyleSheet();
+
+    let i = 0;
+
+    for (i = 0; i < getRadioButtonSetElement.length; i++)
+      if (getRadioButtonSetElement[i].checked) break;
+
+    const values: Values = {
+      type: getRadioButtonSetElement[i].value,
+      degree: getDegreeElement.value,
+      duration: duration.value,
+    };
+
+    // only updating preview animation if no current animation is running
+    preview.onanimationend = () => {
+      preview.setAttribute('data-running', 'false');
+      preview.style.animation = '';
+      Stylesheet.deleteRule(initial_length + 1);
+    };
+
+    preview.setAttribute('data-running', 'true');
+    manageAnimation(values, preview, Stylesheet);
+  }
 }
 
 /**

@@ -296,6 +296,10 @@ main > section:last-of-type {
   align-items: center;
 }
 
+[data-content='animation'] .preview-slider {
+  top: -50%;
+}
+
 [data-content='pic-text'] {
   display: flex;
 }
