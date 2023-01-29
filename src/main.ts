@@ -36,8 +36,6 @@ import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
 
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import {
-  getAnimationPreview,
-  getAnimationPreviewVisibilityToggler,
   getGeneratorsElement,
   getInputSpinner,
   getOpenSideBarButton,
@@ -402,23 +400,6 @@ getRadioButtonSetElement.forEach((radioButton: HTMLInputElement) => {
 getDurationElement?.addEventListener('change', () => {
   displayAnimationPreview();
 });
-
-// configuring animation preview container visibility toggler
-const visibilityToggler = getAnimationPreviewVisibilityToggler();
-
-visibilityToggler.onclick = () => {
-  if (visibilityToggler.getAttribute('data-selected') === 'true') {
-    getAnimationPreview().style.display = 'none';
-    visibilityToggler.innerText = 'Show Preview';
-    visibilityToggler.setAttribute('data-selected', 'false');
-    visibilityToggler.setAttribute('aria-selected', 'false');
-  } else {
-    getAnimationPreview().style.display = 'grid';
-    visibilityToggler.innerText = 'Hide Preview';
-    visibilityToggler.setAttribute('data-selected', 'true');
-    visibilityToggler.setAttribute('aria-selected', 'true');
-  }
-};
 
 // configuring dropdown menu
 dropDownElements.forEach((dropDown) => {

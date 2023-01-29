@@ -13,6 +13,7 @@ import {setGradientDegreeValue, showPopup} from '../lib/packages';
 
 let initial_length = 0;
 // let rule_added = false;
+let isAnimationSliderOpen = false;
 let css = '';
 
 type Values = {
@@ -70,9 +71,21 @@ export function animationGenerator(type: 'newResults' | 'oldResults' | null) {
   manageAnimation(values, getOutputElement, Stylesheet);
 }
 
-// configuring animation previews
+// configuring animation preview
 export function displayAnimationPreview() {
   const outputElement = getAnimationPreview();
+
+  if (!isAnimationSliderOpen) {
+    const slideIn = [{left: '-300px'}, {left: '15px'}];
+    const slideInTiming = {
+      duration: 500,
+      iterations: 1,
+      fill: 'both' as FillMode,
+    };
+
+    outputElement.animate(slideIn, slideInTiming);
+    isAnimationSliderOpen = true;
+  }
 
   if (outputElement.getAttribute('data-running') !== 'true') {
     const duration = getInputSpinner(attribute);

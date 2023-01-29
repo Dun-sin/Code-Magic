@@ -34,11 +34,6 @@ export const getAllInputElements = (attribute: string): NodeList =>
 export const getGradientPreview = (attribute: string): HTMLElement =>
   document.querySelector(`#${attribute}-color-preview`) as HTMLElement;
 
-export const getAnimationPreviewVisibilityToggler = (): HTMLButtonElement =>
-  document.querySelector(
-    '#animationPreviewVisibilityToggler'
-  ) as HTMLButtonElement;
-
 export const getOutput = (attribute: string): HTMLElement =>
   document.querySelector(
     `[data-result = ${attribute}] > .output`
