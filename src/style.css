@@ -296,6 +296,13 @@ main > section:last-of-type {
   align-items: center;
 }
 
+[data-content='animation'] .preview-slider {
+  top: -50%;
+
+  display: grid;
+  place-items: center;
+}
+
 [data-content='pic-text'] {
   display: flex;
 }
@@ -407,19 +414,6 @@ input::placeholder {
   height: 50px;
   background-color: var(--primary-color);
   border-radius: 5px;
-}
-
-.animation-preview-slider {
-  height: 80px;
-  width: 200px;
-
-  position: absolute;
-  display: grid;
-  place-items: center;
-  top: -100px;
-  left: -300px;
-  border: 1px solid #fff;
-  background: transparent;
 }
 
 .colors > .color:nth-of-type(even) {

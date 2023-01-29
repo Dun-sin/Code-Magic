@@ -25,9 +25,6 @@ export const getColorInput1 = (attribute: string): HTMLInputElement =>
 export const getColorInput2 = (attribute: string): HTMLInputElement =>
   document.getElementById(`${attribute}-color2`) as HTMLInputElement;
 
-export const getAnimationPreview = (): HTMLDivElement =>
-  document.getElementById('animation-preview') as HTMLDivElement;
-
 export const getAllInputElements = (attribute: string): NodeList =>
   document.querySelectorAll(`.${attribute}-inputs`);
 

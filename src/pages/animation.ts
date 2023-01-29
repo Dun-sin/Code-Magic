@@ -1,15 +1,15 @@
 import copy from 'copy-to-clipboard';
 import {
-  getAnimationPreview,
   getCopyCodeButton,
   getInputSpinner,
   getOutput,
+  getPreviewSlider,
   getRadioButtonSet,
   getRange,
   getResultPage,
   getStyleSheet,
 } from '../lib/getElements';
-import {setGradientDegreeValue, showPopup} from '../lib/packages';
+import {setGradientDegreeValue, showPopup, slideIn} from '../lib/packages';
 
 let initial_length = 0;
 // let rule_added = false;
@@ -28,6 +28,8 @@ const getCodeButtonElement = getCopyCodeButton(attribute);
 const getOutputElement = getOutput(attribute);
 const getDegreeElement = getRange(attribute);
 const getRadioButtonSetElement = getRadioButtonSet(attribute);
+
+const preview = getPreviewSlider(attribute);
 
 initialConfiguration(
   getRadioButtonSetElement,
@@ -73,21 +75,10 @@ export function animationGenerator(type: 'newResults' | 'oldResults' | null) {
 
 // configuring animation preview
 export function displayAnimationPreview() {
-  const outputElement = getAnimationPreview();
+  slideIn(preview, isAnimationSliderOpen);
+  isAnimationSliderOpen = true;
 
-  if (!isAnimationSliderOpen) {
-    const slideIn = [{left: '-300px'}, {left: '15px'}];
-    const slideInTiming = {
-      duration: 500,
-      iterations: 1,
-      fill: 'both' as FillMode,
-    };
-
-    outputElement.animate(slideIn, slideInTiming);
-    isAnimationSliderOpen = true;
-  }
-
-  if (outputElement.getAttribute('data-running') !== 'true') {
+  if (preview.getAttribute('data-running') !== 'true') {
     const duration = getInputSpinner(attribute);
 
     const Stylesheet = getStyleSheet();
@@ -104,14 +95,14 @@ export function displayAnimationPreview() {
     };
 
     // only updating preview animation if no current animation is running
-    outputElement.onanimationend = () => {
-      outputElement.setAttribute('data-running', 'false');
-      outputElement.style.animation = '';
+    preview.onanimationend = () => {
+      preview.setAttribute('data-running', 'false');
+      preview.style.animation = '';
       Stylesheet.deleteRule(initial_length + 1);
     };
 
-    outputElement.setAttribute('data-running', 'true');
-    manageAnimation(values, outputElement, Stylesheet);
+    preview.setAttribute('data-running', 'true');
+    manageAnimation(values, preview, Stylesheet);
   }
 }
 
