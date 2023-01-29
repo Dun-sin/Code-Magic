@@ -298,9 +298,6 @@ main > section:last-of-type {
 
 [data-content='animation'] .preview-slider {
   top: -50%;
-
-  display: grid;
-  place-items: center;
 }
 
 [data-content='pic-text'] {

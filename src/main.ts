@@ -117,6 +117,9 @@ const downloadButtons = document.querySelectorAll(
   '.image-download'
 ) as NodeListOf<HTMLElement>;
 const dropDownElements = document.querySelectorAll('.dropdown');
+const getDegreeElement = getRange('animation');
+const getRadioButtonSetElement = getRadioButtonSet('animation');
+const getDurationElement = getInputSpinner('animation');
 if (openSidePanelButton) {
   openSidePanelButton.style.display = 'none';
 }
@@ -383,13 +386,6 @@ getResultsButton.forEach((getResult) => {
     sidebar.style.left = '0%';
   });
 });
-
-// event listener for animation inputs to display animation preview
-const attribute = 'animation';
-
-const getDegreeElement = getRange(attribute);
-const getRadioButtonSetElement = getRadioButtonSet(attribute);
-const getDurationElement = getInputSpinner(attribute);
 
 getDegreeElement?.addEventListener('change', () => displayAnimationPreview());
 getRadioButtonSetElement.forEach((radioButton: HTMLInputElement) => {
