@@ -1,17 +1,19 @@
 import copy from 'copy-to-clipboard';
 import {
+  getAnimationPreview,
   getCopyCodeButton,
-  getOutput,
-  getRange,
   getInputSpinner,
-  getStyleSheet,
-  getResultPage,
+  getOutput,
   getRadioButtonSet,
+  getRange,
+  getResultPage,
+  getStyleSheet,
 } from '../lib/getElements';
-import {showPopup, setGradientDegreeValue} from '../lib/packages';
+import {setGradientDegreeValue, showPopup} from '../lib/packages';
 
 let initial_length = 0;
 // let rule_added = false;
+let isAnimationSliderOpen = false;
 let css = '';
 
 type Values = {
@@ -67,6 +69,50 @@ export function animationGenerator(type: 'newResults' | 'oldResults' | null) {
     );
   });
   manageAnimation(values, getOutputElement, Stylesheet);
+}
+
+// configuring animation preview
+export function displayAnimationPreview() {
+  const outputElement = getAnimationPreview();
+
+  if (!isAnimationSliderOpen) {
+    const slideIn = [{left: '-300px'}, {left: '15px'}];
+    const slideInTiming = {
+      duration: 500,
+      iterations: 1,
+      fill: 'both' as FillMode,
+    };
+
+    outputElement.animate(slideIn, slideInTiming);
+    isAnimationSliderOpen = true;
+  }
+
+  if (outputElement.getAttribute('data-running') !== 'true') {
+    const duration = getInputSpinner(attribute);
+
+    const Stylesheet = getStyleSheet();
+
+    let i = 0;
+
+    for (i = 0; i < getRadioButtonSetElement.length; i++)
+      if (getRadioButtonSetElement[i].checked) break;
+
+    const values: Values = {
+      type: getRadioButtonSetElement[i].value,
+      degree: getDegreeElement.value,
+      duration: duration.value,
+    };
+
+    // only updating preview animation if no current animation is running
+    outputElement.onanimationend = () => {
+      outputElement.setAttribute('data-running', 'false');
+      outputElement.style.animation = '';
+      Stylesheet.deleteRule(initial_length + 1);
+    };
+
+    outputElement.setAttribute('data-running', 'true');
+    manageAnimation(values, outputElement, Stylesheet);
+  }
 }
 
 /**

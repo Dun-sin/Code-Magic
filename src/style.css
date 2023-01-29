@@ -409,6 +409,19 @@ input::placeholder {
   border-radius: 5px;
 }
 
+.animation-preview-slider {
+  height: 80px;
+  width: 200px;
+
+  position: absolute;
+  display: grid;
+  place-items: center;
+  top: -100px;
+  left: -300px;
+  border: 1px solid #fff;
+  background: transparent;
+}
+
 .colors > .color:nth-of-type(even) {
   margin-left: 10px;
 }
