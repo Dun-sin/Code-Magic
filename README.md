@@ -1,6 +1,21 @@
-## Code-Magic
+<div id="header" align="center">
+  <img src="https://user-images.githubusercontent.com/121221252/215760592-3b24d03b-53ed-4264-9cda-b4f052151513.png"/><br>
+    <!-- <p><strong><em>"Tagline"</em></strong></p>
+     -->
+  <a href="https://gitpod.io/#https://github.com/Dun-sin/Code-Magic">
+    <img src="https://gitpod.io/button/open-in-gitpod.svg">
+  </a>
+</div> <br>
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Dun-sin/Code-Magic)
+[![GitHub issues](https://img.shields.io/github/issues/Dun-sin/Code-Magic.svg)](https://github.com/Dun-sin/Code-Magic/issues)
+[![GitHub forks](https://img.shields.io/github/forks/Dun-sin/Code-Magic.svg)](https://github.com/Dun-sin/Code-Magic/network)
+[![GitHub stars](https://img.shields.io/github/stars/Dun-sin/Code-Magic.svg)](https://github.com/Dun-sin/Code-Magic/stargazers)
+[![GitHub license](https://img.shields.io/github/license/Dun-sin/Code-Magic.svg)](https://github.com/Dun-sin/Code-Magic/blob/master/LICENSE)
+
+
+### 🚀 About
+
+<!-- [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Dun-sin/Code-Magic) -->
 
 Code Magic is a website where you can get simple CSS tricks to make your application elegant with just few clicks.
 
