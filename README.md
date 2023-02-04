@@ -15,7 +15,8 @@
 
 ### 🚀 About
 
-<!-- [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Dun-sin/Code-Magic) -->
+<!-- [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Dun-sin/Code-Magic) 
+To be added later if required -->
 
 Code Magic is a website where you can get simple CSS tricks to make your application elegant with just few clicks.
 
