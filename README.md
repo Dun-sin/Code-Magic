@@ -7,11 +7,6 @@
   </a>
 </div> <br>
 
-[![GitHub issues](https://img.shields.io/github/issues/Dun-sin/Code-Magic.svg)](https://github.com/Dun-sin/Code-Magic/issues)
-[![GitHub forks](https://img.shields.io/github/forks/Dun-sin/Code-Magic.svg)](https://github.com/Dun-sin/Code-Magic/network)
-[![GitHub stars](https://img.shields.io/github/stars/Dun-sin/Code-Magic.svg)](https://github.com/Dun-sin/Code-Magic/stargazers)
-[![GitHub license](https://img.shields.io/github/license/Dun-sin/Code-Magic.svg)](https://github.com/Dun-sin/Code-Magic/blob/master/LICENSE)
-
 
 ### 🚀 About
 
