@@ -125,3 +125,21 @@ export const getPreviewSlider = (attribute: string): HTMLElement =>
   document.querySelector(
     `[data-content=${attribute}] .preview-slider`
   ) as HTMLElement;
+
+export const getTransformScale = (attribute: string) =>
+  document.getElementById(`${attribute}-scale`) as HTMLInputElement;
+
+export const getTransformRotate = (attribute: string) =>
+  document.getElementById(`${attribute}-rotate`) as HTMLInputElement;
+
+export const getTransformSkew = (attribute: string) =>
+  document.getElementById(`${attribute}-skew`) as HTMLInputElement;
+
+export const getTransformTranslateX = (attribute: string) =>
+  document.getElementById(`${attribute}-translateX`) as HTMLInputElement;
+
+export const getTransformTranslateY = (attribute: string) =>
+  document.getElementById(`${attribute}-translateY`) as HTMLInputElement;
+
+export const getTransformItemValue = (item: string) =>
+  document.getElementById(`transform-${item}-value`) as HTMLInputElement;

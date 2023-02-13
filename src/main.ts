@@ -43,6 +43,7 @@ import {
   getRange,
   getResultPage,
 } from './lib/getElements';
+import {addTransformListener, transformGenerator} from './pages/transform';
 
 FilePond.registerPlugin(
   FilePondPluginImagePreview,
@@ -196,6 +197,7 @@ function generatorsFunction(attribute: string, type: openResults): void {
   attribute === 'border-radius' && borderRadiusGenerator(type);
   attribute === 'box-shadow' && boxShadowGenerator(type);
   attribute === 'text-shadow' && textShadowGenerator(type);
+  attribute === 'transform' && transformGenerator(type);
 }
 
 /**
@@ -237,6 +239,7 @@ function showContent(attribute: string, display: Display): void {
   attribute === 'box-shadow' && addBoxShadowListener();
   attribute === 'gradient-background' && addGradientBackgroundListener();
   attribute === 'animation' && addAnimationListener();
+  attribute === 'transform' && addTransformListener();
 }
 
 /**

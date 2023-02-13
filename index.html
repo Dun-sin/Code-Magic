@@ -337,6 +337,39 @@
               </li>
             </ul>
           </li>
+
+          <li id="transform" class="dropdown">
+            <div>
+              <div>
+                <iconify-icon
+                  inline
+                  icon="icon-park-outline:transform"
+                  style="color: white"
+                  width="20"
+                ></iconify-icon>
+                <span>Transform Generators</span>
+              </div>
+              <iconify-icon
+                inline
+                icon="material-symbols:arrow-drop-down-rounded"
+                style="color: white"
+                width="20"
+              ></iconify-icon>
+            </div>
+            <ul>
+              <li data-gen="transform">
+                <iconify-icon
+                  inline
+                  icon="game-icons:transform"
+                  width="20"
+                ></iconify-icon>
+                <span> Transform </span>
+                <span class="tooltip">
+                  Scale, skew, translate and rotate elements with transform
+                </span>
+              </li>
+            </ul>
+          </li>
         </ul>
         <footer>
           <a
@@ -910,6 +943,108 @@
           </div>
           <!-- End of Text Shadow Generator -->
 
+          <!-- Transform Generator -->
+          <div data-content="transform">
+            <div class="transform-container">
+              <div class="transform-inputs-container">
+                <div class="scale-container">
+                  <label for="scale" class="scale">
+                    <span class="transform-item-info">
+                      <span>Scale</span>
+                      <span id="transform-scale-value"></span>
+                    </span>
+                    <input
+                      type="range"
+                      max="50"
+                      min="1"
+                      value="25"
+                      step="1"
+                      id="transform-scale"
+                      class="transform-inputs"
+                    />
+                  </label>
+                </div>
+
+                <div class="rotate-container">
+                  <label for="rotate" class="rotate">
+                    <span class="transform-item-info">
+                      <span>Rotate</span>
+                      <span id="transform-rotate-value">deg</span>
+                    </span>
+                    <input
+                      type="range"
+                      max="360"
+                      min="0"
+                      value="0"
+                      step="1"
+                      id="transform-rotate"
+                      class="transform-inputs"
+                    />
+                  </label>
+                </div>
+
+                <div class="skew-container">
+                  <label for="skew" class="skew">
+                    <span class="transform-item-info">
+                      <span>Skew</span>
+                      <span id="transform-skew-value">deg</span>
+                    </span>
+                    <input
+                      type="range"
+                      max="180"
+                      min="-180"
+                      value="0"
+                      step="1"
+                      id="transform-skew"
+                      class="transform-inputs"
+                    />
+                  </label>
+                </div>
+
+                <div class="translateX-container">
+                  <label for="translateX" class="translateX">
+                    <span class="transform-item-info">
+                      <span>translateX</span>
+                      <span id="transform-translateX-value">px</span>
+                    </span>
+                    <input
+                      type="range"
+                      max="100"
+                      min="-100"
+                      value="0"
+                      step="1"
+                      id="transform-translateX"
+                      class="transform-inputs"
+                    />
+                  </label>
+                </div>
+
+                <div class="translateY-container">
+                  <label for="translateY" class="translateY">
+                    <span class="transform-item-info">
+                      <span>translateY</span>
+                      <span id="transform-translateY-value">px</span>
+                    </span>
+                    <input
+                      type="range"
+                      max="100"
+                      min="-100"
+                      value="0"
+                      step="1"
+                      id="transform-translateY"
+                      class="transform-inputs"
+                    />
+                  </label>
+                </div>
+              </div>
+
+              <div class="transform-preview preview"></div>
+            </div>
+
+            <div class="btn" data-button="transform">Get Results</div>
+          </div>
+          <!-- End of Transform Generator -->
+
           <!-- Input Type Range Generator -->
           <div data-content="input-range">
             <label for="preview-range">
@@ -1246,6 +1381,23 @@
             </div>
           </div>
           <!-- End of Box-Shadow Result -->
+
+          <!-- Transform Result -->
+          <div class="download-output" data-result="transform">
+            <div class="output transform-output"></div>
+            <div class="download-btn">
+              <button class="btn" data-download="transform-code">
+                <iconify-icon
+                  inline
+                  icon="bx:code-alt"
+                  style="color: white; margin-right: 5px"
+                  width="20"
+                ></iconify-icon>
+                Get Code
+              </button>
+            </div>
+          </div>
+          <!-- End of Transform Result -->
 
           <!-- Text Shadow Result -->
           <div class="download-output" data-result="text-shadow">

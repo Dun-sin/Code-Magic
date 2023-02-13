@@ -10,6 +10,7 @@ import {
   getParentElementOfColors,
   getRemoveNewColorButton,
 } from './getElements';
+import {transformExports} from '../pages/transform';
 
 export const setGradientDegreeValue = (degreeElement: HTMLElement): void =>
   degreeElement.addEventListener('input', (e) => {
@@ -94,6 +95,10 @@ export const addRule = (function (style) {
 const actOnGenerator = (attribute: string, outputElement: HTMLElement) => {
   let codeToCopy = '';
   let element;
+
+  // variables for case 'transform'
+  const {scale, skew, rotate, translateX, translateY} = transformExports;
+
   switch (attribute) {
     case 'pic-text':
       codeToCopy = `
@@ -217,6 +222,15 @@ const actOnGenerator = (attribute: string, outputElement: HTMLElement) => {
         outline: none;
       }
       `;
+      break;
+    case 'transform':
+      codeToCopy = `
+          div {
+            transform: scale(${scale}) skew(${skew}) rotate(${rotate}) translate(${translateX}, ${translateY});
+            -webkit-transform: scale(${scale}) skew(${skew}) rotate(${rotate}) translate(${translateX}, ${translateY});
+            -moz-transform: scale(${scale}) skew(${skew}) rotate(${rotate}) translate(${translateX}, ${translateY});
+          }
+        `;
       break;
     default:
       codeToCopy = `
