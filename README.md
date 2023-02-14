@@ -1,6 +1,16 @@
-## Code-Magic
+<div id="header" align="center">
+  <img src="https://user-images.githubusercontent.com/121221252/215760592-3b24d03b-53ed-4264-9cda-b4f052151513.png"/><br>
+    <!-- <p><strong><em>"Tagline"</em></strong></p>
+     -->
+  <a href="https://gitpod.io/#https://github.com/Dun-sin/Code-Magic">
+    <img src="https://gitpod.io/button/open-in-gitpod.svg">
+  </a>
+</div> <br>
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Dun-sin/Code-Magic)
+
+### 🚀 About
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Dun-sin/Code-Magic) 
 
 Code Magic is a website where you can get simple CSS tricks to make your application elegant with just few clicks.
 
