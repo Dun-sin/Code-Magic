@@ -946,6 +946,8 @@
           <!-- Transform Generator -->
           <div data-content="transform">
             <div class="transform-container">
+              <div class="transform-preview preview"></div>
+
               <div class="transform-inputs-container">
                 <div class="scale-container">
                   <label for="scale" class="scale">
@@ -955,10 +957,10 @@
                     </span>
                     <input
                       type="range"
-                      max="50"
-                      min="1"
-                      value="25"
-                      step="1"
+                      max="2"
+                      min="0.1"
+                      value="1"
+                      step="0.1"
                       id="transform-scale"
                       class="transform-inputs"
                     />
@@ -1037,8 +1039,6 @@
                   </label>
                 </div>
               </div>
-
-              <div class="transform-preview preview"></div>
             </div>
 
             <div class="btn" data-button="transform">Get Results</div>

@@ -64,14 +64,14 @@ function copyHandler() {
 
 export function addTransformListener(): void {
   const transformGenerator = (): void => {
-    const scale = parseFloat(scaleInput.value) / 50;
+    const scale = parseFloat(scaleInput.value);
     const skew = skewInput.value + 'deg';
     const rotate = rotateInput.value + 'deg';
     const translateX = translateXInput.value + 'px';
     const translateY = translateYInput.value + 'px';
     transformPreview.style.transform = `scale(${scale}) skew(${skew}) rotate(${rotate}) translate(${translateX}, ${translateY})`;
 
-    scaleValue.innerText = (scale * 50).toString();
+    scaleValue.innerText = scale.toString();
     skewValue.innerText = skew;
     rotateValue.innerText = rotate;
     translateXValue.innerText = translateX;
@@ -116,7 +116,7 @@ function getTransformResult(
   outputElement: HTMLElement
 ): void {
   const createTransformElement = (): void => {
-    const scale = parseFloat(values.scale) / 50;
+    const scale = parseFloat(values.scale);
     outputElement.style.width = '250px';
     outputElement.style.height = '250px';
     outputElement.style.transform = `scale(${scale}) skew(${values.skew}deg) rotate(${values.rotate}deg) translate(${values.translateX}px, ${values.translateY}px)`;
