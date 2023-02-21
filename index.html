@@ -215,6 +215,17 @@
                   >Create animations like Fade, Flip, Skew
                 </span>
               </li>
+              <li data-gen="transform">
+                <iconify-icon
+                  inline
+                  icon="game-icons:transform"
+                  width="20"
+                ></iconify-icon>
+                <span> Transform </span>
+                <span class="tooltip">
+                  Scale, skew, translate and rotate elements with transform
+                </span>
+              </li>
             </ul>
           </li>
 
@@ -333,39 +344,6 @@
                 <span>Pic-Text</span>
                 <span class="tooltip">
                   Convert Your Image to Character Art
-                </span>
-              </li>
-            </ul>
-          </li>
-
-          <li id="transform" class="dropdown">
-            <div>
-              <div>
-                <iconify-icon
-                  inline
-                  icon="icon-park-outline:transform"
-                  style="color: white"
-                  width="20"
-                ></iconify-icon>
-                <span>Transform Generators</span>
-              </div>
-              <iconify-icon
-                inline
-                icon="material-symbols:arrow-drop-down-rounded"
-                style="color: white"
-                width="20"
-              ></iconify-icon>
-            </div>
-            <ul>
-              <li data-gen="transform">
-                <iconify-icon
-                  inline
-                  icon="game-icons:transform"
-                  width="20"
-                ></iconify-icon>
-                <span> Transform </span>
-                <span class="tooltip">
-                  Scale, skew, translate and rotate elements with transform
                 </span>
               </li>
             </ul>
@@ -944,102 +922,76 @@
           <!-- End of Text Shadow Generator -->
 
           <!-- Transform Generator -->
+
           <div data-content="transform">
-            <div class="transform-container">
-              <div class="transform-preview preview"></div>
+            <div class="transform-preview preview"></div>
 
-              <div class="transform-inputs-container">
-                <div class="scale-container">
-                  <label for="scale" class="scale">
-                    <span class="transform-item-info">
-                      <span>Scale</span>
-                      <span id="transform-scale-value"></span>
-                    </span>
-                    <input
-                      type="range"
-                      max="2"
-                      min="0.1"
-                      value="1"
-                      step="0.1"
-                      id="transform-scale"
-                      class="transform-inputs"
-                    />
-                  </label>
-                </div>
-
-                <div class="rotate-container">
-                  <label for="rotate" class="rotate">
-                    <span class="transform-item-info">
-                      <span>Rotate</span>
-                      <span id="transform-rotate-value">deg</span>
-                    </span>
-                    <input
-                      type="range"
-                      max="360"
-                      min="0"
-                      value="0"
-                      step="1"
-                      id="transform-rotate"
-                      class="transform-inputs"
-                    />
-                  </label>
-                </div>
-
-                <div class="skew-container">
-                  <label for="skew" class="skew">
-                    <span class="transform-item-info">
-                      <span>Skew</span>
-                      <span id="transform-skew-value">deg</span>
-                    </span>
-                    <input
-                      type="range"
-                      max="180"
-                      min="-180"
-                      value="0"
-                      step="1"
-                      id="transform-skew"
-                      class="transform-inputs"
-                    />
-                  </label>
-                </div>
-
-                <div class="translateX-container">
-                  <label for="translateX" class="translateX">
-                    <span class="transform-item-info">
-                      <span>translateX</span>
-                      <span id="transform-translateX-value">px</span>
-                    </span>
-                    <input
-                      type="range"
-                      max="100"
-                      min="-100"
-                      value="0"
-                      step="1"
-                      id="transform-translateX"
-                      class="transform-inputs"
-                    />
-                  </label>
-                </div>
-
-                <div class="translateY-container">
-                  <label for="translateY" class="translateY">
-                    <span class="transform-item-info">
-                      <span>translateY</span>
-                      <span id="transform-translateY-value">px</span>
-                    </span>
-                    <input
-                      type="range"
-                      max="100"
-                      min="-100"
-                      value="0"
-                      step="1"
-                      id="transform-translateY"
-                      class="transform-inputs"
-                    />
-                  </label>
-                </div>
+            <div class="transform-type">
+              <p>Transform Type</p>
+              <div class="radio-group">
+                <label id="transform-radio-label" for="scale">
+                  <input
+                    checked
+                    type="radio"
+                    id="scale"
+                    name="transform-radio"
+                    value="scale"
+                  />
+                  <span>Scale</span>
+                </label>
+                <label id="transform-radio-label" for="rotate">
+                  <input
+                    type="radio"
+                    id="rotate"
+                    name="transform-radio"
+                    value="rotate"
+                  />
+                  <span>Rotate</span>
+                </label>
+                <label id="transform-radio-label" for="skew">
+                  <input
+                    type="radio"
+                    id="skew"
+                    name="transform-radio"
+                    value="skew"
+                  />
+                  <span>Skew</span>
+                </label>
+                <label id="transform-radio-label" for="translateX">
+                  <input
+                    type="radio"
+                    id="translateX"
+                    name="transform-radio"
+                    value="translateX"
+                  />
+                  <span>TranslateX</span>
+                </label>
+                <label id="transform-radio-label" for="translateY">
+                  <input
+                    type="radio"
+                    id="translateY"
+                    name="transform-radio"
+                    value="translateY"
+                  />
+                  <span>TranslateY</span>
+                </label>
               </div>
             </div>
+            <label id="degree" for="transform-degree">
+              <span class="label-title">
+                <span class="title-display transform">Size</span>
+                <span class="unit-display transform"></span>
+              </span>
+              <input
+                type="range"
+                max="2"
+                min=".1"
+                value="1"
+                step=".1"
+                class="degree-range"
+                id="transform-degree"
+              />
+            </label>
 
             <div class="btn" data-button="transform">Get Results</div>
           </div>

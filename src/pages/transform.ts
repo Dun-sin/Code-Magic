@@ -1,22 +1,16 @@
+import copy from 'copy-to-clipboard';
 import {
   getCopyCodeButton,
   getOutput,
+  getRadioButtonSet,
+  getRange,
   getResultPage,
-  getTransformItemValue,
-  getTransformRotate,
-  getTransformScale,
-  getTransformSkew,
-  getTransformTranslateX,
-  getTransformTranslateY,
 } from '../lib/getElements';
-import {copyCodeToClipboard, showPopup} from '../lib/packages';
+import {showPopup} from '../lib/packages';
 
-type TransformValues = {
-  scale: string;
-  rotate: string;
-  skew: string;
-  translateX: string;
-  translateY: string;
+type Values = {
+  type: string;
+  degree: string;
 };
 
 const attribute = 'transform';
@@ -29,64 +23,95 @@ const transformExports = {
   translateY: '',
 };
 
+let css = '';
 const transformPreview = document.querySelector(
   '.transform-preview'
 ) as HTMLElement;
-const scaleInput = getTransformScale(attribute);
-const rotateInput = getTransformRotate(attribute);
-const skewInput = getTransformSkew(attribute);
-const translateXInput = getTransformTranslateX(attribute);
-const translateYInput = getTransformTranslateY(attribute);
-const inputs = [
-  scaleInput,
-  skewInput,
-  rotateInput,
-  translateXInput,
-  translateYInput,
-];
 
-// gets element holding value of each transform item
-const scaleValue = getTransformItemValue('scale');
-const rotateValue = getTransformItemValue('rotate');
-const skewValue = getTransformItemValue('skew');
-const translateXValue = getTransformItemValue('translateX');
-const translateYValue = getTransformItemValue('translateY');
-
-function copyHandler() {
-  const outputElement = getOutput(attribute);
-  copyCodeToClipboard(attribute, outputElement);
-  showPopup(
-    'Code Copied',
-    'Code has been successfully copied to clipboard',
-    'success'
-  );
-}
+const getDegreeElement = getRange(attribute);
+const getRadioButtonSetElement = getRadioButtonSet(attribute);
+// const getOutputElement = getOutput(attribute);
 
 export function addTransformListener(): void {
-  const transformGenerator = (): void => {
-    const scale = parseFloat(scaleInput.value);
-    const skew = skewInput.value + 'deg';
-    const rotate = rotateInput.value + 'deg';
-    const translateX = translateXInput.value + 'px';
-    const translateY = translateYInput.value + 'px';
-    transformPreview.style.transform = `scale(${scale}) skew(${skew}) rotate(${rotate}) translate(${translateX}, ${translateY})`;
+  // Listen for radio button changes
+  getRadioButtonSetElement.forEach((option) => {
+    option.addEventListener('change', () => {
+      // resets input element value when radio button changes
+      getDegreeElement.valueAsNumber = 1;
 
-    scaleValue.innerText = scale.toString();
-    skewValue.innerText = skew;
-    rotateValue.innerText = rotate;
-    translateXValue.innerText = translateX;
-    translateYValue.innerText = translateY;
-
-    transformExports.scale = scale;
-    transformExports.skew = skew;
-    transformExports.rotate = rotate;
-    transformExports.translateX = translateX;
-    transformExports.translateY = translateY;
-  };
-
-  inputs.forEach((input) => {
-    input.addEventListener('input', transformGenerator);
+      // Update preview with default value for selected option
+      updatePreviewAndRange(option.value, getDegreeElement.valueAsNumber);
+    });
   });
+
+  // Listen for range input changes
+  getDegreeElement.addEventListener('input', () => {
+    // Update preview with current value for selected option
+    const selectedOption = document.querySelector(
+      'input[name="transform-radio"]:checked'
+    ) as HTMLInputElement;
+    updatePreviewAndRange(selectedOption.value, getDegreeElement.valueAsNumber);
+  });
+}
+
+function updatePreviewAndRange(type: string, value: number) {
+  const unitDisplayElement = document.querySelector(
+    '.unit-display.transform'
+  ) as HTMLElement;
+
+  const titleDisplayElement = document.querySelector(
+    '.title-display.transform'
+  ) as HTMLElement;
+
+  switch (type) {
+    case 'scale':
+      transformPreview.style.transform = `scale(${value})`;
+      transformExports.scale = value;
+      getDegreeElement.min = '.1';
+      getDegreeElement.max = '2';
+      getDegreeElement.step = '.1';
+      unitDisplayElement.innerText = `${value}`;
+      titleDisplayElement.innerText = 'Size';
+      break;
+    case 'skew':
+      transformPreview.style.transform = `skew(${value}deg)`;
+      transformExports.skew = value.toString();
+      getDegreeElement.min = '-180';
+      getDegreeElement.max = '180';
+      getDegreeElement.step = '1';
+      unitDisplayElement.innerText = `${value}deg`;
+      titleDisplayElement.innerText = 'Degree';
+      break;
+    case 'translateX':
+      transformPreview.style.transform = `translateX(${value}px)`;
+      transformExports.translateX = value.toString();
+      getDegreeElement.min = '-100';
+      getDegreeElement.max = '100';
+      getDegreeElement.step = '1';
+      unitDisplayElement.innerText = `${value}px`;
+      titleDisplayElement.innerText = 'Position';
+      break;
+    case 'translateY':
+      transformPreview.style.transform = `translateY(${value}px)`;
+      transformExports.translateY = value.toString();
+      getDegreeElement.min = '-100';
+      getDegreeElement.max = '100';
+      getDegreeElement.step = '1';
+      unitDisplayElement.innerText = `${value}px`;
+      titleDisplayElement.innerText = 'Position';
+      break;
+    case 'rotate':
+      transformPreview.style.transform = `rotate(${value}deg)`;
+      transformExports.rotate = value.toString();
+      getDegreeElement.min = '0';
+      getDegreeElement.max = '360';
+      getDegreeElement.step = '1';
+      unitDisplayElement.innerText = `${value}deg`;
+      titleDisplayElement.innerText = 'Degrees';
+      break;
+    default:
+      break;
+  }
 }
 
 export function transformGenerator(
@@ -100,31 +125,78 @@ export function transformGenerator(
   resultPage.style.display = 'flex';
   if (getOutputElement === null || type === 'oldResults') return;
 
-  const values = {
-    scale: scaleInput.value,
-    rotate: rotateInput.value,
-    skew: skewInput.value,
-    translateX: translateXInput.value,
-    translateY: translateYInput.value,
-  };
-
-  getTransformResult(values, getOutputElement);
+  getTransformResult(getOutputElement);
 }
 
-function getTransformResult(
-  values: TransformValues,
-  outputElement: HTMLElement
-): void {
+function getTransformResult(outputElement: HTMLElement): void {
   const createTransformElement = (): void => {
-    const scale = parseFloat(values.scale);
-    outputElement.style.width = '250px';
-    outputElement.style.height = '250px';
-    outputElement.style.transform = `scale(${scale}) skew(${values.skew}deg) rotate(${values.rotate}deg) translate(${values.translateX}px, ${values.translateY}px)`;
+    outputElement.style.width = '200px';
+    outputElement.style.height = '200px';
   };
   createTransformElement();
 
+  let i = 0;
+
+  for (i = 0; i < getRadioButtonSetElement.length; i++)
+    if (getRadioButtonSetElement[i].checked) break;
+
+  const values: Values = {
+    type: getRadioButtonSetElement[i].value,
+    degree: getDegreeElement.value,
+  };
+
+  manageTransform(values, outputElement);
+
   const getCodeButtonElement = getCopyCodeButton(attribute);
-  getCodeButtonElement.addEventListener('click', copyHandler);
+  getCodeButtonElement.style.zIndex = '100';
+  getCodeButtonElement.addEventListener('click', () => {
+    copy(css);
+    showPopup(
+      'Code Copied',
+      'Code has been successfully copied to clipboard',
+      'success'
+    );
+  });
 }
 
-export {transformExports};
+function manageTransform(values: Values, getOutputElement: HTMLElement) {
+  switch (values.type) {
+    case 'scale':
+      css = `
+      transform: scale(${values.degree});
+      -webkit-transform: scale(${values.degree});
+      -moz-transform: scale(${values.degree});`;
+      getOutputElement.style.transform = `scale(${values.degree})`;
+      break;
+    case 'skew':
+      css = `
+      transform: skew(${values.degree}deg);
+      -webkit-transform: skew(${values.degree}deg);
+      -moz-transform: skew(${values.degree}deg);`;
+      getOutputElement.style.transform = `skew(${values.degree}deg)`;
+      break;
+    case 'translateX':
+      css = `
+      transform: translateX(${values.degree}px);
+      -webkit-transform: translateX(${values.degree}px);
+      -moz-transform: translateX(${values.degree}px);`;
+      getOutputElement.style.transform = `translateX(${values.degree}px)`;
+      break;
+    case 'translateY':
+      css = `
+      transform: translateY(${values.degree}px);
+      -webkit-transform: translateY(${values.degree}px);
+      -moz-transform: translateY(${values.degree}px);`;
+      getOutputElement.style.transform = `translateY(${values.degree}px)`;
+      break;
+    case 'rotate':
+      css = `
+      transform: rotate(${values.degree}deg);
+      -webkit-transform: rotate(${values.degree}deg);
+      -moz-transform: rotate(${values.degree}deg);`;
+      getOutputElement.style.transform = `rotate(${values.degree}deg)`;
+      break;
+    default:
+      break;
+  }
+}
