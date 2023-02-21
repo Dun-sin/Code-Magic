@@ -124,16 +124,29 @@ const actOnGenerator = (attribute: string, outputElement: HTMLElement) => {
       break;
     case 'gradient-border':
       element = outputElement.style;
+      const content = window.getComputedStyle(outputElement, '::before');
+
       codeToCopy = `
         div {
-          border-width:8px;
-          border-style:solid;
-          border-radius:${element.getPropertyValue(`--${attribute}-radius`)};
-          border-image:linear-gradient(${element.getPropertyValue(
-            `--${attribute}-degree`
-          )}, ${element.getPropertyValue(
-        `--${attribute}-color-1`
-      )}, ${element.getPropertyValue(`--${attribute}-color-2`)}) 1;
+          position: relative;
+        }
+
+        div::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          padding: 6px;
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          background: ${content.background};
+          background-clip: 'border-box';
+          ${
+            content.borderRadius !== '0px'
+              ? `border-radius: ${content.borderRadius};`
+              : ''
+          }
         }
       `;
       break;
