@@ -300,6 +300,10 @@ main > section:last-of-type {
   top: -50%;
 }
 
+[data-content='transform'] .preview-slider {
+  top: -50%;
+}
+
 [data-content='pic-text'] {
   display: flex;
 }
