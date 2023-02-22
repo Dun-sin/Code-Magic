@@ -2,12 +2,11 @@ import copy from 'copy-to-clipboard';
 import {
   getCopyCodeButton,
   getOutput,
-  getPreviewSlider,
   getRadioButtonSet,
   getRange,
   getResultPage,
 } from '../lib/getElements';
-import {showPopup, slideIn} from '../lib/packages';
+import {showPopup} from '../lib/packages';
 
 type Values = {
   type: string;
@@ -25,11 +24,13 @@ const transformExports = {
 };
 
 let css = '';
-let isSliderOpen = false;
+const transformPreview = document.querySelector(
+  '.transform-preview'
+) as HTMLElement;
 
-const preview = getPreviewSlider(attribute);
 const getDegreeElement = getRange(attribute);
 const getRadioButtonSetElement = getRadioButtonSet(attribute);
+// const getOutputElement = getOutput(attribute);
 
 export function addTransformListener(): void {
   // Listen for radio button changes
@@ -45,16 +46,6 @@ export function addTransformListener(): void {
 
   // Listen for range input changes
   getDegreeElement.addEventListener('input', () => {
-    let i = 0;
-    for (i = 0; i < getRadioButtonSetElement.length; i++)
-      if (getRadioButtonSetElement[i].checked) break;
-
-    const type = getRadioButtonSetElement[i].value;
-    if (type === '') return;
-
-    slideIn(preview, isSliderOpen);
-    isSliderOpen = true;
-
     // Update preview with current value for selected option
     const selectedOption = document.querySelector(
       'input[name="transform-radio"]:checked'
@@ -74,7 +65,7 @@ function updatePreviewAndRange(type: string, value: number) {
 
   switch (type) {
     case 'scale':
-      preview.style.transform = `scale(${value})`;
+      transformPreview.style.transform = `scale(${value})`;
       transformExports.scale = value;
       getDegreeElement.min = '.1';
       getDegreeElement.max = '2';
@@ -83,7 +74,7 @@ function updatePreviewAndRange(type: string, value: number) {
       titleDisplayElement.innerText = 'Size';
       break;
     case 'skew':
-      preview.style.transform = `skew(${value}deg)`;
+      transformPreview.style.transform = `skew(${value}deg)`;
       transformExports.skew = value.toString();
       getDegreeElement.min = '-180';
       getDegreeElement.max = '180';
@@ -92,7 +83,7 @@ function updatePreviewAndRange(type: string, value: number) {
       titleDisplayElement.innerText = 'Degree';
       break;
     case 'translateX':
-      preview.style.transform = `translateX(${value}px)`;
+      transformPreview.style.transform = `translateX(${value}px)`;
       transformExports.translateX = value.toString();
       getDegreeElement.min = '-100';
       getDegreeElement.max = '100';
@@ -101,7 +92,7 @@ function updatePreviewAndRange(type: string, value: number) {
       titleDisplayElement.innerText = 'Position';
       break;
     case 'translateY':
-      preview.style.transform = `translateY(${value}px)`;
+      transformPreview.style.transform = `translateY(${value}px)`;
       transformExports.translateY = value.toString();
       getDegreeElement.min = '-100';
       getDegreeElement.max = '100';
@@ -110,7 +101,7 @@ function updatePreviewAndRange(type: string, value: number) {
       titleDisplayElement.innerText = 'Position';
       break;
     case 'rotate':
-      preview.style.transform = `rotate(${value}deg)`;
+      transformPreview.style.transform = `rotate(${value}deg)`;
       transformExports.rotate = value.toString();
       getDegreeElement.min = '0';
       getDegreeElement.max = '360';
@@ -209,22 +200,3 @@ function manageTransform(values: Values, getOutputElement: HTMLElement) {
       break;
   }
 }
-
-// configuring transform animation preview
-// export function displayTransformPreview() {
-//   slideIn(preview, isSliderOpen);
-//   isSliderOpen = true;
-
-//   if (preview.getAttribute('data-running') !== 'true') {
-
-//     let i = 0;
-//     for (i = 0; i < getRadioButtonSetElement.length; i++)
-//       if (getRadioButtonSetElement[i].checked) break;
-
-//     const values: Values = {
-//       type: getRadioButtonSetElement[i].value,
-//       degree: getDegreeElement.value,
-//     };
-//     manageTransform(values, preview);
-//   }
-// }
