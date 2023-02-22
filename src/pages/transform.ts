@@ -2,11 +2,12 @@ import copy from 'copy-to-clipboard';
 import {
   getCopyCodeButton,
   getOutput,
+  getPreviewSlider,
   getRadioButtonSet,
   getRange,
   getResultPage,
 } from '../lib/getElements';
-import {showPopup} from '../lib/packages';
+import {showPopup, slideIn} from '../lib/packages';
 
 type Values = {
   type: string;
@@ -24,13 +25,11 @@ const transformExports = {
 };
 
 let css = '';
-const transformPreview = document.querySelector(
-  '.transform-preview'
-) as HTMLElement;
+let isSliderOpen = false;
 
+const preview = getPreviewSlider(attribute);
 const getDegreeElement = getRange(attribute);
 const getRadioButtonSetElement = getRadioButtonSet(attribute);
-// const getOutputElement = getOutput(attribute);
 
 export function addTransformListener(): void {
   // Listen for radio button changes
@@ -46,6 +45,15 @@ export function addTransformListener(): void {
 
   // Listen for range input changes
   getDegreeElement.addEventListener('input', () => {
+    let i = 0;
+    for (i = 0; i < getRadioButtonSetElement.length; i++)
+      if (getRadioButtonSetElement[i].checked) break;
+
+    const type = getRadioButtonSetElement[i].value;
+    if (type === '') return;
+
+    slideIn(preview, isSliderOpen);
+    isSliderOpen = true;
     // Update preview with current value for selected option
     const selectedOption = document.querySelector(
       'input[name="transform-radio"]:checked'
@@ -65,7 +73,7 @@ function updatePreviewAndRange(type: string, value: number) {
 
   switch (type) {
     case 'scale':
-      transformPreview.style.transform = `scale(${value})`;
+      preview.style.transform = `scale(${value})`;
       transformExports.scale = value;
       getDegreeElement.min = '.1';
       getDegreeElement.max = '2';
@@ -74,7 +82,7 @@ function updatePreviewAndRange(type: string, value: number) {
       titleDisplayElement.innerText = 'Size';
       break;
     case 'skew':
-      transformPreview.style.transform = `skew(${value}deg)`;
+      preview.style.transform = `skew(${value}deg)`;
       transformExports.skew = value.toString();
       getDegreeElement.min = '-180';
       getDegreeElement.max = '180';
@@ -83,7 +91,7 @@ function updatePreviewAndRange(type: string, value: number) {
       titleDisplayElement.innerText = 'Degree';
       break;
     case 'translateX':
-      transformPreview.style.transform = `translateX(${value}px)`;
+      preview.style.transform = `translateX(${value}px)`;
       transformExports.translateX = value.toString();
       getDegreeElement.min = '-100';
       getDegreeElement.max = '100';
@@ -92,7 +100,7 @@ function updatePreviewAndRange(type: string, value: number) {
       titleDisplayElement.innerText = 'Position';
       break;
     case 'translateY':
-      transformPreview.style.transform = `translateY(${value}px)`;
+      preview.style.transform = `translateY(${value}px)`;
       transformExports.translateY = value.toString();
       getDegreeElement.min = '-100';
       getDegreeElement.max = '100';
@@ -101,7 +109,7 @@ function updatePreviewAndRange(type: string, value: number) {
       titleDisplayElement.innerText = 'Position';
       break;
     case 'rotate':
-      transformPreview.style.transform = `rotate(${value}deg)`;
+      preview.style.transform = `rotate(${value}deg)`;
       transformExports.rotate = value.toString();
       getDegreeElement.min = '0';
       getDegreeElement.max = '360';
