@@ -62,7 +62,7 @@ export function borderRadiusGenerator(
   if (type === null) return;
 
   const getOutputElement = getOutput(attribute);
-  const resultPage = getResultPage(); //page to hold result
+  const resultPage = getResultPage();
 
   resultPage.style.display = 'flex';
   if (getOutputElement === null || type === 'oldResults') return;
