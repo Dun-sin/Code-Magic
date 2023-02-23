@@ -215,6 +215,17 @@
                   >Create animations like Fade, Flip, Skew
                 </span>
               </li>
+              <li data-gen="transform">
+                <iconify-icon
+                  inline
+                  icon="game-icons:transform"
+                  width="20"
+                ></iconify-icon>
+                <span> Transform </span>
+                <span class="tooltip">
+                  Scale, skew, translate and rotate elements with transform
+                </span>
+              </li>
             </ul>
           </li>
 
@@ -910,6 +921,82 @@
           </div>
           <!-- End of Text Shadow Generator -->
 
+          <!-- Transform Generator -->
+
+          <div data-content="transform">
+            <div class="preview-slider"></div>
+
+            <div class="transform-type">
+              <p>Transform Type</p>
+              <div class="radio-group">
+                <label id="transform-radio-label" for="scale">
+                  <input
+                    checked
+                    type="radio"
+                    id="scale"
+                    name="transform-radio"
+                    value="scale"
+                  />
+                  <span>Scale</span>
+                </label>
+                <label id="transform-radio-label" for="rotate">
+                  <input
+                    type="radio"
+                    id="rotate"
+                    name="transform-radio"
+                    value="rotate"
+                  />
+                  <span>Rotate</span>
+                </label>
+                <label id="transform-radio-label" for="skew">
+                  <input
+                    type="radio"
+                    id="skew"
+                    name="transform-radio"
+                    value="skew"
+                  />
+                  <span>Skew</span>
+                </label>
+                <label id="transform-radio-label" for="translateX">
+                  <input
+                    type="radio"
+                    id="translateX"
+                    name="transform-radio"
+                    value="translateX"
+                  />
+                  <span>TranslateX</span>
+                </label>
+                <label id="transform-radio-label" for="translateY">
+                  <input
+                    type="radio"
+                    id="translateY"
+                    name="transform-radio"
+                    value="translateY"
+                  />
+                  <span>TranslateY</span>
+                </label>
+              </div>
+            </div>
+            <label id="degree" for="transform-degree">
+              <span class="label-title">
+                <span class="title-display transform">Size</span>
+                <span class="unit-display transform"></span>
+              </span>
+              <input
+                type="range"
+                max="2"
+                min=".1"
+                value="1"
+                step=".1"
+                class="degree-range"
+                id="transform-degree"
+              />
+            </label>
+
+            <div class="btn" data-button="transform">Get Results</div>
+          </div>
+          <!-- End of Transform Generator -->
+
           <!-- Input Type Range Generator -->
           <div data-content="input-range">
             <label for="preview-range">
@@ -1246,6 +1333,23 @@
             </div>
           </div>
           <!-- End of Box-Shadow Result -->
+
+          <!-- Transform Result -->
+          <div class="download-output" data-result="transform">
+            <div class="output transform-output"></div>
+            <div class="download-btn">
+              <button class="btn" data-download="transform-code">
+                <iconify-icon
+                  inline
+                  icon="bx:code-alt"
+                  style="color: white; margin-right: 5px"
+                  width="20"
+                ></iconify-icon>
+                Get Code
+              </button>
+            </div>
+          </div>
+          <!-- End of Transform Result -->
 
           <!-- Text Shadow Result -->
           <div class="download-output" data-result="text-shadow">

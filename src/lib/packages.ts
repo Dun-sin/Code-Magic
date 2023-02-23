@@ -94,6 +94,7 @@ export const addRule = (function (style) {
 const actOnGenerator = (attribute: string, outputElement: HTMLElement) => {
   let codeToCopy = '';
   let element;
+
   switch (attribute) {
     case 'pic-text':
       codeToCopy = `
