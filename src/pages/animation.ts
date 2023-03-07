@@ -1,5 +1,6 @@
 import copy from 'copy-to-clipboard';
 import {
+  getAllFields,
   getCopyCodeButton,
   getInputSpinner,
   getOutput,
@@ -271,3 +272,43 @@ function initialConfiguration(
 export function addAnimationListener() {
   setGradientDegreeValue(getDegreeElement);
 }
+
+
+
+function resetValues() {
+  const { inputs } = getAllFields(attribute);
+  const resetBtn = document.querySelector("[data-reset='animation']") as HTMLButtonElement;
+
+  resetBtn.addEventListener("click", () => {
+
+    inputs.forEach(input => {
+      input.value = input.defaultValue;
+      input.checked = input.defaultChecked;
+    });
+
+
+    (document.querySelector("[data-content='animation'] .unit-display") as HTMLSpanElement).innerHTML = "deg"
+    resetBtn.classList.remove("reset-show");
+  })
+
+}
+
+// get values from all targets to get notified when values change.
+
+function getValues() {
+
+  const resetBtn = document.querySelector("[data-reset='animation']") as HTMLButtonElement;
+
+  const { inputs }  = getAllFields(attribute);
+
+  inputs.forEach(input => {
+    input.addEventListener("input", () => {
+      if (inputs[4].value !== inputs[4].defaultValue || input.checked !== input.defaultChecked 
+        || inputs[5].value !== inputs[5].defaultValue) {
+        resetBtn.classList.add("reset-show");
+        resetValues();
+      }
+    })
+  })
+}
+getValues();

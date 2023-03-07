@@ -11,6 +11,7 @@ import {
   getSVGButton,
   getPreviewSlider,
   getShadowFields,
+  getAllFields,
 } from '../lib/getElements';
 import {
   copyCodeToClipboard,
@@ -155,3 +156,54 @@ export function addTextShadowListener(): void {
     getSVGButtonElement.addEventListener('click', svgDownloadHanlder);
   });
 }
+
+
+// reset the values of all target fields
+
+function resetValues() {
+  const { inputs, textarea } = getAllFields(attribute);
+  const resetBtn = document.querySelector("[data-reset='text-shadow']") as HTMLButtonElement;
+
+  resetBtn.addEventListener("click", () => {
+    inputs.forEach(input => {
+      input.value = input.defaultValue;
+    })
+
+    textarea.value = textarea.defaultValue;
+
+    
+    document.querySelector("[data-content='text-shadow'] #text-shadow-h-offset-field")!.innerHTML = "2px";
+    document.querySelector("[data-content='text-shadow'] #text-shadow-v-offset-field")!.innerHTML = "2px";
+    document.querySelector("[data-content='text-shadow'] #text-shadow-blur-field")!.innerHTML = "4px";
+
+    resetBtn.classList.remove("reset-show");
+  })
+}
+
+// get values from all targets to get notified when values change.
+
+function getValues() {
+
+  const resetBtn = document.querySelector("[data-reset='text-shadow']") as HTMLButtonElement;
+
+  const { inputs, textarea } = getAllFields(attribute);
+
+
+  inputs.forEach(input => {
+    input.addEventListener("input", () => {
+      if (input.value !== "" || input.value !== input.defaultValue) {
+        resetBtn.classList.add("reset-show");
+        resetValues();
+      }
+    })
+  })
+
+  textarea.addEventListener("input", () => {
+    if (textarea.value !== "") {
+      resetValues()
+      resetBtn.classList.add("reset-show");
+      return;
+    }
+  })
+}
+getValues();

@@ -5,6 +5,7 @@ import {
   getColorInput1,
   getColorInput2,
   getAllInputElements,
+  getAllFields
 } from '../lib/getElements';
 import {copyCodeToClipboard, showPopup} from '../lib/packages';
 
@@ -180,3 +181,41 @@ export const rangeGenerator = () => {
 
   getCodeButton.addEventListener('click', copyHandler);
 };
+
+
+function resetValues() {
+  const { inputs } = getAllFields(attribute);
+  const resetBtn = document.querySelector("[data-reset='input-range']") as HTMLButtonElement;
+
+  resetBtn.addEventListener("click", () => {
+
+    inputs.forEach(input => {
+      input.value = input.defaultValue;
+      input.checked = input.defaultChecked;
+    });
+
+   (document.querySelector('[data-content="input-range"] #thumb-height-label') as HTMLElement).innerHTML = "";
+   (document.querySelector('[data-content="input-range"] #track-height-label') as HTMLElement).innerHTML = "";
+   (document.querySelector('[data-content="input-range"] #thumb-width-label') as HTMLElement).innerHTML = "";
+   (document.querySelector('[data-content="input-range"] #track-width-label') as HTMLElement).innerHTML = "";
+
+    resetBtn.classList.remove("reset-show");
+  })
+}
+
+// get values from all targets to get notified when values change.
+
+function getValues() {
+
+  const resetBtn = document.querySelector("[data-reset='input-range']") as HTMLButtonElement;
+
+  const { inputs } = getAllFields(attribute);
+
+  inputs.forEach(input => {
+    input.addEventListener("input", () => {
+      resetBtn.classList.add("reset-show");
+      resetValues();
+    })
+  })
+}
+getValues();

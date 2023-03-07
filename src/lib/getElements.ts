@@ -125,3 +125,14 @@ export const getPreviewSlider = (attribute: string): HTMLElement =>
   document.querySelector(
     `[data-content=${attribute}] .preview-slider`
   ) as HTMLElement;
+
+
+export const getAllFields = (attribute: string) => {
+  const inputs = document.querySelectorAll(`[data-content=${attribute}] input`) as NodeListOf<HTMLInputElement>;
+  const textarea = document.querySelector(`[data-content='${attribute}'] textarea`) as HTMLTextAreaElement;
+  
+  return {
+    inputs,
+    textarea
+  }
+}

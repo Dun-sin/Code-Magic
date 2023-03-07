@@ -581,6 +581,39 @@ input[type='number']::-webkit-outer-spin-button {
   font-size: 0.9em;
 }
 
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.btn-container .reset {
+  height: 40px;
+  width: 150px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  cursor: pointer;
+  margin-top: calc(var(--spacing) + 10px);
+  border: none;
+  display: none;
+}
+
+.btn-container .reset-show {
+  animation: 1s reset-show;
+  display: flex;
+}
+
+@keyframes reset-show {
+  from {
+    transform: translateY(-30px);
+  }
+}
+
 .btn {
   height: 40px;
   width: 150px;

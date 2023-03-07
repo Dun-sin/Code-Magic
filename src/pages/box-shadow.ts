@@ -9,6 +9,7 @@ import {
   getCopyCodeButton,
   getPreviewSlider,
   getShadowFields,
+  getAllFields
 } from '../lib/getElements';
 import {copyCodeToClipboard, showPopup, slideIn} from '../lib/packages';
 
@@ -127,3 +128,42 @@ export function addBoxShadowListener(): void {
     });
   });
 }
+
+
+// reset the values of all target fields
+
+function resetValues() {
+  const { inputs } = getAllFields(attribute);
+  const resetBtn = document.querySelector("[data-reset='box-shadow']") as HTMLButtonElement;
+
+  resetBtn.addEventListener("click", () => {
+
+    inputs.forEach(input => {
+      input.value = input.defaultValue;
+    });
+
+    document.querySelector("[data-content='box-shadow'] #box-shadow-h-offset-field")!.innerHTML = "5px";
+    document.querySelector("[data-content='box-shadow'] #box-shadow-v-offset-field")!.innerHTML = "10px";
+    document.querySelector("[data-content='box-shadow'] #box-shadow-blur-field")!.innerHTML = "18px";
+    document.querySelector("[data-content='box-shadow'] #box-shadow-spread-field")!.innerHTML = "5px";
+
+    resetBtn.classList.remove("reset-show");
+  })
+}
+
+// get values from all targets to get notified when values change.
+
+function getValues() {
+
+  const resetBtn = document.querySelector("[data-reset='box-shadow']") as HTMLButtonElement;
+
+  const { inputs }  = getAllFields(attribute);
+
+  inputs.forEach(input => {
+    input.addEventListener("input", () => {
+      resetBtn.classList.add("reset-show");
+      resetValues();
+    })
+  })
+}
+getValues();

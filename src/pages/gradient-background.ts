@@ -6,6 +6,7 @@ import {
   getCopyCodeButton,
   getResultPage,
   getRemoveNewColorButton,
+  getAllFields
 } from '../lib/getElements';
 import {
   copyCodeToClipboard,
@@ -107,3 +108,44 @@ function inputEventListner() {
     });
   });
 }
+
+
+// reset the values of all target fields
+
+function resetValues() {
+  const { inputs } = getAllFields(attribute);
+  const resetBtn = document.querySelector("[data-reset='gradient-background']") as HTMLButtonElement;
+
+  resetBtn.addEventListener("click", () => {
+
+    inputs.forEach(input => {
+      input.value = input.defaultValue;
+    });
+
+  
+
+    (document.querySelector("[data-content='gradient-background'] .unit-display") as HTMLSpanElement).innerHTML = "deg";
+    resetBtn.classList.remove("reset-show");
+  })
+
+}
+
+// get values from all targets to get notified when values change.
+
+function getValues() {
+
+  const resetBtn = document.querySelector("[data-reset='gradient-background']") as HTMLButtonElement;
+
+  const { inputs }  = getAllFields(attribute);
+
+
+  inputs.forEach(input => {
+    input.addEventListener("input", () => {
+      if (input.value !== "") {
+        resetBtn.classList.add("reset-show");
+        resetValues();
+      }
+    })
+  })
+}
+getValues();

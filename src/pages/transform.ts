@@ -1,5 +1,6 @@
 import copy from 'copy-to-clipboard';
 import {
+  getAllFields,
   getCopyCodeButton,
   getOutput,
   getPreviewSlider,
@@ -208,3 +209,41 @@ function manageTransform(values: Values, getOutputElement: HTMLElement) {
       break;
   }
 }
+
+
+function resetValues() {
+  const { inputs } = getAllFields(attribute);
+  const resetBtn = document.querySelector("[data-reset='transform']") as HTMLButtonElement;
+
+  resetBtn.addEventListener("click", () => {
+
+    inputs.forEach(input => {
+      input.value = input.defaultValue;
+      input.checked = input.defaultChecked;
+    });
+
+    resetBtn.classList.remove("reset-show");
+  })
+
+}
+
+
+// get values from all targets to get notified when values change.
+
+function getValues() {
+
+  const resetBtn = document.querySelector("[data-reset='transform']") as HTMLButtonElement;
+
+  const { inputs }  = getAllFields(attribute);
+
+  inputs.forEach(input => {
+    input.addEventListener("input", () => {
+      if (input.checked !== input.defaultChecked 
+        || inputs[5].value !== inputs[5].defaultValue) {
+        resetBtn.classList.add("reset-show");
+        resetValues();
+      }
+    })
+  })
+}
+getValues();

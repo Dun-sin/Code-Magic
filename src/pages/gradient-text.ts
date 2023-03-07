@@ -9,6 +9,7 @@ import {
   getRemoveNewColorButton,
   getResultPage,
   getSVGButton,
+  getAllFields
 } from '../lib/getElements';
 import {
   copyCodeToClipboard,
@@ -164,3 +165,49 @@ function inputEventListner() {
     });
   });
 }
+
+// reset the values of all target fields
+
+function resetValues() {
+  const { inputs, textarea } = getAllFields(attribute);
+  const resetBtn = document.querySelector("[data-reset='gradient-text']") as HTMLButtonElement;
+
+  resetBtn.addEventListener("click", () => {
+    inputs.forEach(input => {
+      input.value = input.defaultValue;
+    })
+
+    textarea.value = textarea.defaultValue;
+
+    (document.querySelector("[data-content='gradient-text'] .unit-display") as HTMLSpanElement).innerHTML = "deg";
+    resetBtn.classList.remove("reset-show");
+  })
+
+}
+
+// get values from all targets to get notified when values change.
+
+function getValues() {
+
+  const resetBtn = document.querySelector("[data-reset='gradient-text']") as HTMLButtonElement;
+
+  const { inputs, textarea } = getAllFields(attribute);
+
+
+  inputs.forEach(input => {
+    input.addEventListener("input", () => {
+      if (input.value !== "") {
+        resetBtn.classList.add("reset-show");
+        resetValues();
+      }
+    })
+  })
+
+  textarea.addEventListener("input", () => {
+    if (textarea.value !== "") {
+      resetValues()
+      resetBtn.classList.add("reset-show");
+    }
+  })
+}
+getValues();
