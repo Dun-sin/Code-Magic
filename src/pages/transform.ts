@@ -1,10 +1,12 @@
 import copy from 'copy-to-clipboard';
 import {
+  getAllFields,
   getCopyCodeButton,
   getOutput,
   getPreviewSlider,
   getRadioButtonSet,
   getRange,
+  getResetButton,
   getResultPage,
 } from '../lib/getElements';
 import {showPopup, slideIn} from '../lib/packages';
@@ -208,3 +210,39 @@ function manageTransform(values: Values, getOutputElement: HTMLElement) {
       break;
   }
 }
+
+
+function resetValues() {
+
+  const { inputs } = getAllFields(attribute);
+
+  getResetButton(attribute).addEventListener("click", () => {
+
+    inputs.forEach(input => {
+      input.value = input.defaultValue;
+      input.checked = input.defaultChecked;
+    });
+
+    getResetButton(attribute).classList.remove("reset-show");
+  })
+
+}
+
+
+// get values from all targets to get notified when values change.
+
+function getValues() {
+
+  const { inputs }  = getAllFields(attribute);
+
+  inputs.forEach(input => {
+    input.addEventListener("input", () => {
+      if (input.checked !== input.defaultChecked 
+        || inputs[5].value !== inputs[5].defaultValue) {
+        getResetButton(attribute).classList.add("reset-show");
+        resetValues();
+      }
+    })
+  })
+}
+getValues();

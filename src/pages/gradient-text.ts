@@ -9,6 +9,9 @@ import {
   getRemoveNewColorButton,
   getResultPage,
   getSVGButton,
+  getAllFields,
+  getResetButton,
+  getDegreeSpanElement
 } from '../lib/getElements';
 import {
   copyCodeToClipboard,
@@ -164,3 +167,46 @@ function inputEventListner() {
     });
   });
 }
+
+// reset the values of all target fields
+
+function resetValues() {
+  const { inputs, textarea } = getAllFields(attribute);
+
+  getResetButton(attribute).addEventListener("click", () => {
+    inputs.forEach(input => {
+      input.value = input.defaultValue;
+    })
+
+    textarea.value = textarea.defaultValue;
+
+    getDegreeSpanElement(attribute).innerHTML = "deg";
+    getResetButton(attribute).classList.remove("reset-show");
+  })
+
+}
+
+// get values from all targets to get notified when values change.
+
+function getValues() {
+
+  const { inputs, textarea } = getAllFields(attribute);
+
+
+  inputs.forEach(input => {
+    input.addEventListener("input", () => {
+      if (input.value !== "") {
+        getResetButton(attribute).classList.add("reset-show");
+        resetValues();
+      }
+    })
+  })
+
+  textarea.addEventListener("input", () => {
+    if (textarea.value !== "") {
+      resetValues()
+      getResetButton(attribute).classList.add("reset-show");
+    }
+  })
+}
+getValues();

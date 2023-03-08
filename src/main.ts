@@ -153,6 +153,9 @@ FilePond.create(getImageEntryElement, {
     img.src = URL.createObjectURL(output);
     imageSRC = img.src;
 
+    // reference to reset button
+    const resetBtn = document.querySelector("[data-reset='pic-text']") as HTMLButtonElement;
+
     // function to enable the get result button once image uploaded
     function enableImgResultBtn() {
       const getPicResultBtn = document.querySelector(
@@ -160,6 +163,8 @@ FilePond.create(getImageEntryElement, {
       ) as HTMLButtonElement;
 
       getPicResultBtn.style.pointerEvents = '';
+      //add reset button to dom
+      resetBtn.classList.add("reset-show");
     }
 
     enableImgResultBtn();
@@ -175,7 +180,19 @@ FilePond.create(getImageEntryElement, {
       ) as HTMLButtonElement;
 
       getPicResultBtn.style.pointerEvents = 'none';
+      // remove reset button from dom
+      resetBtn.classList.remove("reset-show");
     });
+
+    // clear the input value when reset button is clicked.
+
+    function resetValue() {
+      resetBtn.addEventListener("click", () => {
+       closeBtn.click();
+      })
+    }
+
+    resetValue();
 
     console.log(fileItem);
   },

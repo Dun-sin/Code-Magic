@@ -1,11 +1,14 @@
 import copy from 'copy-to-clipboard';
 import {
+  getAllFields,
   getCopyCodeButton,
+  getDegreeSpanElement,
   getInputSpinner,
   getOutput,
   getPreviewSlider,
   getRadioButtonSet,
   getRange,
+  getResetButton,
   getResultPage,
   getStyleSheet,
 } from '../lib/getElements';
@@ -271,3 +274,40 @@ function initialConfiguration(
 export function addAnimationListener() {
   setGradientDegreeValue(getDegreeElement);
 }
+
+
+
+function resetValues() {
+  const { inputs } = getAllFields(attribute);
+
+  getResetButton(attribute).addEventListener("click", () => {
+
+    inputs.forEach(input => {
+      input.value = input.defaultValue;
+      input.checked = input.defaultChecked;
+    });
+
+
+    getDegreeSpanElement(attribute).innerHTML = "deg"
+    getResetButton(attribute).classList.remove("reset-show");
+  })
+
+}
+
+// get values from all targets to get notified when values change.
+
+function getValues() {
+
+  const { inputs }  = getAllFields(attribute);
+
+  inputs.forEach(input => {
+    input.addEventListener("input", () => {
+      if (inputs[4].value !== inputs[4].defaultValue || input.checked !== input.defaultChecked 
+        || inputs[5].value !== inputs[5].defaultValue) {
+        getResetButton(attribute).classList.add("reset-show");
+        resetValues();
+      }
+    })
+  })
+}
+getValues();

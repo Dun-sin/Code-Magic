@@ -6,6 +6,8 @@ import {
   getOutput,
   getCopyCodeButton,
   getResultPage,
+  getAllFields,
+  getResetButton
 } from '../lib/getElements';
 import {copyCodeToClipboard, showPopup} from '../lib/packages';
 
@@ -106,3 +108,35 @@ export function addBorderRadiusListener() {
     );
   });
 }
+
+// reset the values of all target fields
+
+function resetValues() {
+  const { inputs } = getAllFields(attribute);
+
+  getResetButton(attribute).addEventListener("click", () => {
+
+    inputs.forEach(input => {
+      input.value = input.defaultValue;
+    });
+
+    borderRadiusPreview.style.borderRadius = "0";
+
+    getResetButton(attribute).classList.remove("reset-show");
+  })
+}
+
+// get values from all targets to get notified when values change.
+
+function getValues() {
+
+  const { inputs }  = getAllFields(attribute);
+
+  inputs.forEach(input => {
+    input.addEventListener("input", () => {
+      getResetButton(attribute).classList.add("reset-show");
+      resetValues();
+    })
+  })
+}
+getValues();

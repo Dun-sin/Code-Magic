@@ -8,6 +8,9 @@ import {
   getAllInputElements,
   getResultPage,
   getCopyCodeButton,
+  getAllFields,
+  getResetButton,
+  getDegreeSpanElement,
 } from '../lib/getElements';
 import {
   copyCodeToClipboard,
@@ -131,3 +134,40 @@ function inputEventListner() {
     });
   });
 }
+
+
+// reset the values of all target fields
+
+function resetValues() {
+  const { inputs } = getAllFields(attribute);
+
+  getResetButton(attribute).addEventListener("click", () => {
+
+    inputs.forEach(input => {
+      input.value = input.defaultValue;
+      input.checked = false
+    });
+
+    getDegreeSpanElement(attribute).innerHTML = "deg";
+    getResetButton(attribute).classList.remove("reset-show");
+  })
+
+}
+
+// get values from all targets to get notified when values change.
+
+function getValues() {
+
+  const { inputs }  = getAllFields(attribute);
+
+  inputs.forEach(input => {
+    input.addEventListener("input", () => {
+      if (!input.checked) getResetButton(attribute).classList.remove("reset-show");
+      if (input.value !== "" || input.checked === true) {
+        getResetButton(attribute).classList.add("reset-show");
+        resetValues();
+      }
+    })
+  })
+}
+getValues();
