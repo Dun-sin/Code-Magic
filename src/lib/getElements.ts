@@ -136,3 +136,9 @@ export const getAllFields = (attribute: string) => {
     textarea
   }
 }
+
+export const getResetButton = (attribute: string) => 
+document.querySelector(`[data-reset=${attribute}]`) as HTMLButtonElement;
+
+export const getDegreeSpanElement = (attribute: string) => 
+document.querySelector(`[data-content=${attribute}] .unit-display`) as HTMLSpanElement;

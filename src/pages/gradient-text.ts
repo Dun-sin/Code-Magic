@@ -9,7 +9,9 @@ import {
   getRemoveNewColorButton,
   getResultPage,
   getSVGButton,
-  getAllFields
+  getAllFields,
+  getResetButton,
+  getDegreeSpanElement
 } from '../lib/getElements';
 import {
   copyCodeToClipboard,
@@ -170,17 +172,16 @@ function inputEventListner() {
 
 function resetValues() {
   const { inputs, textarea } = getAllFields(attribute);
-  const resetBtn = document.querySelector("[data-reset='gradient-text']") as HTMLButtonElement;
 
-  resetBtn.addEventListener("click", () => {
+  getResetButton(attribute).addEventListener("click", () => {
     inputs.forEach(input => {
       input.value = input.defaultValue;
     })
 
     textarea.value = textarea.defaultValue;
 
-    (document.querySelector("[data-content='gradient-text'] .unit-display") as HTMLSpanElement).innerHTML = "deg";
-    resetBtn.classList.remove("reset-show");
+    getDegreeSpanElement(attribute).innerHTML = "deg";
+    getResetButton(attribute).classList.remove("reset-show");
   })
 
 }
@@ -189,15 +190,13 @@ function resetValues() {
 
 function getValues() {
 
-  const resetBtn = document.querySelector("[data-reset='gradient-text']") as HTMLButtonElement;
-
   const { inputs, textarea } = getAllFields(attribute);
 
 
   inputs.forEach(input => {
     input.addEventListener("input", () => {
       if (input.value !== "") {
-        resetBtn.classList.add("reset-show");
+        getResetButton(attribute).classList.add("reset-show");
         resetValues();
       }
     })
@@ -206,7 +205,7 @@ function getValues() {
   textarea.addEventListener("input", () => {
     if (textarea.value !== "") {
       resetValues()
-      resetBtn.classList.add("reset-show");
+      getResetButton(attribute).classList.add("reset-show");
     }
   })
 }

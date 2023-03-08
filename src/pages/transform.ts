@@ -6,6 +6,7 @@ import {
   getPreviewSlider,
   getRadioButtonSet,
   getRange,
+  getResetButton,
   getResultPage,
 } from '../lib/getElements';
 import {showPopup, slideIn} from '../lib/packages';
@@ -212,17 +213,17 @@ function manageTransform(values: Values, getOutputElement: HTMLElement) {
 
 
 function resetValues() {
-  const { inputs } = getAllFields(attribute);
-  const resetBtn = document.querySelector("[data-reset='transform']") as HTMLButtonElement;
 
-  resetBtn.addEventListener("click", () => {
+  const { inputs } = getAllFields(attribute);
+
+  getResetButton(attribute).addEventListener("click", () => {
 
     inputs.forEach(input => {
       input.value = input.defaultValue;
       input.checked = input.defaultChecked;
     });
 
-    resetBtn.classList.remove("reset-show");
+    getResetButton(attribute).classList.remove("reset-show");
   })
 
 }
@@ -232,15 +233,13 @@ function resetValues() {
 
 function getValues() {
 
-  const resetBtn = document.querySelector("[data-reset='transform']") as HTMLButtonElement;
-
   const { inputs }  = getAllFields(attribute);
 
   inputs.forEach(input => {
     input.addEventListener("input", () => {
       if (input.checked !== input.defaultChecked 
         || inputs[5].value !== inputs[5].defaultValue) {
-        resetBtn.classList.add("reset-show");
+        getResetButton(attribute).classList.add("reset-show");
         resetValues();
       }
     })
