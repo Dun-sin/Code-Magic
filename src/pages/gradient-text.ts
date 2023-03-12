@@ -9,9 +9,9 @@ import {
   getRemoveNewColorButton,
   getResultPage,
   getSVGButton,
-  getAllFields,
   getResetButton,
-  getDegreeSpanElement
+  getDegreeSpanElement,
+  getGradientPreview,
 } from '../lib/getElements';
 import {
   copyCodeToClipboard,
@@ -39,6 +39,7 @@ const getNewColorButtonElement = getNewColorButton(attribute);
 const getRemoveColorButtonElement = getRemoveNewColorButton(attribute);
 
 const getDegreeElement = getRange(attribute);
+const resetButton = getResetButton(attribute);
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
@@ -155,9 +156,12 @@ export function addGradientTextListener() {
 
   setGradientDegreeValue(getDegreeElement);
 }
+
 function addEventListenerToTheNewColorPicker() {
   gradientTextInputs = getAllInputElements(attribute);
   inputEventListner();
+  if (resetButton.classList.contains('reset-show')) return;
+  resetButton.classList.add('reset-show');
 }
 
 function inputEventListner() {
@@ -169,44 +173,44 @@ function inputEventListner() {
 }
 
 // reset the values of all target fields
-
 function resetValues() {
-  const { inputs, textarea } = getAllFields(attribute);
+  const colorInput: HTMLInputElement[] = [...new Set([])];
 
-  getResetButton(attribute).addEventListener("click", () => {
-    inputs.forEach(input => {
+  resetButton.addEventListener('click', () => {
+    resetButton.classList.remove('reset-show');
+    getDegreeSpanElement(attribute).innerHTML = 'deg';
+
+    getGradientPreview(attribute).style.background = '';
+
+    gradientTextInputs.forEach((input) => {
       input.value = input.defaultValue;
-    })
 
-    textarea.value = textarea.defaultValue;
+      if (input.id.includes('color')) {
+        colorInput.push(input);
+      }
+    });
 
-    getDegreeSpanElement(attribute).innerHTML = "deg";
-    getResetButton(attribute).classList.remove("reset-show");
-  })
-
+    if (colorInput.length > 2) {
+      for (let i = 2; i < colorInput.length; i++) {
+        removeColorPicker(attribute);
+      }
+    }
+  });
 }
 
 // get values from all targets to get notified when values change.
 
 function getValues() {
-
-  const { inputs, textarea } = getAllFields(attribute);
-
-
-  inputs.forEach(input => {
-    input.addEventListener("input", () => {
-      if (input.value !== "") {
-        getResetButton(attribute).classList.add("reset-show");
-        resetValues();
+  gradientTextInputs.forEach((input) => {
+    input.addEventListener('input', () => {
+      if (input.nodeName === 'TEXTAREA') {
+        if (input.value === '') return;
       }
-    })
-  })
 
-  textarea.addEventListener("input", () => {
-    if (textarea.value !== "") {
-      resetValues()
-      getResetButton(attribute).classList.add("reset-show");
-    }
-  })
+      if (resetButton.classList.contains('reset-show')) return;
+      resetButton.classList.add('reset-show');
+    });
+  });
 }
+resetValues();
 getValues();

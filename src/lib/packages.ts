@@ -9,6 +9,7 @@ import {
   getNewColorButton,
   getParentElementOfColors,
   getRemoveNewColorButton,
+  getAllColorInput,
 } from './getElements';
 
 export const setGradientDegreeValue = (degreeElement: HTMLElement): void =>
@@ -333,9 +334,8 @@ export function addNewColorPicker(attribute: string): void {
 export function getColorsValue(attribute: string): Array<string> {
   const colorValues: string[] = [];
 
-  const colorInput = document.querySelectorAll(
-    `[data-content=${attribute}] .color input`
-  );
+  const colorInput = getAllColorInput(attribute);
+
   colorInput.forEach((value) => {
     const colorValue = value as HTMLInputElement;
     colorValues.push(colorValue.value);

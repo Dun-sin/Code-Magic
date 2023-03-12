@@ -6,9 +6,9 @@ import {
   getCopyCodeButton,
   getResultPage,
   getRemoveNewColorButton,
-  getAllFields,
   getResetButton,
-  getDegreeSpanElement
+  getDegreeSpanElement,
+  getGradientPreview,
 } from '../lib/getElements';
 import {
   copyCodeToClipboard,
@@ -33,6 +33,7 @@ const getRemoveColorButtonElement = getRemoveNewColorButton(attribute);
 let gradientBackgroundInputs = getAllInputElements('gradient-background');
 
 const getDegreeElement = getRange(attribute);
+const resetButton = getResetButton(attribute);
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
@@ -101,6 +102,8 @@ export function addGradientBackgroundListener() {
 function addEventListenerToTheNewColorPicker() {
   gradientBackgroundInputs = getAllInputElements(attribute);
   inputEventListner();
+  if (resetButton.classList.contains('reset-show')) return;
+  resetButton.classList.add('reset-show');
 }
 
 function inputEventListner() {
@@ -111,38 +114,43 @@ function inputEventListner() {
   });
 }
 
-
-
 // reset the values of all target fields
-
 function resetValues() {
-  const { inputs } = getAllFields(attribute);
+  const colorInput: HTMLInputElement[] = [...new Set([])];
 
-  getResetButton(attribute).addEventListener("click", () => {
+  resetButton.addEventListener('click', () => {
+    resetButton.classList.remove('reset-show');
+    getDegreeSpanElement(attribute).innerHTML = 'deg';
 
-    inputs.forEach(input => {
+    getGradientPreview(attribute).style.background = '';
+
+    gradientBackgroundInputs.forEach((input) => {
       input.value = input.defaultValue;
+
+      if (input.id.includes('color')) {
+        colorInput.push(input);
+      }
     });
 
-    getDegreeSpanElement(attribute).innerHTML = "deg";
-    getResetButton(attribute).classList.remove("reset-show");
-  })
-
+    if (colorInput.length > 2) {
+      for (let i = 2; i < colorInput.length; i++) {
+        removeColorPicker(attribute);
+      }
+    }
+  });
 }
 
 // get values from all targets to get notified when values change.
 
 function getValues() {
+  gradientBackgroundInputs.forEach((input) => {
+    input.addEventListener('input', () => {
+      if (input.value === '') return;
 
-  const { inputs }  = getAllFields(attribute);
-
-  inputs.forEach(input => {
-    input.addEventListener("input", () => {
-      if (input.value !== "") {
-        getResetButton(attribute).classList.add("reset-show");
-        resetValues();
-      }
-    })
-  })
+      if (resetButton.classList.contains('reset-show')) return;
+      resetButton.classList.add('reset-show');
+    });
+  });
 }
+resetValues();
 getValues();

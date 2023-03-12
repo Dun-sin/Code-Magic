@@ -154,7 +154,9 @@ FilePond.create(getImageEntryElement, {
     imageSRC = img.src;
 
     // reference to reset button
-    const resetBtn = document.querySelector("[data-reset='pic-text']") as HTMLButtonElement;
+    const resetBtn = document.querySelector(
+      "[data-reset='pic-text']"
+    ) as HTMLButtonElement;
 
     // function to enable the get result button once image uploaded
     function enableImgResultBtn() {
@@ -164,7 +166,7 @@ FilePond.create(getImageEntryElement, {
 
       getPicResultBtn.style.pointerEvents = '';
       //add reset button to dom
-      resetBtn.classList.add("reset-show");
+      resetBtn.classList.add('reset-show');
     }
 
     enableImgResultBtn();
@@ -181,15 +183,15 @@ FilePond.create(getImageEntryElement, {
 
       getPicResultBtn.style.pointerEvents = 'none';
       // remove reset button from dom
-      resetBtn.classList.remove("reset-show");
+      resetBtn.classList.remove('reset-show');
     });
 
     // clear the input value when reset button is clicked.
 
     function resetValue() {
-      resetBtn.addEventListener("click", () => {
-       closeBtn.click();
-      })
+      resetBtn.addEventListener('click', () => {
+        closeBtn.click();
+      });
     }
 
     resetValue();
@@ -372,6 +374,12 @@ closeBar?.addEventListener('click', () => {
   }, 200);
 });
 
+getDurationElement?.addEventListener('change', () => {
+  displayAnimationPreview();
+});
+
+getDegreeElement?.addEventListener('change', () => displayAnimationPreview());
+
 // adds event listner for which generator should show
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
@@ -407,14 +415,10 @@ getResultsButton.forEach((getResult) => {
   });
 });
 
-getDegreeElement?.addEventListener('change', () => displayAnimationPreview());
 getRadioButtonSetElement.forEach((radioButton: HTMLInputElement) => {
   radioButton.onclick = () => {
     displayAnimationPreview();
   };
-});
-getDurationElement?.addEventListener('change', () => {
-  displayAnimationPreview();
 });
 
 // configuring dropdown menu
