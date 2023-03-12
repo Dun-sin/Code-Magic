@@ -8,9 +8,9 @@ import {
   getAllInputElements,
   getResultPage,
   getCopyCodeButton,
-  getAllFields,
   getResetButton,
   getDegreeSpanElement,
+  getGradientPreview,
 } from '../lib/getElements';
 import {
   copyCodeToClipboard,
@@ -39,6 +39,7 @@ const toggleRadiusInputForGradientBorder = getCheckbox(attribute);
 const getOutputElement = getOutput(attribute);
 
 const getDegreeElement = getRange(attribute);
+const resetButton = getResetButton(attribute);
 
 let gradientBorderInputs = getAllInputElements('gradient-border');
 
@@ -124,6 +125,8 @@ export function addGradientBorderListener() {
 function addEventListenerToTheNewColorPicker() {
   gradientBorderInputs = getAllInputElements(attribute);
   inputEventListner();
+  if (resetButton.classList.contains('reset-show')) return;
+  resetButton.classList.add('reset-show');
 }
 
 function inputEventListner() {
@@ -135,39 +138,46 @@ function inputEventListner() {
   });
 }
 
-
 // reset the values of all target fields
-
 function resetValues() {
-  const { inputs } = getAllFields(attribute);
+  const colorInput: HTMLInputElement[] = [...new Set([])];
 
-  getResetButton(attribute).addEventListener("click", () => {
+  resetButton.addEventListener('click', () => {
+    resetButton.classList.remove('reset-show');
+    getDegreeSpanElement(attribute).innerHTML = 'deg';
 
-    inputs.forEach(input => {
+    getGradientPreview(attribute).style.background = '';
+
+    gradientBorderInputs.forEach((input) => {
+      input.checked = false;
       input.value = input.defaultValue;
-      input.checked = false
+
+      if (input.id.includes('color')) {
+        colorInput.push(input);
+      }
     });
 
-    getDegreeSpanElement(attribute).innerHTML = "deg";
-    getResetButton(attribute).classList.remove("reset-show");
-  })
-
+    if (colorInput.length > 2) {
+      for (let i = 2; i < colorInput.length; i++) {
+        removeColorPicker(attribute);
+      }
+    }
+  });
 }
 
 // get values from all targets to get notified when values change.
 
 function getValues() {
-
-  const { inputs }  = getAllFields(attribute);
-
-  inputs.forEach(input => {
-    input.addEventListener("input", () => {
-      if (!input.checked) getResetButton(attribute).classList.remove("reset-show");
-      if (input.value !== "" || input.checked === true) {
-        getResetButton(attribute).classList.add("reset-show");
-        resetValues();
+  gradientBorderInputs.forEach((input) => {
+    input.addEventListener('input', () => {
+      if (input.nodeName === 'TEXTAREA') {
+        if (input.value === '') return;
       }
-    })
-  })
+
+      if (resetButton.classList.contains('reset-show')) return;
+      resetButton.classList.add('reset-show');
+    });
+  });
 }
+resetValues();
 getValues();
