@@ -446,3 +446,13 @@ dropDownElements.forEach((dropDown) => {
 });
 
 showResult(null, null);
+
+// Disable files opening in browser.
+
+const events = ["dragover", "drop"];
+
+for ( let event of events ) {
+  document.addEventListener(event, (e) => {
+    e.preventDefault();
+  })
+}
