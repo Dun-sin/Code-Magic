@@ -5,7 +5,8 @@ import {
   getColorInput1,
   getColorInput2,
   getAllInputElements,
-  getAllFields
+  getAllFields,
+  getResetButton
 } from '../lib/getElements';
 import {copyCodeToClipboard, showPopup} from '../lib/packages';
 
@@ -185,9 +186,8 @@ export const rangeGenerator = () => {
 
 function resetValues() {
   const { inputs } = getAllFields(attribute);
-  const resetBtn = document.querySelector("[data-reset='input-range']") as HTMLButtonElement;
 
-  resetBtn.addEventListener("click", () => {
+  getResetButton(attribute).addEventListener("click", () => {
 
     inputs.forEach(input => {
       input.value = input.defaultValue;
@@ -199,7 +199,7 @@ function resetValues() {
    (document.querySelector('[data-content="input-range"] #thumb-width-label') as HTMLElement).innerHTML = "";
    (document.querySelector('[data-content="input-range"] #track-width-label') as HTMLElement).innerHTML = "";
 
-    resetBtn.classList.remove("reset-show");
+    getResetButton(attribute).classList.remove("reset-show");
   })
 }
 
@@ -207,13 +207,11 @@ function resetValues() {
 
 function getValues() {
 
-  const resetBtn = document.querySelector("[data-reset='input-range']") as HTMLButtonElement;
-
   const { inputs } = getAllFields(attribute);
 
   inputs.forEach(input => {
     input.addEventListener("input", () => {
-      resetBtn.classList.add("reset-show");
+      getResetButton(attribute).classList.add("reset-show");
       resetValues();
     })
   })

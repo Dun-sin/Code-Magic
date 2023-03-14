@@ -2,11 +2,13 @@ import copy from 'copy-to-clipboard';
 import {
   getAllFields,
   getCopyCodeButton,
+  getDegreeSpanElement,
   getInputSpinner,
   getOutput,
   getPreviewSlider,
   getRadioButtonSet,
   getRange,
+  getResetButton,
   getResultPage,
   getStyleSheet,
 } from '../lib/getElements';
@@ -277,9 +279,8 @@ export function addAnimationListener() {
 
 function resetValues() {
   const { inputs } = getAllFields(attribute);
-  const resetBtn = document.querySelector("[data-reset='animation']") as HTMLButtonElement;
 
-  resetBtn.addEventListener("click", () => {
+  getResetButton(attribute).addEventListener("click", () => {
 
     inputs.forEach(input => {
       input.value = input.defaultValue;
@@ -287,8 +288,8 @@ function resetValues() {
     });
 
 
-    (document.querySelector("[data-content='animation'] .unit-display") as HTMLSpanElement).innerHTML = "deg"
-    resetBtn.classList.remove("reset-show");
+    getDegreeSpanElement(attribute).innerHTML = "deg"
+    getResetButton(attribute).classList.remove("reset-show");
   })
 
 }
@@ -297,15 +298,13 @@ function resetValues() {
 
 function getValues() {
 
-  const resetBtn = document.querySelector("[data-reset='animation']") as HTMLButtonElement;
-
   const { inputs }  = getAllFields(attribute);
 
   inputs.forEach(input => {
     input.addEventListener("input", () => {
       if (inputs[4].value !== inputs[4].defaultValue || input.checked !== input.defaultChecked 
         || inputs[5].value !== inputs[5].defaultValue) {
-        resetBtn.classList.add("reset-show");
+        getResetButton(attribute).classList.add("reset-show");
         resetValues();
       }
     })

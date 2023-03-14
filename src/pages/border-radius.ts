@@ -6,7 +6,8 @@ import {
   getOutput,
   getCopyCodeButton,
   getResultPage,
-  getAllFields
+  getAllFields,
+  getResetButton
 } from '../lib/getElements';
 import {copyCodeToClipboard, showPopup} from '../lib/packages';
 
@@ -112,9 +113,8 @@ export function addBorderRadiusListener() {
 
 function resetValues() {
   const { inputs } = getAllFields(attribute);
-  const resetBtn = document.querySelector("[data-reset='border-radius']") as HTMLButtonElement;
 
-  resetBtn.addEventListener("click", () => {
+  getResetButton(attribute).addEventListener("click", () => {
 
     inputs.forEach(input => {
       input.value = input.defaultValue;
@@ -122,7 +122,7 @@ function resetValues() {
 
     borderRadiusPreview.style.borderRadius = "0";
 
-    resetBtn.classList.remove("reset-show");
+    getResetButton(attribute).classList.remove("reset-show");
   })
 }
 
@@ -130,13 +130,11 @@ function resetValues() {
 
 function getValues() {
 
-  const resetBtn = document.querySelector("[data-reset='border-radius']") as HTMLButtonElement;
-
   const { inputs }  = getAllFields(attribute);
 
   inputs.forEach(input => {
     input.addEventListener("input", () => {
-      resetBtn.classList.add("reset-show");
+      getResetButton(attribute).classList.add("reset-show");
       resetValues();
     })
   })

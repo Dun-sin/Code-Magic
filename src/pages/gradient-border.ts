@@ -9,6 +9,8 @@ import {
   getResultPage,
   getCopyCodeButton,
   getAllFields,
+  getResetButton,
+  getDegreeSpanElement,
 } from '../lib/getElements';
 import {
   copyCodeToClipboard,
@@ -138,17 +140,16 @@ function inputEventListner() {
 
 function resetValues() {
   const { inputs } = getAllFields(attribute);
-  const resetBtn = document.querySelector("[data-reset='gradient-border']") as HTMLButtonElement;
 
-  resetBtn.addEventListener("click", () => {
+  getResetButton(attribute).addEventListener("click", () => {
 
     inputs.forEach(input => {
       input.value = input.defaultValue;
       input.checked = false
     });
 
-    (document.querySelector("[data-content='gradient-border'] .unit-display") as HTMLSpanElement).innerHTML = "deg";
-    resetBtn.classList.remove("reset-show");
+    getDegreeSpanElement(attribute).innerHTML = "deg";
+    getResetButton(attribute).classList.remove("reset-show");
   })
 
 }
@@ -157,16 +158,13 @@ function resetValues() {
 
 function getValues() {
 
-  const resetBtn = document.querySelector("[data-reset='gradient-border']") as HTMLButtonElement;
-
   const { inputs }  = getAllFields(attribute);
-
 
   inputs.forEach(input => {
     input.addEventListener("input", () => {
-      if (!input.checked) resetBtn.classList.remove("reset-show");
+      if (!input.checked) getResetButton(attribute).classList.remove("reset-show");
       if (input.value !== "" || input.checked === true) {
-        resetBtn.classList.add("reset-show");
+        getResetButton(attribute).classList.add("reset-show");
         resetValues();
       }
     })
