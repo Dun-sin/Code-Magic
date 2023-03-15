@@ -121,6 +121,8 @@ const dropDownElements = document.querySelectorAll('.dropdown');
 const getDegreeElement = getRange('animation');
 const getRadioButtonSetElement = getRadioButtonSet('animation');
 const getDurationElement = getInputSpinner('animation');
+const events = ["dragover", "drop"];
+
 if (openSidePanelButton) {
   openSidePanelButton.style.display = 'none';
 }
@@ -306,7 +308,7 @@ function showOpenPreviousResultText() {
   getOpenPreviousResult.style.animationFillMode = 'backwards';
 }
 
-// clicking outside the nav bar should close the nav abr
+// clicking outside the nav bar should close the nav bar
 document.addEventListener('click', (e: Event) => {
   const event = e.target as HTMLElement;
 
@@ -329,6 +331,13 @@ document.addEventListener('click', (e: Event) => {
     openOrCloseNavigationBar('close');
   }
 });
+
+// Disable file opening in browser
+for ( let event of events) {
+  document.addEventListener(event, (e) => {
+    e.preventDefault();
+  })
+}
 
 // clicking on the menu icon should close the nav bar
 menuIcon?.addEventListener('click', () => {
@@ -450,14 +459,3 @@ dropDownElements.forEach((dropDown) => {
 });
 
 showResult(null, null);
-
-
-// Disable file opening in browser
-
-const events = ["dragover", "drop"];
-
-for ( let event of events) {
-  document.addEventListener(event, (e) => {
-    e.preventDefault();
-  })
-}
