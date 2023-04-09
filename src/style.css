@@ -134,11 +134,11 @@ nav ul {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
 }
 
 #category > li {
-  font-size: 0.8rem;
+  font-size: 1rem;
   padding-left: 0.2rem;
   display: flex;
   flex-direction: column;
@@ -148,7 +148,7 @@ nav ul {
   border-radius: 3px;
   display: flex;
   flex-direction: column;
-  font-size: 0.7rem;
+  font-size: 0.85rem;
 }
 
 #category ul > li {
