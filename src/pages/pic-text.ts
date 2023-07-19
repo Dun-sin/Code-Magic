@@ -4,6 +4,7 @@ import {
   getCopyCodeButton,
   getPNGButton,
   getSVGButton,
+  getTailwindButton,
 } from '../lib/getElements';
 import {
   copyCodeToClipboard,
@@ -13,6 +14,7 @@ import {
 } from '../lib/packages';
 
 const attribute = 'pic-text';
+const getTailwindCode = getTailwindButton(attribute);
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
@@ -100,3 +102,16 @@ function getPicTextResult(attribute: string, outputNode: HTMLElement): void {
   getSVGButtonElement.addEventListener('click', svgDownloadHanlder);
   getCodeButtonElement.addEventListener('click', copyHandler);
 }
+
+// Tailwind codecopy handler
+function tailwindHandler() {
+  getTailwindCode.addEventListener('click', () => {
+    showPopup(
+      'Tailwind Code Copied',
+      'Code has been successfully copied to clipboard',
+      'success'
+    );
+  });
+}
+
+tailwindHandler();

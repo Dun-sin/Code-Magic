@@ -11,6 +11,7 @@ import {
   getResetButton,
   getDegreeSpanElement,
   getGradientPreview,
+  getTailwindButton,
 } from '../lib/getElements';
 import {
   copyCodeToClipboard,
@@ -40,6 +41,7 @@ const getOutputElement = getOutput(attribute);
 
 const getDegreeElement = getRange(attribute);
 const resetButton = getResetButton(attribute);
+const getTailwindCode = getTailwindButton(attribute);
 
 let gradientBorderInputs = getAllInputElements('gradient-border');
 
@@ -181,3 +183,16 @@ function getValues() {
 }
 resetValues();
 getValues();
+
+// Tailwind codecopy handler
+function tailwindHandler() {
+  getTailwindCode.addEventListener('click', () => {
+    showPopup(
+      'Tailwind Code Copied',
+      'Code has been successfully copied to clipboard',
+      'success'
+    );
+  });
+}
+
+tailwindHandler();

@@ -6,7 +6,8 @@ import {
   getColorInput2,
   getAllInputElements,
   getAllFields,
-  getResetButton
+  getResetButton,
+  getTailwindButton,
 } from '../lib/getElements';
 import {copyCodeToClipboard, showPopup} from '../lib/packages';
 
@@ -23,6 +24,7 @@ type Values = {
 };
 
 const attribute = 'input-range';
+const getTailwindCode = getTailwindButton(attribute);
 
 function setLabelValue() {
   const getThumbHeightLabel = document.getElementById(
@@ -183,37 +185,63 @@ export const rangeGenerator = () => {
   getCodeButton.addEventListener('click', copyHandler);
 };
 
-
 function resetValues() {
-  const { inputs } = getAllFields(attribute);
+  const {inputs} = getAllFields(attribute);
 
-  getResetButton(attribute).addEventListener("click", () => {
-
-    inputs.forEach(input => {
+  getResetButton(attribute).addEventListener('click', () => {
+    inputs.forEach((input) => {
       input.value = input.defaultValue;
       input.checked = input.defaultChecked;
     });
 
-   (document.querySelector('[data-content="input-range"] #thumb-height-label') as HTMLElement).innerHTML = "";
-   (document.querySelector('[data-content="input-range"] #track-height-label') as HTMLElement).innerHTML = "";
-   (document.querySelector('[data-content="input-range"] #thumb-width-label') as HTMLElement).innerHTML = "";
-   (document.querySelector('[data-content="input-range"] #track-width-label') as HTMLElement).innerHTML = "";
+    (
+      document.querySelector(
+        '[data-content="input-range"] #thumb-height-label'
+      ) as HTMLElement
+    ).innerHTML = '';
+    (
+      document.querySelector(
+        '[data-content="input-range"] #track-height-label'
+      ) as HTMLElement
+    ).innerHTML = '';
+    (
+      document.querySelector(
+        '[data-content="input-range"] #thumb-width-label'
+      ) as HTMLElement
+    ).innerHTML = '';
+    (
+      document.querySelector(
+        '[data-content="input-range"] #track-width-label'
+      ) as HTMLElement
+    ).innerHTML = '';
 
-    getResetButton(attribute).classList.remove("reset-show");
-  })
+    getResetButton(attribute).classList.remove('reset-show');
+  });
 }
 
 // get values from all targets to get notified when values change.
 
 function getValues() {
+  const {inputs} = getAllFields(attribute);
 
-  const { inputs } = getAllFields(attribute);
-
-  inputs.forEach(input => {
-    input.addEventListener("input", () => {
-      getResetButton(attribute).classList.add("reset-show");
+  inputs.forEach((input) => {
+    input.addEventListener('input', () => {
+      getResetButton(attribute).classList.add('reset-show');
       resetValues();
-    })
-  })
+    });
+  });
 }
 getValues();
+
+// Tailwind codecopy handler
+function tailwindHandler() {
+  getTailwindCode.addEventListener('click', () => {
+    showPopup(
+      'Tailwind Code Copied',
+      'Code has been successfully copied to clipboard',
+      'success'
+    );
+  });
+}
+
+tailwindHandler();

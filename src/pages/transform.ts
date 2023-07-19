@@ -8,6 +8,7 @@ import {
   getRange,
   getResetButton,
   getResultPage,
+  getTailwindButton,
 } from '../lib/getElements';
 import {showPopup, slideIn} from '../lib/packages';
 
@@ -32,6 +33,7 @@ let isSliderOpen = false;
 const preview = getPreviewSlider(attribute);
 const getDegreeElement = getRange(attribute);
 const getRadioButtonSetElement = getRadioButtonSet(attribute);
+const getTailwindCode = getTailwindButton(attribute);
 
 export function addTransformListener(): void {
   // Listen for radio button changes
@@ -211,38 +213,47 @@ function manageTransform(values: Values, getOutputElement: HTMLElement) {
   }
 }
 
-
 function resetValues() {
+  const {inputs} = getAllFields(attribute);
 
-  const { inputs } = getAllFields(attribute);
-
-  getResetButton(attribute).addEventListener("click", () => {
-
-    inputs.forEach(input => {
+  getResetButton(attribute).addEventListener('click', () => {
+    inputs.forEach((input) => {
       input.value = input.defaultValue;
       input.checked = input.defaultChecked;
     });
 
-    getResetButton(attribute).classList.remove("reset-show");
-  })
-
+    getResetButton(attribute).classList.remove('reset-show');
+  });
 }
-
 
 // get values from all targets to get notified when values change.
 
 function getValues() {
+  const {inputs} = getAllFields(attribute);
 
-  const { inputs }  = getAllFields(attribute);
-
-  inputs.forEach(input => {
-    input.addEventListener("input", () => {
-      if (input.checked !== input.defaultChecked 
-        || inputs[5].value !== inputs[5].defaultValue) {
-        getResetButton(attribute).classList.add("reset-show");
+  inputs.forEach((input) => {
+    input.addEventListener('input', () => {
+      if (
+        input.checked !== input.defaultChecked ||
+        inputs[5].value !== inputs[5].defaultValue
+      ) {
+        getResetButton(attribute).classList.add('reset-show');
         resetValues();
       }
-    })
-  })
+    });
+  });
 }
 getValues();
+
+// Tailwind codecopy handler
+function tailwindHandler() {
+  getTailwindCode.addEventListener('click', () => {
+    showPopup(
+      'Tailwind Code Copied',
+      'Code has been successfully copied to clipboard',
+      'success'
+    );
+  });
+}
+
+tailwindHandler();

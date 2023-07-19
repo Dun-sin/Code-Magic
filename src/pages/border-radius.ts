@@ -7,7 +7,8 @@ import {
   getCopyCodeButton,
   getResultPage,
   getAllFields,
-  getResetButton
+  getResetButton,
+  getTailwindButton,
 } from '../lib/getElements';
 import {copyCodeToClipboard, showPopup} from '../lib/packages';
 
@@ -25,6 +26,7 @@ const borderTop = getBorderTop(attribute);
 const borderRight = getBorderRight(attribute);
 const borderLeft = getBorderLeft(attribute);
 const borderBottom = getBorderBottom(attribute);
+const getTailwindCode = getTailwindButton(attribute);
 
 const borderRadiusPreview = document.querySelector(
   '.border-radius-preview-box > .preview'
@@ -112,31 +114,42 @@ export function addBorderRadiusListener() {
 // reset the values of all target fields
 
 function resetValues() {
-  const { inputs } = getAllFields(attribute);
+  const {inputs} = getAllFields(attribute);
 
-  getResetButton(attribute).addEventListener("click", () => {
-
-    inputs.forEach(input => {
+  getResetButton(attribute).addEventListener('click', () => {
+    inputs.forEach((input) => {
       input.value = input.defaultValue;
     });
 
-    borderRadiusPreview.style.borderRadius = "0";
+    borderRadiusPreview.style.borderRadius = '0';
 
-    getResetButton(attribute).classList.remove("reset-show");
-  })
+    getResetButton(attribute).classList.remove('reset-show');
+  });
 }
 
 // get values from all targets to get notified when values change.
 
 function getValues() {
+  const {inputs} = getAllFields(attribute);
 
-  const { inputs }  = getAllFields(attribute);
-
-  inputs.forEach(input => {
-    input.addEventListener("input", () => {
-      getResetButton(attribute).classList.add("reset-show");
+  inputs.forEach((input) => {
+    input.addEventListener('input', () => {
+      getResetButton(attribute).classList.add('reset-show');
       resetValues();
-    })
-  })
+    });
+  });
 }
 getValues();
+
+// Tailwind codecopy handler
+function tailwindHandler() {
+  getTailwindCode.addEventListener('click', () => {
+    showPopup(
+      'Tailwind Code Copied',
+      'Code has been successfully copied to clipboard',
+      'success'
+    );
+  });
+}
+
+tailwindHandler();
