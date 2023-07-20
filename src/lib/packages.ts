@@ -58,17 +58,29 @@ function createDownloadLink(fileName: string, url: string) {
   return link;
 }
 
+// copyCodeToClipboard;
+
 /**
- * Allows you to copy to clipboard
+ * Allows you to copy CSS code to clipboard
  *
  * @param attribute The attribute name of the generator element
  * @param outputElement output element to display result
  */
-export function copyCodeToClipboard(
+export function copyCSSCodeToClipboard(
   attribute: string,
   outputElement: HTMLElement
 ): void {
   actOnGenerator(attribute, outputElement);
+}
+
+/**
+ * Allows you to copy Tailwind code to clipboard
+ *
+ * @param attribute The attribute name of the generator element
+ * @param outputElement output element to display result
+ */
+export function copyTailwindCodeToClipboard(attribute: string): void {
+  actOnTailwindGenerator(attribute);
 }
 
 export const addRule = (function (style) {
@@ -232,6 +244,56 @@ const actOnGenerator = (attribute: string, outputElement: HTMLElement) => {
         outline: none;
       }
       `;
+      break;
+    default:
+      codeToCopy = `
+          Couldn't copy, please try again :(
+        `;
+  }
+
+  try {
+    copy(codeToCopy);
+  } catch {
+    Eggy({
+      title: `Whoops`,
+      message: `Can't copy, try again`,
+      type: 'error',
+    });
+  }
+};
+/**
+ * what should copy when the copy Tailwind button is clicked
+ *
+ * @param attribute attribute of the clicked generator
+ * @param outputElement output element to display result
+ */
+const actOnTailwindGenerator = (attribute: string) => {
+  let codeToCopy = '';
+
+  switch (attribute) {
+    case 'pic-text':
+      codeToCopy = ``;
+      break;
+    case 'gradient-text':
+      codeToCopy = ``;
+      break;
+    case 'gradient-border':
+      codeToCopy = ``;
+      break;
+    case 'gradient-background':
+      codeToCopy = ``;
+      break;
+    case 'border-radius':
+      codeToCopy = ``;
+      break;
+    case 'box-shadow':
+      codeToCopy = ``;
+      break;
+    case 'text-shadow':
+      codeToCopy = ``;
+      break;
+    case 'input-range':
+      codeToCopy = ``;
       break;
     default:
       codeToCopy = `

@@ -28,12 +28,12 @@ const transformExports = {
 };
 
 let css = '';
+let tailwindCss = '';
 let isSliderOpen = false;
 
 const preview = getPreviewSlider(attribute);
 const getDegreeElement = getRange(attribute);
 const getRadioButtonSetElement = getRadioButtonSet(attribute);
-const getTailwindCode = getTailwindButton(attribute);
 
 export function addTransformListener(): void {
   // Listen for radio button changes
@@ -158,6 +158,7 @@ function getTransformResult(outputElement: HTMLElement): void {
   };
 
   manageTransform(values, outputElement);
+  manageTailwindTransform(values);
 
   const getCodeButtonElement = getCopyCodeButton(attribute);
   getCodeButtonElement.style.zIndex = '100';
@@ -165,6 +166,15 @@ function getTransformResult(outputElement: HTMLElement): void {
     copy(css);
     showPopup(
       'Code Copied',
+      'Code has been successfully copied to clipboard',
+      'success'
+    );
+  });
+  const getTailwindCodeButtonElement = getTailwindButton(attribute);
+  getTailwindCodeButtonElement.addEventListener('click', () => {
+    copy(tailwindCss);
+    showPopup(
+      'Tailwind Code Copied',
       'Code has been successfully copied to clipboard',
       'success'
     );
@@ -245,15 +255,25 @@ function getValues() {
 }
 getValues();
 
-// Tailwind codecopy handler
-function tailwindHandler() {
-  getTailwindCode.addEventListener('click', () => {
-    showPopup(
-      'Tailwind Code Copied',
-      'Code has been successfully copied to clipboard',
-      'success'
-    );
-  });
+// Function to get tailwind styles for transform
+function manageTailwindTransform(values: Values) {
+  switch (values.type) {
+    case 'scale':
+      tailwindCss = `scale`;
+      break;
+    case 'skew':
+      tailwindCss = `skew`;
+      break;
+    case 'translateX':
+      tailwindCss = `translateX`;
+      break;
+    case 'translateY':
+      tailwindCss = `Translatey`;
+      break;
+    case 'rotate':
+      tailwindCss = `Rotate`;
+      break;
+    default:
+      break;
+  }
 }
-
-tailwindHandler();

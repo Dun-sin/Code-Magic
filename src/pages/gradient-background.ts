@@ -12,7 +12,7 @@ import {
   getTailwindButton,
 } from '../lib/getElements';
 import {
-  copyCodeToClipboard,
+  copyCSSCodeToClipboard,
   showPopup,
   whatColorButtonShouldShow,
   addNewColorPicker,
@@ -20,6 +20,7 @@ import {
   setGradientDegreeValue,
   createGradientPreview,
   getColorsValue,
+  copyTailwindCodeToClipboard,
 } from '../lib/packages';
 
 type Values = {
@@ -35,11 +36,10 @@ let gradientBackgroundInputs = getAllInputElements('gradient-background');
 
 const getDegreeElement = getRange(attribute);
 const resetButton = getResetButton(attribute);
-const getTailwindCode = getTailwindButton(attribute);
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
-  copyCodeToClipboard(attribute, outputElement);
+  copyCSSCodeToClipboard(attribute, outputElement);
   showPopup(
     'Code Copied',
     'Code has been successfully copied to clipboard',
@@ -65,6 +65,8 @@ function getGradientBackgroundResult(
 
   const getCodeButtonElement = getCopyCodeButton(attribute);
   getCodeButtonElement.addEventListener('click', copyHandler);
+  const getTailwindCodeButtonElement = getTailwindButton(attribute);
+  getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
 }
 
 export function gradientBackgroundGenerator(
@@ -159,13 +161,10 @@ getValues();
 
 // Tailwind codecopy handler
 function tailwindHandler() {
-  getTailwindCode.addEventListener('click', () => {
-    showPopup(
-      'Tailwind Code Copied',
-      'Code has been successfully copied to clipboard',
-      'success'
-    );
-  });
+  copyTailwindCodeToClipboard(attribute);
+  showPopup(
+    'Tailwind Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
 }
-
-tailwindHandler();

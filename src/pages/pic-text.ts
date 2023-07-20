@@ -7,18 +7,18 @@ import {
   getTailwindButton,
 } from '../lib/getElements';
 import {
-  copyCodeToClipboard,
+  copyCSSCodeToClipboard,
   showPopup,
   downloadPNG,
   downloadSVG,
+  copyTailwindCodeToClipboard,
 } from '../lib/packages';
 
 const attribute = 'pic-text';
-const getTailwindCode = getTailwindButton(attribute);
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
-  copyCodeToClipboard(attribute, outputElement);
+  copyCSSCodeToClipboard(attribute, outputElement);
   showPopup(
     'Code Copied',
     'Code has been successfully copied to clipboard',
@@ -97,21 +97,20 @@ function getPicTextResult(attribute: string, outputNode: HTMLElement): void {
   const getCodeButtonElement = getCopyCodeButton(attribute);
   const getPNGButtonElement = getPNGButton(attribute);
   const getSVGButtonElement = getSVGButton(attribute);
+  const getTailwindCodeButtonElement = getTailwindButton(attribute);
 
   getPNGButtonElement.addEventListener('click', pngDownloadHandler);
   getSVGButtonElement.addEventListener('click', svgDownloadHanlder);
   getCodeButtonElement.addEventListener('click', copyHandler);
+  getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
 }
 
 // Tailwind codecopy handler
 function tailwindHandler() {
-  getTailwindCode.addEventListener('click', () => {
-    showPopup(
-      'Tailwind Code Copied',
-      'Code has been successfully copied to clipboard',
-      'success'
-    );
-  });
+  copyTailwindCodeToClipboard(attribute);
+  showPopup(
+    'Tailwind Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
 }
-
-tailwindHandler();

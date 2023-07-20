@@ -13,7 +13,12 @@ import {
   getResetButton,
   getTailwindButton,
 } from '../lib/getElements';
-import {copyCodeToClipboard, showPopup, slideIn} from '../lib/packages';
+import {
+  copyCSSCodeToClipboard,
+  copyTailwindCodeToClipboard,
+  showPopup,
+  slideIn,
+} from '../lib/packages';
 
 type Values = {
   hOffset: string;
@@ -25,11 +30,10 @@ type Values = {
 
 const attribute = 'box-shadow';
 let isSliderOpen = false;
-const getTailwindCode = getTailwindButton(attribute);
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
-  copyCodeToClipboard(attribute, outputElement);
+  copyCSSCodeToClipboard(attribute, outputElement);
   showPopup(
     'Code Copied',
     'Code has been successfully copied to clipboard',
@@ -85,6 +89,8 @@ function getBoxShadowResult(values: Values, outputElement: HTMLElement): void {
 
   const getCodeButtonElement = getCopyCodeButton(attribute);
   getCodeButtonElement.addEventListener('click', copyHandler);
+  const getTailwindCodeButtonElement = getTailwindButton(attribute);
+  getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
 }
 
 export function addBoxShadowListener(): void {
@@ -175,13 +181,10 @@ getValues();
 
 // Tailwind codecopy handler
 function tailwindHandler() {
-  getTailwindCode.addEventListener('click', () => {
-    showPopup(
-      'Tailwind Code Copied',
-      'Code has been successfully copied to clipboard',
-      'success'
-    );
-  });
+  copyTailwindCodeToClipboard(attribute);
+  showPopup(
+    'Tailwind Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
 }
-
-tailwindHandler();

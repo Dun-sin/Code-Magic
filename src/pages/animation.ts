@@ -19,6 +19,7 @@ let initial_length = 0;
 // let rule_added = false;
 let isAnimationSliderOpen = false;
 let css = '';
+let tailwindCss = '';
 
 type Values = {
   type: string;
@@ -28,7 +29,7 @@ type Values = {
 
 const attribute = 'animation';
 const getCodeButtonElement = getCopyCodeButton(attribute);
-const getTailwindCode = getTailwindButton(attribute);
+const getTailwindCodeButtonElement = getTailwindButton(attribute);
 
 const getOutputElement = getOutput(attribute);
 const getDegreeElement = getRange(attribute);
@@ -76,6 +77,15 @@ export function animationGenerator(type: 'newResults' | 'oldResults' | null) {
     );
   });
   manageAnimation(values, getOutputElement, Stylesheet);
+  getTailwindCodeButtonElement.addEventListener('click', () => {
+    copy(tailwindCss);
+    showPopup(
+      'Tailwind Code Copied',
+      'Code has been successfully copied to clipboard',
+      'success'
+    );
+  });
+  manageTailwindAnimation(values);
 }
 
 // configuring animation preview
@@ -311,15 +321,21 @@ function getValues() {
 }
 getValues();
 
-// Tailwind codecopy handler
-function tailwindHandler() {
-  getTailwindCode.addEventListener('click', () => {
-    showPopup(
-      'Tailwind Code Copied',
-      'Code has been successfully copied to clipboard',
-      'success'
-    );
-  });
+// Function to get tailwind styles for animation
+function manageTailwindAnimation(values: Values) {
+  // if (rule_added) {
+  //   stylesheet.deleteRule(initial_length + 1);
+  //   rule_added = false;
+  // }
+  if (values.type === 'fade') {
+    tailwindCss = ``;
+  } else if (values.type === 'skew') {
+    tailwindCss = ``;
+    // rule_added = true;
+  } else if (values.type === 'flip') {
+    tailwindCss = ``;
+    // rule_added = true;
+  } else if (values.type === 'rotate') {
+    tailwindCss = ``;
+  }
 }
-
-tailwindHandler();

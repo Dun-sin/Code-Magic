@@ -1085,6 +1085,10 @@ a {
   .input {
     padding: 2rem;
   }
+
+  .btn-container {
+    justify-content: space-around;
+  }
 }
 
 @media screen and (max-width: 650px) {

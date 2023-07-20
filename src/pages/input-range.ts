@@ -9,7 +9,11 @@ import {
   getResetButton,
   getTailwindButton,
 } from '../lib/getElements';
-import {copyCodeToClipboard, showPopup} from '../lib/packages';
+import {
+  copyCSSCodeToClipboard,
+  copyTailwindCodeToClipboard,
+  showPopup,
+} from '../lib/packages';
 
 type RangeType = 'track' | 'thumb';
 type RangeValues = {
@@ -24,7 +28,6 @@ type Values = {
 };
 
 const attribute = 'input-range';
-const getTailwindCode = getTailwindButton(attribute);
 
 function setLabelValue() {
   const getThumbHeightLabel = document.getElementById(
@@ -119,7 +122,7 @@ function copyHandler() {
   const previewElement = document.getElementById(
     'preview-range'
   ) as HTMLInputElement;
-  copyCodeToClipboard(attribute, previewElement);
+  copyCSSCodeToClipboard(attribute, previewElement);
   showPopup(
     'Code Copied',
     'Code has been successfully copied to clipboard',
@@ -129,7 +132,7 @@ function copyHandler() {
 
 export const rangeGenerator = () => {
   const getCodeButton = getCopyCodeButton(attribute);
-
+  const getTailwindCodeButtonElement = getTailwindButton(attribute);
   const getTrackColor = getColorInput1(attribute);
   const getThumbColor = getColorInput2(attribute);
 
@@ -183,6 +186,7 @@ export const rangeGenerator = () => {
   });
 
   getCodeButton.addEventListener('click', copyHandler);
+  getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
 };
 
 function resetValues() {
@@ -235,13 +239,10 @@ getValues();
 
 // Tailwind codecopy handler
 function tailwindHandler() {
-  getTailwindCode.addEventListener('click', () => {
-    showPopup(
-      'Tailwind Code Copied',
-      'Code has been successfully copied to clipboard',
-      'success'
-    );
-  });
+  copyTailwindCodeToClipboard(attribute);
+  showPopup(
+    'Tailwind Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
 }
-
-tailwindHandler();
