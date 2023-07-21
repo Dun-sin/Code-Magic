@@ -12,9 +12,10 @@ import {
   getResetButton,
   getDegreeSpanElement,
   getGradientPreview,
+  getTailwindButton,
 } from '../lib/getElements';
 import {
-  copyCodeToClipboard,
+  copyCSSCodeToClipboard,
   showPopup,
   downloadPNG,
   downloadSVG,
@@ -25,6 +26,7 @@ import {
   setGradientDegreeValue,
   createGradientPreview,
   getColorsValue,
+  copyTailwindCodeToClipboard,
 } from '../lib/packages';
 
 type Values = {
@@ -43,7 +45,7 @@ const resetButton = getResetButton(attribute);
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
-  copyCodeToClipboard(attribute, outputElement);
+  copyCSSCodeToClipboard(attribute, outputElement);
   showPopup(
     'Code Copied',
     'Code has been successfully copied to clipboard',
@@ -124,6 +126,7 @@ function getGradientTextResult(
   const getCodeButtonElement = getCopyCodeButton(attribute);
   const getPNGButtonElement = getPNGButton(attribute);
   const getSVGButtonElement = getSVGButton(attribute);
+  const getTailwindCodeButtonElement = getTailwindButton(attribute);
 
   if (outputElement.childElementCount >= 1) {
     outputElement.innerHTML = '';
@@ -137,6 +140,8 @@ function getGradientTextResult(
   getSVGButtonElement.addEventListener('click', svgDownloadHanlder);
 
   getCodeButtonElement.addEventListener('click', copyHandler);
+
+  getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
 }
 
 export function addGradientTextListener() {
@@ -214,3 +219,13 @@ function getValues() {
 }
 resetValues();
 getValues();
+
+// Tailwind codecopy handler
+function tailwindHandler() {
+  copyTailwindCodeToClipboard(attribute);
+  showPopup(
+    'Tailwind Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
+}

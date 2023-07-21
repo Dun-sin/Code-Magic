@@ -10,6 +10,11 @@ export const getResultPage = (): HTMLElement =>
 export const getCopyCodeButton = (attribute: string): HTMLElement =>
   document.querySelector(`[data-download=${attribute}-code]`) as HTMLElement;
 
+export const getTailwindButton = (attribute: string): HTMLElement =>
+  document.querySelector(
+    `[data-download=${attribute}-tailwind]`
+  ) as HTMLElement;
+
 export const getPNGButton = (attribute: string): HTMLElement =>
   document.querySelector(`[data-download=${attribute}-PNG]`) as HTMLElement;
 

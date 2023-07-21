@@ -6,9 +6,14 @@ import {
   getColorInput2,
   getAllInputElements,
   getAllFields,
-  getResetButton
+  getResetButton,
+  getTailwindButton,
 } from '../lib/getElements';
-import {copyCodeToClipboard, showPopup} from '../lib/packages';
+import {
+  copyCSSCodeToClipboard,
+  copyTailwindCodeToClipboard,
+  showPopup,
+} from '../lib/packages';
 
 type RangeType = 'track' | 'thumb';
 type RangeValues = {
@@ -117,7 +122,7 @@ function copyHandler() {
   const previewElement = document.getElementById(
     'preview-range'
   ) as HTMLInputElement;
-  copyCodeToClipboard(attribute, previewElement);
+  copyCSSCodeToClipboard(attribute, previewElement);
   showPopup(
     'Code Copied',
     'Code has been successfully copied to clipboard',
@@ -127,7 +132,7 @@ function copyHandler() {
 
 export const rangeGenerator = () => {
   const getCodeButton = getCopyCodeButton(attribute);
-
+  const getTailwindCodeButtonElement = getTailwindButton(attribute);
   const getTrackColor = getColorInput1(attribute);
   const getThumbColor = getColorInput2(attribute);
 
@@ -181,39 +186,63 @@ export const rangeGenerator = () => {
   });
 
   getCodeButton.addEventListener('click', copyHandler);
+  getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
 };
 
-
 function resetValues() {
-  const { inputs } = getAllFields(attribute);
+  const {inputs} = getAllFields(attribute);
 
-  getResetButton(attribute).addEventListener("click", () => {
-
-    inputs.forEach(input => {
+  getResetButton(attribute).addEventListener('click', () => {
+    inputs.forEach((input) => {
       input.value = input.defaultValue;
       input.checked = input.defaultChecked;
     });
 
-   (document.querySelector('[data-content="input-range"] #thumb-height-label') as HTMLElement).innerHTML = "";
-   (document.querySelector('[data-content="input-range"] #track-height-label') as HTMLElement).innerHTML = "";
-   (document.querySelector('[data-content="input-range"] #thumb-width-label') as HTMLElement).innerHTML = "";
-   (document.querySelector('[data-content="input-range"] #track-width-label') as HTMLElement).innerHTML = "";
+    (
+      document.querySelector(
+        '[data-content="input-range"] #thumb-height-label'
+      ) as HTMLElement
+    ).innerHTML = '';
+    (
+      document.querySelector(
+        '[data-content="input-range"] #track-height-label'
+      ) as HTMLElement
+    ).innerHTML = '';
+    (
+      document.querySelector(
+        '[data-content="input-range"] #thumb-width-label'
+      ) as HTMLElement
+    ).innerHTML = '';
+    (
+      document.querySelector(
+        '[data-content="input-range"] #track-width-label'
+      ) as HTMLElement
+    ).innerHTML = '';
 
-    getResetButton(attribute).classList.remove("reset-show");
-  })
+    getResetButton(attribute).classList.remove('reset-show');
+  });
 }
 
 // get values from all targets to get notified when values change.
 
 function getValues() {
+  const {inputs} = getAllFields(attribute);
 
-  const { inputs } = getAllFields(attribute);
-
-  inputs.forEach(input => {
-    input.addEventListener("input", () => {
-      getResetButton(attribute).classList.add("reset-show");
+  inputs.forEach((input) => {
+    input.addEventListener('input', () => {
+      getResetButton(attribute).classList.add('reset-show');
       resetValues();
-    })
-  })
+    });
+  });
 }
 getValues();
+
+// Tailwind codecopy handler
+function tailwindHandler() {
+  copyTailwindCodeToClipboard(attribute);
+  showPopup(
+    'Tailwind Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
+}
