@@ -844,9 +844,15 @@ input[type='number']::-webkit-outer-spin-button {
 .border-radius-preview-box {
   width: 250px;
   height: 250px;
-  border: 1px dashed var(--text-color);
+  outline: 1px dashed var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 1rem;
   position: relative;
+}
+.border-radius-preview-box + .btn-container {
+  margin-top: 1rem;
 }
 
 .border-radius-preview-box .preview {
