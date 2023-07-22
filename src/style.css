@@ -848,7 +848,6 @@ input[type='number']::-webkit-outer-spin-button {
   margin-bottom: 1rem;
   position: relative;
 }
-
 .border-radius-preview-box .preview {
   width: inherit;
   height: inherit;
