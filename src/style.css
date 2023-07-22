@@ -851,7 +851,6 @@ input[type='number']::-webkit-outer-spin-button {
   margin-bottom: 1rem;
   position: relative;
 }
-
 .border-radius-preview-box + .btn-container {
   margin-top: 1rem;
 }
