@@ -269,7 +269,6 @@ const actOnGenerator = (attribute: string, outputElement: HTMLElement) => {
  */
 const actOnTailwindGenerator = (attribute: string) => {
   let codeToCopy = '';
-
   switch (attribute) {
     case 'pic-text':
       codeToCopy = ``;
@@ -284,7 +283,7 @@ const actOnTailwindGenerator = (attribute: string) => {
       codeToCopy = ``;
       break;
     case 'border-radius':
-      codeToCopy = ``;
+      codeToCopy = `<div class="rounded-sm"></div>`;
       break;
     case 'box-shadow':
       codeToCopy = ``;
