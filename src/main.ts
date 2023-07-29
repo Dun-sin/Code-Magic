@@ -333,7 +333,7 @@ document.addEventListener('click', (e: Event) => {
 });
 
 // Disable file opening in browser
-for ( let event of events) {
+for ( const event of events) {
   document.addEventListener(event, (e) => {
     e.preventDefault();
   })
