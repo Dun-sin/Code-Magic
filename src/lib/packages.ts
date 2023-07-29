@@ -79,8 +79,11 @@ export function copyCSSCodeToClipboard(
  * @param attribute The attribute name of the generator element
  * @param outputElement output element to display result
  */
-export function copyTailwindCodeToClipboard(attribute: string): void {
-  actOnTailwindGenerator(attribute);
+export function copyTailwindCodeToClipboard(
+  attribute: string,
+  outputElement: HTMLElement
+): void {
+  actOnTailwindGenerator(attribute, outputElement);
 }
 
 export const addRule = (function (style) {
@@ -267,7 +270,11 @@ const actOnGenerator = (attribute: string, outputElement: HTMLElement) => {
  * @param attribute attribute of the clicked generator
  * @param outputElement output element to display result
  */
-const actOnTailwindGenerator = (attribute: string) => {
+const actOnTailwindGenerator = (
+  attribute: string,
+  outputElement: HTMLElement
+) => {
+  let element = outputElement.style;
   let codeToCopy = '';
   switch (attribute) {
     case 'pic-text':
@@ -283,7 +290,7 @@ const actOnTailwindGenerator = (attribute: string) => {
       codeToCopy = ``;
       break;
     case 'border-radius':
-      codeToCopy = `<div class="rounded-sm"></div>`;
+      codeToCopy = `rounded-[${element.borderRadius.replace(/ /g, '_')}]`;
       break;
     case 'box-shadow':
       codeToCopy = ``;
