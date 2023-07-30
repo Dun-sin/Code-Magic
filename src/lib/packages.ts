@@ -81,9 +81,10 @@ export function copyCSSCodeToClipboard(
  */
 export function copyTailwindCodeToClipboard(
   attribute: string,
-  outputElement: HTMLElement
+  outputElement?: HTMLElement | null
 ): void {
-  actOnTailwindGenerator(attribute, outputElement);
+  if (outputElement) actOnTailwindGenerator(attribute, outputElement);
+  else console.log("Can't generate tailwind code");
 }
 
 export const addRule = (function (style) {
