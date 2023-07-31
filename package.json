@@ -1,5 +1,5 @@
 {
-  "name": "Code-Magic",
+  "name": "code-magic",
   "private": true,
   "version": "0.0.0-development",
   "scripts": {
@@ -52,6 +52,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Dun-sin/Code-Magic.git"
-  }
+    "url": "git+https://github.com/Dun-sin/Code-Magic.git"
+  },
+  "description": "<div id=\"header\" align=\"center\">\r   <img src=\"https://user-images.githubusercontent.com/121221252/215760592-3b24d03b-53ed-4264-9cda-b4f052151513.png\"/><br>\r     <!-- <p><strong><em>\"Tagline\"</em></strong></p>\r      -->\r   <a href=\"https://gitpod.io/#https://github.com/Dun-sin/Code-Magic\">\r     <img src=\"https://gitpod.io/button/open-in-gitpod.svg\">\r   </a>\r </div> <br>",
+  "bugs": {
+    "url": "https://github.com/Dun-sin/Code-Magic/issues"
+  },
+  "homepage": "https://github.com/Dun-sin/Code-Magic#readme",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "author": "",
+  "license": "ISC"
 }

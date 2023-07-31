@@ -121,7 +121,7 @@ const dropDownElements = document.querySelectorAll('.dropdown');
 const getDegreeElement = getRange('animation');
 const getRadioButtonSetElement = getRadioButtonSet('animation');
 const getDurationElement = getInputSpinner('animation');
-const events = ["dragover", "drop"];
+const events = ['dragover', 'drop'];
 
 if (openSidePanelButton) {
   openSidePanelButton.style.display = 'none';
@@ -333,10 +333,10 @@ document.addEventListener('click', (e: Event) => {
 });
 
 // Disable file opening in browser
-for ( let event of events) {
+for (const event of events) {
   document.addEventListener(event, (e) => {
     e.preventDefault();
-  })
+  });
 }
 
 // clicking on the menu icon should close the nav bar

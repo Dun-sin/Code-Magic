@@ -105,7 +105,7 @@ export const addRule = (function (style) {
  * @param outputElement output element to display result
  */
 const actOnGenerator = (attribute: string, outputElement: HTMLElement) => {
-  let codeToCopy = '';
+  let codeToCopy = 'h-100px, w-100px, background: backgroundImage ';
   let element;
 
   switch (attribute) {
@@ -137,6 +137,7 @@ const actOnGenerator = (attribute: string, outputElement: HTMLElement) => {
       break;
     case 'gradient-border':
       element = outputElement.style;
+      // eslint-disable-next-line no-case-declarations
       const content = window.getComputedStyle(outputElement, '::before');
 
       codeToCopy = `
@@ -268,7 +269,7 @@ const actOnGenerator = (attribute: string, outputElement: HTMLElement) => {
  * @param outputElement output element to display result
  */
 const actOnTailwindGenerator = (attribute: string) => {
-  let codeToCopy = '';
+  let codeToCopy = 'h-100px, w-100px, background: backgroundImage';
 
   switch (attribute) {
     case 'pic-text':
