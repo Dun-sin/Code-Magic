@@ -9,9 +9,13 @@ import {
   getRemoveNewColorButton,
   getResultPage,
   getSVGButton,
+  getResetButton,
+  getDegreeSpanElement,
+  getGradientPreview,
+  getTailwindButton,
 } from '../lib/getElements';
 import {
-  copyCodeToClipboard,
+  copyCSSCodeToClipboard,
   showPopup,
   downloadPNG,
   downloadSVG,
@@ -22,6 +26,7 @@ import {
   setGradientDegreeValue,
   createGradientPreview,
   getColorsValue,
+  copyTailwindCodeToClipboard,
 } from '../lib/packages';
 
 type Values = {
@@ -36,10 +41,11 @@ const getNewColorButtonElement = getNewColorButton(attribute);
 const getRemoveColorButtonElement = getRemoveNewColorButton(attribute);
 
 const getDegreeElement = getRange(attribute);
+const resetButton = getResetButton(attribute);
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
-  copyCodeToClipboard(attribute, outputElement);
+  copyCSSCodeToClipboard(attribute, outputElement);
   showPopup(
     'Code Copied',
     'Code has been successfully copied to clipboard',
@@ -120,6 +126,7 @@ function getGradientTextResult(
   const getCodeButtonElement = getCopyCodeButton(attribute);
   const getPNGButtonElement = getPNGButton(attribute);
   const getSVGButtonElement = getSVGButton(attribute);
+  const getTailwindCodeButtonElement = getTailwindButton(attribute);
 
   if (outputElement.childElementCount >= 1) {
     outputElement.innerHTML = '';
@@ -133,6 +140,8 @@ function getGradientTextResult(
   getSVGButtonElement.addEventListener('click', svgDownloadHanlder);
 
   getCodeButtonElement.addEventListener('click', copyHandler);
+
+  getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
 }
 
 export function addGradientTextListener() {
@@ -152,9 +161,12 @@ export function addGradientTextListener() {
 
   setGradientDegreeValue(getDegreeElement);
 }
+
 function addEventListenerToTheNewColorPicker() {
   gradientTextInputs = getAllInputElements(attribute);
   inputEventListner();
+  if (resetButton.classList.contains('reset-show')) return;
+  resetButton.classList.add('reset-show');
 }
 
 function inputEventListner() {
@@ -163,4 +175,57 @@ function inputEventListner() {
       createGradientPreview(getDegreeElement, attribute);
     });
   });
+}
+
+// reset the values of all target fields
+function resetValues() {
+  const colorInput: HTMLInputElement[] = [...new Set([])];
+
+  resetButton.addEventListener('click', () => {
+    resetButton.classList.remove('reset-show');
+    getDegreeSpanElement(attribute).innerHTML = 'deg';
+
+    getGradientPreview(attribute).style.background = '';
+
+    gradientTextInputs.forEach((input) => {
+      input.value = input.defaultValue;
+
+      if (input.id.includes('color')) {
+        colorInput.push(input);
+      }
+    });
+
+    if (colorInput.length > 2) {
+      for (let i = 2; i < colorInput.length; i++) {
+        removeColorPicker(attribute);
+      }
+    }
+  });
+}
+
+// get values from all targets to get notified when values change.
+
+function getValues() {
+  gradientTextInputs.forEach((input) => {
+    input.addEventListener('input', () => {
+      if (input.nodeName === 'TEXTAREA') {
+        if (input.value === '') return;
+      }
+
+      if (resetButton.classList.contains('reset-show')) return;
+      resetButton.classList.add('reset-show');
+    });
+  });
+}
+resetValues();
+getValues();
+
+// Tailwind codecopy handler
+function tailwindHandler() {
+  copyTailwindCodeToClipboard(attribute);
+  showPopup(
+    'Tailwind Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
 }

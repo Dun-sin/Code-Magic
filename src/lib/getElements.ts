@@ -10,6 +10,11 @@ export const getResultPage = (): HTMLElement =>
 export const getCopyCodeButton = (attribute: string): HTMLElement =>
   document.querySelector(`[data-download=${attribute}-code]`) as HTMLElement;
 
+export const getTailwindButton = (attribute: string): HTMLElement =>
+  document.querySelector(
+    `[data-download=${attribute}-tailwind]`
+  ) as HTMLElement;
+
 export const getPNGButton = (attribute: string): HTMLElement =>
   document.querySelector(`[data-download=${attribute}-PNG]`) as HTMLElement;
 
@@ -25,7 +30,14 @@ export const getColorInput1 = (attribute: string): HTMLInputElement =>
 export const getColorInput2 = (attribute: string): HTMLInputElement =>
   document.getElementById(`${attribute}-color2`) as HTMLInputElement;
 
-export const getAllInputElements = (attribute: string): NodeList =>
+export const getAllColorInput = (
+  attribute: string
+): NodeListOf<HTMLInputElement> =>
+  document.querySelectorAll(`[data-content=${attribute}] .color input`);
+
+export const getAllInputElements = (
+  attribute: string
+): NodeListOf<HTMLInputElement> =>
   document.querySelectorAll(`.${attribute}-inputs`);
 
 export const getGradientPreview = (attribute: string): HTMLElement =>
@@ -125,3 +137,25 @@ export const getPreviewSlider = (attribute: string): HTMLElement =>
   document.querySelector(
     `[data-content=${attribute}] .preview-slider`
   ) as HTMLElement;
+
+export const getAllFields = (attribute: string) => {
+  const inputs = document.querySelectorAll(
+    `[data-content=${attribute}] input`
+  ) as NodeListOf<HTMLInputElement>;
+  const textarea = document.querySelector(
+    `[data-content='${attribute}'] textarea`
+  ) as HTMLTextAreaElement;
+
+  return {
+    inputs,
+    textarea,
+  };
+};
+
+export const getResetButton = (attribute: string) =>
+  document.querySelector(`[data-reset=${attribute}]`) as HTMLButtonElement;
+
+export const getDegreeSpanElement = (attribute: string) =>
+  document.querySelector(
+    `[data-content=${attribute}] .unit-display`
+  ) as HTMLSpanElement;

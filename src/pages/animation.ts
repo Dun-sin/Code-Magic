@@ -1,13 +1,17 @@
 import copy from 'copy-to-clipboard';
 import {
+  getAllFields,
   getCopyCodeButton,
+  getDegreeSpanElement,
   getInputSpinner,
   getOutput,
   getPreviewSlider,
   getRadioButtonSet,
   getRange,
+  getResetButton,
   getResultPage,
   getStyleSheet,
+  getTailwindButton,
 } from '../lib/getElements';
 import {setGradientDegreeValue, showPopup, slideIn} from '../lib/packages';
 
@@ -15,6 +19,7 @@ let initial_length = 0;
 // let rule_added = false;
 let isAnimationSliderOpen = false;
 let css = '';
+let tailwindCss = '';
 
 type Values = {
   type: string;
@@ -24,6 +29,7 @@ type Values = {
 
 const attribute = 'animation';
 const getCodeButtonElement = getCopyCodeButton(attribute);
+const getTailwindCodeButtonElement = getTailwindButton(attribute);
 
 const getOutputElement = getOutput(attribute);
 const getDegreeElement = getRange(attribute);
@@ -71,6 +77,15 @@ export function animationGenerator(type: 'newResults' | 'oldResults' | null) {
     );
   });
   manageAnimation(values, getOutputElement, Stylesheet);
+  getTailwindCodeButtonElement.addEventListener('click', () => {
+    copy(tailwindCss);
+    showPopup(
+      'Tailwind Code Copied',
+      'Code has been successfully copied to clipboard',
+      'success'
+    );
+  });
+  manageTailwindAnimation(values);
 }
 
 // configuring animation preview
@@ -270,4 +285,57 @@ function initialConfiguration(
 
 export function addAnimationListener() {
   setGradientDegreeValue(getDegreeElement);
+}
+
+function resetValues() {
+  const {inputs} = getAllFields(attribute);
+
+  getResetButton(attribute).addEventListener('click', () => {
+    inputs.forEach((input) => {
+      input.value = input.defaultValue;
+      input.checked = input.defaultChecked;
+    });
+
+    getDegreeSpanElement(attribute).innerHTML = 'deg';
+    getResetButton(attribute).classList.remove('reset-show');
+  });
+}
+
+// get values from all targets to get notified when values change.
+
+function getValues() {
+  const {inputs} = getAllFields(attribute);
+
+  inputs.forEach((input) => {
+    input.addEventListener('input', () => {
+      if (
+        inputs[4].value !== inputs[4].defaultValue ||
+        input.checked !== input.defaultChecked ||
+        inputs[5].value !== inputs[5].defaultValue
+      ) {
+        getResetButton(attribute).classList.add('reset-show');
+        resetValues();
+      }
+    });
+  });
+}
+getValues();
+
+// Function to get tailwind styles for animation
+function manageTailwindAnimation(values: Values) {
+  // if (rule_added) {
+  //   stylesheet.deleteRule(initial_length + 1);
+  //   rule_added = false;
+  // }
+  if (values.type === 'fade') {
+    tailwindCss = ``;
+  } else if (values.type === 'skew') {
+    tailwindCss = ``;
+    // rule_added = true;
+  } else if (values.type === 'flip') {
+    tailwindCss = ``;
+    // rule_added = true;
+  } else if (values.type === 'rotate') {
+    tailwindCss = ``;
+  }
 }

@@ -8,9 +8,13 @@ import {
   getAllInputElements,
   getResultPage,
   getCopyCodeButton,
+  getResetButton,
+  getDegreeSpanElement,
+  getGradientPreview,
+  getTailwindButton,
 } from '../lib/getElements';
 import {
-  copyCodeToClipboard,
+  copyCSSCodeToClipboard,
   showPopup,
   addRule,
   whatColorButtonShouldShow,
@@ -19,6 +23,7 @@ import {
   setGradientDegreeValue,
   createGradientPreview,
   getColorsValue,
+  copyTailwindCodeToClipboard,
 } from '../lib/packages';
 
 type Values = {
@@ -36,6 +41,7 @@ const toggleRadiusInputForGradientBorder = getCheckbox(attribute);
 const getOutputElement = getOutput(attribute);
 
 const getDegreeElement = getRange(attribute);
+const resetButton = getResetButton(attribute);
 
 let gradientBorderInputs = getAllInputElements('gradient-border');
 
@@ -43,7 +49,7 @@ const resultPage = getResultPage();
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
-  copyCodeToClipboard(attribute, outputElement);
+  copyCSSCodeToClipboard(attribute, outputElement);
   showPopup(
     'Code Copied',
     'Code has been successfully copied to clipboard',
@@ -76,6 +82,8 @@ function getGradientBorderResult(
 
   const getCodeButtonElement = getCopyCodeButton(attribute);
   getCodeButtonElement.addEventListener('click', copyHandler);
+  const getTailwindCodeButtonElement = getTailwindButton(attribute);
+  getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
 }
 
 export function gradientBorderGenerator(
@@ -121,6 +129,8 @@ export function addGradientBorderListener() {
 function addEventListenerToTheNewColorPicker() {
   gradientBorderInputs = getAllInputElements(attribute);
   inputEventListner();
+  if (resetButton.classList.contains('reset-show')) return;
+  resetButton.classList.add('reset-show');
 }
 
 function inputEventListner() {
@@ -130,4 +140,58 @@ function inputEventListner() {
       createGradientPreview(getDegreeElement, attribute);
     });
   });
+}
+
+// reset the values of all target fields
+function resetValues() {
+  const colorInput: HTMLInputElement[] = [...new Set([])];
+
+  resetButton.addEventListener('click', () => {
+    resetButton.classList.remove('reset-show');
+    getDegreeSpanElement(attribute).innerHTML = 'deg';
+
+    getGradientPreview(attribute).style.background = '';
+
+    gradientBorderInputs.forEach((input) => {
+      input.checked = false;
+      input.value = input.defaultValue;
+
+      if (input.id.includes('color')) {
+        colorInput.push(input);
+      }
+    });
+
+    if (colorInput.length > 2) {
+      for (let i = 2; i < colorInput.length; i++) {
+        removeColorPicker(attribute);
+      }
+    }
+  });
+}
+
+// get values from all targets to get notified when values change.
+
+function getValues() {
+  gradientBorderInputs.forEach((input) => {
+    input.addEventListener('input', () => {
+      if (input.nodeName === 'TEXTAREA') {
+        if (input.value === '') return;
+      }
+
+      if (resetButton.classList.contains('reset-show')) return;
+      resetButton.classList.add('reset-show');
+    });
+  });
+}
+resetValues();
+getValues();
+
+// Tailwind codecopy handler
+function tailwindHandler() {
+  copyTailwindCodeToClipboard(attribute);
+  showPopup(
+    'Tailwind Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
 }

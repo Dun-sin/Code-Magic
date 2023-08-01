@@ -9,6 +9,7 @@ import {
   getNewColorButton,
   getParentElementOfColors,
   getRemoveNewColorButton,
+  getAllColorInput,
 } from './getElements';
 
 export const setGradientDegreeValue = (degreeElement: HTMLElement): void =>
@@ -57,17 +58,33 @@ function createDownloadLink(fileName: string, url: string) {
   return link;
 }
 
+// copyCodeToClipboard;
+
 /**
- * Allows you to copy to clipboard
+ * Allows you to copy CSS code to clipboard
  *
  * @param attribute The attribute name of the generator element
  * @param outputElement output element to display result
  */
-export function copyCodeToClipboard(
+export function copyCSSCodeToClipboard(
   attribute: string,
   outputElement: HTMLElement
 ): void {
   actOnGenerator(attribute, outputElement);
+}
+
+/**
+ * Allows you to copy Tailwind code to clipboard
+ *
+ * @param attribute The attribute name of the generator element
+ * @param outputElement output element to display result
+ */
+export function copyTailwindCodeToClipboard(
+  attribute: string,
+  outputElement?: HTMLElement | null
+): void {
+  if (outputElement) actOnTailwindGenerator(attribute, outputElement);
+  else console.log("Can't generate tailwind code");
 }
 
 export const addRule = (function (style) {
@@ -94,6 +111,7 @@ export const addRule = (function (style) {
 const actOnGenerator = (attribute: string, outputElement: HTMLElement) => {
   let codeToCopy = '';
   let element;
+
   switch (attribute) {
     case 'pic-text':
       codeToCopy = `
@@ -123,16 +141,29 @@ const actOnGenerator = (attribute: string, outputElement: HTMLElement) => {
       break;
     case 'gradient-border':
       element = outputElement.style;
+      const content = window.getComputedStyle(outputElement, '::before');
+
       codeToCopy = `
         div {
-          border-width:8px;
-          border-style:solid;
-          border-radius:${element.getPropertyValue(`--${attribute}-radius`)};
-          border-image:linear-gradient(${element.getPropertyValue(
-            `--${attribute}-degree`
-          )}, ${element.getPropertyValue(
-        `--${attribute}-color-1`
-      )}, ${element.getPropertyValue(`--${attribute}-color-2`)}) 1;
+          position: relative;
+        }
+
+        div::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          padding: 6px;
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          background: ${content.background};
+          background-clip: 'border-box';
+          ${
+            content.borderRadius !== '0px'
+              ? `border-radius: ${content.borderRadius};`
+              : ''
+          }
         }
       `;
       break;
@@ -217,6 +248,59 @@ const actOnGenerator = (attribute: string, outputElement: HTMLElement) => {
         outline: none;
       }
       `;
+      break;
+    default:
+      codeToCopy = `
+          Couldn't copy, please try again :(
+        `;
+  }
+
+  try {
+    copy(codeToCopy);
+  } catch {
+    Eggy({
+      title: `Whoops`,
+      message: `Can't copy, try again`,
+      type: 'error',
+    });
+  }
+};
+/**
+ * what should copy when the copy Tailwind button is clicked
+ *
+ * @param attribute attribute of the clicked generator
+ * @param outputElement output element to display result
+ */
+const actOnTailwindGenerator = (
+  attribute: string,
+  outputElement: HTMLElement
+) => {
+  let element = outputElement.style;
+  let codeToCopy = '';
+  switch (attribute) {
+    case 'pic-text':
+      codeToCopy = ``;
+      break;
+    case 'gradient-text':
+      codeToCopy = ``;
+      break;
+    case 'gradient-border':
+      codeToCopy = ``;
+      break;
+    case 'gradient-background':
+      codeToCopy = ``;
+      break;
+    case 'border-radius':
+      codeToCopy = `rounded-[${element.borderRadius.replace(/ /g, '_')}]`;
+      break;
+    case 'box-shadow':
+      codeToCopy = ``;
+      break;
+    case 'text-shadow':
+      codeToCopy = ``;
+      break;
+    case 'input-range':
+      codeToCopy = ``;
       break;
     default:
       codeToCopy = `
@@ -319,9 +403,8 @@ export function addNewColorPicker(attribute: string): void {
 export function getColorsValue(attribute: string): Array<string> {
   const colorValues: string[] = [];
 
-  const colorInput = document.querySelectorAll(
-    `[data-content=${attribute}] .color input`
-  );
+  const colorInput = getAllColorInput(attribute);
+
   colorInput.forEach((value) => {
     const colorValue = value as HTMLInputElement;
     colorValues.push(colorValue.value);

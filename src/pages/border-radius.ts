@@ -6,8 +6,15 @@ import {
   getOutput,
   getCopyCodeButton,
   getResultPage,
+  getAllFields,
+  getResetButton,
+  getTailwindButton,
 } from '../lib/getElements';
-import {copyCodeToClipboard, showPopup} from '../lib/packages';
+import {
+  copyCSSCodeToClipboard,
+  showPopup,
+  copyTailwindCodeToClipboard,
+} from '../lib/packages';
 
 type Values = {
   BorderTop: string;
@@ -30,7 +37,7 @@ const borderRadiusPreview = document.querySelector(
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
-  copyCodeToClipboard(attribute, outputElement);
+  copyCSSCodeToClipboard(attribute, outputElement);
   showPopup(
     'Code Copied',
     'Code has been successfully copied to clipboard',
@@ -54,6 +61,8 @@ function getBorderRadiusResult(
 
   const getCodeButtonElement = getCopyCodeButton(attribute);
   getCodeButtonElement.addEventListener('click', copyHandler);
+  const getTailwindCodeButtonElement = getTailwindButton(attribute);
+  getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
 }
 
 export function borderRadiusGenerator(
@@ -105,4 +114,45 @@ export function addBorderRadiusListener() {
       )
     );
   });
+}
+
+// reset the values of all target fields
+
+function resetValues() {
+  const {inputs} = getAllFields(attribute);
+
+  getResetButton(attribute).addEventListener('click', () => {
+    inputs.forEach((input) => {
+      input.value = input.defaultValue;
+    });
+
+    borderRadiusPreview.style.borderRadius = '0';
+
+    getResetButton(attribute).classList.remove('reset-show');
+  });
+}
+
+// get values from all targets to get notified when values change.
+
+function getValues() {
+  const {inputs} = getAllFields(attribute);
+
+  inputs.forEach((input) => {
+    input.addEventListener('input', () => {
+      getResetButton(attribute).classList.add('reset-show');
+      resetValues();
+    });
+  });
+}
+getValues();
+
+// Tailwind codecopy handler
+function tailwindHandler() {
+  const outputElement = getOutput(attribute);
+  copyTailwindCodeToClipboard(attribute, outputElement);
+  showPopup(
+    'Tailwind Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
 }

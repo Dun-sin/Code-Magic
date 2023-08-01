@@ -9,7 +9,6 @@
 
 <!--
 [x] - Correct; marked as done
-[X] - Correct; marked as done
 
 [ ] - Not correct; marked as **not** done
 -->

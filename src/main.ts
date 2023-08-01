@@ -43,6 +43,7 @@ import {
   getRange,
   getResultPage,
 } from './lib/getElements';
+import {addTransformListener, transformGenerator} from './pages/transform';
 
 FilePond.registerPlugin(
   FilePondPluginImagePreview,
@@ -120,6 +121,8 @@ const dropDownElements = document.querySelectorAll('.dropdown');
 const getDegreeElement = getRange('animation');
 const getRadioButtonSetElement = getRadioButtonSet('animation');
 const getDurationElement = getInputSpinner('animation');
+const events = ["dragover", "drop"];
+
 if (openSidePanelButton) {
   openSidePanelButton.style.display = 'none';
 }
@@ -152,6 +155,11 @@ FilePond.create(getImageEntryElement, {
     img.src = URL.createObjectURL(output);
     imageSRC = img.src;
 
+    // reference to reset button
+    const resetBtn = document.querySelector(
+      "[data-reset='pic-text']"
+    ) as HTMLButtonElement;
+
     // function to enable the get result button once image uploaded
     function enableImgResultBtn() {
       const getPicResultBtn = document.querySelector(
@@ -159,6 +167,8 @@ FilePond.create(getImageEntryElement, {
       ) as HTMLButtonElement;
 
       getPicResultBtn.style.pointerEvents = '';
+      //add reset button to dom
+      resetBtn.classList.add('reset-show');
     }
 
     enableImgResultBtn();
@@ -174,7 +184,19 @@ FilePond.create(getImageEntryElement, {
       ) as HTMLButtonElement;
 
       getPicResultBtn.style.pointerEvents = 'none';
+      // remove reset button from dom
+      resetBtn.classList.remove('reset-show');
     });
+
+    // clear the input value when reset button is clicked.
+
+    function resetValue() {
+      resetBtn.addEventListener('click', () => {
+        closeBtn.click();
+      });
+    }
+
+    resetValue();
 
     console.log(fileItem);
   },
@@ -196,6 +218,7 @@ function generatorsFunction(attribute: string, type: openResults): void {
   attribute === 'border-radius' && borderRadiusGenerator(type);
   attribute === 'box-shadow' && boxShadowGenerator(type);
   attribute === 'text-shadow' && textShadowGenerator(type);
+  attribute === 'transform' && transformGenerator(type);
 }
 
 /**
@@ -237,6 +260,7 @@ function showContent(attribute: string, display: Display): void {
   attribute === 'box-shadow' && addBoxShadowListener();
   attribute === 'gradient-background' && addGradientBackgroundListener();
   attribute === 'animation' && addAnimationListener();
+  attribute === 'transform' && addTransformListener();
 }
 
 /**
@@ -284,7 +308,7 @@ function showOpenPreviousResultText() {
   getOpenPreviousResult.style.animationFillMode = 'backwards';
 }
 
-// clicking outside the nav bar should close the nav abr
+// clicking outside the nav bar should close the nav bar
 document.addEventListener('click', (e: Event) => {
   const event = e.target as HTMLElement;
 
@@ -307,6 +331,13 @@ document.addEventListener('click', (e: Event) => {
     openOrCloseNavigationBar('close');
   }
 });
+
+// Disable file opening in browser
+for ( let event of events) {
+  document.addEventListener(event, (e) => {
+    e.preventDefault();
+  })
+}
 
 // clicking on the menu icon should close the nav bar
 menuIcon?.addEventListener('click', () => {
@@ -352,6 +383,12 @@ closeBar?.addEventListener('click', () => {
   }, 200);
 });
 
+getDurationElement?.addEventListener('change', () => {
+  displayAnimationPreview();
+});
+
+getDegreeElement?.addEventListener('change', () => displayAnimationPreview());
+
 // adds event listner for which generator should show
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
@@ -387,14 +424,10 @@ getResultsButton.forEach((getResult) => {
   });
 });
 
-getDegreeElement?.addEventListener('change', () => displayAnimationPreview());
 getRadioButtonSetElement.forEach((radioButton: HTMLInputElement) => {
   radioButton.onclick = () => {
     displayAnimationPreview();
   };
-});
-getDurationElement?.addEventListener('change', () => {
-  displayAnimationPreview();
 });
 
 // configuring dropdown menu

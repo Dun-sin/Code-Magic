@@ -6,9 +6,13 @@ import {
   getCopyCodeButton,
   getResultPage,
   getRemoveNewColorButton,
+  getResetButton,
+  getDegreeSpanElement,
+  getGradientPreview,
+  getTailwindButton,
 } from '../lib/getElements';
 import {
-  copyCodeToClipboard,
+  copyCSSCodeToClipboard,
   showPopup,
   whatColorButtonShouldShow,
   addNewColorPicker,
@@ -16,6 +20,7 @@ import {
   setGradientDegreeValue,
   createGradientPreview,
   getColorsValue,
+  copyTailwindCodeToClipboard,
 } from '../lib/packages';
 
 type Values = {
@@ -30,10 +35,11 @@ const getRemoveColorButtonElement = getRemoveNewColorButton(attribute);
 let gradientBackgroundInputs = getAllInputElements('gradient-background');
 
 const getDegreeElement = getRange(attribute);
+const resetButton = getResetButton(attribute);
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
-  copyCodeToClipboard(attribute, outputElement);
+  copyCSSCodeToClipboard(attribute, outputElement);
   showPopup(
     'Code Copied',
     'Code has been successfully copied to clipboard',
@@ -59,6 +65,8 @@ function getGradientBackgroundResult(
 
   const getCodeButtonElement = getCopyCodeButton(attribute);
   getCodeButtonElement.addEventListener('click', copyHandler);
+  const getTailwindCodeButtonElement = getTailwindButton(attribute);
+  getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
 }
 
 export function gradientBackgroundGenerator(
@@ -98,6 +106,8 @@ export function addGradientBackgroundListener() {
 function addEventListenerToTheNewColorPicker() {
   gradientBackgroundInputs = getAllInputElements(attribute);
   inputEventListner();
+  if (resetButton.classList.contains('reset-show')) return;
+  resetButton.classList.add('reset-show');
 }
 
 function inputEventListner() {
@@ -106,4 +116,55 @@ function inputEventListner() {
       createGradientPreview(getDegreeElement, attribute);
     });
   });
+}
+
+// reset the values of all target fields
+function resetValues() {
+  const colorInput: HTMLInputElement[] = [...new Set([])];
+
+  resetButton.addEventListener('click', () => {
+    resetButton.classList.remove('reset-show');
+    getDegreeSpanElement(attribute).innerHTML = 'deg';
+
+    getGradientPreview(attribute).style.background = '';
+
+    gradientBackgroundInputs.forEach((input) => {
+      input.value = input.defaultValue;
+
+      if (input.id.includes('color')) {
+        colorInput.push(input);
+      }
+    });
+
+    if (colorInput.length > 2) {
+      for (let i = 2; i < colorInput.length; i++) {
+        removeColorPicker(attribute);
+      }
+    }
+  });
+}
+
+// get values from all targets to get notified when values change.
+
+function getValues() {
+  gradientBackgroundInputs.forEach((input) => {
+    input.addEventListener('input', () => {
+      if (input.value === '') return;
+
+      if (resetButton.classList.contains('reset-show')) return;
+      resetButton.classList.add('reset-show');
+    });
+  });
+}
+resetValues();
+getValues();
+
+// Tailwind codecopy handler
+function tailwindHandler() {
+  copyTailwindCodeToClipboard(attribute);
+  showPopup(
+    'Tailwind Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
 }

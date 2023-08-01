@@ -215,6 +215,17 @@
                   >Create animations like Fade, Flip, Skew
                 </span>
               </li>
+              <li data-gen="transform">
+                <iconify-icon
+                  inline
+                  icon="game-icons:transform"
+                  width="20"
+                ></iconify-icon>
+                <span> Transform </span>
+                <span class="tooltip">
+                  Scale, skew, translate and rotate elements with transform
+                </span>
+              </li>
             </ul>
           </li>
 
@@ -404,7 +415,10 @@
             <label for="pic-text-file">
               <input type="file" id="pic-text-file" required />
             </label>
-            <div class="btn" data-button="pic-text">Get Results</div>
+            <div class="btn-container">
+              <div class="reset" data-reset="pic-text">Reset</div>
+              <div class="btn" data-button="pic-text">Get Results</div>
+            </div>
           </div>
           <!-- End of Pic Text -->
 
@@ -473,7 +487,10 @@
               />
             </label>
 
-            <div class="btn" data-button="gradient-text">Get Results</div>
+            <div class="btn-container">
+              <div class="reset" data-reset="gradient-text">Reset</div>
+              <div class="btn" data-button="gradient-text">Get Results</div>
+            </div>
           </div>
           <!-- End of Gradient Text -->
 
@@ -553,7 +570,10 @@
               />
             </label>
 
-            <div class="btn" data-button="gradient-border">Get Result</div>
+            <div class="btn-container">
+              <div class="reset" data-reset="gradient-border">Reset</div>
+              <div class="btn" data-button="gradient-border">Get Result</div>
+            </div>
           </div>
           <!-- End of Gradient Border -->
 
@@ -617,7 +637,12 @@
               />
             </label>
 
-            <div class="btn" data-button="gradient-background">Get Result</div>
+            <div class="btn-container">
+              <div class="reset" data-reset="gradient-background">Reset</div>
+              <div class="btn" data-button="gradient-background">
+                Get Result
+              </div>
+            </div>
           </div>
           <!-- End of Gradient Background -->
 
@@ -696,7 +721,10 @@
               />
             </label>
 
-            <div class="btn" data-button="animation">Get Results</div>
+            <div class="btn-container">
+              <div class="reset" data-reset="animation">Reset</div>
+              <div class="btn" data-button="animation">Get Results</div>
+            </div>
           </div>
           <!-- End of Animation -->
 
@@ -744,7 +772,10 @@
               </div>
             </div>
 
-            <div class="btn" data-button="border-radius">Get Results</div>
+            <div class="btn-container">
+              <div class="reset" data-reset="border-radius">Reset</div>
+              <div class="btn" data-button="border-radius">Get Results</div>
+            </div>
           </div>
           <!-- End of Border Radius -->
 
@@ -830,7 +861,10 @@
               </div>
             </div>
 
-            <div class="btn" data-button="box-shadow">Get Results</div>
+            <div class="btn-container">
+              <div class="reset" data-reset="box-shadow">Reset</div>
+              <div class="btn" data-button="box-shadow">Get Results</div>
+            </div>
           </div>
           <!-- End of Box Shadow -->
 
@@ -906,9 +940,91 @@
               </div>
             </div>
 
-            <div class="btn" data-button="text-shadow">Get Results</div>
+            <div class="btn-container">
+              <div class="reset" data-reset="text-shadow">Reset</div>
+              <div class="btn" data-button="text-shadow">Get Results</div>
+            </div>
           </div>
           <!-- End of Text Shadow Generator -->
+
+          <!-- Transform Generator -->
+
+          <div data-content="transform">
+            <div class="preview-slider"></div>
+
+            <div class="transform-type">
+              <p>Transform Type</p>
+              <div class="radio-group">
+                <label id="transform-radio-label" for="scale">
+                  <input
+                    checked
+                    type="radio"
+                    id="scale"
+                    name="transform-radio"
+                    value="scale"
+                  />
+                  <span>Scale</span>
+                </label>
+                <label id="transform-radio-label" for="rotate">
+                  <input
+                    type="radio"
+                    id="rotate"
+                    name="transform-radio"
+                    value="rotate"
+                  />
+                  <span>Rotate</span>
+                </label>
+                <label id="transform-radio-label" for="skew">
+                  <input
+                    type="radio"
+                    id="skew"
+                    name="transform-radio"
+                    value="skew"
+                  />
+                  <span>Skew</span>
+                </label>
+                <label id="transform-radio-label" for="translateX">
+                  <input
+                    type="radio"
+                    id="translateX"
+                    name="transform-radio"
+                    value="translateX"
+                  />
+                  <span>TranslateX</span>
+                </label>
+                <label id="transform-radio-label" for="translateY">
+                  <input
+                    type="radio"
+                    id="translateY"
+                    name="transform-radio"
+                    value="translateY"
+                  />
+                  <span>TranslateY</span>
+                </label>
+              </div>
+            </div>
+            <label id="degree" for="transform-degree">
+              <span class="label-title">
+                <span class="title-display transform">Size</span>
+                <span class="unit-display transform"></span>
+              </span>
+              <input
+                type="range"
+                max="2"
+                min=".1"
+                value="1"
+                step=".1"
+                class="degree-range"
+                id="transform-degree"
+              />
+            </label>
+
+            <div class="btn-container">
+              <div class="reset" data-reset="transform">Reset</div>
+              <div class="btn" data-button="transform">Get Results</div>
+            </div>
+          </div>
+          <!-- End of Transform Generator -->
 
           <!-- Input Type Range Generator -->
           <div data-content="input-range">
@@ -1054,14 +1170,26 @@
             </div>
 
             <!-- Copy Code Button -->
-            <div class="btn" data-download="input-range-code">
-              <iconify-icon
-                inline
-                icon="bx:code-alt"
-                style="color: white; margin-right: 5px"
-                width="20"
-              ></iconify-icon>
-              Get Code
+            <div class="btn-container">
+              <div class="reset" data-reset="input-range">Reset</div>
+              <div class="btn" data-download="input-range-code">
+                <iconify-icon
+                  inline
+                  icon="bx:code-alt"
+                  style="color: white; margin-right: 5px"
+                  width="20"
+                ></iconify-icon>
+                Get CSS Code
+              </div>
+              <div class="btn" data-download="input-range-tailwind">
+                <iconify-icon
+                  inline
+                  icon="bx:code-alt"
+                  style="color: white; margin-right: 5px"
+                  width="20"
+                ></iconify-icon>
+                Get Tailwind
+              </div>
             </div>
           </div>
           <!-- End of Input Type Range Generator -->
@@ -1109,16 +1237,26 @@
                   Download Svg
                 </button>
               </div>
-
-              <button class="btn" data-download="pic-text-code">
-                <iconify-icon
-                  inline
-                  icon="bx:code-alt"
-                  style="color: white; margin-right: 5px"
-                  width="20"
-                ></iconify-icon>
-                Get Code
-              </button>
+              <div class="btn-container">
+                <button class="btn" data-download="pic-text-code">
+                  <iconify-icon
+                    inline
+                    icon="bx:code-alt"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon>
+                  Get CSS Code
+                </button>
+                <button class="btn" data-download="pic-text-tailwind">
+                  <iconify-icon
+                    inline
+                    icon="bx:code-alt"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon>
+                  Get Tailwind
+                </button>
+              </div>
             </div>
           </div>
           <!-- End of Pic Text Result -->
@@ -1148,16 +1286,26 @@
                   Download Svg
                 </button>
               </div>
-
-              <button class="btn" data-download="gradient-text-code">
-                <iconify-icon
-                  inline
-                  icon="bx:code-alt"
-                  style="color: white; margin-right: 5px"
-                  width="20"
-                ></iconify-icon>
-                Get Code
-              </button>
+              <div class="btn-container">
+                <button class="btn" data-download="gradient-text-code">
+                  <iconify-icon
+                    inline
+                    icon="bx:code-alt"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon>
+                  Get CSS Code
+                </button>
+                <button class="btn" data-download="gradient-text-tailwind">
+                  <iconify-icon
+                    inline
+                    icon="bx:code-alt"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon>
+                  Get Tailwind
+                </button>
+              </div>
             </div>
           </div>
           <!-- End of Gradient Text Result -->
@@ -1165,16 +1313,29 @@
           <!-- Gradient Border Result -->
           <div class="download-output" data-result="gradient-border">
             <div class="output gradient-border"></div>
-            <div class="download-btn">
-              <button class="btn" data-download="gradient-border-code">
-                <iconify-icon
-                  inline
-                  icon="bx:code-alt"
-                  style="color: white; margin-right: 5px"
-                  width="20"
-                ></iconify-icon>
-                Get Code
-              </button>
+            <div class="btn-container">
+              <div class="download-btn">
+                <button class="btn" data-download="gradient-border-code">
+                  <iconify-icon
+                    inline
+                    icon="bx:code-alt"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon>
+                  Get CSS Code
+                </button>
+              </div>
+              <div class="download-btn">
+                <button class="btn" data-download="gradient-border-tailwind">
+                  <iconify-icon
+                    inline
+                    icon="bx:code-alt"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon>
+                  Get Tailwind
+                </button>
+              </div>
             </div>
           </div>
           <!-- End of Gradient Border Result -->
@@ -1182,16 +1343,32 @@
           <!-- Gradient Background Result -->
           <div class="download-output" data-result="gradient-background">
             <div class="output"></div>
-            <div class="download-btn">
-              <button class="btn" data-download="gradient-background-code">
-                <iconify-icon
-                  inline
-                  icon="bx:code-alt"
-                  style="color: white; margin-right: 5px"
-                  width="20"
-                ></iconify-icon>
-                Get Code
-              </button>
+            <div class="btn-container">
+              <div class="download-btn">
+                <button class="btn" data-download="gradient-background-code">
+                  <iconify-icon
+                    inline
+                    icon="bx:code-alt"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon>
+                  Get CSS Code
+                </button>
+              </div>
+              <div class="download-btn">
+                <button
+                  class="btn"
+                  data-download="gradient-background-tailwind"
+                >
+                  <iconify-icon
+                    inline
+                    icon="bx:code-alt"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon>
+                  Get Tailwind
+                </button>
+              </div>
             </div>
           </div>
           <!-- End of Gradient Background Result -->
@@ -1199,16 +1376,29 @@
           <!-- Animation Result -->
           <div class="download-output" data-result="animation">
             <div class="output"></div>
-            <div class="download-btn">
-              <button class="btn" data-download="animation-code">
-                <iconify-icon
-                  inline
-                  icon="bx:code-alt"
-                  style="color: white; margin-right: 5px"
-                  width="20"
-                ></iconify-icon
-                >Get Code
-              </button>
+            <div class="btn-container">
+              <div class="download-btn">
+                <button class="btn" data-download="animation-code">
+                  <iconify-icon
+                    inline
+                    icon="bx:code-alt"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon
+                  >Get CSS Code
+                </button>
+              </div>
+              <div class="download-btn">
+                <button class="btn" data-download="animation-tailwind">
+                  <iconify-icon
+                    inline
+                    icon="bx:code-alt"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon
+                  >Get Tailwind
+                </button>
+              </div>
             </div>
           </div>
           <!-- End of Animation Result -->
@@ -1216,16 +1406,29 @@
           <!-- Border Radius Result -->
           <div class="download-output" data-result="border-radius">
             <div class="output"></div>
-            <div class="download-btn">
-              <button class="btn" data-download="border-radius-code">
-                <iconify-icon
-                  inline
-                  icon="bx:code-alt"
-                  style="color: white; margin-right: 5px"
-                  width="20"
-                ></iconify-icon
-                >Get Code
-              </button>
+            <div class="btn-container">
+              <div class="download-btn">
+                <button class="btn" data-download="border-radius-code">
+                  <iconify-icon
+                    inline
+                    icon="bx:code-alt"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon
+                  >Get CSS Code
+                </button>
+              </div>
+              <div class="download-btn">
+                <button class="btn" data-download="border-radius-tailwind">
+                  <iconify-icon
+                    inline
+                    icon="bx:code-alt"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon
+                  >Get Tailwind Code
+                </button>
+              </div>
             </div>
           </div>
           <!-- End of Border Radius Result -->
@@ -1233,19 +1436,62 @@
           <!-- Box-Shadow Result -->
           <div class="download-output" data-result="box-shadow">
             <div class="output box-shadow"></div>
-            <div class="download-btn">
-              <button class="btn" data-download="box-shadow-code">
-                <iconify-icon
-                  inline
-                  icon="bx:code-alt"
-                  style="color: white; margin-right: 5px"
-                  width="20"
-                ></iconify-icon>
-                Get Code
-              </button>
+            <div class="btn-container">
+              <div class="download-btn">
+                <button class="btn" data-download="box-shadow-code">
+                  <iconify-icon
+                    inline
+                    icon="bx:code-alt"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon>
+                  Get CSS Code
+                </button>
+              </div>
+              <div class="download-btn">
+                <button class="btn" data-download="box-shadow-tailwind">
+                  <iconify-icon
+                    inline
+                    icon="bx:code-alt"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon>
+                  Get Tailwind
+                </button>
+              </div>
             </div>
           </div>
           <!-- End of Box-Shadow Result -->
+
+          <!-- Transform Result -->
+          <div class="download-output" data-result="transform">
+            <div class="output transform-output"></div>
+            <div class="btn-container">
+              <div class="download-btn">
+                <button class="btn" data-download="transform-code">
+                  <iconify-icon
+                    inline
+                    icon="bx:code-alt"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon>
+                  Get CSS Code
+                </button>
+              </div>
+              <div class="download-btn">
+                <button class="btn" data-download="transform-tailwind">
+                  <iconify-icon
+                    inline
+                    icon="bx:code-alt"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon>
+                  Get Tailwind
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- End of Transform Result -->
 
           <!-- Text Shadow Result -->
           <div class="download-output" data-result="text-shadow">
@@ -1272,16 +1518,26 @@
                   Download Svg
                 </button>
               </div>
-
-              <button class="btn" data-download="text-shadow-code">
-                <iconify-icon
-                  inline
-                  icon="bx:code-alt"
-                  style="color: white; margin-right: 5px"
-                  width="20"
-                ></iconify-icon>
-                Get Code
-              </button>
+              <div class="btn-container">
+                <button class="btn" data-download="text-shadow-code">
+                  <iconify-icon
+                    inline
+                    icon="bx:code-alt"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon>
+                  Get CSS Code
+                </button>
+                <button class="btn" data-download="text-shadow-tailwind">
+                  <iconify-icon
+                    inline
+                    icon="bx:code-alt"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon>
+                  Get Tailwind
+                </button>
+              </div>
             </div>
           </div>
           <!-- End Text Shadow Result -->
