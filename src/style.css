@@ -380,8 +380,8 @@ input::placeholder {
 }
 
 .colors {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   align-items: center;
   margin: var(--spacing) 0 var(--spacing) 0;
   width: var(--generator-width);
@@ -422,7 +422,6 @@ input::placeholder {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 48%;
   margin-bottom: 5px;
 }
 
