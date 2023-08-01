@@ -1043,8 +1043,9 @@ footer {
   flex-direction: column;
   justify-content: center;
   font-size: 0.7rem;
-  position: relative;
-  top: 2rem;
+  position: absolute;
+  height: max-content;
+  bottom: 1rem;
   color: var(--text-color);
 }
 
