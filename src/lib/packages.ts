@@ -294,7 +294,7 @@ const actOnTailwindGenerator = (
       codeToCopy = `rounded-[${element.borderRadius.replace(/ /g, '_')}]`;
       break;
     case 'box-shadow':
-      codeToCopy = ``;
+      codeToCopy = `shadow-[${element.boxShadow.replace(/ /g, '_')}]`;
       break;
     case 'text-shadow':
       codeToCopy = ``;
