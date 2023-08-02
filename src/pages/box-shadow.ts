@@ -181,7 +181,7 @@ getValues();
 
 // Tailwind codecopy handler
 function tailwindHandler() {
-  const outputElement = getOutput(attribute);
+  const outputElement: HTMLElement = getOutput(attribute);
   copyTailwindCodeToClipboard(attribute, outputElement);
   showPopup(
     'Tailwind Code Copied',
