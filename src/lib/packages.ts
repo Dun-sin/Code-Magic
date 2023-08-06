@@ -282,7 +282,11 @@ const actOnTailwindGenerator = (
       codeToCopy = ``;
       break;
     case 'gradient-text':
-      codeToCopy = ``;
+      codeToCopy = `
+        text-[${(outputElement.children[0] as HTMLElement).style.fontSize}]
+        bg-[${(outputElement.children[0] as HTMLElement).style.background}]
+        text-transparent
+        bg-clip-text`;
       break;
     case 'gradient-border':
       codeToCopy = ``;
