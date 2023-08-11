@@ -10,6 +10,8 @@ import {
   getDegreeSpanElement,
   getGradientPreview,
   getTailwindButton,
+  getCssOrTailwindButton,
+  getCssOrTailwindDropdown,
 } from '../lib/getElements';
 import {
   copyCSSCodeToClipboard,
@@ -21,6 +23,7 @@ import {
   createGradientPreview,
   getColorsValue,
   copyTailwindCodeToClipboard,
+  closeDropdown,
 } from '../lib/packages';
 
 type Values = {
@@ -36,6 +39,8 @@ let gradientBackgroundInputs = getAllInputElements('gradient-background');
 
 const getDegreeElement = getRange(attribute);
 const resetButton = getResetButton(attribute);
+const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
+const showCopyClass = 'show-css-tailwind';
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
@@ -46,6 +51,14 @@ function copyHandler() {
     'success'
   );
 }
+
+function getCssOrTailwind(e?: MouseEvent): void {
+  e?.stopPropagation();
+  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
+}
+
+// closes css and tailwind dropdown on outside click
+closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
 
 /**
  * sets the result to the output element
@@ -67,6 +80,8 @@ function getGradientBackgroundResult(
   getCodeButtonElement.addEventListener('click', copyHandler);
   const getTailwindCodeButtonElement = getTailwindButton(attribute);
   getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
+  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
+  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
 }
 
 export function gradientBackgroundGenerator(

@@ -5,6 +5,10 @@ import {
   getPNGButton,
   getSVGButton,
   getTailwindButton,
+  getCssOrTailwindButton,
+  getCssOrTailwindDropdown,
+  getPngOrSvgButton,
+  getPngOrSvgDropdown,
 } from '../lib/getElements';
 import {
   copyCSSCodeToClipboard,
@@ -12,9 +16,14 @@ import {
   downloadPNG,
   downloadSVG,
   copyTailwindCodeToClipboard,
+  closeDropdown,
 } from '../lib/packages';
 
 const attribute = 'pic-text';
+const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
+const getPngOrSvgDropdownElement = getPngOrSvgDropdown(attribute);
+const showCopyClass = 'show-css-tailwind';
+const showPngOrSvgClass = 'show-png-svg';
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
@@ -25,6 +34,22 @@ function copyHandler() {
     'success'
   );
 }
+
+function getCssOrTailwind(e?: MouseEvent): void {
+  e?.stopPropagation();
+  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
+}
+
+function getPngOrSvg(e?: MouseEvent) {
+  e?.stopPropagation();
+  getPngOrSvgDropdownElement.classList.toggle(showPngOrSvgClass);
+}
+
+// closes css and tailwind dropdown on outside click
+closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
+
+// closes png and css dropdown outside click
+closeDropdown(getPngOrSvg, getPngOrSvgDropdownElement, showPngOrSvgClass);
 
 function pngDownloadHandler() {
   const outputElement = getOutput(attribute);
@@ -98,11 +123,15 @@ function getPicTextResult(attribute: string, outputNode: HTMLElement): void {
   const getPNGButtonElement = getPNGButton(attribute);
   const getSVGButtonElement = getSVGButton(attribute);
   const getTailwindCodeButtonElement = getTailwindButton(attribute);
+  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
+  const getPngOrSvgButtonElement = getPngOrSvgButton(attribute);
 
   getPNGButtonElement.addEventListener('click', pngDownloadHandler);
   getSVGButtonElement.addEventListener('click', svgDownloadHanlder);
   getCodeButtonElement.addEventListener('click', copyHandler);
   getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
+  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
+  getPngOrSvgButtonElement.addEventListener('click', getPngOrSvg);
 }
 
 // Tailwind codecopy handler
