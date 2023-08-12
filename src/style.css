@@ -626,6 +626,8 @@ input[type='number']::-webkit-outer-spin-button {
   cursor: pointer;
   margin-top: calc(var(--spacing) + 10px);
   border: none;
+  font-size: 14px;
+  gap: 0.7rem;
 }
 
 .btn:hover {
@@ -916,14 +918,52 @@ input[type='number']::-webkit-outer-spin-button {
 
 .download-btn {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: min(25%, 35%);
 }
 
+.btn-dropdown-container,
 .image-download {
+  width: var(--generator-width);
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  gap: 20px;
+}
+
+.btn-dropdown-container .css-tailwind,
+.image-download .png-svg {
+  visibility: hidden;
+  position: absolute;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  transition: all 0.1s cubic-bezier(0.16, 1, 0.5, 1);
+  transform: translateY(0.5rem);
+  margin-top: 0.3rem;
+  opacity: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+}
+
+.css-tailwind.show-css-tailwind,
+.png-svg.show-png-svg {
+  visibility: visible;
+  transform: translateY(0rem);
+  opacity: 1;
+}
+
+.dropdown-item {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.5rem;
+  padding: 0.3rem 0.3rem 0.3rem 0.2rem;
+  font-size: 12px;
+}
+.dropdown-item:hover {
+  background-color: #0c49d2;
 }
 
 .image-download > button:first-of-type {
