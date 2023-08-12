@@ -265,6 +265,84 @@ const actOnGenerator = (attribute: string, outputElement: HTMLElement) => {
     });
   }
 };
+
+function extractDegreeFromGradient(gradient: string): number {
+  const regex = /linear-gradient\((\d+)deg/;
+  const match = gradient.match(regex);
+
+  if (match) {
+    const degree = parseInt(match[1]);
+    return degree;
+  }
+
+  return 0;
+}
+
+function getTailwindDirectionClass(angle: number) {
+  const gradientDirections = [
+    {angle: 0, class: 'to-r'},
+    {angle: 45, class: 'to-tr'},
+    {angle: 90, class: 'to-t'},
+    {angle: 135, class: 'to-tl'},
+    {angle: 180, class: 'to-l'},
+    {angle: 225, class: 'to-bl'},
+    {angle: 270, class: 'to-b'},
+    {angle: 315, class: 'to-br'},
+  ];
+
+  const closest = gradientDirections.reduce((prev, curr) => {
+    return Math.abs(curr.angle - angle) < Math.abs(prev.angle - angle)
+      ? curr
+      : prev;
+  });
+  return closest.class;
+}
+
+function rgbToHex(rgb: string): string {
+  const regex = /rgb\((\d+), (\d+), (\d+)\)/;
+  const match = rgb.match(regex);
+
+  if (match) {
+    const r = parseInt(match[1]).toString(16).padStart(2, '0');
+    const g = parseInt(match[2]).toString(16).padStart(2, '0');
+    const b = parseInt(match[3]).toString(16).padStart(2, '0');
+    return `#${r}${g}${b}`;
+  }
+
+  return '';
+}
+
+function extractRGBColorsFromGradient(gradient: string): string[] {
+  const regex = /rgb\(\d+, \d+, \d+\)/g;
+  const matches = gradient.match(regex);
+
+  if (matches) {
+    return matches.map((rgb) => rgbToHex(rgb));
+  }
+
+  return [];
+}
+
+function generateTailwindClasses(colors: string[]): string {
+  if (colors.length === 2) {
+    return `from-[${colors[0]}] [to-[${colors[1]}]`;
+  } else if (colors.length === 3) {
+    return `from-[${colors[0]}] via-[${colors[1]}] to-[${colors[2]}]`;
+  } else if (colors.length === 4) {
+    return `from-[${colors[0]}] via-[${colors[1]}] via-[${colors[2]}] to-[${colors[3]}]`;
+  }
+
+  return '';
+}
+
+function convertLinearGradientToTailwind(gradient: string): string {
+  const angle = extractDegreeFromGradient(gradient);
+  const direction = getTailwindDirectionClass(angle);
+  const rbgColors = extractRGBColorsFromGradient(gradient);
+  const gradientClass = generateTailwindClasses(rbgColors);
+
+  return `bg-gradient-${direction} ${gradientClass}`;
+}
 /**
  * what should copy when the copy Tailwind button is clicked
  *
@@ -282,17 +360,19 @@ const actOnTailwindGenerator = (
       codeToCopy = ``;
       break;
     case 'gradient-text':
-      codeToCopy = `
-        text-[${(outputElement.children[0] as HTMLElement).style.fontSize}]
-        bg-[${(outputElement.children[0] as HTMLElement).style.background}]
-        text-transparent
-        bg-clip-text`;
+      const output = outputElement.children[0] as HTMLElement;
+
+      codeToCopy = `text-[${
+        output.style.fontSize
+      }] ${convertLinearGradientToTailwind(
+        output.style.backgroundImage
+      )} text-transparent bg-clip-text`;
       break;
     case 'gradient-border':
       codeToCopy = ``;
       break;
     case 'border-radius':
-      codeToCopy = `rounded-[${element.borderRadius.replace(/ /g, '_')}]`;
+      codeToCopy = `bg-[${element.borderRadius.replace(/ /g, '_')}]`;
       break;
     case 'box-shadow':
       codeToCopy = `shadow-[${element.boxShadow.replace(/ /g, '_')}]`;
