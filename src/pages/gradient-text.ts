@@ -253,7 +253,8 @@ getValues();
 
 // Tailwind codecopy handler
 function tailwindHandler() {
-  copyTailwindCodeToClipboard(attribute);
+  const outputElement = getOutput(attribute);
+  copyTailwindCodeToClipboard(attribute, outputElement);
   showPopup(
     'Tailwind Code Copied',
     'Code has been successfully copied to clipboard',
