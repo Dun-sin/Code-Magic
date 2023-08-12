@@ -9,6 +9,7 @@ import {
   getResetButton,
   getDegreeSpanElement,
   getGradientPreview,
+  getCssOrTailwindDropdown,
 } from '../lib/getElements';
 import {
   copyCSSCodeToClipboard,
@@ -19,6 +20,7 @@ import {
   setGradientDegreeValue,
   createGradientPreview,
   getColorsValue,
+  closeDropdown,
 } from '../lib/packages';
 
 type Values = {
