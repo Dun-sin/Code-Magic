@@ -291,11 +291,8 @@ const actOnTailwindGenerator = (
     case 'gradient-border':
       codeToCopy = ``;
       break;
-    case 'gradient-background':
-      codeToCopy = ``;
-      break;
     case 'border-radius':
-      codeToCopy = `rounded-[${element.borderRadius.replace(/ /g, '_')}]`;
+      codeToCopy = `bg-[${element.borderRadius.replace(/ /g, '_')}]`;
       break;
     case 'box-shadow':
       codeToCopy = `shadow-[${element.boxShadow.replace(/ /g, '_')}]`;
