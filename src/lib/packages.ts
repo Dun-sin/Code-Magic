@@ -522,3 +522,17 @@ export const whatColorButtonShouldShow = (attribute: string): void => {
     getRemoveNewColorButton(attribute).style.display = 'none';
   }
 };
+
+// close dropdown on outside click
+
+export function closeDropdown(
+  toggleFunction: () => void,
+  dropdown: HTMLElement,
+  classToToggle: string
+): void {
+  document.documentElement.addEventListener('click', function () {
+    if (dropdown.classList.contains(classToToggle)) {
+      toggleFunction();
+    }
+  });
+}

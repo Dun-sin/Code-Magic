@@ -8,11 +8,14 @@ import {
   getAllFields,
   getResetButton,
   getTailwindButton,
+  getCssOrTailwindButton,
+  getCssOrTailwindDropdown,
 } from '../lib/getElements';
 import {
   copyCSSCodeToClipboard,
   copyTailwindCodeToClipboard,
   showPopup,
+  closeDropdown,
 } from '../lib/packages';
 
 type RangeType = 'track' | 'thumb';
@@ -28,6 +31,8 @@ type Values = {
 };
 
 const attribute = 'input-range';
+const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
+const showCopyClass = 'show-css-tailwind';
 
 function setLabelValue() {
   const getThumbHeightLabel = document.getElementById(
@@ -129,12 +134,20 @@ function copyHandler() {
     'success'
   );
 }
+function getCssOrTailwind(e?: MouseEvent): void {
+  e?.stopPropagation();
+  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
+}
+
+// closes css and tailwind dropdown on outside click
+closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
 
 export const rangeGenerator = () => {
   const getCodeButton = getCopyCodeButton(attribute);
   const getTailwindCodeButtonElement = getTailwindButton(attribute);
   const getTrackColor = getColorInput1(attribute);
   const getThumbColor = getColorInput2(attribute);
+  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
 
   const getTrackHeightElement = document.getElementById(
     'track-height'
@@ -187,6 +200,7 @@ export const rangeGenerator = () => {
 
   getCodeButton.addEventListener('click', copyHandler);
   getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
+  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
 };
 
 function resetValues() {
