@@ -9,9 +9,6 @@ import {
   getResetButton,
   getDegreeSpanElement,
   getGradientPreview,
-  getTailwindButton,
-  getCssOrTailwindButton,
-  getCssOrTailwindDropdown,
 } from '../lib/getElements';
 import {
   copyCSSCodeToClipboard,
@@ -22,8 +19,6 @@ import {
   setGradientDegreeValue,
   createGradientPreview,
   getColorsValue,
-  copyTailwindCodeToClipboard,
-  closeDropdown,
 } from '../lib/packages';
 
 type Values = {
@@ -78,10 +73,6 @@ function getGradientBackgroundResult(
 
   const getCodeButtonElement = getCopyCodeButton(attribute);
   getCodeButtonElement.addEventListener('click', copyHandler);
-  const getTailwindCodeButtonElement = getTailwindButton(attribute);
-  getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
-  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
-  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
 }
 
 export function gradientBackgroundGenerator(
@@ -173,13 +164,3 @@ function getValues() {
 }
 resetValues();
 getValues();
-
-// Tailwind codecopy handler
-function tailwindHandler() {
-  copyTailwindCodeToClipboard(attribute);
-  showPopup(
-    'Tailwind Code Copied',
-    'Code has been successfully copied to clipboard',
-    'success'
-  );
-}
