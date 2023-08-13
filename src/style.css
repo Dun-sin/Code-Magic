@@ -924,8 +924,7 @@ input[type='number']::-webkit-outer-spin-button {
 
 .btn-dropdown-container,
 .image-download {
-  width: var(--generator-width);
-  display: inline-block;
+  display: block;
   justify-content: center;
   align-items: center;
   position: relative;

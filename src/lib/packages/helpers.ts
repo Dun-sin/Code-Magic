@@ -247,7 +247,7 @@ function convertLinearGradientToTailwind(gradient: string): string {
 
   function generateTailwindClasses(colors: string[]): string {
     if (colors.length === 2) {
-      return `from-[${colors[0]}] [to-[${colors[1]}]`;
+      return `from-[${colors[0]}] to-[${colors[1]}]`;
     } else if (colors.length === 3) {
       return `from-[${colors[0]}] via-[${colors[1]}] to-[${colors[2]}]`;
     } else if (colors.length === 4) {
@@ -285,6 +285,11 @@ export const actOnTailwindGenerator = (
       break;
     case 'gradient-border':
       codeToCopy = ``;
+      break;
+    case 'gradient-background':
+      codeToCopy = `${convertLinearGradientToTailwind(
+        element.backgroundImage
+      )}`;
       break;
     case 'border-radius':
       codeToCopy = `bg-[${element.borderRadius.replace(/ /g, '_')}]`;
