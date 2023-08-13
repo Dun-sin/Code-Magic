@@ -17,7 +17,7 @@ import {
   downloadSVG,
   copyTailwindCodeToClipboard,
   closeDropdown,
-} from '../lib/packages';
+} from '../lib/packages/utils';
 
 const attribute = 'pic-text';
 const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);

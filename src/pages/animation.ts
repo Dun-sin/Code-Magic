@@ -20,7 +20,7 @@ import {
   showPopup,
   slideIn,
   closeDropdown,
-} from '../lib/packages';
+} from '../lib/packages/utils';
 
 let initial_length = 0;
 // let rule_added = false;

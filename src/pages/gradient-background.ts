@@ -21,7 +21,7 @@ import {
   createGradientPreview,
   getColorsValue,
   closeDropdown,
-} from '../lib/packages';
+} from '../lib/packages/utils';
 
 type Values = {
   degree: string;

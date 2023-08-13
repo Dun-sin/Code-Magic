@@ -28,7 +28,7 @@ import {
   slideIn,
   copyTailwindCodeToClipboard,
   closeDropdown,
-} from '../lib/packages';
+} from '../lib/packages/utils';
 
 type Values = {
   hOffset: string;

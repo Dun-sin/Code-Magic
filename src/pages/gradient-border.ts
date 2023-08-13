@@ -27,7 +27,7 @@ import {
   getColorsValue,
   copyTailwindCodeToClipboard,
   closeDropdown,
-} from '../lib/packages';
+} from '../lib/packages/utils';
 
 type Values = {
   degree: string;

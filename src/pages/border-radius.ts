@@ -17,7 +17,7 @@ import {
   showPopup,
   copyTailwindCodeToClipboard,
   closeDropdown,
-} from '../lib/packages';
+} from '../lib/packages/utils';
 
 type Values = {
   BorderTop: string;

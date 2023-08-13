@@ -21,7 +21,7 @@ import {
   showPopup,
   slideIn,
   closeDropdown,
-} from '../lib/packages';
+} from '../lib/packages/utils';
 
 type Values = {
   hOffset: string;

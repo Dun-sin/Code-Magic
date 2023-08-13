@@ -12,7 +12,7 @@ import {
   getCssOrTailwindButton,
   getCssOrTailwindDropdown,
 } from '../lib/getElements';
-import {showPopup, slideIn, closeDropdown} from '../lib/packages';
+import {showPopup, slideIn, closeDropdown} from '../lib/packages/utils';
 
 type Values = {
   type: string;

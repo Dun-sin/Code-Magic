@@ -16,7 +16,7 @@ import {
   copyTailwindCodeToClipboard,
   showPopup,
   closeDropdown,
-} from '../lib/packages';
+} from '../lib/packages/utils';
 
 type RangeType = 'track' | 'thumb';
 type RangeValues = {
