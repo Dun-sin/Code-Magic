@@ -47,8 +47,9 @@ export function gradientBackgroundGenerator(
   type: 'newResults' | 'oldResults' | null
 ) {
   if (type === null) return;
+  // Show error when the colors are not entered.
   var element = gradientBackgroundInputs[0];
-  var value = element.value; // Get the value of the input field
+  var value = element.value;
   if (value.length < 3) {
     gradientBackgroundInputs.forEach((ele) => {
       getResultBtn.style.backgroundColor = 'grey';
