@@ -587,7 +587,6 @@
                   placeholder="Tap to pick a color"
                   id="gradient-background-color1"
                   class="gradient-background-inputs"
-                  required
                 />
               </label>
 
@@ -598,7 +597,6 @@
                   placeholder="Tap to pick a color"
                   id="gradient-background-color2"
                   class="gradient-background-inputs"
-                  required
                 />
               </label>
             </div>
@@ -641,7 +639,11 @@
 
             <div class="btn-container">
               <div class="reset" data-reset="gradient-background">Reset</div>
-              <div class="btn" data-button="gradient-background">
+              <div
+                class="btn"
+                data-button="gradient-background"
+                id="getResultBtn"
+              >
                 Get Result
               </div>
             </div>

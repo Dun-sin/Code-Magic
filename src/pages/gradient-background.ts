@@ -12,9 +12,9 @@ import {
   getCssOrTailwindDropdown,
   getTailwindButton,
   getCssOrTailwindButton,
-  getInputText,
 } from '../lib/getElements';
 import {
+  triggerEmptyAnimation,
   copyCSSCodeToClipboard,
   showPopup,
   whatColorButtonShouldShow,
@@ -25,7 +25,6 @@ import {
   getColorsValue,
   closeDropdown,
   copyTailwindCodeToClipboard,
-  triggerEmptyAnimation,
 } from '../lib/packages/utils';
 
 type Values = {
@@ -48,10 +47,12 @@ export function gradientBackgroundGenerator(
   type: 'newResults' | 'oldResults' | null
 ) {
   if (type === null) return;
-
   var element = gradientBackgroundInputs[0];
   var value = element.value; // Get the value of the input field
   if (value.length < 3) {
+    gradientBackgroundInputs.forEach((ele) => {
+      triggerEmptyAnimation(ele);
+    });
     return;
   }
 
