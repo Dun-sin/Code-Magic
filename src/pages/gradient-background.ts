@@ -52,12 +52,16 @@ export function gradientBackgroundGenerator(
   var value = element.value;
   if (value.length < 3) {
     gradientBackgroundInputs.forEach((ele) => {
-      getResultBtn.style.backgroundColor = 'grey';
+      if (getResultBtn) {
+        getResultBtn.style.backgroundColor = 'grey';
+      }
       triggerEmptyAnimation(ele);
     });
     return;
   } else {
-    getResultBtn.style.backgroundColor = 'blue';
+    if (getResultBtn) {
+      getResultBtn.style.backgroundColor = 'blue';
+    }
   }
 
   const getOutputElement = getOutput(attribute);
