@@ -49,14 +49,15 @@ export function gradientBackgroundGenerator(
   if (type === null) return;
   // Show error when the colors are not entered.
   var element = gradientBackgroundInputs[0];
-  var value = element.value;
-  if (value.length < 3) {
+  var element2 = gradientBackgroundInputs[1];
+  console.log(element.value.length);
+  if (element.value.length == 0 || element2.value.length == 0) {
     gradientBackgroundInputs.forEach((ele) => {
-      if (getResultBtn) {
-        getResultBtn.style.backgroundColor = 'grey';
-      }
       triggerEmptyAnimation(ele);
     });
+    if (getResultBtn) {
+      getResultBtn.style.backgroundColor = 'grey';
+    }
     return;
   } else {
     if (getResultBtn) {
