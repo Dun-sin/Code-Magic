@@ -16,6 +16,7 @@ import {
   getCssOrTailwindDropdown,
 } from '../lib/getElements';
 import {
+  triggerEmptyAnimation,
   copyCSSCodeToClipboard,
   copyTailwindCodeToClipboard,
   showPopup,
@@ -35,7 +36,7 @@ const attribute = 'box-shadow';
 let isSliderOpen = false;
 const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
 const showCopyClass = 'show-css-tailwind';
-
+const getResultBtn = document.getElementById("getResultBtn");
 function copyHandler() {
   const outputElement = getOutput(attribute);
   copyCSSCodeToClipboard(attribute, outputElement);
@@ -66,6 +67,21 @@ export function boxShadowGenerator(
   const color = getShadowColor(attribute);
   const getOutputElement = getOutput(attribute);
   const resultPage = getResultPage();
+
+  if (
+    horizontalOffset.value === '' ||
+    verticalOffset.value === '' ||
+    blur.value === '' ||
+    spread.value === '' ||
+    color.value === ''
+  ) {
+    triggerEmptyAnimation(color);
+    if(getResultBtn){
+      getResultBtn.style.backgroundColor = 'grey';
+    }
+    console.log("enter any input");
+    return;
+  }
 
   resultPage.style.display = 'flex';
   if (type === 'oldResults') return;
