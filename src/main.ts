@@ -42,6 +42,7 @@ import {
   getRadioButtonSet,
   getRange,
   getResultPage,
+  getInputText,
 } from './lib/getElements';
 import {addTransformListener, transformGenerator} from './pages/transform';
 
@@ -416,8 +417,10 @@ generators.forEach((generator) => {
 //  event listener for get result button
 getResultsButton.forEach((getResult) => {
   getResult?.addEventListener('click', () => {
-    openSidePanelButton.style.display = 'flex';
-
+    if (getInputText('gradient-text')?.value.length === 0) {
+      openSidePanelButton.style.display = 'none';
+    }else { openSidePanelButton.style.display = 'flex'; }
+    
     showResult(getResult.getAttribute('data-button'), 'newResults');
     sidebar.animate(sideBarSlide, sideBarTiming);
     sidebar.style.left = '0%';
