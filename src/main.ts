@@ -42,7 +42,7 @@ import {
   getRadioButtonSet,
   getRange,
   getResultPage,
-  getInputText,
+  getInputText, //needed to check if the input text is empty
 } from './lib/getElements';
 import {addTransformListener, transformGenerator} from './pages/transform';
 
@@ -417,6 +417,7 @@ generators.forEach((generator) => {
 //  event listener for get result button
 getResultsButton.forEach((getResult) => {
   getResult?.addEventListener('click', () => {
+    //check if inputtext is empty, if not show sidePanel button
     if (getInputText('gradient-text')?.value.length === 0) {
       openSidePanelButton.style.display = 'none';
     }else { openSidePanelButton.style.display = 'flex'; }
