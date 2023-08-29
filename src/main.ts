@@ -121,7 +121,7 @@ const dropDownElements = document.querySelectorAll('.dropdown');
 const getDegreeElement = getRange('animation');
 const getRadioButtonSetElement = getRadioButtonSet('animation');
 const getDurationElement = getInputSpinner('animation');
-const events = ["dragover", "drop"];
+const events = ['dragover', 'drop'];
 
 if (openSidePanelButton) {
   openSidePanelButton.style.display = 'none';
@@ -221,6 +221,36 @@ function generatorsFunction(attribute: string, type: openResults): void {
   attribute === 'transform' && transformGenerator(type);
 }
 
+/*
+ * Util functions for capitalizing first letter of a string
+ */
+function capitalizeWords(str: string): string {
+  return str.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
+}
+
+/*
+ * update heading of generator
+ * @param selectedContent The attribute name of the generator element
+ * @returns void
+ * @example updateHeading('gradient-text')
+ */
+function updateHeading(selectedContent: string): void {
+  const generatorDiv = document.querySelector('.generators');
+
+  if (generatorDiv) {
+    const heading = document.createElement('h1');
+    const attributeDataCapitalize = capitalizeWords(selectedContent);
+    heading.textContent = attributeDataCapitalize;
+
+    if (generatorDiv.lastElementChild) {
+      generatorDiv.removeChild(generatorDiv.lastElementChild);
+    }
+
+    heading.classList.add('generator-heading');
+    generatorDiv.appendChild(heading);
+  }
+}
+
 /**
  * use to toggle visibility of content in generators
  *
@@ -235,6 +265,8 @@ function showContent(attribute: string, display: Display): void {
   const highLightGen = document.querySelector(
     `[data-gen=${attribute}]`
   ) as HTMLElement;
+
+  updateHeading(attribute);
 
   generatorsContent.forEach((item) => {
     const element = <HTMLElement>item;
@@ -333,10 +365,10 @@ document.addEventListener('click', (e: Event) => {
 });
 
 // Disable file opening in browser
-for ( let event of events) {
+for (let event of events) {
   document.addEventListener(event, (e) => {
     e.preventDefault();
-  })
+  });
 }
 
 // clicking on the menu icon should close the nav bar
@@ -369,7 +401,7 @@ openSidePanelButton?.addEventListener('click', () => {
   sidebar.style.left = '0%';
 });
 
-// onClick event listener for the closebar icon
+// onClick event listener for the closeBar icon
 closeBar?.addEventListener('click', () => {
   sidebar.animate(sideBarSlideOut, sideBarTiming);
   sidebar.style.left = '100%';
@@ -389,7 +421,7 @@ getDurationElement?.addEventListener('change', () => {
 
 getDegreeElement?.addEventListener('change', () => displayAnimationPreview());
 
-// adds event listner for which generator should show
+// adds event listener for which generator should show
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
     const checking = generator.getAttribute('data-gen');
