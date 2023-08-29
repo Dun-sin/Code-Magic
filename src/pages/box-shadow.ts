@@ -6,6 +6,7 @@ import {
   getShadowSpread,
   getShadowColor,
   getResultPage,
+  getResultButton,
   getCopyCodeButton,
   getPreviewSlider,
   getShadowFields,
@@ -16,6 +17,7 @@ import {
   getCssOrTailwindDropdown,
 } from '../lib/getElements';
 import {
+  triggerEmptyAnimation,
   copyCSSCodeToClipboard,
   copyTailwindCodeToClipboard,
   showPopup,
@@ -35,7 +37,6 @@ const attribute = 'box-shadow';
 let isSliderOpen = false;
 const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
 const showCopyClass = 'show-css-tailwind';
-
 function copyHandler() {
   const outputElement = getOutput(attribute);
   copyCSSCodeToClipboard(attribute, outputElement);
@@ -66,6 +67,21 @@ export function boxShadowGenerator(
   const color = getShadowColor(attribute);
   const getOutputElement = getOutput(attribute);
   const resultPage = getResultPage();
+
+  if (
+    horizontalOffset.value === '' ||
+    verticalOffset.value === '' ||
+    blur.value === '' ||
+    spread.value === '' ||
+    color.value === ''
+  ) {
+    triggerEmptyAnimation(color);
+    const resultBtn = getResultButton(attribute);
+    if(resultBtn){
+      resultBtn.style.backgroundColor = 'grey';
+    }
+    return;
+  }
 
   resultPage.style.display = 'flex';
   if (type === 'oldResults') return;
