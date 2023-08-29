@@ -6,6 +6,7 @@ import {
   getShadowSpread,
   getShadowColor,
   getResultPage,
+  getResultButton,
   getCopyCodeButton,
   getPreviewSlider,
   getShadowFields,
@@ -36,7 +37,6 @@ const attribute = 'box-shadow';
 let isSliderOpen = false;
 const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
 const showCopyClass = 'show-css-tailwind';
-const getResultBtn = document.getElementById("getResultBtn");
 function copyHandler() {
   const outputElement = getOutput(attribute);
   copyCSSCodeToClipboard(attribute, outputElement);
@@ -76,10 +76,10 @@ export function boxShadowGenerator(
     color.value === ''
   ) {
     triggerEmptyAnimation(color);
-    if(getResultBtn){
-      getResultBtn.style.backgroundColor = 'grey';
+    const resultBtn = getResultButton(attribute);
+    if(resultBtn){
+      resultBtn.style.backgroundColor = 'grey';
     }
-    console.log("enter any input");
     return;
   }
 
