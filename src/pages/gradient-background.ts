@@ -35,7 +35,6 @@ const attribute = 'gradient-background';
 
 const getNewColorButtonElement = getNewColorButton(attribute);
 const getRemoveColorButtonElement = getRemoveNewColorButton(attribute);
-const getResultBtn = document.getElementById('getResultBtn');
 let gradientBackgroundInputs = getAllInputElements('gradient-background');
 
 const getDegreeElement = getRange(attribute);
@@ -55,14 +54,7 @@ export function gradientBackgroundGenerator(
     gradientBackgroundInputs.forEach((ele) => {
       triggerEmptyAnimation(ele);
     });
-    if (getResultBtn) {
-      getResultBtn.style.backgroundColor = 'grey';
-    }
     return;
-  } else {
-    if (getResultBtn) {
-      getResultBtn.style.backgroundColor = 'blue';
-    }
   }
 
   const getOutputElement = getOutput(attribute);
