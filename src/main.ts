@@ -277,6 +277,7 @@ function showContent(attribute: string, display: Display): void {
     generatorNav.style.background = 'none';
   });
 
+  // update heading of generator
   updateHeading(attribute);
 
   showGen.style.display = `${display}`;
