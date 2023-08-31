@@ -121,7 +121,7 @@ const dropDownElements = document.querySelectorAll('.dropdown');
 const getDegreeElement = getRange('animation');
 const getRadioButtonSetElement = getRadioButtonSet('animation');
 const getDurationElement = getInputSpinner('animation');
-const events = ["dragover", "drop"];
+const events = ['dragover', 'drop'];
 
 if (openSidePanelButton) {
   openSidePanelButton.style.display = 'none';
@@ -221,6 +221,36 @@ function generatorsFunction(attribute: string, type: openResults): void {
   attribute === 'transform' && transformGenerator(type);
 }
 
+/*
+ * Function Capitalize the first letter of a string
+ */
+function capitalizeWords(str: string): string {
+  return str.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
+}
+
+/*
+ * update heading of generator
+ * @param selectedContent The attribute name of the generator element
+ * @returns void
+ * @example updateHeading('gradient-text')
+ */
+function updateHeading(selectedContent: string): void {
+  const generatorDiv = document.querySelector('.generators');
+
+  if (generatorDiv) {
+    const heading = document.createElement('h1');
+    const attributeDataCapitalize = capitalizeWords(selectedContent);
+    heading.textContent = attributeDataCapitalize;
+
+    if (generatorDiv.lastElementChild) {
+      generatorDiv.removeChild(generatorDiv.lastElementChild);
+    }
+
+    heading.classList.add('generator-heading');
+    generatorDiv.appendChild(heading);
+  }
+}
+
 /**
  * use to toggle visibility of content in generators
  *
@@ -246,6 +276,8 @@ function showContent(attribute: string, display: Display): void {
     generatorNav.style.border = 'none';
     generatorNav.style.background = 'none';
   });
+
+  updateHeading(attribute);
 
   showGen.style.display = `${display}`;
   highLightGen.style.background = `linear-gradient(80deg,var(--primary-color), var(--secondary-color))`;
@@ -333,10 +365,10 @@ document.addEventListener('click', (e: Event) => {
 });
 
 // Disable file opening in browser
-for ( let event of events) {
+for (let event of events) {
   document.addEventListener(event, (e) => {
     e.preventDefault();
-  })
+  });
 }
 
 // clicking on the menu icon should close the nav bar
