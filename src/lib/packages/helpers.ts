@@ -298,7 +298,7 @@ export const actOnTailwindGenerator = (
       codeToCopy = `shadow-[${element.boxShadow.replace(/ /g, '_')}]`;
       break;
     case 'text-shadow':
-      codeToCopy = ``;
+      codeToCopy = `text-[${element.textShadow.replace(/ /g, ' ')}]`;
       break;
     case 'input-range':
       codeToCopy = ``;
