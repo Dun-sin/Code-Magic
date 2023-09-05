@@ -18,6 +18,7 @@ import {
   getCssOrTailwindDropdown,
   getPngOrSvgButton,
   getPngOrSvgDropdown,
+  getOpenSideBarButton,
 } from '../lib/getElements';
 import {
   copyCSSCodeToClipboard,
@@ -96,6 +97,7 @@ export function textShadowGenerator(
   const resultPage = getResultPage();
 
   if (getInputElement.value.length === 0) {
+    getOpenSideBarButton().style.display = 'none';
     triggerEmptyAnimation(getInputElement);
     return;
   }

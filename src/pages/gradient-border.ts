@@ -14,6 +14,7 @@ import {
   getTailwindButton,
   getCssOrTailwindButton,
   getCssOrTailwindDropdown,
+  getOpenSideBarButton,
 } from '../lib/getElements';
 import {
   copyCSSCodeToClipboard,
@@ -105,7 +106,15 @@ export function gradientBorderGenerator(
   type: 'newResults' | 'oldResults' | null
 ): void {
   if (type === null) return;
-  resultPage.style.display = 'flex';
+  const element = gradientBorderInputs[0];
+  const value = element.value;
+  if (value.length < 3) {
+    getOpenSideBarButton().style.display = 'none';
+  }else{
+    getOpenSideBarButton().style.display = 'flex';
+    resultPage.style.display = 'flex';
+  }
+  
 
   if (type === 'oldResults') return;
 
