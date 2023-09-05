@@ -115,19 +115,26 @@ nav ul {
 .dropdown > ul {
   visibility: hidden;
   position: relative;
-  height: 0px;
+  max-height: 0px;
+  opacity: 0;
+  transform: scaley(0);
+  transform-origin: 50% 0;
+  margin-bottom: 10px;
 }
 
 .dropdown > ul {
-  transition: 350ms transform;
+  transition-property: transform, max-height, opacity;
+  transition-duration: 350ms;
+  /* transition: transform 350ms, max-height 350ms, opacity 350ms; */
   transition-timing-function: ease-in-out;
 }
 
-.dropdown:hover > ul,
+/* .dropdown:hover > ul, */
 #showList {
   visibility: visible;
-  height: fit-content;
-  transform: translateX(10px);
+  max-height: 50px;
+  opacity: 1;
+  transform: scale(1) translateX(10px);
 }
 
 #category {
