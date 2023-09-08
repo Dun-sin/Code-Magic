@@ -19,7 +19,6 @@ import {
   getAllInputElements,
 } from '../lib/getElements';
 import {
-  triggerEmptyAnimation,
   copyCSSCodeToClipboard,
   copyTailwindCodeToClipboard,
   showPopup,
