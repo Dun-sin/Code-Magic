@@ -12,6 +12,7 @@ import {
   getCssOrTailwindDropdown,
   getTailwindButton,
   getCssOrTailwindButton,
+  getOpenSideBarButton,
 } from '../lib/getElements';
 import {
   triggerEmptyAnimation,
@@ -55,6 +56,7 @@ export function gradientBackgroundGenerator(
       if (getResultBtn) {
         getResultBtn.style.backgroundColor = 'grey';
       }
+      getOpenSideBarButton().style.display = 'none';
       triggerEmptyAnimation(ele);
     });
     return;
