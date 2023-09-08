@@ -6,7 +6,6 @@ import {
   getShadowSpread,
   getShadowColor,
   getResultPage,
-  getResultButton,
   getCopyCodeButton,
   getPreviewSlider,
   getShadowFields,
