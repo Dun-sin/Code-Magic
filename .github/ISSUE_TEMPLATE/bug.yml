@@ -46,7 +46,7 @@ body:
     attributes:
       label: "👀 Have you checked if this issue has been raised before?"
       options:
-        - label: "I checked and didn't find similar issue"
+        - label: "I checked and didn't find a similar issue"
           required: true
 
   - type: checkboxes
@@ -59,7 +59,7 @@ body:
 
   - type: dropdown
     attributes:
-      label: Are you willing to work on this issue ?
+      label: Are you willing to work on this issue?
       description: This is absolutely not required, but we are happy to guide you in the contribution process.
       options:
         - "Yes I am willing to submit a PR!"
@@ -67,5 +67,5 @@ body:
   - type: markdown
     attributes:
       value: |
-        Follow me on Twitter [here](https://twitter.com/DunsinWebDev)
-        Feel free to Join the discord server [here](https://discord.gg/kcFraw3nhz) and check out other cool repositories [here](https://github.com/Dunsin)
+        Follow me on Twitter [here](https://twitter.com/dunsincodes)
+        Feel free to Join the discord server [here](https://discord.gg/kcFraw3nhz) and check out other cool repositories [here](https://github.com/Dun-sin)

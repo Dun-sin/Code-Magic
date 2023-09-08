@@ -6,6 +6,7 @@ import {
   getShadowSpread,
   getShadowColor,
   getResultPage,
+  getResultButton,
   getCopyCodeButton,
   getPreviewSlider,
   getShadowFields,
@@ -18,6 +19,7 @@ import {
   getAllInputElements,
 } from '../lib/getElements';
 import {
+  triggerEmptyAnimation,
   copyCSSCodeToClipboard,
   copyTailwindCodeToClipboard,
   showPopup,
