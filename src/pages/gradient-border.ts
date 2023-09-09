@@ -14,9 +14,10 @@ import {
   getTailwindButton,
   getCssOrTailwindButton,
   getCssOrTailwindDropdown,
-  getOpenSideBarButton,
+  getResultButton,
 } from '../lib/getElements';
 import {
+  triggerEmptyAnimation,
   copyCSSCodeToClipboard,
   showPopup,
   addRule,
@@ -42,7 +43,6 @@ const getRemoveColorButtonElement = getRemoveNewColorButton(attribute);
 
 const getBorderRadiusInput = getRadiusInput(attribute);
 const toggleRadiusInputForGradientBorder = getCheckbox(attribute);
-const getOutputElement = getOutput(attribute);
 
 const getDegreeElement = getRange(attribute);
 const resetButton = getResetButton(attribute);
@@ -50,8 +50,6 @@ const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
 const showCopyClass = 'show-css-tailwind';
 
 let gradientBorderInputs = getAllInputElements('gradient-border');
-
-const resultPage = getResultPage();
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
@@ -106,16 +104,34 @@ export function gradientBorderGenerator(
   type: 'newResults' | 'oldResults' | null
 ): void {
   if (type === null) return;
-  const element = gradientBorderInputs[0];
-  const value = element.value;
-  if (value.length < 3) {
-    getOpenSideBarButton().style.display = 'none';
-  }else{
-    getOpenSideBarButton().style.display = 'flex';
-    resultPage.style.display = 'flex';
-  }
-  
 
+  const resultBtn = getResultButton(attribute);
+
+  const item1 = gradientBorderInputs[0];
+  const val1 = item1.value.length;
+
+  const item2 = gradientBorderInputs[1];
+  const val2 = item2.value.length;
+
+  //Show error if input values are empty
+  if ((resultBtn && val1 < 1) || val2 < 1) {
+    gradientBorderInputs.forEach((e) => {
+      if (e.value.length === 0) {
+        triggerEmptyAnimation(e);
+      }
+      resultBtn.style.backgroundColor = 'grey';
+    });
+    return;
+  } else {
+    if (resultBtn) {
+      resultBtn.style.backgroundColor = 'blue';
+    }
+  }
+
+  const getOutputElement = getOutput(attribute);
+  const resultPage = getResultPage();
+
+  resultPage.style.display = 'flex';
   if (type === 'oldResults') return;
 
   if (!toggleRadiusInputForGradientBorder.checked) {
