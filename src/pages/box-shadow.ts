@@ -6,7 +6,6 @@ import {
   getShadowSpread,
   getShadowColor,
   getResultPage,
-  getResultButton,
   getCopyCodeButton,
   getPreviewSlider,
   getShadowFields,
@@ -15,9 +14,10 @@ import {
   getTailwindButton,
   getCssOrTailwindButton,
   getCssOrTailwindDropdown,
+  getOpenSideBarButton,
+  getAllInputElements,
 } from '../lib/getElements';
 import {
-  triggerEmptyAnimation,
   copyCSSCodeToClipboard,
   copyTailwindCodeToClipboard,
   showPopup,
@@ -37,6 +37,8 @@ const attribute = 'box-shadow';
 let isSliderOpen = false;
 const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
 const showCopyClass = 'show-css-tailwind';
+const boxshadowInputs = getAllInputElements(attribute);
+
 function copyHandler() {
   const outputElement = getOutput(attribute);
   copyCSSCodeToClipboard(attribute, outputElement);
@@ -67,23 +69,17 @@ export function boxShadowGenerator(
   const color = getShadowColor(attribute);
   const getOutputElement = getOutput(attribute);
   const resultPage = getResultPage();
+  
+  const element = boxshadowInputs[0];
+  const value = element.value;
 
-  if (
-    horizontalOffset.value === '' ||
-    verticalOffset.value === '' ||
-    blur.value === '' ||
-    spread.value === '' ||
-    color.value === ''
-  ) {
-    triggerEmptyAnimation(color);
-    const resultBtn = getResultButton(attribute);
-    if(resultBtn){
-      resultBtn.style.backgroundColor = 'grey';
-    }
-    return;
+  if (value.length < 3) {
+    getOpenSideBarButton().style.display = 'none';
+  }else{
+    getOpenSideBarButton().style.display = 'flex';
+    resultPage.style.display = 'flex';
   }
 
-  resultPage.style.display = 'flex';
   if (type === 'oldResults') return;
 
   const values: Values = {
