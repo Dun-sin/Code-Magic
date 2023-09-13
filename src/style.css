@@ -271,6 +271,17 @@ main > section:last-of-type {
   position: relative;
 }
 
+.generator-tool-title {
+  position: fixed;
+  top: 7%;
+  left: 25%;
+}
+
+.generator-tool-title h1 {
+  font-size: 2.25rem;
+  font-weight: 600;
+}
+
 /* inputs */
 .generators > div {
   display: none;
@@ -1134,6 +1145,10 @@ a {
     margin: 0.8rem auto;
   }
 
+  .generator-tool-title {
+    left: 30%;
+  }
+
   .input {
     padding: 2rem;
   }
@@ -1179,6 +1194,10 @@ a {
 
   .generator {
     margin: 0.8rem auto;
+  }
+
+  .generator-tool-title {
+    left: auto;
   }
 
   footer {
