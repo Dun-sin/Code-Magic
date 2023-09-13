@@ -108,10 +108,14 @@ export const actOnGenerator = (
       `;
       break;
     case 'text-shadow':
+
       element = outputElement.style;
+      // const textShadow = '2px 2px 4px rgba(0, 0, 0, 0.5)';
+      const textShadow = window.getComputedStyle(outputElement).textShadow;
       codeToCopy = `
         div {
-          text-shadow: ${element.textShadow};
+          /* Apply text shadow */
+          text-shadow: ${textShadow};
         }
       `;
       break;
