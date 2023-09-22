@@ -1,7 +1,7 @@
 name: 🐛 Bug
 description: Report an issue to help improve the project.
 title: "[BUG] <what went wrong>"
-labels: ["bug"]
+labels: ["bug", "hacktoberfast"]
 body:
   - type: textarea
     id: description
