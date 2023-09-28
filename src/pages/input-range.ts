@@ -253,7 +253,8 @@ getValues();
 
 // Tailwind codecopy handler
 function tailwindHandler() {
-  copyTailwindCodeToClipboard(attribute);
+  const element = document.querySelector('#preview-range') as HTMLInputElement;
+  copyTailwindCodeToClipboard(attribute, element);
   showPopup(
     'Tailwind Code Copied',
     'Code has been successfully copied to clipboard',
