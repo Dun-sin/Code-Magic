@@ -261,79 +261,77 @@ function convertLinearGradientToTailwind(gradient: string): string {
 function convertInputRangeStylesToTailwind(element: CSSStyleDeclaration) {
   const tailwindClasses = [];
 
-  tailwindClasses.push(`appearance-none bg-transparent`);
+  tailwindClasses.push(`appearance-none`);
 
   // Track height
   if (element.getPropertyValue('--preview-track-height')) {
+    const trackHeight = element.getPropertyValue('--preview-track-height');
+
     tailwindClasses.push(
-      `[&::-webkit-slider-runnable-track]:h-[${element.getPropertyValue(
-        '--preview-track-height'
-      )}]`
+      `[&::-webkit-slider-runnable-track]:h-[${trackHeight}] h-[${trackHeight}]`
     );
   }
 
   // Track width
   if (element.getPropertyValue('--preview-track-width')) {
+    const trackWidth = element.getPropertyValue('--preview-track-width');
+
     tailwindClasses.push(
-      `[&::-webkit-slider-runnable-track]:w-[${element.getPropertyValue(
-        '--preview-track-width'
-      )}]`
+      `[&::-webkit-slider-runnable-track]:w-[${trackWidth}] w-[${trackWidth}]`
     );
   }
 
   // Track radius
   if (element.getPropertyValue('--preview-track-radius')) {
+    const trackRadius = element.getPropertyValue('--preview-track-radius');
+
     tailwindClasses.push(
-      `[&::-webkit-slider-thumb]:rounded-[${element.getPropertyValue(
-        '--preview-track-radius'
-      )}]`
+      `[&::-webkit-slider-runnable-track]:rounded-[${trackRadius}] rounded-[${trackRadius}]`
     );
   }
 
   // Thumb height
   if (element.getPropertyValue('--preview-thumb-height')) {
-    tailwindClasses.push('[&::-webkit-slider-thumb]:appearance-none');
-    tailwindClasses.push('[&::-webkit-slider-thumb]:mt-[-3.2px]');
+    const thumbHeight = element.getPropertyValue('--preview-thumb-height');
+
     tailwindClasses.push(
-      `[&::-webkit-slider-thumb]:h-[${element.getPropertyValue(
-        '--preview-thumb-height'
-      )}]`
+      `[&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:mt-[-3.2px] [&::-webkit-slider-thumb]:h-[${thumbHeight}] [&::-moz-range-thumb]:h-[${thumbHeight}]`
     );
   }
 
   // Thumb width
   if (element.getPropertyValue('--preview-thumb-width')) {
+    const thumbWidth = element.getPropertyValue('--preview-thumb-width');
+
     tailwindClasses.push(
-      `[&::-webkit-slider-thumb]:w-[${element.getPropertyValue(
-        '--preview-thumb-width'
-      )}]`
+      `[&::-webkit-slider-thumb]:w-[${thumbWidth}] [&::-moz-range-thumb]:w-[${thumbWidth}]`
     );
   }
 
   // Thumb radius
   if (element.getPropertyValue('--preview-thumb-radius')) {
+    const thumbRadius = element.getPropertyValue('--preview-thumb-radius');
+
     tailwindClasses.push(
-      `[&::-webkit-slider-runnable-track]:rounded-[${element.getPropertyValue(
-        '--preview-thumb-radius'
-      )}]`
+      `[&::-webkit-slider-thumb]:rounded-[${thumbRadius}] [&::-moz-range-thumb]:rounded-[${thumbRadius}]`
     );
   }
 
   // Thumb color
   if (element.getPropertyValue('--preview-thumb-color')) {
+    const thumbColor = element.getPropertyValue('--preview-thumb-color');
+
     tailwindClasses.push(
-      `[&::-webkit-slider-thumb]:bg-[${element.getPropertyValue(
-        '--preview-thumb-color'
-      )}]`
+      `[&::-webkit-slider-thumb]:bg-[${thumbColor}] [&::-moz-range-thumb]:bg-[${thumbColor}]`
     );
   }
 
   // Track color
   if (element.getPropertyValue('--preview-track-color')) {
+    const trackColor = element.getPropertyValue('--preview-track-color');
+
     tailwindClasses.push(
-      `[&::-webkit-slider-runnable-track]:bg-[${element.getPropertyValue(
-        '--preview-track-color'
-      )}]`
+      `[&::-webkit-slider-runnable-track]:bg-[${trackColor}] bg-[${trackColor}]`
     );
   }
 
