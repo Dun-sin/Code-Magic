@@ -258,6 +258,86 @@ function convertLinearGradientToTailwind(gradient: string): string {
   }
 }
 
+function convertInputRangeStylesToTailwind(element: CSSStyleDeclaration) {
+  const tailwindClasses = [];
+
+  tailwindClasses.push(`appearance-none`);
+
+  // Track height
+  if (element.getPropertyValue('--preview-track-height')) {
+    const trackHeight = element.getPropertyValue('--preview-track-height');
+
+    tailwindClasses.push(
+      `[&::-webkit-slider-runnable-track]:h-[${trackHeight}] h-[${trackHeight}]`
+    );
+  }
+
+  // Track width
+  if (element.getPropertyValue('--preview-track-width')) {
+    const trackWidth = element.getPropertyValue('--preview-track-width');
+
+    tailwindClasses.push(
+      `[&::-webkit-slider-runnable-track]:w-[${trackWidth}] w-[${trackWidth}]`
+    );
+  }
+
+  // Track radius
+  if (element.getPropertyValue('--preview-track-radius')) {
+    const trackRadius = element.getPropertyValue('--preview-track-radius');
+
+    tailwindClasses.push(
+      `[&::-webkit-slider-runnable-track]:rounded-[${trackRadius}] rounded-[${trackRadius}]`
+    );
+  }
+
+  // Thumb height
+  if (element.getPropertyValue('--preview-thumb-height')) {
+    const thumbHeight = element.getPropertyValue('--preview-thumb-height');
+
+    tailwindClasses.push(
+      `[&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:mt-[-3.2px] [&::-webkit-slider-thumb]:h-[${thumbHeight}] [&::-moz-range-thumb]:h-[${thumbHeight}]`
+    );
+  }
+
+  // Thumb width
+  if (element.getPropertyValue('--preview-thumb-width')) {
+    const thumbWidth = element.getPropertyValue('--preview-thumb-width');
+
+    tailwindClasses.push(
+      `[&::-webkit-slider-thumb]:w-[${thumbWidth}] [&::-moz-range-thumb]:w-[${thumbWidth}]`
+    );
+  }
+
+  // Thumb radius
+  if (element.getPropertyValue('--preview-thumb-radius')) {
+    const thumbRadius = element.getPropertyValue('--preview-thumb-radius');
+
+    tailwindClasses.push(
+      `[&::-webkit-slider-thumb]:rounded-[${thumbRadius}] [&::-moz-range-thumb]:rounded-[${thumbRadius}]`
+    );
+  }
+
+  // Thumb color
+  if (element.getPropertyValue('--preview-thumb-color')) {
+    const thumbColor = element.getPropertyValue('--preview-thumb-color');
+
+    tailwindClasses.push(
+      `[&::-webkit-slider-thumb]:bg-[${thumbColor}] [&::-moz-range-thumb]:bg-[${thumbColor}]`
+    );
+  }
+
+  // Track color
+  if (element.getPropertyValue('--preview-track-color')) {
+    const trackColor = element.getPropertyValue('--preview-track-color');
+
+    tailwindClasses.push(
+      `[&::-webkit-slider-runnable-track]:bg-[${trackColor}] bg-[${trackColor}]`
+    );
+  }
+
+  return tailwindClasses.join(' ');
+}
+
 /**
  * what should copy when the copy Tailwind button is clicked
  *
@@ -301,7 +381,7 @@ export const actOnTailwindGenerator = (
       codeToCopy = `[text-shadow:${element.textShadow.replace(/[\s,]/g, '_')}]`;
       break;
     case 'input-range':
-      codeToCopy = ``;
+      codeToCopy = `${convertInputRangeStylesToTailwind(element)}`;
       break;
     default:
       codeToCopy = `
