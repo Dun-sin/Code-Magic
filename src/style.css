@@ -421,6 +421,7 @@ input::placeholder {
 
 .newColor {
   display: flex;
+  align-items: center;
   background-color: var(--primary-color);
   padding: 5px;
   border-radius: 2px;
