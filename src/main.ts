@@ -453,6 +453,11 @@ dropDownElements.forEach((dropDown) => {
 
   const listElement = dropDown.lastElementChild as HTMLElement;
 
+  // Prevent the click event on subitems from propagating to the parent dropdown
+  listElement.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
   // loop through children of dropdown and add event listener to each child
   for (let i = 0; i < listElement.children.length; i++) {
     const child = listElement.children[i] as HTMLElement;
