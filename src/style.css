@@ -115,19 +115,26 @@ nav ul {
 .dropdown > ul {
   visibility: hidden;
   position: relative;
-  height: 0px;
+  max-height: 0px;
+  opacity: 0;
+  transform: scaley(0);
+  transform-origin: 50% 0;
+  margin-bottom: 10px;
 }
 
 .dropdown > ul {
-  transition: 350ms transform;
+  transition-property: transform, max-height, opacity;
+  transition-duration: 350ms;
+  /* transition: transform 350ms, max-height 350ms, opacity 350ms; */
   transition-timing-function: ease-in-out;
 }
 
-.dropdown:hover > ul,
+/* .dropdown:hover > ul, */
 #showList {
   visibility: visible;
-  height: fit-content;
-  transform: translateX(10px);
+  max-height: 50px;
+  opacity: 1;
+  transform: scale(1) translateX(10px);
 }
 
 #category {
@@ -262,6 +269,17 @@ main > section:last-of-type {
   align-items: center;
   justify-content: center;
   position: relative;
+}
+
+.generator-tool-title {
+  position: fixed;
+  top: 7%;
+  left: 25%;
+}
+
+.generator-tool-title h1 {
+  font-size: 2.25rem;
+  font-weight: 600;
 }
 
 /* inputs */
@@ -403,6 +421,7 @@ input::placeholder {
 
 .newColor {
   display: flex;
+  align-items: center;
   background-color: var(--primary-color);
   padding: 5px;
   border-radius: 2px;
@@ -626,6 +645,8 @@ input[type='number']::-webkit-outer-spin-button {
   cursor: pointer;
   margin-top: calc(var(--spacing) + 10px);
   border: none;
+  font-size: 14px;
+  gap: 0.7rem;
 }
 
 .btn:hover {
@@ -916,14 +937,51 @@ input[type='number']::-webkit-outer-spin-button {
 
 .download-btn {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: min(25%, 35%);
 }
 
+.btn-dropdown-container,
 .image-download {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  gap: 20px;
+}
+
+.btn-dropdown-container .css-tailwind,
+.image-download .png-svg {
+  visibility: hidden;
+  position: absolute;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  transition: all 0.1s cubic-bezier(0.16, 1, 0.5, 1);
+  transform: translateY(0.5rem);
+  margin-top: 0.3rem;
+  opacity: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+}
+
+.css-tailwind.show-css-tailwind,
+.png-svg.show-png-svg {
+  visibility: visible;
+  transform: translateY(0rem);
+  opacity: 1;
+}
+
+.dropdown-item {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.5rem;
+  padding: 0.3rem 0.3rem 0.3rem 0.2rem;
+  font-size: 12px;
+}
+.dropdown-item:hover {
+  background-color: #0c49d2;
 }
 
 .image-download > button:first-of-type {
@@ -1120,6 +1178,10 @@ a {
     margin: 0.8rem auto;
   }
 
+  .generator-tool-title {
+    left: 30%;
+  }
+
   .input {
     padding: 2rem;
   }
@@ -1165,6 +1227,10 @@ a {
 
   .generator {
     margin: 0.8rem auto;
+  }
+
+  .generator-tool-title {
+    left: auto;
   }
 
   footer {

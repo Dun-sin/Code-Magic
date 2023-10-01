@@ -12,8 +12,15 @@ import {
   getResultPage,
   getStyleSheet,
   getTailwindButton,
+  getCssOrTailwindButton,
+  getCssOrTailwindDropdown,
 } from '../lib/getElements';
-import {setGradientDegreeValue, showPopup, slideIn} from '../lib/packages';
+import {
+  setGradientDegreeValue,
+  showPopup,
+  slideIn,
+  closeDropdown,
+} from '../lib/packages/utils';
 
 let initial_length = 0;
 // let rule_added = false;
@@ -34,8 +41,18 @@ const getTailwindCodeButtonElement = getTailwindButton(attribute);
 const getOutputElement = getOutput(attribute);
 const getDegreeElement = getRange(attribute);
 const getRadioButtonSetElement = getRadioButtonSet(attribute);
+const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
+const showCopyClass = 'show-css-tailwind';
 
 const preview = getPreviewSlider(attribute);
+
+function getCssOrTailwind(e?: MouseEvent): void {
+  e?.stopPropagation();
+  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
+}
+
+// closes css and tailwind dropdown on outside click
+closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
 
 initialConfiguration(
   getRadioButtonSetElement,
@@ -86,6 +103,8 @@ export function animationGenerator(type: 'newResults' | 'oldResults' | null) {
     );
   });
   manageTailwindAnimation(values);
+  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
+  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
 }
 
 // configuring animation preview

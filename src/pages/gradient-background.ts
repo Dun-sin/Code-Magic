@@ -9,9 +9,13 @@ import {
   getResetButton,
   getDegreeSpanElement,
   getGradientPreview,
+  getCssOrTailwindDropdown,
   getTailwindButton,
+  getCssOrTailwindButton,
+  getOpenSideBarButton,
 } from '../lib/getElements';
 import {
+  triggerEmptyAnimation,
   copyCSSCodeToClipboard,
   showPopup,
   whatColorButtonShouldShow,
@@ -20,8 +24,9 @@ import {
   setGradientDegreeValue,
   createGradientPreview,
   getColorsValue,
+  closeDropdown,
   copyTailwindCodeToClipboard,
-} from '../lib/packages';
+} from '../lib/packages/utils';
 
 type Values = {
   degree: string;
@@ -31,48 +36,35 @@ const attribute = 'gradient-background';
 
 const getNewColorButtonElement = getNewColorButton(attribute);
 const getRemoveColorButtonElement = getRemoveNewColorButton(attribute);
-
+const getResultBtn = document.getElementById('getResultBtn');
 let gradientBackgroundInputs = getAllInputElements('gradient-background');
 
 const getDegreeElement = getRange(attribute);
 const resetButton = getResetButton(attribute);
-
-function copyHandler() {
-  const outputElement = getOutput(attribute);
-  copyCSSCodeToClipboard(attribute, outputElement);
-  showPopup(
-    'Code Copied',
-    'Code has been successfully copied to clipboard',
-    'success'
-  );
-}
-
-/**
- * sets the result to the output element
- *
- * @param attribute attribute name of the generator
- * @param values object that contains all values entered by users
- * @param outputElement output element to display result
- */
-function getGradientBackgroundResult(
-  attribute: string,
-  values: Values,
-  outputElement: HTMLElement
-): void {
-  outputElement.style.background = `linear-gradient(${
-    values.degree
-  }deg, ${getColorsValue(attribute).join(', ')})`;
-
-  const getCodeButtonElement = getCopyCodeButton(attribute);
-  getCodeButtonElement.addEventListener('click', copyHandler);
-  const getTailwindCodeButtonElement = getTailwindButton(attribute);
-  getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
-}
+const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
+const showCopyClass = 'show-css-tailwind';
 
 export function gradientBackgroundGenerator(
   type: 'newResults' | 'oldResults' | null
 ) {
   if (type === null) return;
+  // Show error when the colors are not entered.
+  var element = gradientBackgroundInputs[0];
+  var value = element.value;
+  if (value.length < 3) {
+    gradientBackgroundInputs.forEach((ele) => {
+      if (getResultBtn) {
+        getResultBtn.style.backgroundColor = 'grey';
+      }
+      getOpenSideBarButton().style.display = 'none';
+      triggerEmptyAnimation(ele);
+    });
+    return;
+  } else {
+    if (getResultBtn) {
+      getResultBtn.style.backgroundColor = 'blue';
+    }
+  }
 
   const getOutputElement = getOutput(attribute);
   const resultPage = getResultPage();
@@ -101,6 +93,47 @@ export function addGradientBackgroundListener() {
   inputEventListner();
 
   setGradientDegreeValue(getDegreeElement);
+}
+
+function copyHandler() {
+  const outputElement = getOutput(attribute);
+  copyCSSCodeToClipboard(attribute, outputElement);
+  showPopup(
+    'Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
+}
+
+function getCssOrTailwind(e?: MouseEvent): void {
+  e?.stopPropagation();
+  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
+}
+
+/**
+ * sets the result to the output element
+ *
+ * @param attribute attribute name of the generator
+ * @param values object that contains all values entered by users
+ * @param outputElement output element to display result
+ */
+function getGradientBackgroundResult(
+  attribute: string,
+  values: Values,
+  outputElement: HTMLElement
+): void {
+  outputElement.style.background = `linear-gradient(${
+    values.degree
+  }deg, ${getColorsValue(attribute).join(', ')})`;
+
+  const getCodeButtonElement = getCopyCodeButton(attribute);
+  const getTailwindCodeButtonElement = getTailwindButton(attribute);
+  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
+
+  getCodeButtonElement.addEventListener('click', copyHandler);
+  getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
+
+  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
 }
 
 function addEventListenerToTheNewColorPicker() {
@@ -145,7 +178,6 @@ function resetValues() {
 }
 
 // get values from all targets to get notified when values change.
-
 function getValues() {
   gradientBackgroundInputs.forEach((input) => {
     input.addEventListener('input', () => {
@@ -156,15 +188,20 @@ function getValues() {
     });
   });
 }
-resetValues();
-getValues();
 
 // Tailwind codecopy handler
 function tailwindHandler() {
-  copyTailwindCodeToClipboard(attribute);
+  const outputElement = getOutput(attribute);
+  copyTailwindCodeToClipboard(attribute, outputElement);
+
   showPopup(
     'Tailwind Code Copied',
     'Code has been successfully copied to clipboard',
     'success'
   );
 }
+
+closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
+
+resetValues();
+getValues();

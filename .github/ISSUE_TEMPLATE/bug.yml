@@ -1,7 +1,7 @@
 name: 🐛 Bug
 description: Report an issue to help improve the project.
-title: "[BUG] <what went wrong>"
-labels: ["bug"]
+title: '[BUG] <what went wrong>'
+labels: ['bug', 'hacktoberfast']
 body:
   - type: textarea
     id: description
@@ -28,8 +28,8 @@ body:
   - type: dropdown
     id: browser
     attributes:
-      label: "🥦 Browser"
-      description: "What browser are you using ?"
+      label: '🥦 Browser'
+      description: 'What browser are you using ?'
       options:
         - Google Chrome
         - Brave
@@ -44,28 +44,28 @@ body:
   - type: checkboxes
     id: no-duplicate-issues
     attributes:
-      label: "👀 Have you checked if this issue has been raised before?"
+      label: '👀 Have you checked if this issue has been raised before?'
       options:
-        - label: "I checked and didn't find similar issue"
+        - label: "I checked and didn't find a similar issue"
           required: true
 
   - type: checkboxes
     id: read-code-of-conduct
     attributes:
-      label: "🏢 Have you read the Contributing Guidelines?"
+      label: '🏢 Have you read the Contributing Guidelines?'
       options:
-        - label: "I have read and understood the rules in the [Contributing Guidelines](https://github.com/Dun-sin/Code-Magic/blob/main/CONTRIBUTING.md)"
+        - label: 'I have read and understood the rules in the [Contributing Guidelines](https://github.com/Dun-sin/Code-Magic/blob/main/CONTRIBUTING.md)'
           required: true
 
   - type: dropdown
     attributes:
-      label: Are you willing to work on this issue ?
+      label: Are you willing to work on this issue?
       description: This is absolutely not required, but we are happy to guide you in the contribution process.
       options:
-        - "Yes I am willing to submit a PR!"
+        - 'Yes I am willing to submit a PR!'
 
   - type: markdown
     attributes:
       value: |
-        Follow me on Twitter [here](https://twitter.com/DunsinWebDev)
-        Feel free to Join the discord server [here](https://discord.gg/kcFraw3nhz) and check out other cool repositories [here](https://github.com/Dunsin)
+        Follow me on Twitter [here](https://twitter.com/dunsincodes)
+        Feel free to Join the discord server [here](https://discord.gg/kcFraw3nhz) and check out other cool repositories [here](https://github.com/Dun-sin)

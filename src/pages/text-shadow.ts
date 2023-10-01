@@ -14,6 +14,11 @@ import {
   getAllFields,
   getResetButton,
   getTailwindButton,
+  getCssOrTailwindButton,
+  getCssOrTailwindDropdown,
+  getPngOrSvgButton,
+  getPngOrSvgDropdown,
+  getOpenSideBarButton,
 } from '../lib/getElements';
 import {
   copyCSSCodeToClipboard,
@@ -23,7 +28,8 @@ import {
   triggerEmptyAnimation,
   slideIn,
   copyTailwindCodeToClipboard,
-} from '../lib/packages';
+  closeDropdown,
+} from '../lib/packages/utils';
 
 type Values = {
   hOffset: string;
@@ -35,6 +41,10 @@ type Values = {
 
 let isSliderOpen = false;
 const attribute = 'text-shadow';
+const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
+const getPngOrSvgDropdownElement = getPngOrSvgDropdown(attribute);
+const showCopyClass = 'show-css-tailwind';
+const showPngOrSvgClass = 'show-png-svg';
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
@@ -45,6 +55,22 @@ function copyHandler() {
     'success'
   );
 }
+
+function getCssOrTailwind(e?: MouseEvent): void {
+  e?.stopPropagation();
+  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
+}
+
+function getPngOrSvg(e?: MouseEvent) {
+  e?.stopPropagation();
+  getPngOrSvgDropdownElement.classList.toggle(showPngOrSvgClass);
+}
+
+// closes css and tailwind dropdown on outside click
+closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
+
+// closes png and css dropdown outside click
+closeDropdown(getPngOrSvg, getPngOrSvgDropdownElement, showPngOrSvgClass);
 
 function pngDownloadHandler() {
   const outputElement = getOutput(attribute);
@@ -71,6 +97,7 @@ export function textShadowGenerator(
   const resultPage = getResultPage();
 
   if (getInputElement.value.length === 0) {
+    getOpenSideBarButton().style.display = 'none';
     triggerEmptyAnimation(getInputElement);
     return;
   }
@@ -108,6 +135,10 @@ function getTextShadowResult(values: Values, outputElement: HTMLElement): void {
   getCodeButtonElement.addEventListener('click', copyHandler);
   const getTailwindCodeButtonElement = getTailwindButton(attribute);
   getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
+  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
+  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
+  const getPngOrSvgButtonElement = getPngOrSvgButton(attribute);
+  getPngOrSvgButtonElement.addEventListener('click', getPngOrSvg);
 }
 
 export function addTextShadowListener(): void {
@@ -213,7 +244,8 @@ getValues();
 
 // Tailwind codecopy handler
 function tailwindHandler() {
-  copyTailwindCodeToClipboard(attribute);
+  const outputElement: HTMLElement = getOutput(attribute);
+  copyTailwindCodeToClipboard(attribute, outputElement);
   showPopup(
     'Tailwind Code Copied',
     'Code has been successfully copied to clipboard',

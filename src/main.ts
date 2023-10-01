@@ -433,6 +433,28 @@ getRadioButtonSetElement.forEach((radioButton: HTMLInputElement) => {
 
 // configuring dropdown menu
 dropDownElements.forEach((dropDown) => {
+  // add click event listener to the dropdown parent element
+  dropDown.addEventListener('click', (e) => {
+    // keep dropdown open when a subitem is clicked on
+    e.stopPropagation();
+    const target = e.target as HTMLElement;
+    if (!dropDown.children[0].innerHTML.includes(target.outerHTML)) return;
+
+    const listElement = dropDown.lastElementChild as HTMLElement;
+    if (listElement.id === 'showList') {
+      listElement.id = '';
+      return;
+    }
+
+    // clear other open dropdown menus
+    dropDownElements.forEach((dropdown) => {
+      const listElement = dropdown.lastElementChild as HTMLElement;
+      listElement.id = '';
+    });
+
+    listElement.id = 'showList';
+  });
+
   const listElement = dropDown.lastElementChild as HTMLElement;
 
   // loop through children of dropdown and add event listener to each child

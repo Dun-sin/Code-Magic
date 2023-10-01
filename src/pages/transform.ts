@@ -9,8 +9,10 @@ import {
   getResetButton,
   getResultPage,
   getTailwindButton,
+  getCssOrTailwindButton,
+  getCssOrTailwindDropdown,
 } from '../lib/getElements';
-import {showPopup, slideIn} from '../lib/packages';
+import {showPopup, slideIn, closeDropdown} from '../lib/packages/utils';
 
 type Values = {
   type: string;
@@ -34,6 +36,16 @@ let isSliderOpen = false;
 const preview = getPreviewSlider(attribute);
 const getDegreeElement = getRange(attribute);
 const getRadioButtonSetElement = getRadioButtonSet(attribute);
+const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
+const showCopyClass = 'show-css-tailwind';
+
+function getCssOrTailwind(e?: MouseEvent): void {
+  e?.stopPropagation();
+  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
+}
+
+// closes css and tailwind dropdown on outside click
+closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
 
 export function addTransformListener(): void {
   // Listen for radio button changes
@@ -179,6 +191,8 @@ function getTransformResult(outputElement: HTMLElement): void {
       'success'
     );
   });
+  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
+  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
 }
 
 function manageTransform(values: Values, getOutputElement: HTMLElement) {

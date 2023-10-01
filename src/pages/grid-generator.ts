@@ -5,7 +5,6 @@ import {
   getGridPreview,
   getNumberOfColumns,
   getNumberOfRows,
-  getOutput,
   getResetButton,
   getTailwindButton,
 } from '../lib/getElements';
@@ -13,7 +12,7 @@ import {
   copyCSSCodeToClipboard,
   copyTailwindCodeToClipboard,
   showPopup,
-} from '../lib/packages';
+} from '../lib/packages/utils';
 
 const attribute = 'grid-generators';
 
@@ -52,7 +51,7 @@ export function gridGenerator(): void {
 }
 
 function copyTailwindHandler() {
-  const outputElement: HTMLElement = getOutput(attribute);
+  const outputElement: HTMLElement = getGridPreview(attribute);
   copyTailwindCodeToClipboard(attribute, outputElement);
   showPopup(
     'Tailwind Code Copied',
@@ -73,12 +72,14 @@ function copyCSSHandler() {
 
 function resetValues() {
   const {inputs} = getAllFields(attribute);
+  const preview = getGridPreview(attribute);
 
   getResetButton(attribute).addEventListener('click', () => {
     inputs.forEach((input) => {
       input.value = input.defaultValue;
     });
     updatePreviewElement();
+    preview.style = '';
     getResetButton(attribute).classList.remove('reset-show');
   });
 }

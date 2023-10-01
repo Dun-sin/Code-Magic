@@ -13,6 +13,11 @@ import {
   getDegreeSpanElement,
   getGradientPreview,
   getTailwindButton,
+  getCssOrTailwindButton,
+  getCssOrTailwindDropdown,
+  getPngOrSvgButton,
+  getPngOrSvgDropdown,
+  getOpenSideBarButton,
 } from '../lib/getElements';
 import {
   copyCSSCodeToClipboard,
@@ -27,7 +32,8 @@ import {
   createGradientPreview,
   getColorsValue,
   copyTailwindCodeToClipboard,
-} from '../lib/packages';
+  closeDropdown,
+} from '../lib/packages/utils';
 
 type Values = {
   degree: string;
@@ -42,6 +48,10 @@ const getRemoveColorButtonElement = getRemoveNewColorButton(attribute);
 
 const getDegreeElement = getRange(attribute);
 const resetButton = getResetButton(attribute);
+const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
+const getPngOrSvgDropdownElement = getPngOrSvgDropdown(attribute);
+const showCopyClass = 'show-css-tailwind';
+const showPngOrSvgClass = 'show-png-svg';
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
@@ -52,6 +62,22 @@ function copyHandler() {
     'success'
   );
 }
+
+function getCssOrTailwind(e?: MouseEvent): void {
+  e?.stopPropagation();
+  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
+}
+
+function getPngOrSvg(e?: MouseEvent) {
+  e?.stopPropagation();
+  getPngOrSvgDropdownElement.classList.toggle(showPngOrSvgClass);
+}
+
+// closes css and tailwind dropdown on outside click
+closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
+
+// closes png and css dropdown outside click
+closeDropdown(getPngOrSvg, getPngOrSvgDropdownElement, showPngOrSvgClass);
 
 function pngDownloadHandler() {
   const outputElement = getOutput(attribute);
@@ -71,6 +97,7 @@ export function gradientTextGenerator(
   const getInputElement = getInputText(attribute);
 
   if (getInputElement.value.length === 0) {
+    getOpenSideBarButton().style.display = 'none';
     triggerEmptyAnimation(getInputElement);
     return;
   }
@@ -127,6 +154,8 @@ function getGradientTextResult(
   const getPNGButtonElement = getPNGButton(attribute);
   const getSVGButtonElement = getSVGButton(attribute);
   const getTailwindCodeButtonElement = getTailwindButton(attribute);
+  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
+  const getPngOrSvgButtonElement = getPngOrSvgButton(attribute);
 
   if (outputElement.childElementCount >= 1) {
     outputElement.innerHTML = '';
@@ -142,6 +171,10 @@ function getGradientTextResult(
   getCodeButtonElement.addEventListener('click', copyHandler);
 
   getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
+
+  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
+
+  getPngOrSvgButtonElement.addEventListener('click', getPngOrSvg);
 }
 
 export function addGradientTextListener() {
@@ -222,7 +255,8 @@ getValues();
 
 // Tailwind codecopy handler
 function tailwindHandler() {
-  copyTailwindCodeToClipboard(attribute);
+  const outputElement = getOutput(attribute);
+  copyTailwindCodeToClipboard(attribute, outputElement);
   showPopup(
     'Tailwind Code Copied',
     'Code has been successfully copied to clipboard',

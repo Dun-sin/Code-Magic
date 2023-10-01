@@ -5,14 +5,14 @@
   <a href="https://gitpod.io/#https://github.com/Dun-sin/Code-Magic">
     <img src="https://gitpod.io/button/open-in-gitpod.svg">
   </a>
-</div> <br>
-
+</div> 
+<br>
 
 ### 🚀 About
 
 Code Magic is a website where you can get simple CSS tricks to make your application elegant with just few clicks.
 
-![code magic v2](https://user-images.githubusercontent.com/78784850/200561173-5d359f26-0d9a-4da5-b8b2-d1e2472cb835.gif)
+![code magic v2](https://github-production-user-asset-6210df.s3.amazonaws.com/78784850/268496391-eb41fa2f-0617-49e1-9035-c9ade068624d.gif)
 
 ### 🧙‍♀️ Magic options available for you:
 

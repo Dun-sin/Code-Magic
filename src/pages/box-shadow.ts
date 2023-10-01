@@ -12,13 +12,18 @@ import {
   getAllFields,
   getResetButton,
   getTailwindButton,
+  getCssOrTailwindButton,
+  getCssOrTailwindDropdown,
+  getOpenSideBarButton,
+  getAllInputElements,
 } from '../lib/getElements';
 import {
   copyCSSCodeToClipboard,
   copyTailwindCodeToClipboard,
   showPopup,
   slideIn,
-} from '../lib/packages';
+  closeDropdown,
+} from '../lib/packages/utils';
 
 type Values = {
   hOffset: string;
@@ -30,6 +35,9 @@ type Values = {
 
 const attribute = 'box-shadow';
 let isSliderOpen = false;
+const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
+const showCopyClass = 'show-css-tailwind';
+const boxshadowInputs = getAllInputElements(attribute);
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
@@ -40,6 +48,14 @@ function copyHandler() {
     'success'
   );
 }
+
+function getCssOrTailwind(e?: MouseEvent): void {
+  e?.stopPropagation();
+  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
+}
+
+// closes css and tailwind dropdown on outside click
+closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
 
 export function boxShadowGenerator(
   type: 'newResults' | 'oldResults' | null
@@ -54,7 +70,16 @@ export function boxShadowGenerator(
   const getOutputElement = getOutput(attribute);
   const resultPage = getResultPage();
 
-  resultPage.style.display = 'flex';
+  const element = boxshadowInputs[0];
+  const value = element.value;
+
+  if (value.length < 3) {
+    getOpenSideBarButton().style.display = 'none';
+  } else {
+    getOpenSideBarButton().style.display = 'flex';
+    resultPage.style.display = 'flex';
+  }
+
   if (type === 'oldResults') return;
 
   const values: Values = {
@@ -91,6 +116,8 @@ function getBoxShadowResult(values: Values, outputElement: HTMLElement): void {
   getCodeButtonElement.addEventListener('click', copyHandler);
   const getTailwindCodeButtonElement = getTailwindButton(attribute);
   getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
+  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
+  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
 }
 
 export function addBoxShadowListener(): void {

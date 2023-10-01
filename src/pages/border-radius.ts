@@ -9,12 +9,15 @@ import {
   getAllFields,
   getResetButton,
   getTailwindButton,
+  getCssOrTailwindButton,
+  getCssOrTailwindDropdown,
 } from '../lib/getElements';
 import {
   copyCSSCodeToClipboard,
   showPopup,
   copyTailwindCodeToClipboard,
-} from '../lib/packages';
+  closeDropdown,
+} from '../lib/packages/utils';
 
 type Values = {
   BorderTop: string;
@@ -30,6 +33,8 @@ const borderTop = getBorderTop(attribute);
 const borderRight = getBorderRight(attribute);
 const borderLeft = getBorderLeft(attribute);
 const borderBottom = getBorderBottom(attribute);
+const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
+const showCopyClass = 'show-css-tailwind';
 
 const borderRadiusPreview = document.querySelector(
   '.border-radius-preview-box > .preview'
@@ -44,6 +49,14 @@ function copyHandler() {
     'success'
   );
 }
+
+function getCssOrTailwind(e?: MouseEvent): void {
+  e?.stopPropagation();
+  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
+}
+
+// closes css and tailwind dropdown on outside click
+closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
 
 function getBorderRadiusResult(
   attribute: string,
@@ -63,6 +76,8 @@ function getBorderRadiusResult(
   getCodeButtonElement.addEventListener('click', copyHandler);
   const getTailwindCodeButtonElement = getTailwindButton(attribute);
   getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
+  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
+  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
 }
 
 export function borderRadiusGenerator(

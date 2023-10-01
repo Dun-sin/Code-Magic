@@ -12,8 +12,12 @@ import {
   getDegreeSpanElement,
   getGradientPreview,
   getTailwindButton,
+  getCssOrTailwindButton,
+  getCssOrTailwindDropdown,
+  getResultButton,
 } from '../lib/getElements';
 import {
+  triggerEmptyAnimation,
   copyCSSCodeToClipboard,
   showPopup,
   addRule,
@@ -24,7 +28,8 @@ import {
   createGradientPreview,
   getColorsValue,
   copyTailwindCodeToClipboard,
-} from '../lib/packages';
+  closeDropdown,
+} from '../lib/packages/utils';
 
 type Values = {
   degree: string;
@@ -38,14 +43,13 @@ const getRemoveColorButtonElement = getRemoveNewColorButton(attribute);
 
 const getBorderRadiusInput = getRadiusInput(attribute);
 const toggleRadiusInputForGradientBorder = getCheckbox(attribute);
-const getOutputElement = getOutput(attribute);
 
 const getDegreeElement = getRange(attribute);
 const resetButton = getResetButton(attribute);
+const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
+const showCopyClass = 'show-css-tailwind';
 
 let gradientBorderInputs = getAllInputElements('gradient-border');
-
-const resultPage = getResultPage();
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
@@ -56,6 +60,14 @@ function copyHandler() {
     'success'
   );
 }
+
+function getCssOrTailwind(e?: MouseEvent): void {
+  e?.stopPropagation();
+  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
+}
+
+// closes css and tailwind dropdown on outside click
+closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
 
 /**
  * sets the result to the output element
@@ -84,14 +96,42 @@ function getGradientBorderResult(
   getCodeButtonElement.addEventListener('click', copyHandler);
   const getTailwindCodeButtonElement = getTailwindButton(attribute);
   getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
+  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
+  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
 }
 
 export function gradientBorderGenerator(
   type: 'newResults' | 'oldResults' | null
 ): void {
   if (type === null) return;
-  resultPage.style.display = 'flex';
 
+  const resultBtn = getResultButton(attribute);
+
+  const item1 = gradientBorderInputs[0];
+  const val1 = item1.value.length;
+
+  const item2 = gradientBorderInputs[1];
+  const val2 = item2.value.length;
+
+  //Show error if input values are empty
+  if ((resultBtn && val1 < 1) || val2 < 1) {
+    gradientBorderInputs.forEach((e) => {
+      if (e.value.length === 0) {
+        triggerEmptyAnimation(e);
+      }
+      resultBtn.style.backgroundColor = 'grey';
+    });
+    return;
+  } else {
+    if (resultBtn) {
+      resultBtn.style.backgroundColor = 'blue';
+    }
+  }
+
+  const getOutputElement = getOutput(attribute);
+  const resultPage = getResultPage();
+
+  resultPage.style.display = 'flex';
   if (type === 'oldResults') return;
 
   if (!toggleRadiusInputForGradientBorder.checked) {

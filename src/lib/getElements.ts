@@ -7,6 +7,24 @@ export const getOpenSideBarButton = (): HTMLElement =>
 export const getResultPage = (): HTMLElement =>
   document.querySelector('.side-results') as HTMLElement;
 
+export const getCssOrTailwindButton = (attribute: string): HTMLElement =>
+  document.querySelector(
+    `[data-css-tailwind=${attribute}-code]`
+  ) as HTMLElement;
+
+export const getCssOrTailwindDropdown = (attribute: string): HTMLElement =>
+  document.querySelector(
+    `[data-dropdown=${attribute}-dropdown2]`
+  ) as HTMLElement;
+
+export const getPngOrSvgButton = (attribute: string): HTMLElement =>
+  document.querySelector(`[data-png-svg=${attribute}-image]`) as HTMLElement;
+
+export const getPngOrSvgDropdown = (attribute: string): HTMLElement =>
+  document.querySelector(
+    `[data-dropdown=${attribute}-dropdown1]`
+  ) as HTMLElement;
+
 export const getCopyCodeButton = (attribute: string): HTMLElement =>
   document.querySelector(`[data-download=${attribute}-code]`) as HTMLElement;
 
