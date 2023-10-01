@@ -435,7 +435,6 @@ dropDownElements.forEach((dropDown) => {
   // add click event listener to the dropdown parent element
   dropDown.addEventListener('click', (e) => {
     e.stopPropagation();
-    const target = e.target as HTMLElement;
 
     const listElement = dropDown.lastElementChild as HTMLElement;
     if (listElement.id === 'showList') {
@@ -445,10 +444,8 @@ dropDownElements.forEach((dropDown) => {
 
     // Clear other open dropdown menus
     dropDownElements.forEach((dropdown) => {
-      const otherListElement = dropdown.lastElementChild as HTMLElement;
-      if (otherListElement.id === 'showList') {
-        otherListElement.id = '';
-      }
+      const listElement = dropdown.lastElementChild as HTMLElement;
+      listElement.id = '';
     });
 
     listElement.id = 'showList';
