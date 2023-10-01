@@ -426,6 +426,7 @@ input::placeholder {
   padding: 5px;
   border-radius: 2px;
   cursor: pointer;
+  justify-content: center;
 }
 
 .preview {
