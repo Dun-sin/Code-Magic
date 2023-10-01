@@ -1036,6 +1036,38 @@ input[type='range']:focus::-moz-range-thumb {
   display: block;
 }
 
+/* Grid generators styles */
+
+.grid-generators {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.grid-generators-preview {
+  width: 300px;
+  height: 200px;
+  border: 1px solid white;
+  margin-top: 10px;
+}
+
+.grid-generators input[type='number'] {
+  border-radius: 5px;
+  width: var(--generator-width);
+  height: 50px;
+  border: none;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  resize: none;
+  padding: 1rem;
+  margin-bottom: var(--spacing);
+  outline: none;
+}
+
+.grid-generators input[type='number']::placeholder {
+  color: #ffffff;
+}
+
 /* FOOTER SECTION */
 
 footer {

@@ -24,7 +24,7 @@ import {
 import {rangeGenerator} from './pages/input-range';
 import {picTextGenerator} from './pages/pic-text';
 import {addTextShadowListener, textShadowGenerator} from './pages/text-shadow';
-
+import {gridGenerator} from './pages/grid-generator';
 // Packages
 import * as FilePond from 'filepond';
 import 'filepond/dist/filepond.min.css';
@@ -121,7 +121,7 @@ const dropDownElements = document.querySelectorAll('.dropdown');
 const getDegreeElement = getRange('animation');
 const getRadioButtonSetElement = getRadioButtonSet('animation');
 const getDurationElement = getInputSpinner('animation');
-const events = ["dragover", "drop"];
+const events = ['dragover', 'drop'];
 
 if (openSidePanelButton) {
   openSidePanelButton.style.display = 'none';
@@ -261,6 +261,7 @@ function showContent(attribute: string, display: Display): void {
   attribute === 'gradient-background' && addGradientBackgroundListener();
   attribute === 'animation' && addAnimationListener();
   attribute === 'transform' && addTransformListener();
+  attribute === 'grid-generators' && gridGenerator();
 }
 
 /**
@@ -333,10 +334,10 @@ document.addEventListener('click', (e: Event) => {
 });
 
 // Disable file opening in browser
-for ( let event of events) {
+for (let event of events) {
   document.addEventListener(event, (e) => {
     e.preventDefault();
-  })
+  });
 }
 
 // clicking on the menu icon should close the nav bar

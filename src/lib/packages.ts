@@ -249,6 +249,18 @@ const actOnGenerator = (attribute: string, outputElement: HTMLElement) => {
       }
       `;
       break;
+    case 'grid-generators':
+      element = outputElement.style;
+      codeToCopy = `
+        div {
+          height: 300px;
+          width: 300px;
+          display:${element.display},
+          grid-template-rows:${element.gridTemplateRows},
+          grid-template-columns:${element.gridTemplateColumns}
+        }
+      `;
+      break;
     default:
       codeToCopy = `
           Couldn't copy, please try again :(
