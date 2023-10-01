@@ -435,7 +435,6 @@ dropDownElements.forEach((dropDown) => {
   // add click event listener to the dropdown parent element
   dropDown.addEventListener('click', (e) => {
     e.stopPropagation();
-    const target = e.target as HTMLElement;
 
     const listElement = dropDown.lastElementChild as HTMLElement;
     if (listElement.id === 'showList') {
