@@ -444,8 +444,8 @@ dropDownElements.forEach((dropDown) => {
 
     // Clear other open dropdown menus
     dropDownElements.forEach((dropdown) => {
-      const listElement = dropdown.lastElementChild as HTMLElement;
-      listElement.id = '';
+       const listElement = dropdown.lastElementChild as HTMLElement;
+       listElement.id = '';
     });
 
     listElement.id = 'showList';
