@@ -69,7 +69,6 @@ export function boxShadowGenerator(
   const color = getShadowColor(attribute);
   const getOutputElement = getOutput(attribute);
   const resultPage = getResultPage();
-
   const element = boxshadowInputs[0];
   const value = element.value;
 
