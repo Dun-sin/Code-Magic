@@ -24,6 +24,7 @@ import {
 import {rangeGenerator} from './pages/input-range';
 import {picTextGenerator} from './pages/pic-text';
 import {addTextShadowListener, textShadowGenerator} from './pages/text-shadow';
+import {gridGenerator} from './pages/grid-generator';
 
 // Packages
 import * as FilePond from 'filepond';
@@ -261,6 +262,7 @@ function showContent(attribute: string, display: Display): void {
   attribute === 'gradient-background' && addGradientBackgroundListener();
   attribute === 'animation' && addAnimationListener();
   attribute === 'transform' && addTransformListener();
+  attribute === 'grid-generators' && gridGenerator();
 }
 
 /**

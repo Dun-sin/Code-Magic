@@ -5,6 +5,7 @@ import copy from 'copy-to-clipboard';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {Eggy} from '@s-r0/eggy-js';
+import {getNumberOfColumns, getNumberOfRows} from '../getElements';
 
 export function createDownloadLink(fileName: string, url: string) {
   const link = document.createElement('a');
@@ -162,6 +163,18 @@ export const actOnGenerator = (
         outline: none;
       }
       `;
+      break;
+    case 'grid-generators':
+      element = outputElement.style;
+      codeToCopy = `
+      div {
+      height: 300px;
+      width: 300px;
+      display:${element.display},
+      grid-template-rows:${element.gridTemplateRows},
+      grid-template-columns:${element.gridTemplateColumns}
+    }
+    `;
       break;
     default:
       codeToCopy = `
@@ -338,6 +351,18 @@ function convertInputRangeStylesToTailwind(element: CSSStyleDeclaration) {
   return tailwindClasses.join(' ');
 }
 
+function convertGridSylesToTailwind(attribute: string) {
+  const noOfColumns = getNumberOfColumns(attribute).value;
+  const noOfRows = getNumberOfRows(attribute).value;
+  const rows = parseInt(noOfRows !== '' ? noOfRows : '0');
+  const columns = parseInt(noOfColumns !== '' ? noOfColumns : '0');
+  if (rows > 0 || columns > 0) {
+    return `grid grid-rows-${rows} grid-cols-${columns}`;
+  } else {
+    return '';
+  }
+}
+
 /**
  * what should copy when the copy Tailwind button is clicked
  *
@@ -382,6 +407,9 @@ export const actOnTailwindGenerator = (
       break;
     case 'input-range':
       codeToCopy = `${convertInputRangeStylesToTailwind(element)}`;
+      break;
+    case 'grid-generators':
+      codeToCopy = `${convertGridSylesToTailwind(attribute)}`;
       break;
     default:
       codeToCopy = `
