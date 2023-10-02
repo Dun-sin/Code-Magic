@@ -79,7 +79,7 @@ function resetValues() {
       input.value = input.defaultValue;
     });
     updatePreviewElement();
-    preview.style = '';
+    preview.setAttribute('style', '');
     getResetButton(attribute).classList.remove('reset-show');
   });
 }
