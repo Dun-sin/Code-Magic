@@ -348,6 +348,39 @@
               </li>
             </ul>
           </li>
+          <li id="layout-generator" class="dropdown">
+            <div>
+              <div>
+                <iconify-icon
+                  inline
+                  icon="ph:layout"
+                  style="color: white"
+                  width="20"
+                  height="20"
+                ></iconify-icon>
+                <span>Layout Generators</span>
+              </div>
+              <iconify-icon
+                inline
+                icon="material-symbols:arrow-drop-down-rounded"
+                style="color: white"
+                width="20"
+              ></iconify-icon>
+            </div>
+            <ul>
+              <li data-gen="grid-generators">
+                <iconify-icon
+                  inline
+                  icon="ep:grid"
+                  style="color: white"
+                  width="20"
+                  height="20"
+                ></iconify-icon>
+                <span>CSS Grid Generator</span>
+                <span class="tooltip"> Get styling for css grid </span>
+              </li>
+            </ul>
+          </li>
         </ul>
         <footer>
           <a
@@ -1222,7 +1255,7 @@
                   <div class="dropdown-item" data-download="input-range-code">
                     <iconify-icon
                       inline
-                      icon="bx:code-alt"
+                      icon="skill-icons:css"
                       style="color: white; margin-right: 5px"
                       width="20"
                     ></iconify-icon>
@@ -1234,7 +1267,7 @@
                   >
                     <iconify-icon
                       inline
-                      icon="bx:code-alt"
+                      icon="devicon:tailwindcss"
                       style="color: white; margin-right: 5px"
                       width="20"
                     ></iconify-icon>
@@ -1247,6 +1280,65 @@
           <!-- End of Input Type Range Generator -->
         </div>
         <!-- End of Input for Generators -->
+
+        <!-- Grid Generator -->
+        <div data-content="grid-generators" class="grid-generators">
+          <label for="grid-generators-preview">
+            <p>CSS Grid Preview</p>
+            <div
+              id="grid-generators-preview"
+              class="grid-generators-preview"
+            ></div>
+          </label>
+          <div class="rows">
+            <label for="grid-generators-rows" class="row full-page">
+              <input
+                type="number"
+                name="grid-generators-rows"
+                placeholder="Enter no of rows"
+                id="grid-generators-rows"
+                class="grid-generators-inputs"
+                min="0"
+                max="100"
+              />
+            </label>
+          </div>
+          <div class="columns">
+            <label for="grid-generator-columns" class="column full-page">
+              <input
+                type="number"
+                name="grid-generator-columns"
+                placeholder="Enter no of columns"
+                id="grid-generators-columns"
+                class="grid-generators-inputs"
+                min="0"
+                max="100"
+              />
+            </label>
+          </div>
+          <div class="btn-container">
+            <div class="btn" data-reset="grid-generators">Reset</div>
+            <button class="btn" data-download="grid-generators-code">
+              <iconify-icon
+                inline
+                icon="bx:code-alt"
+                style="color: white; margin-right: 5px"
+                width="20"
+              ></iconify-icon>
+              Get CSS Code
+            </button>
+            <button class="btn" data-download="grid-generators-tailwind">
+              <iconify-icon
+                inline
+                icon="bx:code-alt"
+                style="color: white; margin-right: 5px"
+                width="20"
+              ></iconify-icon>
+              Get Tailwind
+            </button>
+          </div>
+        </div>
+        <!-- End of Grid generator -->
 
         <!-- Result from Generators -->
         <div class="side-results">
@@ -1317,7 +1409,7 @@
                   <div class="dropdown-item" data-download="pic-text-code">
                     <iconify-icon
                       inline
-                      icon="bx:code-alt"
+                      icon="skill-icons:css"
                       style="color: white; margin-right: 5px"
                       width="20"
                     ></iconify-icon>
@@ -1326,7 +1418,7 @@
                   <div class="dropdown-item" data-download="pic-text-tailwind">
                     <iconify-icon
                       inline
-                      icon="bx:code-alt"
+                      icon="devicon:tailwindcss"
                       style="color: white; margin-right: 5px"
                       width="20"
                     ></iconify-icon>
@@ -1394,7 +1486,7 @@
                   <div class="dropdown-item" data-download="gradient-text-code">
                     <iconify-icon
                       inline
-                      icon="bx:code-alt"
+                      icon="skill-icons:css"
                       style="color: white; margin-right: 5px"
                       width="20"
                     ></iconify-icon>
@@ -1406,7 +1498,7 @@
                   >
                     <iconify-icon
                       inline
-                      icon="bx:code-alt"
+                      icon="devicon:tailwindcss"
                       style="color: white; margin-right: 5px"
                       width="20"
                     ></iconify-icon>
@@ -1438,7 +1530,7 @@
                 <div class="dropdown-item" data-download="gradient-border-code">
                   <iconify-icon
                     inline
-                    icon="bx:code-alt"
+                    icon="skill-icons:css"
                     style="color: white; margin-right: 5px"
                     width="20"
                   ></iconify-icon>
@@ -1450,7 +1542,7 @@
                 >
                   <iconify-icon
                     inline
-                    icon="bx:code-alt"
+                    icon="devicon:tailwindcss"
                     style="color: white; margin-right: 5px"
                     width="20"
                   ></iconify-icon>
@@ -1486,7 +1578,7 @@
                 >
                   <iconify-icon
                     inline
-                    icon="bx:code-alt"
+                    icon="skill-icons:css"
                     style="color: white; margin-right: 5px"
                     width="20"
                   ></iconify-icon>
@@ -1499,7 +1591,7 @@
                   >
                     <iconify-icon
                       inline
-                      icon="bx:code-alt"
+                      icon="devicon:tailwindcss"
                       style="color: white; margin-right: 5px"
                       width="20"
                     ></iconify-icon>
@@ -1530,7 +1622,7 @@
                 <div class="dropdown-item" data-download="animation-code">
                   <iconify-icon
                     inline
-                    icon="bx:code-alt"
+                    icon="skill-icons:css"
                     style="color: white; margin-right: 5px"
                     width="20"
                   ></iconify-icon>
@@ -1539,7 +1631,7 @@
                 <div class="dropdown-item" data-download="animation-tailwind">
                   <iconify-icon
                     inline
-                    icon="bx:code-alt"
+                    icon="devicon:tailwindcss"
                     style="color: white; margin-right: 5px"
                     width="20"
                   ></iconify-icon>
@@ -1569,7 +1661,7 @@
                 <div class="dropdown-item" data-download="border-radius-code">
                   <iconify-icon
                     inline
-                    icon="bx:code-alt"
+                    icon="skill-icons:css"
                     style="color: white; margin-right: 5px"
                     width="20"
                   ></iconify-icon>
@@ -1581,7 +1673,7 @@
                 >
                   <iconify-icon
                     inline
-                    icon="bx:code-alt"
+                    icon="devicon:tailwindcss"
                     style="color: white; margin-right: 5px"
                     width="20"
                   ></iconify-icon>
@@ -1611,7 +1703,7 @@
                 <div class="dropdown-item" data-download="box-shadow-code">
                   <iconify-icon
                     inline
-                    icon="bx:code-alt"
+                    icon="skill-icons:css"
                     style="color: white; margin-right: 5px"
                     width="20"
                   ></iconify-icon>
@@ -1620,7 +1712,7 @@
                 <div class="dropdown-item" data-download="box-shadow-tailwind">
                   <iconify-icon
                     inline
-                    icon="bx:code-alt"
+                    icon="devicon:tailwindcss"
                     style="color: white; margin-right: 5px"
                     width="20"
                   ></iconify-icon>
@@ -1650,7 +1742,7 @@
                 <div class="dropdown-item" data-download="transform-code">
                   <iconify-icon
                     inline
-                    icon="bx:code-alt"
+                    icon="skill-icons:css"
                     style="color: white; margin-right: 5px"
                     width="20"
                   ></iconify-icon>
@@ -1659,7 +1751,7 @@
                 <div class="dropdown-item" data-download="transform-tailwind">
                   <iconify-icon
                     inline
-                    icon="bx:code-alt"
+                    icon="devicon:tailwindcss"
                     style="color: white; margin-right: 5px"
                     width="20"
                   ></iconify-icon>
@@ -1723,7 +1815,7 @@
                   <div class="dropdown-item" data-download="text-shadow-code">
                     <iconify-icon
                       inline
-                      icon="bx:code-alt"
+                      icon="skill-icons:css"
                       style="color: white; margin-right: 5px"
                       width="20"
                     ></iconify-icon>
@@ -1735,7 +1827,7 @@
                   >
                     <iconify-icon
                       inline
-                      icon="bx:code-alt"
+                      icon="devicon:tailwindcss"
                       style="color: white; margin-right: 5px"
                       width="20"
                     ></iconify-icon>
