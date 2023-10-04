@@ -1317,25 +1317,46 @@
             </label>
           </div>
           <div class="btn-container">
-            <div class="btn" data-reset="grid-generators">Reset</div>
-            <button class="btn" data-download="grid-generators-code">
-              <iconify-icon
-                inline
-                icon="bx:code-alt"
-                style="color: white; margin-right: 5px"
-                width="20"
-              ></iconify-icon>
-              Get CSS Code
-            </button>
-            <button class="btn" data-download="grid-generators-tailwind">
-              <iconify-icon
-                inline
-                icon="bx:code-alt"
-                style="color: white; margin-right: 5px"
-                width="20"
-              ></iconify-icon>
-              Get Tailwind
-            </button>
+            <div class="reset" data-reset="grid-generators">Reset</div>
+            <div class="btn-dropdown-container">
+              <button class="btn" data-css-tailwind="grid-generators-code">
+                Copy Code
+                <iconify-icon
+                  inline
+                  icon="material-symbols:arrow-drop-down-rounded"
+                  style="color: white"
+                  width="20"
+                ></iconify-icon>
+              </button>
+              <div
+                class="css-tailwind"
+                data-dropdown="grid-generators-dropdown2"
+              >
+                <!-- dropdown elements go here -->
+
+                <div class="dropdown-item" data-download="grid-generators-code">
+                  <iconify-icon
+                    inline
+                    icon="skill-icons:css"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon>
+                  <span> Get CSS Code </span>
+                </div>
+                <div
+                  class="dropdown-item"
+                  data-download="grid-generators-tailwind"
+                >
+                  <iconify-icon
+                    inline
+                    icon="devicon:tailwindcss"
+                    style="color: white; margin-right: 5px"
+                    width="20"
+                  ></iconify-icon>
+                  <span> Get Tailwind </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <!-- End of Grid generator -->
