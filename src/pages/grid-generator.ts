@@ -7,18 +7,25 @@ import {
   getNumberOfRows,
   getResetButton,
   getTailwindButton,
+  getCssOrTailwindDropdown,
+  getCssOrTailwindButton,
 } from '../lib/getElements';
 import {
   copyCSSCodeToClipboard,
   copyTailwindCodeToClipboard,
   showPopup,
+  closeDropdown,
 } from '../lib/packages/utils';
 
 const attribute = 'grid-generators';
+const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
+const showCopyClass = 'show-css-tailwind';
 
 export function gridGenerator(): void {
   const noOfColumns = getNumberOfColumns(attribute);
   const noOfRows = getNumberOfRows(attribute);
+
+  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
 
   const preview = getGridPreview(attribute);
 
@@ -48,7 +55,15 @@ export function gridGenerator(): void {
   getCSSCodeButtonElement.addEventListener('click', copyCSSHandler);
   const getTailwindCodeButtonElement = getTailwindButton(attribute);
   getTailwindCodeButtonElement.addEventListener('click', copyTailwindHandler);
+  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
 }
+
+function getCssOrTailwind(e?: MouseEvent): void {
+  e?.stopPropagation();
+  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
+}
+
+closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
 
 function copyTailwindHandler() {
   const outputElement: HTMLElement = getGridPreview(attribute);
@@ -89,6 +104,7 @@ function getValues() {
 
   inputs.forEach((input) => {
     input.addEventListener('input', () => {
+      getResetButton(attribute).classList.add('reset-show');
       resetValues();
     });
   });
