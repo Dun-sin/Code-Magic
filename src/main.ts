@@ -439,7 +439,7 @@ dropDownElements.forEach((dropDown) => {
     e.stopPropagation();
 
     const listElement = dropDown.lastElementChild as HTMLElement;
-    let iconElement =
+    const iconElement =
       listElement?.parentElement?.firstElementChild?.lastElementChild;
     if (listElement.id === 'showList') {
       listElement.id = '';
