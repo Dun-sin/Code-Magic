@@ -439,8 +439,18 @@ dropDownElements.forEach((dropDown) => {
     e.stopPropagation();
 
     const listElement = dropDown.lastElementChild as HTMLElement;
+    const iconElement =
+      listElement?.parentElement?.firstElementChild?.lastElementChild;
     if (listElement.id === 'showList') {
       listElement.id = '';
+
+      // Toggle arrow icon to downwards
+      if (iconElement) {
+        iconElement.setAttribute(
+          'icon',
+          'material-symbols:arrow-drop-down-rounded'
+        );
+      }
       return;
     }
 
@@ -451,6 +461,14 @@ dropDownElements.forEach((dropDown) => {
     });
 
     listElement.id = 'showList';
+
+    // Toggle arrow icon to upwards
+    if (iconElement) {
+      iconElement.setAttribute(
+        'icon',
+        'material-symbols:arrow-drop-up-rounded'
+      );
+    }
   });
 
   const listElement = dropDown.lastElementChild as HTMLElement;
