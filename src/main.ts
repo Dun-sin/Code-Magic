@@ -439,12 +439,14 @@ dropDownElements.forEach((dropDown) => {
     e.stopPropagation();
 
     const listElement = dropDown.lastElementChild as HTMLElement;
+    let iconElement =
+      listElement?.parentElement?.firstElementChild?.lastElementChild;
     if (listElement.id === 'showList') {
       listElement.id = '';
 
       // Toggle arrow icon to downwards
-      if (listElement?.parentElement?.firstElementChild?.lastElementChild) {
-        listElement.parentElement.firstElementChild.lastElementChild.setAttribute(
+      if (iconElement) {
+        iconElement.setAttribute(
           'icon',
           'material-symbols:arrow-drop-down-rounded'
         );
@@ -461,8 +463,8 @@ dropDownElements.forEach((dropDown) => {
     listElement.id = 'showList';
 
     // Toggle arrow icon to upwards
-    if (listElement.parentElement?.firstElementChild?.lastElementChild) {
-      listElement.parentElement.firstElementChild.lastElementChild.setAttribute(
+    if (iconElement) {
+      iconElement.setAttribute(
         'icon',
         'material-symbols:arrow-drop-up-rounded'
       );
