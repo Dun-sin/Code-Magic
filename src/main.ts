@@ -441,6 +441,14 @@ dropDownElements.forEach((dropDown) => {
     const listElement = dropDown.lastElementChild as HTMLElement;
     if (listElement.id === 'showList') {
       listElement.id = '';
+
+      // Toggle arrow icon to downwards
+      if (listElement?.parentElement?.firstElementChild?.lastElementChild) {
+        listElement.parentElement.firstElementChild.lastElementChild.setAttribute(
+          'icon',
+          'material-symbols:arrow-drop-down-rounded'
+        );
+      }
       return;
     }
 
@@ -451,6 +459,14 @@ dropDownElements.forEach((dropDown) => {
     });
 
     listElement.id = 'showList';
+
+    // Toggle arrow icon to upwards
+    if (listElement.parentElement?.firstElementChild?.lastElementChild) {
+      listElement.parentElement.firstElementChild.lastElementChild.setAttribute(
+        'icon',
+        'material-symbols:arrow-drop-up-rounded'
+      );
+    }
   });
 
   const listElement = dropDown.lastElementChild as HTMLElement;
