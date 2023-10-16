@@ -107,29 +107,29 @@ export function gradientBorderGenerator(
 
   const resultBtn = getResultButton(attribute);
 
-  const item1 = gradientBorderInputs[0];
-  const val1 = item1.value.length;
+  let isColorInputFieldEmpty = false;
 
-  const item2 = gradientBorderInputs[1];
-  const val2 = item2.value.length;
-
-  //Show error if input values are empty
-  if ((resultBtn && val1 < 1) || val2 < 1) {
-    gradientBorderInputs.forEach((e) => {
-      if (e.value.length === 0) {
-        triggerEmptyAnimation(e);
+  if (type === 'newResults') {
+    gradientBorderInputs.forEach((element) => {
+      if (element.value.length === 0) {
+        triggerEmptyAnimation(element);
+        (resultBtn as HTMLElement).style.backgroundColor = 'grey';
+        isColorInputFieldEmpty = true;
       }
-      resultBtn.style.backgroundColor = 'grey';
     });
-    return;
-  } else {
-    if (resultBtn) {
-      resultBtn.style.backgroundColor = 'blue';
-    }
+    if (isColorInputFieldEmpty) return;
+
+    if (isColorInputFieldEmpty === false)
+      (resultBtn as HTMLElement).style.backgroundColor = 'blue';
   }
 
   const getOutputElement = getOutput(attribute);
   const resultPage = getResultPage();
+
+  if (!getOutputElement.getAttribute('style') && type === 'oldResults') {
+    showPopup('No Previous Result Found', 'Create new ones now!', 'error');
+    return;
+  }
 
   resultPage.style.display = 'flex';
   if (type === 'oldResults') return;
