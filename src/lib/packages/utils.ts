@@ -168,6 +168,13 @@ export function addNewColorPicker(attribute: string): void {
 
   // create color pickter
   function createNewColor(): Node {
+    const containerElement = document.createElement('div');
+    containerElement.className = 'clr-field';
+
+    const buttonElement = document.createElement('button');
+    buttonElement.setAttribute('type', 'button');
+    buttonElement.setAttribute('aria-labelledby', 'clr-open-label');
+
     const newColorCreated = document.createElement('input');
     newColorCreated.setAttribute('type', 'text');
     newColorCreated.setAttribute('data-coloris', '');
@@ -175,7 +182,10 @@ export function addNewColorPicker(attribute: string): void {
     newColorCreated.id = `${attribute}-color${colorNumber}`;
     newColorCreated.className = `${attribute}-inputs`;
 
-    return newColorCreated;
+    containerElement.appendChild(buttonElement);
+    containerElement.appendChild(newColorCreated);
+
+    return containerElement;
   }
 }
 
