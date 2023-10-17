@@ -11,7 +11,7 @@
 
 ### 🚀 About
 
-Code Magic is a website where you can get simple CSS tricks to make your application elegant with just few clicks.
+Code Magic is a website where you can get simple CSS tricks to make your application elegant with just a few clicks.
 
 ![code magic v2](https://github-production-user-asset-6210df.s3.amazonaws.com/78784850/268496391-eb41fa2f-0617-49e1-9035-c9ade068624d.gif)
 
@@ -19,7 +19,7 @@ Code Magic is a website where you can get simple CSS tricks to make your applica
 
 - Pic Text - Convert images to CSS art. Just upload and get CSS art with just one click.
 - Gradient Text - Dual color gradient for your texts.
-- Gradient Border - Get dual color gradient with desired radius.
+- Gradient Border - Get dual color gradient with the desired radius.
 - Gradient Background - Make your backgrounds stand out by applying gradient colors.
 - Animations
   - Select one of the below options
@@ -41,7 +41,7 @@ Code Magic is a website where you can get simple CSS tricks to make your applica
   - Set duration and speed for the animations
   - And boom
 - Box Shadow - Cast a shadow on your element.
-- Border Radius - Get desired border radius for your element.
+- Border Radius - Get the desired border radius for your element.
 - Text Shadow - Create a cool shadow for your text.
 - Input Range - Style your range input type elements easily and quickly
 
@@ -125,7 +125,7 @@ npm run dev
 git checkout -b YourBranchName
 ```
 
-2. Add it to staging area
+2. Add it to the staging area
 
 > NOTE: don't commit the package.json
 
@@ -147,11 +147,11 @@ git push
 
 ## 👨‍👩‍👦 Community
 
-Don't forget to join the discord community - [Join us](https://discord.com/invite/ufcysW9q23)
+Don't forget to join the Discord community - [Join us](https://discord.com/invite/ufcysW9q23)
 
 ## 👩🏽‍💻 Contributing
 
-- Contributions make the open source community such an amazing place to learn, inspire, and create.
+- Contributions make the open-source community such an amazing place to learn, inspire, and create.
 - Any contributions you make are greatly appreciated.
 - Check out our [contribution guidelines](/CONTRIBUTING.md) for more information.
 
