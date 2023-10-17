@@ -548,7 +548,7 @@ input::placeholder {
 
 /* Style for checked circular checkbox */
 .circular-checkbox:checked {
-  background-color: #2196f3;
+  background-color: var(--tertiary-color);
 }
 .circular-checkbox:checked::before {
   content: '\2713'; /* Unicode checkmark character */
