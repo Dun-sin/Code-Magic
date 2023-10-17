@@ -123,39 +123,10 @@ function setPreview(values: Values): void {
   );
 }
 
-function areInputsValid() {
-  const getTrackColor = getColorInput1(attribute);
-  const getThumbColor = getColorInput2(attribute);
-
-  const areColorInputsValid = getTrackColor.value && getThumbColor.value;
-
-  const trackCheckBox = getCheckbox(`${attribute}-track`);
-  const getTrackRadius = getRadiusInput(`${attribute}-track`);
-
-  const isTrackRadiusInputValid = trackCheckBox.checked
-    ? getTrackRadius.value !== ''
-    : true;
-
-  const thumbCheckBox = getCheckbox(`${attribute}-thumb`);
-  const getThumbRadius = getRadiusInput(`${attribute}-thumb`);
-
-  const isThumbRadiusInputValid = thumbCheckBox.checked
-    ? getThumbRadius.value !== ''
-    : true;
-
-  if (areColorInputsValid && isTrackRadiusInputValid && isThumbRadiusInputValid)
-    return true;
-
-  showPopup("Couldn't Copy Code", 'Some input value may be missing', 'error');
-  return false;
-}
-
 function copyHandler() {
   const previewElement = document.getElementById(
     'preview-range'
   ) as HTMLInputElement;
-  if (areInputsValid() === false) return;
-
   copyCSSCodeToClipboard(attribute, previewElement);
   showPopup(
     'Code Copied',

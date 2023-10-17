@@ -1,4 +1,3 @@
-/* eslint-disable no-case-declarations */
 // Includes all functions that the utils functions use
 
 import copy from 'copy-to-clipboard';
@@ -119,8 +118,6 @@ export const actOnGenerator = (
       break;
     case 'input-range':
       element = outputElement.style;
-      const trackRadius = element.getPropertyValue('--preview-track-radius');
-      const thumbRadius = element.getPropertyValue('--preview-thumb-radius');
       codeToCopy = `
       input[type='range'] {
         -webkit-appearance: none;
@@ -134,14 +131,14 @@ export const actOnGenerator = (
         background-color: ${element.getPropertyValue('--preview-track-color')};
         height: ${element.getPropertyValue('--preview-track-height')};
         width: 100%;
-        ${trackRadius !== '0px' ? `border-radius: ${trackRadius};` : ``}
+        border-radius: ${element.getPropertyValue('--preview-track-radius')};
       }
 
       input[type='range']::-moz-range-track {
         background-color: ${element.getPropertyValue('--preview-track-color')};
         height: ${element.getPropertyValue('--preview-track-height')};
         width: 100%;
-        ${trackRadius !== '0px' ? `border-radius: ${trackRadius};` : ``}
+        border-radius: ${element.getPropertyValue('--preview-track-radius')};
       }
 
       input[type='range']::-webkit-slider-thumb {
@@ -151,7 +148,7 @@ export const actOnGenerator = (
         height: ${element.getPropertyValue('--preview-thumb-height')};
         width: ${element.getPropertyValue('--preview-thumb-width')};
         margin-top: -3.2px;
-        ${thumbRadius !== '0px' ? `border-radius: ${thumbRadius};` : ``}
+        border-radius: ${element.getPropertyValue('--preview-thumb-radius')};
       }
 
       input[type='range']::-moz-range-thumb {
@@ -159,7 +156,7 @@ export const actOnGenerator = (
         background-color: ${element.getPropertyValue('--preview-thumb-color')};
         height: ${element.getPropertyValue('--preview-thumb-height')};
         width: ${element.getPropertyValue('--preview-thumb-width')};
-        ${thumbRadius !== '0px' ? `border-radius: ${thumbRadius};` : ``}
+        border-radius: ${element.getPropertyValue('--preview-thumb-radius')};
       }
 
       input[type='range']:focus {
@@ -376,7 +373,7 @@ export const actOnTailwindGenerator = (
   attribute: string,
   outputElement: HTMLElement
 ) => {
-  const element = outputElement.style;
+  let element = outputElement.style;
   let codeToCopy = '';
   switch (attribute) {
     case 'pic-text':
