@@ -12,6 +12,7 @@ import {
   getCssOrTailwindDropdown,
   getTailwindButton,
   getCssOrTailwindButton,
+  getOpenSideBarButton,
 } from '../lib/getElements';
 import {
   triggerEmptyAnimation,
@@ -35,7 +36,7 @@ const attribute = 'gradient-background';
 
 const getNewColorButtonElement = getNewColorButton(attribute);
 const getRemoveColorButtonElement = getRemoveNewColorButton(attribute);
-const resultBtn = document.getElementById('getResultBtn');
+const getResultBtn = document.getElementById('getResultBtn');
 let gradientBackgroundInputs = getAllInputElements('gradient-background');
 
 const getDegreeElement = getRange(attribute);
@@ -47,30 +48,26 @@ export function gradientBackgroundGenerator(
   type: 'newResults' | 'oldResults' | null
 ) {
   if (type === null) return;
-
-  let isColorInputFieldEmpty = false;
-
-  if (type === 'newResults') {
-    gradientBackgroundInputs.forEach((element) => {
-      if (element.value.length === 0) {
-        triggerEmptyAnimation(element);
-        (resultBtn as HTMLElement).style.backgroundColor = 'grey';
-        isColorInputFieldEmpty = true;
+  // Show error when the colors are not entered.
+  var element = gradientBackgroundInputs[0];
+  var value = element.value;
+  if (value.length < 3) {
+    gradientBackgroundInputs.forEach((ele) => {
+      if (getResultBtn) {
+        getResultBtn.style.backgroundColor = 'grey';
       }
+      getOpenSideBarButton().style.display = 'none';
+      triggerEmptyAnimation(ele);
     });
-    if (isColorInputFieldEmpty) return;
-
-    if (isColorInputFieldEmpty === false)
-      (resultBtn as HTMLElement).style.backgroundColor = 'blue';
+    return;
+  } else {
+    if (getResultBtn) {
+      getResultBtn.style.backgroundColor = 'blue';
+    }
   }
 
   const getOutputElement = getOutput(attribute);
   const resultPage = getResultPage();
-
-  if (!getOutputElement.getAttribute('style') && type === 'oldResults') {
-    showPopup('No Previous Result Found', 'Create new ones now!', 'error');
-    return;
-  }
 
   resultPage.style.display = 'flex';
   if (type === 'oldResults') return;
