@@ -525,8 +525,10 @@ input::placeholder {
   display: none;
   min-width: 0;
 }
-.track-input {
-  margin-left: 14px;
+.track-input,
+.thumb-input {
+  width: 80%;
+  padding: 5px;
 }
 .input-range-container {
   display: flex;
@@ -1298,5 +1300,18 @@ a {
 
   .transform-inputs-container {
     margin-top: 50px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .input-range-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 5px;
+  }
+  .track-input,
+  .thumb-input {
+    padding: 2px;
+    width: 60%;
   }
 }
