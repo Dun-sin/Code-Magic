@@ -1193,46 +1193,79 @@
             </div>
 
             <!-- Border Radius for Tracks and Thumbs -->
+
             <div class="radius">
               <label for="input-range-thumb-radius">
-                <input
-                  type="checkbox"
-                  id="input-range-thumb-radius"
-                  name="check"
-                  class="input-range-inputs"
-                />
-                <span> Include Thumb Radius </span>
-                <label id="radius-input-label" for="input-range-thumb-input">
+                <div class="input-range-container">
                   <input
-                    type="number"
-                    id="input-range-thumb-input"
-                    name="desired-radius"
-                    class="toggle-radius input-range-inputs"
-                    placeholder="Enter a number e.g. 50"
-                    autofocus
-                    required
+                    type="checkbox"
+                    id="input-range-thumb-radius"
+                    name="check"
+                    class="input-range-inputs circular-checkbox"
                   />
-                </label>
+
+                  <span> Include Thumb Radius </span>
+
+                  <label id="radius-input-label" for="input-range-thumb-input">
+                    <button
+                      id="input-range-plus-thumb-btn"
+                      class="thumb-btn toggle-radius"
+                    >
+                      +
+                    </button>
+                    <input
+                      type="number"
+                      id="input-range-thumb-input"
+                      name="desired-radius"
+                      class="toggle-radius input-range-inputs"
+                      placeholder="Enter a number e.g. 50"
+                      autofocus
+                      required
+                    />
+                    <button
+                      id="input-range-minus-thumb-btn"
+                      class="thumb-btn toggle-radius"
+                    >
+                      -
+                    </button>
+                  </label>
+                </div>
               </label>
               <label for="input-range-track-radius">
-                <input
-                  type="checkbox"
-                  id="input-range-track-radius"
-                  name="check"
-                  class="input-range-inputs"
-                />
-                <span> Include Track Radius </span>
-                <label id="radius-input-label" for="input-range-track-input">
+                <div class="input-range-container">
                   <input
-                    type="number"
-                    id="input-range-track-input"
-                    name="desired-radius"
-                    class="toggle-radius input-range-inputs"
-                    placeholder="Enter a number e.g. 50"
-                    autofocus
-                    required
+                    type="checkbox"
+                    id="input-range-track-radius"
+                    name="check"
+                    class="input-range-inputs circular-checkbox"
                   />
-                </label>
+
+                  <span> Include Track Radius </span>
+
+                  <label id="radius-input-label" for="input-range-track-input">
+                    <button
+                      id="input-range-plus-track-btn"
+                      class="track-btn toggle-radius"
+                    >
+                      +
+                    </button>
+                    <input
+                      type="number"
+                      id="input-range-track-input"
+                      name="desired-radius"
+                      class="toggle-radius input-range-inputs"
+                      placeholder="Enter a number e.g. 50"
+                      autofocus
+                      required
+                    />
+                    <button
+                      id="input-range-minus-track-btn"
+                      class="track-btn toggle-radius"
+                    >
+                      -
+                    </button>
+                  </label>
+                </div>
               </label>
             </div>
 
