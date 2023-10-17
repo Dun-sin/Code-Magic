@@ -532,7 +532,7 @@ input::placeholder {
   display: flex;
   align-items: center;
   justify-content: start;
-  gap: 25px;
+  gap: 40px;
   padding: 5px;
 }
 .circular-checkbox {
