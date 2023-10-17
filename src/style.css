@@ -548,7 +548,7 @@ input::placeholder {
 
 /* Style for checked circular checkbox */
 .circular-checkbox:checked {
-  background-color: green;
+  background-color: #2196f3;
 }
 .circular-checkbox:checked::before {
   content: '\2713'; /* Unicode checkmark character */
@@ -561,16 +561,6 @@ input::placeholder {
   position: absolute;
   top: 0;
   left: 0;
-}
-
-.track-btn,
-.thumb-btn {
-  font-size: 10px;
-  font-weight: bold;
-  padding: 8px 8px;
-  margin: 0px 6px;
-  border-radius: 4px;
-  outline: none;
 }
 
 #animation-duration,

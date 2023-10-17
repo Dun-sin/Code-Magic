@@ -77,8 +77,7 @@ export const getCheckbox = (attribute: string): HTMLInputElement =>
 
 export const getRadiusInput = (attribute: string) =>
   document.getElementById(`${attribute}-input`) as HTMLInputElement;
-export const getInputButton = (attribute: string) =>
-  document.getElementById(`${attribute}-btn`) as HTMLInputElement;
+
 export const getInputSpinner = (attribute: string) =>
   document.getElementById(`${attribute}-duration`) as HTMLInputElement;
 

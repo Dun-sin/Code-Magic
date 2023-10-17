@@ -1,5 +1,4 @@
 import {
-  getInputButton,
   getRadiusInput,
   getCheckbox,
   getCopyCodeButton,
@@ -76,12 +75,11 @@ function setLabelValue() {
 function setBorderRadiusValue(element: RangeType) {
   const range = `${attribute}-${element}`;
   const getBorderRadiusInput = getRadiusInput(range);
-  const checkbox = getCheckbox(range);
 
-  if (checkbox.checked) {
-    getBorderRadiusInput.value = '10';
+  if (getCheckbox(range).checked) {
+    getRadiusInput(range).value = getBorderRadiusInput.value;
   } else {
-    getBorderRadiusInput.value = ' ';
+    getRadiusInput(range).value = '10';
   }
 }
 
@@ -168,10 +166,7 @@ export const rangeGenerator = () => {
   const thumbCheckBox = getCheckbox(`${attribute}-thumb`);
   const getTrackRadius = getRadiusInput(`${attribute}-track`);
   const getThumbRadius = getRadiusInput(`${attribute}-thumb`);
-  const inputPlusThumbButton = getInputButton(`${attribute}-plus-thumb`);
-  const inputMinusThumbButton = getInputButton(`${attribute}-minus-thumb`);
-  const inputPlusTrackButton = getInputButton(`${attribute}-plus-track`);
-  const inputMinusTrackButton = getInputButton(`${attribute}-minus-track`);
+
   const allRangeInputElements = getAllInputElements(attribute);
 
   allRangeInputElements.forEach((item) => {
@@ -194,53 +189,13 @@ export const rangeGenerator = () => {
     });
   });
 
-  const setBorderRadiusValueMinus = (element: RangeType) => {
-    const range = `${attribute}-${element}`;
-    const getBorderRadiusInput = getRadiusInput(range);
-    getBorderRadiusInput.value = (
-      getBorderRadiusInput.valueAsNumber - 1
-    ).toString();
-  };
-  const setBorderRadiusValuePlus = (element: RangeType) => {
-    const range = `${attribute}-${element}`;
-    const getBorderRadiusInput = getRadiusInput(range);
-    getBorderRadiusInput.value = (
-      getBorderRadiusInput.valueAsNumber + 1
-    ).toString();
-  };
-  inputMinusThumbButton.addEventListener('click', () => {
-    setBorderRadiusValueMinus('thumb');
-  });
-  inputMinusTrackButton.addEventListener('click', () => {
-    setBorderRadiusValueMinus('track');
-  });
-  inputPlusThumbButton.addEventListener('click', () => {
-    setBorderRadiusValuePlus('thumb');
-  });
-  inputPlusTrackButton.addEventListener('click', () => {
-    setBorderRadiusValuePlus('track');
-  });
-
   trackCheckBox.addEventListener('input', () => {
     setBorderRadiusValue('track');
-    if (getTrackRadius && inputPlusTrackButton && inputMinusTrackButton) {
-      const displayStyle = trackCheckBox.checked ? 'inline' : 'none';
-
-      getTrackRadius.style.display = displayStyle;
-      inputPlusTrackButton.style.display = displayStyle;
-      inputMinusTrackButton.style.display = displayStyle;
-    }
+    getTrackRadius.style.display = trackCheckBox.checked ? 'inline' : 'none';
   });
-
   thumbCheckBox.addEventListener('input', () => {
     setBorderRadiusValue('thumb');
-    if (getThumbRadius && inputPlusThumbButton && inputMinusThumbButton) {
-      const displayStyle = thumbCheckBox.checked ? 'inline' : 'none';
-
-      getThumbRadius.style.display = displayStyle;
-      inputPlusThumbButton.style.display = displayStyle;
-      inputMinusThumbButton.style.display = displayStyle;
-    }
+    getThumbRadius.style.display = thumbCheckBox.checked ? 'inline' : 'none';
   });
 
   getCodeButton.addEventListener('click', copyHandler);
