@@ -65,16 +65,6 @@ function getCssOrTailwind(e?: MouseEvent): void {
 
 closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
 
-function copyTailwindHandler() {
-  const outputElement: HTMLElement = getGridPreview(attribute);
-  copyTailwindCodeToClipboard(attribute, outputElement);
-  showPopup(
-    'Tailwind Code Copied',
-    'Code has been successfully copied to clipboard',
-    'success'
-  );
-}
-
 function doInputExist() {
   const noOfColumns = getNumberOfColumns(attribute);
   const noOfRows = getNumberOfRows(attribute);
@@ -85,6 +75,17 @@ function doInputExist() {
   }
 
   return true;
+}
+
+function copyTailwindHandler() {
+  const outputElement: HTMLElement = getGridPreview(attribute);
+  if (doInputExist() === false) return;
+  copyTailwindCodeToClipboard(attribute, outputElement);
+  showPopup(
+    'Tailwind Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
 }
 
 function copyCSSHandler() {

@@ -286,6 +286,7 @@ getValues();
 // Tailwind codecopy handler
 function tailwindHandler() {
   const element = document.querySelector('#preview-range') as HTMLInputElement;
+  if (doInputsExist() === false) return;
   copyTailwindCodeToClipboard(attribute, element);
   showPopup(
     'Tailwind Code Copied',
