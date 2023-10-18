@@ -533,9 +533,13 @@ input::placeholder {
 .input-range-container {
   display: flex;
   align-items: center;
-  justify-content: start;
-  gap: 40px;
+  justify-content: space-between;
   padding: 5px;
+}
+.checkbox-title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 .circular-checkbox {
   width: 20px;
@@ -1313,5 +1317,10 @@ a {
   .thumb-input {
     padding: 2px;
     width: 60%;
+  }
+  .checkbox-title {
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
 }
