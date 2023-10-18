@@ -17,7 +17,7 @@ import {
   getCssOrTailwindDropdown,
   getPngOrSvgButton,
   getPngOrSvgDropdown,
-  getResultButton,
+  getOpenSideBarButton,
 } from '../lib/getElements';
 import {
   copyCSSCodeToClipboard,
@@ -94,37 +94,16 @@ export function gradientTextGenerator(
 ): void {
   if (type === null) return;
 
-  const resultBtn = getResultButton(attribute);
   const getInputElement = getInputText(attribute);
-  let isColorInputFieldEmpty = false;
 
-  if (type === 'newResults') {
-    if (getInputElement.value.length === 0) {
-      triggerEmptyAnimation(getInputElement);
-      resultBtn.style.backgroundColor = 'grey';
-      return;
-    }
-
-    gradientTextInputs.forEach((e) => {
-      if (e.value.length === 0) {
-        triggerEmptyAnimation(e);
-        resultBtn.style.backgroundColor = 'grey';
-        isColorInputFieldEmpty = true;
-      }
-    });
-    if (isColorInputFieldEmpty) return;
-
-    if (isColorInputFieldEmpty === false)
-      resultBtn.style.backgroundColor = 'blue';
+  if (getInputElement.value.length === 0) {
+    getOpenSideBarButton().style.display = 'none';
+    triggerEmptyAnimation(getInputElement);
+    return;
   }
 
   const getOutputElement = getOutput(attribute);
   const resultPage = getResultPage();
-
-  if (!getOutputElement.innerHTML && type === 'oldResults') {
-    showPopup('No Previous Result Found', 'Create new ones now!', 'error');
-    return;
-  }
 
   resultPage.style.display = 'flex';
   if (getOutputElement === null || type === 'oldResults') return;
