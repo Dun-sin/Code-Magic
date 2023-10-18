@@ -21,6 +21,30 @@ const attribute = 'grid-generators';
 const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
 const showCopyClass = 'show-css-tailwind';
 
+function areInputsValid() {
+  const noOfColumns = getNumberOfColumns(attribute);
+  const noOfRows = getNumberOfRows(attribute);
+
+  const isColumnInputValid =
+    noOfColumns.value.length > 0
+      ? parseInt(noOfColumns.value) >= 1 && parseInt(noOfColumns.value) <= 100
+      : true;
+  const isRowInputValid =
+    noOfRows.value.length > 0
+      ? parseInt(noOfRows.value) >= 1 && parseInt(noOfRows.value) <= 100
+      : true;
+
+  if (isColumnInputValid && isRowInputValid) return true;
+
+  showPopup(
+    'Limit Exceeded',
+    'The input value should be within 1 and 100.',
+    'error'
+  );
+
+  return false;
+}
+
 export function gridGenerator(): void {
   const noOfColumns = getNumberOfColumns(attribute);
   const noOfRows = getNumberOfRows(attribute);
@@ -44,6 +68,7 @@ export function gridGenerator(): void {
       allGridInputFields[index].textContent = `${input.value}px`;
     }
     input.addEventListener('input', () => {
+      if (areInputsValid() === false) return;
       preview.style.display = 'grid';
       preview.style.gridTemplateColumns = getGridColValue();
       preview.style.gridTemplateRows = getGridRowValue();
