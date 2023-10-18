@@ -16,7 +16,6 @@ import {
   getCssOrTailwindDropdown,
   getOpenSideBarButton,
   getAllInputElements,
-  getResultButton,
 } from '../lib/getElements';
 import {
   copyCSSCodeToClipboard,
@@ -24,7 +23,6 @@ import {
   showPopup,
   slideIn,
   closeDropdown,
-  triggerEmptyAnimation,
 } from '../lib/packages/utils';
 
 type Values = {
@@ -69,30 +67,18 @@ export function boxShadowGenerator(
   const blur = getShadowBlur(attribute);
   const spread = getShadowSpread(attribute);
   const color = getShadowColor(attribute);
-
+  const getOutputElement = getOutput(attribute);
+  const resultPage = getResultPage();
+  
   const element = boxshadowInputs[0];
   const value = element.value;
 
-  const resultBtn = getResultButton(attribute);
-
-  if (type === 'newResults' && !value) {
-    triggerEmptyAnimation(element);
-    resultBtn.style.backgroundColor = 'grey';
-    return;
+  if (value.length < 3) {
+    getOpenSideBarButton().style.display = 'none';
+  }else{
+    getOpenSideBarButton().style.display = 'flex';
+    resultPage.style.display = 'flex';
   }
-
-  const getOutputElement = getOutput(attribute);
-  const resultPage = getResultPage();
-
-  if (!getOutputElement.getAttribute('style') && type === 'oldResults') {
-    showPopup('No Previous Result Found', 'Create new ones!', 'error');
-    return;
-  }
-
-  resultBtn.style.backgroundColor = 'blue';
-
-  getOpenSideBarButton().style.display = 'flex';
-  resultPage.style.display = 'flex';
 
   if (type === 'oldResults') return;
 
