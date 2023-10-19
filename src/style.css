@@ -571,10 +571,12 @@ input::placeholder {
 
 #animation-duration,
 #gradient-border-input {
-  border: 2px solid #2196f3;
+  background: #0e213c;
+  border: 1px solid black;
   border-radius: 5px;
+  -webkit-text-fill-color: white;
   padding: 4px;
-  margin-top: 8px;
+  margin-top: 4px;
   font-family: inherit;
 }
 
@@ -932,6 +934,16 @@ input[type='number']::-webkit-outer-spin-button {
 
 .border-radius-inputs {
   width: 100%;
+}
+
+.radius-input-fix {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#input-radius {
+  margin-right: 50px;
 }
 
 #border-radius-code {
