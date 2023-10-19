@@ -95,7 +95,7 @@ function doInputExist() {
   const noOfRows = getNumberOfRows(attribute);
 
   if (!noOfColumns.value || !noOfRows.value) {
-    showPopup("Couldn't ", 'Some input value may be missing', 'error');
+    showPopup("Couldn't Copy Code", 'Some input value may be missing', 'error');
     return false;
   }
 
