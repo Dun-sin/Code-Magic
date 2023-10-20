@@ -23,6 +23,30 @@ const attribute = 'grid-generators';
 const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
 const showCopyClass = 'show-css-tailwind';
 
+function areInputsValid() {
+  const noOfColumns = getNumberOfColumns(attribute);
+  const noOfRows = getNumberOfRows(attribute);
+
+  const isColumnInputValid =
+    noOfColumns.value.length > 0
+      ? parseInt(noOfColumns.value) >= 1 && parseInt(noOfColumns.value) <= 100
+      : true;
+  const isRowInputValid =
+    noOfRows.value.length > 0
+      ? parseInt(noOfRows.value) >= 1 && parseInt(noOfRows.value) <= 100
+      : true;
+
+  if (isColumnInputValid && isRowInputValid) return true;
+
+  showPopup(
+    'Limit Exceeded',
+    'The input value should be within 1 and 100.',
+    'error'
+  );
+
+  return false;
+}
+
 export function gridGenerator(): void {
   const noOfColumns = getNumberOfColumns(attribute);
   const noOfRows = getNumberOfRows(attribute);
@@ -53,6 +77,7 @@ export function gridGenerator(): void {
     }
 
     input.addEventListener('input', () => {
+      if (areInputsValid() === false) return;
       preview.style.display = 'grid';
       preview.style.gridTemplateColumns = getGridColValue();
       preview.style.gridTemplateRows = getGridRowValue();
@@ -76,8 +101,21 @@ function getCssOrTailwind(e?: MouseEvent): void {
 
 closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
 
+function doInputExist() {
+  const noOfColumns = getNumberOfColumns(attribute);
+  const noOfRows = getNumberOfRows(attribute);
+
+  if (!noOfColumns.value || !noOfRows.value) {
+    showPopup("Couldn't Copy Code", 'Some input value may be missing', 'error');
+    return false;
+  }
+
+  return true;
+}
+
 function copyTailwindHandler() {
   const outputElement: HTMLElement = getGridPreview(attribute);
+  if (doInputExist() === false) return;
   copyTailwindCodeToClipboard(attribute, outputElement);
   showPopup(
     'Tailwind Code Copied',
@@ -88,6 +126,7 @@ function copyTailwindHandler() {
 
 function copyCSSHandler() {
   const outputElement = getGridPreview(attribute);
+  if (doInputExist() === false) return;
   copyCSSCodeToClipboard(attribute, outputElement);
   showPopup(
     'Code Copied',

@@ -123,10 +123,42 @@ function setPreview(values: Values): void {
   );
 }
 
+function doInputsExist() {
+  const getTrackColor = getColorInput1(attribute);
+  const getThumbColor = getColorInput2(attribute);
+
+  const doColorInputsExist = getTrackColor.value && getThumbColor.value;
+
+  const trackCheckBox = getCheckbox(`${attribute}-track`);
+  const getTrackRadius = getRadiusInput(`${attribute}-track`);
+
+  const doesTrackRadiusInputExists = trackCheckBox.checked
+    ? getTrackRadius.value !== ''
+    : true;
+
+  const thumbCheckBox = getCheckbox(`${attribute}-thumb`);
+  const getThumbRadius = getRadiusInput(`${attribute}-thumb`);
+
+  const doesThumbRadiusInputExists = thumbCheckBox.checked
+    ? getThumbRadius.value !== ''
+    : true;
+
+  if (
+    doColorInputsExist &&
+    doesTrackRadiusInputExists &&
+    doesThumbRadiusInputExists
+  )
+    return true;
+
+  showPopup("Couldn't Copy Code", 'Some input value may be missing', 'error');
+  return false;
+}
+
 function copyHandler() {
   const previewElement = document.getElementById(
     'preview-range'
   ) as HTMLInputElement;
+  if (doInputsExist() === false) return;
   copyCSSCodeToClipboard(attribute, previewElement);
   showPopup(
     'Code Copied',
@@ -254,6 +286,7 @@ getValues();
 // Tailwind codecopy handler
 function tailwindHandler() {
   const element = document.querySelector('#preview-range') as HTMLInputElement;
+  if (doInputsExist() === false) return;
   copyTailwindCodeToClipboard(attribute, element);
   showPopup(
     'Tailwind Code Copied',

@@ -525,6 +525,49 @@ input::placeholder {
   display: none;
   min-width: 0;
 }
+.track-input,
+.thumb-input {
+  width: 80%;
+  padding: 5px;
+}
+.input-range-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+}
+.checkbox-title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.circular-checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Style for checked circular checkbox */
+.circular-checkbox:checked {
+  background-color: var(--tertiary-color);
+}
+.circular-checkbox:checked::before {
+  content: '\2713'; /* Unicode checkmark character */
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 1.4; /* Adjust line height for vertical centering */
+  color: #fff; /* Color for the tick mark */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
 #animation-duration,
 #gradient-border-input {
@@ -1280,5 +1323,23 @@ a {
 
   .transform-inputs-container {
     margin-top: 50px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .input-range-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 5px;
+  }
+  .track-input,
+  .thumb-input {
+    padding: 2px;
+    width: 60%;
+  }
+  .checkbox-title {
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
 }
