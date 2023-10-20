@@ -1103,9 +1103,11 @@ input[type='range']:focus::-moz-range-thumb {
 /* Grid generators styles */
 
 .grid-generators {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: center;
 }
 
 .grid-generators-preview {
@@ -1113,14 +1115,14 @@ input[type='range']:focus::-moz-range-thumb {
   height: 200px;
   border: 1px solid white;
   margin-top: 10px;
+  overflow: scroll;
 }
 
 .grid-generators input[type='number'] {
   border-radius: 5px;
-  width: var(--generator-width);
   height: 50px;
   border: none;
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
   color: var(--text-color);
   resize: none;
   padding: 1rem;
@@ -1130,6 +1132,23 @@ input[type='range']:focus::-moz-range-thumb {
 
 .grid-generators input[type='number']::placeholder {
   color: #ffffff;
+}
+
+.grid-input-containers {
+  width: var(--generator-width);
+  display: flex;
+  flex-direction: column;
+  gap: 10%;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.grid-input-field-wrapper {
+  display: grid;
+  grid-template-columns: 60% 30%;
+  gap: 20px;
+  align-items: center;
 }
 
 /* FOOTER SECTION */
