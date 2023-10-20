@@ -947,12 +947,21 @@ input[type='number']::-webkit-outer-spin-button {
 
 .radius-input-fix {
   display: flex;
-  gap: 10px;
+  /* gap: 10px; */
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
-#input-radius {
-  margin-right: 230px;
+.container-fix {
+  float: left;
+  clear: both;
+  margin-right: 10px;
+}
+
+.container-fix-1 {
+  display: flex;
+  align-items: center;
 }
 
 #border-radius-code {
