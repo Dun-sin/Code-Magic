@@ -949,7 +949,7 @@ input[type='number']::-webkit-outer-spin-button {
   gap: 10px;
 }
 
-.gradient-border-radius-input-section-container {
+.radius-input-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
