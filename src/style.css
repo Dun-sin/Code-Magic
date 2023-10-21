@@ -1025,11 +1025,13 @@ input[type='number']::-webkit-outer-spin-button {
 
 .btn-dropdown-container .css-tailwind,
 .image-download .png-svg {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
   visibility: hidden;
   position: absolute;
-  background-color: var(--primary-color);
   color: var(--text-color);
-  transition: all 0.1s cubic-bezier(0.16, 1, 0.5, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.5, 1);
   transform: translateY(0.5rem);
   margin-top: 0.3rem;
   opacity: 0;
@@ -1052,6 +1054,9 @@ input[type='number']::-webkit-outer-spin-button {
   column-gap: 0.5rem;
   padding: 0.3rem 0.3rem 0.3rem 0.2rem;
   font-size: 12px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  padding: 5px 2px;
 }
 
 .dropdown-item:hover {
