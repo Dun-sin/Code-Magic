@@ -96,6 +96,27 @@ export function gradientTextGenerator(
 
   const getInputElement = getInputText(attribute);
 
+  // Check if any of the color inputs is empty
+  let colorInputsEmpty = false;
+  for (const input of gradientTextInputs) {
+    if (input.id.startsWith('gradient-text-color') && input.value === '') {
+      colorInputsEmpty = true;
+      break;
+    }
+  }
+  if (colorInputsEmpty) {
+    // Show an error message on the screen
+    const errorMessageElement = document.getElementById('error-message');
+    errorMessageElement.textContent = 'Please fill in all color inputs.';
+    errorMessageElement.style.display = 'block';
+
+    // Prevent further action
+    setTimeout(() => {
+      errorMessageElement.style.display = 'none';
+    }, 3000); // 5000 milliseconds (5 seconds)
+    return;
+  }
+
   if (getInputElement.value.length === 0) {
     getOpenSideBarButton().style.display = 'none';
     triggerEmptyAnimation(getInputElement);
