@@ -1027,7 +1027,6 @@ input[type='number']::-webkit-outer-spin-button {
 .image-download .png-svg {
   visibility: hidden;
   position: absolute;
-  background-color: var(--primary-color);
   color: var(--text-color);
   transition: all 0.1s cubic-bezier(0.16, 1, 0.5, 1);
   transform: translateY(0.5rem);
@@ -1052,6 +1051,14 @@ input[type='number']::-webkit-outer-spin-button {
   column-gap: 0.5rem;
   padding: 0.3rem 0.3rem 0.3rem 0.2rem;
   font-size: 12px;
+  background-color: var(--primary-color);
+  border-radius: 0.3rem;
+}
+
+.dropdown-item-svg-png {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
 .dropdown-item:hover {
