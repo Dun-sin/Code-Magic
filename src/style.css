@@ -346,6 +346,7 @@ main > section:last-of-type {
   width: var(--generator-width);
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
   padding: 1rem;
   justify-content: center;
   height: fit-content;
@@ -383,6 +384,7 @@ main > section:last-of-type {
 }
 
 .size > div div {
+  margin: 0.5rem 0;
   font-size: 0.8rem;
 }
 
@@ -445,6 +447,7 @@ input::placeholder {
 .color {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
   justify-content: center;
   align-items: center;
   width: 48%;
