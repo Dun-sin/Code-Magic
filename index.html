@@ -583,19 +583,28 @@
             <div class="preview" id="gradient-border-color-preview"></div>
 
             <label class="radius" for="gradient-border-radius">
-              <input type="checkbox" id="gradient-border-radius" name="check" />
-              <span> Include Radius </span>
-              <label id="radius-input-label" for="gradient-border-input">
-                <input
-                  type="number"
-                  id="gradient-border-input"
-                  name="desired-radius"
-                  placeholder="Enter a number e.g. 50"
-                  class="toggle-radius"
-                  autofocus
-                  required
-                />
-              </label>
+              <div class="radius-input-container">
+                <div class="radius-checkbox-container">
+                  <input
+                    class="circular-checkbox"
+                    type="checkbox"
+                    id="gradient-border-radius"
+                    name="check"
+                  />
+                  <span> Include Radius </span>
+                </div>
+                <label id="radius-input-label" for="gradient-border-input">
+                  <input
+                    type="number"
+                    id="gradient-border-input"
+                    name="desired-radius"
+                    placeholder="Enter a number e.g. 50"
+                    class="toggle-radius styled-input"
+                    autofocus
+                    required
+                  />
+                </label>
+              </div>
             </label>
 
             <label id="degree">
