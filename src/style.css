@@ -575,7 +575,6 @@ input::placeholder {
   border-radius: 5px;
   -webkit-text-fill-color: white;
   padding: 4px;
-  margin-top: 4px;
   font-family: inherit;
 }
 
@@ -585,7 +584,6 @@ input::placeholder {
   border-radius: 5px;
   -webkit-text-fill-color: black;
   padding: 4px;
-  margin-top: 4px;
   font-family: inherit;
 }
 
@@ -945,23 +943,17 @@ input[type='number']::-webkit-outer-spin-button {
   width: 100%;
 }
 
-.radius-input-fix {
+.gradient-border-radius-checkbox-label-container {
   display: flex;
-  /* gap: 10px; */
+  align-items: center;
+  gap: 10px;
+}
+
+.gradient-border-radius-input-section-container {
+  display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-}
-
-.container-fix {
-  float: left;
-  clear: both;
-  margin-right: 10px;
-}
-
-.container-fix-1 {
-  display: flex;
-  align-items: center;
 }
 
 #border-radius-code {
