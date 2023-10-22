@@ -545,6 +545,8 @@ input::placeholder {
   gap: 5px;
 }
 .circular-checkbox {
+  display: flex;
+  flex-shrink: 0;
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -1344,8 +1346,6 @@ a {
 @media screen and (max-width: 768px) {
   .input-range-container {
     display: flex;
-    flex-direction: row;
-    gap: 10px;
     padding: 5px;
   }
   .track-input,
