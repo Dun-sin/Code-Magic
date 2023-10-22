@@ -1146,15 +1146,14 @@ input[type='range']:focus::-moz-range-thumb {
 /* Grid generators styles */
 
 .grid-generators {
-  width: 100%;
+  width: var(--input-width);
   display: flex;
   flex-direction: column;
-  gap: 10px;
   align-items: center;
 }
 
 .grid-generators-preview {
-  width: 300px;
+  width: 100%;
   height: 200px;
   border: 1px solid white;
   margin-top: 10px;
@@ -1165,7 +1164,7 @@ input[type='range']:focus::-moz-range-thumb {
   border-radius: 5px;
   height: 50px;
   border: none;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   color: var(--text-color);
   resize: none;
   padding: 1rem;
@@ -1178,20 +1177,12 @@ input[type='range']:focus::-moz-range-thumb {
 }
 
 .grid-input-containers {
-  width: var(--generator-width);
-  display: flex;
-  flex-direction: column;
-  gap: 10%;
-  background-color: var(--primary-color);
-  border-radius: 5px;
-  padding: 20px;
-}
-
-.grid-input-field-wrapper {
+  width: 100%;
   display: grid;
-  grid-template-columns: 60% 30%;
-  gap: 20px;
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  border-radius: var(--spacing);
+  margin-top: calc(var(--spacing) + 10px);
 }
 
 /* FOOTER SECTION */

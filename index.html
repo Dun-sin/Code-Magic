@@ -1296,68 +1296,49 @@
         <!-- Grid Generator -->
         <div data-content="grid-generators" class="grid-generators">
           <label for="grid-generators-preview">
-            <p>CSS Grid Preview</p>
-            <div
-              id="grid-generators-preview"
-              class="grid-generators-preview"
-            ></div>
+            <h1>CSS Grid Preview</h1>
           </label>
+          <div
+            id="grid-generators-preview"
+            class="grid-generators-preview"
+          ></div>
           <div class="grid-input-containers">
-            <div class="rows grid-input-field-wrapper">
-              <label for="grid-generators-rows" class="row full-page"
-                >Enter no of nows</label
-              >
-              <input
-                type="number"
-                name="grid-generators-rows"
-                id="grid-generators-rows"
-                class="grid-generators-inputs"
-                min="0"
-                max="100"
-              />
-            </div>
-            <div class="columns grid-input-field-wrapper">
-              <label for="grid-generator-columns" class="column full-page"
-                >Enter no of columns</label
-              >
-              <input
-                type="number"
-                name="grid-generator-columns"
-                id="grid-generators-columns"
-                class="grid-generators-inputs"
-                min="0"
-                max="100"
-              />
-            </div>
-            <div class="row-gaps grid-input-field-wrapper">
-              <label for="grid-generators-row-gaps" class="row-gaps full-page"
-                >Row gap in px</label
-              >
-              <input
-                type="number"
-                name="grid-generators-row-gaps"
-                id="grid-generators-row-gaps"
-                class="grid-generators-inputs"
-                min="0"
-                max="100"
-              />
-            </div>
-            <div class="column-gaps grid-input-field-wrapper">
-              <label
-                for="grid-generators-column-gaps"
-                class="column-gaps full-page"
-              >
-                Column gap in px</label
-              >
-              <input
-                type="number"
-                name="grid-generators-column-gaps"
-                id="grid-generators-column-gaps"
-                class="grid-generators-inputs"
-                min="0"
-                max="100"
-              />
-            </div>
+            <input
+              type="number"
+              name="grid-generators-rows"
+              id="grid-generators-rows"
+              placeholder="Rows"
+              class="grid-generators-inputs row full-page"
+              min="0"
+              max="100"
+            />
+            <input
+              type="number"
+              name="grid-generator-columns"
+              id="grid-generators-columns"
+              class="grid-generators-inputs column full-page"
+              placeholder="Columns"
+              min="0"
+              max="100"
+            />
+            <input
+              type="number"
+              name="grid-generators-row-gaps"
+              id="grid-generators-row-gaps"
+              placeholder="Row gap"
+              class="grid-generators-inputs row-gaps full-page"
+              min="0"
+              max="100"
+            />
+            <input
+              type="number"
+              name="grid-generators-column-gaps"
+              id="grid-generators-column-gaps"
+              placeholder="Column gap"
+              class="grid-generators-inputs column-gaps full-page"
+              min="0"
+              max="100"
+            />
           </div>
           <div class="btn-container">
             <div class="reset" data-reset="grid-generators">Reset</div>
