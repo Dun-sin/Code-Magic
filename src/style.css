@@ -635,7 +635,8 @@ input[type='number']::-webkit-outer-spin-button {
   flex-wrap: wrap;
 }
 
-.styled-input {
+.styled-input,
+.input-range-inputs[type='number'] {
   background-color: var(--secondary-color);
   border: 1px solid #010204;
   border-radius: 5px;
@@ -645,12 +646,14 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .styled-input:focus,
-.styled-input:focus-visible {
+.styled-input:focus-visible,
+.input-range-inputs[type='number'] {
   outline: none;
 }
 
 .styled-input::-webkit-inner-spin-button,
-.styled-input::-webkit-outer-spin-button {
+.styled-input::-webkit-outer-spin-button,
+.input-range-inputs[type='number'] {
   -webkit-appearance: none;
   appearance: none;
   margin: 0;
