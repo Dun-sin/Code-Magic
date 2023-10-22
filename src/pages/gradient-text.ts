@@ -95,7 +95,18 @@ export function gradientTextGenerator(
   if (type === null) return;
 
   const getInputElement = getInputText(attribute);
+  const textAreas = document.querySelectorAll('.gradient-text-inputs');
 
+  // Check if any of the color inputs is empty
+  if (
+    Array.from(textAreas).some(
+      (textArea) => (textArea as HTMLInputElement).value.trim() === ''
+    )
+  ) {
+    return;
+  }
+
+  // If all color inputs are filled
   if (getInputElement.value.length === 0) {
     getOpenSideBarButton().style.display = 'none';
     triggerEmptyAnimation(getInputElement);
@@ -244,7 +255,6 @@ function getValues() {
       if (input.nodeName === 'TEXTAREA') {
         if (input.value === '') return;
       }
-
       if (resetButton.classList.contains('reset-show')) return;
       resetButton.classList.add('reset-show');
     });
