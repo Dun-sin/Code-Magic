@@ -1331,11 +1331,8 @@ a {
     margin-top: 50px;
   }
 
-  @supports (-webkit-appearance: none) {
-    .input-range-container {
-      flex-direction: column;
-      gap: 10px;
-    }
+  .circular-checkbox:checked {
+    width: 40px;
   }
 }
 @media screen and (max-width: 768px) {
