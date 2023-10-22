@@ -545,6 +545,8 @@ input::placeholder {
   gap: 5px;
 }
 .circular-checkbox {
+  display: flex;
+  flex-shrink: 0;
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -1329,10 +1331,6 @@ a {
 
   .transform-inputs-container {
     margin-top: 50px;
-  }
-
-  .circular-checkbox:checked {
-    width: 40px;
   }
 }
 @media screen and (max-width: 768px) {
