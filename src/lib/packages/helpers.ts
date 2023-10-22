@@ -5,7 +5,12 @@ import copy from 'copy-to-clipboard';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {Eggy} from '@s-r0/eggy-js';
-import {getNumberOfColumns, getNumberOfRows} from '../getElements';
+import {
+  getColumnGap,
+  getNumberOfColumns,
+  getNumberOfRows,
+  getRowGap,
+} from '../getElements';
 
 export function createDownloadLink(fileName: string, url: string) {
   const link = document.createElement('a');
@@ -172,7 +177,9 @@ export const actOnGenerator = (
       width: 300px;
       display:${element.display},
       grid-template-rows:${element.gridTemplateRows},
-      grid-template-columns:${element.gridTemplateColumns}
+      grid-template-columns:${element.gridTemplateColumns},
+      row-gap:${element.rowGap},
+      column-gap:${element.columnGap}
     }
     `;
       break;
@@ -352,15 +359,21 @@ function convertInputRangeStylesToTailwind(element: CSSStyleDeclaration) {
 }
 
 function convertGridSylesToTailwind(attribute: string) {
+  let result = 'grid';
   const noOfColumns = getNumberOfColumns(attribute).value;
   const noOfRows = getNumberOfRows(attribute).value;
+  const columnGapValue = getColumnGap(attribute).value;
+  const rowGapValue = getRowGap(attribute).value;
   const rows = parseInt(noOfRows !== '' ? noOfRows : '0');
   const columns = parseInt(noOfColumns !== '' ? noOfColumns : '0');
-  if (rows > 0 || columns > 0) {
-    return `grid grid-rows-${rows} grid-cols-${columns}`;
+  const rowGap = parseInt(rowGapValue !== '' ? rowGapValue : '0');
+  const columnGap = parseInt(columnGapValue !== '' ? columnGapValue : '0');
+  if (rows > 0 || columns > 0 || rowGap > 0 || columnGap > 0) {
+    result = `${result} grid-rows-${rows} grid-cols-${columns} gap-x-${rowGap} gap-y-${columnGap}`;
   } else {
-    return '';
+    result = `${result} gap-x-0 gap-y-0`;
   }
+  return result;
 }
 
 /**

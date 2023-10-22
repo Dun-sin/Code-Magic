@@ -1304,38 +1304,47 @@
 
         <!-- Grid Generator -->
         <div data-content="grid-generators" class="grid-generators">
-          <label for="grid-generators-preview">
-            <p>CSS Grid Preview</p>
-            <div
-              id="grid-generators-preview"
-              class="grid-generators-preview"
-            ></div>
-          </label>
-          <div class="rows">
-            <label for="grid-generators-rows" class="row full-page">
-              <input
-                type="number"
-                name="grid-generators-rows"
-                placeholder="Enter no of rows"
-                id="grid-generators-rows"
-                class="grid-generators-inputs"
-                min="0"
-                max="100"
-              />
-            </label>
-          </div>
-          <div class="columns">
-            <label for="grid-generator-columns" class="column full-page">
-              <input
-                type="number"
-                name="grid-generator-columns"
-                placeholder="Enter no of columns"
-                id="grid-generators-columns"
-                class="grid-generators-inputs"
-                min="0"
-                max="100"
-              />
-            </label>
+          <div
+            id="grid-generators-preview"
+            class="grid-generators-preview"
+          ></div>
+          <div class="grid-input-containers">
+            <input
+              type="number"
+              name="grid-generators-rows"
+              id="grid-generators-rows"
+              placeholder="Rows"
+              class="grid-generators-inputs row full-page"
+              min="0"
+              max="100"
+            />
+            <input
+              type="number"
+              name="grid-generator-columns"
+              id="grid-generators-columns"
+              class="grid-generators-inputs column full-page"
+              placeholder="Columns"
+              min="0"
+              max="100"
+            />
+            <input
+              type="number"
+              name="grid-generators-row-gaps"
+              id="grid-generators-row-gaps"
+              placeholder="Row gap"
+              class="grid-generators-inputs row-gaps full-page"
+              min="0"
+              max="100"
+            />
+            <input
+              type="number"
+              name="grid-generators-column-gaps"
+              id="grid-generators-column-gaps"
+              placeholder="Column gap"
+              class="grid-generators-inputs column-gaps full-page"
+              min="0"
+              max="100"
+            />
           </div>
           <div class="btn-container">
             <div class="reset" data-reset="grid-generators">Reset</div>

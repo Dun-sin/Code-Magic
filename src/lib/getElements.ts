@@ -184,6 +184,12 @@ export const getNumberOfColumns = (attribute: string): HTMLInputElement =>
 export const getNumberOfRows = (attribute: string): HTMLInputElement =>
   document.getElementById(`${attribute}-rows`) as HTMLInputElement;
 
+export const getRowGap = (attribute: string): HTMLInputElement =>
+  document.getElementById(`${attribute}-row-gaps`) as HTMLInputElement;
+
+export const getColumnGap = (attribute: string): HTMLInputElement =>
+  document.getElementById(`${attribute}-column-gaps`) as HTMLInputElement;
+
 export const getGridFields = (
   attribute: string,
   types: string[]

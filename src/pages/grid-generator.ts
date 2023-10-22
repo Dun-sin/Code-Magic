@@ -9,6 +9,8 @@ import {
   getTailwindButton,
   getCssOrTailwindDropdown,
   getCssOrTailwindButton,
+  getRowGap,
+  getColumnGap,
 } from '../lib/getElements';
 import {
   copyCSSCodeToClipboard,
@@ -48,30 +50,39 @@ function areInputsValid() {
 export function gridGenerator(): void {
   const noOfColumns = getNumberOfColumns(attribute);
   const noOfRows = getNumberOfRows(attribute);
+  const rowGapValue = getRowGap(attribute);
+  const columnGapValue = getColumnGap(attribute);
 
   const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
 
   const preview = getGridPreview(attribute);
 
-  const allGridInputs = [noOfColumns, noOfRows];
+  const allGridInputs = [noOfColumns, noOfRows, rowGapValue, columnGapValue];
 
-  const allGridInputFields = getGridFields(attribute, ['rows', 'columns']);
+  const allGridInputFields = getGridFields(attribute, [
+    'rows',
+    'columns',
+    'row-gaps',
+    'column-gaps',
+  ]);
 
   const getGridColValue = () => `repeat(${parseInt(noOfColumns.value)}, 1fr)`;
   const getGridRowValue = () => `repeat(${parseInt(noOfRows.value)}, 1fr)`;
-  preview.style.display = 'grid';
-  preview.style.gridTemplateColumns = getGridColValue();
-  preview.style.gridTemplateRows = getGridRowValue();
+  const getGridColGapValue = () => `${parseInt(columnGapValue.value)}px`;
+  const getGridRowGapValue = () => `${parseInt(rowGapValue.value)}px`;
 
   allGridInputs.forEach((input, index) => {
     if (index < 4) {
       allGridInputFields[index].textContent = `${input.value}px`;
     }
+
     input.addEventListener('input', () => {
       if (areInputsValid() === false) return;
       preview.style.display = 'grid';
       preview.style.gridTemplateColumns = getGridColValue();
       preview.style.gridTemplateRows = getGridRowValue();
+      preview.style.rowGap = getGridRowGapValue();
+      preview.style.columnGap = getGridColGapValue();
       updatePreviewElement();
     });
   });
@@ -158,6 +169,7 @@ function updatePreviewElement() {
   const noOfRows = getNumberOfRows(attribute).value;
   const rows = parseInt(noOfRows !== '' ? noOfRows : '0');
   const columns = parseInt(noOfColumns !== '' ? noOfColumns : '0');
+
   if (rows > columns) {
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < columns; j++) {
