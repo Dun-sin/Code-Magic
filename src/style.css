@@ -346,6 +346,7 @@ main > section:last-of-type {
   width: var(--generator-width);
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
   padding: 1rem;
   justify-content: center;
   height: fit-content;
@@ -383,6 +384,7 @@ main > section:last-of-type {
 }
 
 .size > div div {
+  margin: 0.5rem 0;
   font-size: 0.8rem;
 }
 
@@ -445,6 +447,7 @@ input::placeholder {
 .color {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
   justify-content: center;
   align-items: center;
   width: 48%;
@@ -569,12 +572,21 @@ input::placeholder {
   left: 0;
 }
 
-#animation-duration,
-#gradient-border-input {
-  border: 2px solid #2196f3;
+#animation-duration {
+  background: #0e213c;
+  border: 1px solid black;
   border-radius: 5px;
+  -webkit-text-fill-color: white;
   padding: 4px;
-  margin-top: 8px;
+  font-family: inherit;
+}
+
+#gradient-border-input {
+  background: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  -webkit-text-fill-color: black;
+  padding: 4px;
   font-family: inherit;
 }
 
@@ -931,6 +943,19 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .border-radius-inputs {
+  width: 100%;
+}
+
+.radius-checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.radius-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
 }
 

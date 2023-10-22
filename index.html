@@ -22,7 +22,7 @@
     />
     <meta
       property="og:image"
-      content="https://nakam360.netlify.app/src/Assets/Images/open-graph.webp"
+      content="https://github-production-user-asset-6210df.s3.amazonaws.com/80192140/277101609-8a34c60a-4e79-4e29-beb0-7aabcea8fd58.png"
     />
 
     <!-- Twitter Meta Tags -->
@@ -36,7 +36,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://nakam360.netlify.app/src/Assets/Images/open-graph.webp"
+      content="https://github-production-user-asset-6210df.s3.amazonaws.com/80192140/277101609-8a34c60a-4e79-4e29-beb0-7aabcea8fd58.png"
     />
 
     <!-- Meta Tags Generated via https://www.opengraph.xyz -->
@@ -583,19 +583,28 @@
             <div class="preview" id="gradient-border-color-preview"></div>
 
             <label class="radius" for="gradient-border-radius">
-              <input type="checkbox" id="gradient-border-radius" name="check" />
-              <span> Include Radius </span>
-              <label id="radius-input-label" for="gradient-border-input">
-                <input
-                  type="number"
-                  id="gradient-border-input"
-                  name="desired-radius"
-                  placeholder="Enter a number e.g. 50"
-                  class="toggle-radius"
-                  autofocus
-                  required
-                />
-              </label>
+              <div class="radius-input-container">
+                <div class="radius-checkbox-container">
+                  <input
+                    class="circular-checkbox"
+                    type="checkbox"
+                    id="gradient-border-radius"
+                    name="check"
+                  />
+                  <span> Include Radius </span>
+                </div>
+                <label id="radius-input-label" for="gradient-border-input">
+                  <input
+                    type="number"
+                    id="gradient-border-input"
+                    name="desired-radius"
+                    placeholder="Enter a number e.g. 50"
+                    class="toggle-radius styled-input"
+                    autofocus
+                    required
+                  />
+                </label>
+              </div>
             </label>
 
             <label id="degree">
