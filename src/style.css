@@ -647,13 +647,15 @@ input[type='number']::-webkit-outer-spin-button {
 
 .styled-input:focus,
 .styled-input:focus-visible,
-.input-range-inputs[type='number'] {
+.input-range-inputs[type='number']:focus,
+.input-range-inputs[type='number']:focus-visible {
   outline: none;
 }
 
 .styled-input::-webkit-inner-spin-button,
 .styled-input::-webkit-outer-spin-button,
-.input-range-inputs[type='number'] {
+.input-range-inputs[type='number']::-webkit-inner-spin-button,
+.input-range-inputs[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   appearance: none;
   margin: 0;
