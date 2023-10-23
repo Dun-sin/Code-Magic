@@ -1038,6 +1038,7 @@ input[type='number']::-webkit-outer-spin-button {
   border-radius: 5px;
   cursor: pointer;
   width: 150px;
+  padding: 0.3rem 0;
 }
 
 .css-tailwind.show-css-tailwind,
