@@ -69,13 +69,13 @@ export function boxShadowGenerator(
   const color = getShadowColor(attribute);
   const getOutputElement = getOutput(attribute);
   const resultPage = getResultPage();
-  
+
   const element = boxshadowInputs[0];
   const value = element.value;
 
   if (value.length < 3) {
     getOpenSideBarButton().style.display = 'none';
-  }else{
+  } else {
     getOpenSideBarButton().style.display = 'flex';
     resultPage.style.display = 'flex';
   }
@@ -153,7 +153,6 @@ export function addBoxShadowListener(): void {
       allBoxShadowInputsFields[idx].textContent = `${input.value}px`;
     }
     input.addEventListener('input', () => {
-      if (color.value === '') return;
       slideIn(preview, isSliderOpen);
 
       isSliderOpen = true;
