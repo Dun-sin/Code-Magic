@@ -153,7 +153,6 @@ export function addBoxShadowListener(): void {
       allBoxShadowInputsFields[idx].textContent = `${input.value}px`;
     }
     input.addEventListener('input', () => {
-      if (color.value === '') return;
       slideIn(preview, isSliderOpen);
 
       isSliderOpen = true;
