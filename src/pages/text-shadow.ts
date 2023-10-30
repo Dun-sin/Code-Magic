@@ -165,17 +165,18 @@ export function addTextShadowListener(): void {
 
   preview.style.textShadow = getShadowValue();
 
+  getInputElement.addEventListener('input', () => {
+    preview.innerText = getInputElement.value;
+    preview.style.textShadow = getShadowValue();
+  });
+
   allTextShadowInputs.forEach((input, idx) => {
     // default
     if (idx < 3) {
       allTextShadowInputsFields[idx].textContent = `${input.value}px`;
     }
-    getInputElement.addEventListener('input', () => {
-      preview.innerText = getInputElement.value;
-      preview.style.textShadow = getShadowValue();
-    });
     input.addEventListener('input', () => {
-      if (getInputElement.value === '' || color.value === '') return;
+      if (getInputElement.value === '') return;
       preview.innerText = getInputElement.value;
       slideIn(preview, isSliderOpen);
 
