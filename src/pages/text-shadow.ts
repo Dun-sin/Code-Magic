@@ -165,6 +165,11 @@ export function addTextShadowListener(): void {
 
   preview.style.textShadow = getShadowValue();
 
+  getInputElement.addEventListener('input', () => {
+    preview.innerText = getInputElement.value;
+    preview.style.textShadow = getShadowValue();
+  });
+
   allTextShadowInputs.forEach((input, idx) => {
     // default
     if (idx < 3) {
