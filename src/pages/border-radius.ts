@@ -4,20 +4,10 @@ import {
   getBorderLeft,
   getBorderBottom,
   getOutput,
-  getCopyCodeButton,
   getResultPage,
   getAllFields,
   getResetButton,
-  getTailwindButton,
-  getCssOrTailwindButton,
-  getCssOrTailwindDropdown,
 } from '../lib/getElements';
-import {
-  copyCSSCodeToClipboard,
-  showPopup,
-  copyTailwindCodeToClipboard,
-  closeDropdown,
-} from '../lib/packages/utils';
 
 type Values = {
   BorderTop: string;
@@ -33,30 +23,10 @@ const borderTop = getBorderTop(attribute);
 const borderRight = getBorderRight(attribute);
 const borderLeft = getBorderLeft(attribute);
 const borderBottom = getBorderBottom(attribute);
-const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
-const showCopyClass = 'show-css-tailwind';
 
 const borderRadiusPreview = document.querySelector(
   '.border-radius-preview-box > .preview'
 ) as HTMLElement;
-
-function copyHandler() {
-  const outputElement = getOutput(attribute);
-  copyCSSCodeToClipboard(attribute, outputElement);
-  showPopup(
-    'Code Copied',
-    'Code has been successfully copied to clipboard',
-    'success'
-  );
-}
-
-function getCssOrTailwind(e?: MouseEvent): void {
-  e?.stopPropagation();
-  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
-}
-
-// closes css and tailwind dropdown on outside click
-closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
 
 function getBorderRadiusResult(
   attribute: string,
@@ -71,13 +41,6 @@ function getBorderRadiusResult(
   ${values.borderBottom}% ${100 - Number(values.borderBottom)}% /
   ${values.borderLeft}% ${values.borderRight}%
   ${100 - Number(values.borderRight)}% ${100 - Number(values.borderLeft)}%`;
-
-  const getCodeButtonElement = getCopyCodeButton(attribute);
-  getCodeButtonElement.addEventListener('click', copyHandler);
-  const getTailwindCodeButtonElement = getTailwindButton(attribute);
-  getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
-  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
-  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
 }
 
 export function borderRadiusGenerator(
@@ -133,18 +96,13 @@ export function addBorderRadiusListener() {
 
 // reset the values of all target fields
 
-function resetValues() {
+export function resetBorderRadiusValues() {
   const {inputs} = getAllFields(attribute);
-
-  getResetButton(attribute).addEventListener('click', () => {
-    inputs.forEach((input) => {
-      input.value = input.defaultValue;
-    });
-
-    borderRadiusPreview.style.borderRadius = '0';
-
-    getResetButton(attribute).classList.remove('reset-show');
+  inputs.forEach((input) => {
+    input.value = input.defaultValue;
   });
+  borderRadiusPreview.style.borderRadius = '0';
+  getResetButton(attribute).classList.remove('reset-show');
 }
 
 // get values from all targets to get notified when values change.
@@ -155,19 +113,7 @@ function getValues() {
   inputs.forEach((input) => {
     input.addEventListener('input', () => {
       getResetButton(attribute).classList.add('reset-show');
-      resetValues();
     });
   });
 }
 getValues();
-
-// Tailwind codecopy handler
-function tailwindHandler() {
-  const outputElement = getOutput(attribute);
-  copyTailwindCodeToClipboard(attribute, outputElement);
-  showPopup(
-    'Tailwind Code Copied',
-    'Code has been successfully copied to clipboard',
-    'success'
-  );
-}

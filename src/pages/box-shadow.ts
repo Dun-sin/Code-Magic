@@ -6,24 +6,14 @@ import {
   getShadowSpread,
   getShadowColor,
   getResultPage,
-  getCopyCodeButton,
   getPreviewSlider,
   getShadowFields,
   getAllFields,
   getResetButton,
-  getTailwindButton,
-  getCssOrTailwindButton,
-  getCssOrTailwindDropdown,
   getOpenSideBarButton,
   getAllInputElements,
 } from '../lib/getElements';
-import {
-  copyCSSCodeToClipboard,
-  copyTailwindCodeToClipboard,
-  showPopup,
-  slideIn,
-  closeDropdown,
-} from '../lib/packages/utils';
+import {slideIn} from '../lib/packages/utils';
 
 type Values = {
   hOffset: string;
@@ -35,27 +25,7 @@ type Values = {
 
 const attribute = 'box-shadow';
 let isSliderOpen = false;
-const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
-const showCopyClass = 'show-css-tailwind';
 const boxshadowInputs = getAllInputElements(attribute);
-
-function copyHandler() {
-  const outputElement = getOutput(attribute);
-  copyCSSCodeToClipboard(attribute, outputElement);
-  showPopup(
-    'Code Copied',
-    'Code has been successfully copied to clipboard',
-    'success'
-  );
-}
-
-function getCssOrTailwind(e?: MouseEvent): void {
-  e?.stopPropagation();
-  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
-}
-
-// closes css and tailwind dropdown on outside click
-closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
 
 export function boxShadowGenerator(
   type: 'newResults' | 'oldResults' | null
@@ -69,13 +39,13 @@ export function boxShadowGenerator(
   const color = getShadowColor(attribute);
   const getOutputElement = getOutput(attribute);
   const resultPage = getResultPage();
-  
+
   const element = boxshadowInputs[0];
   const value = element.value;
 
   if (value.length < 3) {
     getOpenSideBarButton().style.display = 'none';
-  }else{
+  } else {
     getOpenSideBarButton().style.display = 'flex';
     resultPage.style.display = 'flex';
   }
@@ -111,13 +81,6 @@ function getBoxShadowResult(values: Values, outputElement: HTMLElement): void {
     boxShadowElement.style.boxShadow = `${values.hOffset}px ${values.vOffset}px ${values.blur}px ${values.spread}px ${values.color}`;
   };
   createBoxShadowElement(outputElement, values);
-
-  const getCodeButtonElement = getCopyCodeButton(attribute);
-  getCodeButtonElement.addEventListener('click', copyHandler);
-  const getTailwindCodeButtonElement = getTailwindButton(attribute);
-  getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
-  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
-  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
 }
 
 export function addBoxShadowListener(): void {
@@ -166,29 +129,27 @@ export function addBoxShadowListener(): void {
 
 // reset the values of all target fields
 
-function resetValues() {
+export function resetBoxShadowValues() {
   const {inputs} = getAllFields(attribute);
 
-  getResetButton(attribute).addEventListener('click', () => {
-    inputs.forEach((input) => {
-      input.value = input.defaultValue;
-    });
-
-    document.querySelector(
-      "[data-content='box-shadow'] #box-shadow-h-offset-field"
-    )!.innerHTML = '5px';
-    document.querySelector(
-      "[data-content='box-shadow'] #box-shadow-v-offset-field"
-    )!.innerHTML = '10px';
-    document.querySelector(
-      "[data-content='box-shadow'] #box-shadow-blur-field"
-    )!.innerHTML = '18px';
-    document.querySelector(
-      "[data-content='box-shadow'] #box-shadow-spread-field"
-    )!.innerHTML = '5px';
-
-    getResetButton(attribute).classList.remove('reset-show');
+  inputs.forEach((input) => {
+    input.value = input.defaultValue;
   });
+
+  document.querySelector(
+    "[data-content='box-shadow'] #box-shadow-h-offset-field"
+  )!.innerHTML = '5px';
+  document.querySelector(
+    "[data-content='box-shadow'] #box-shadow-v-offset-field"
+  )!.innerHTML = '10px';
+  document.querySelector(
+    "[data-content='box-shadow'] #box-shadow-blur-field"
+  )!.innerHTML = '18px';
+  document.querySelector(
+    "[data-content='box-shadow'] #box-shadow-spread-field"
+  )!.innerHTML = '5px';
+
+  getResetButton(attribute).classList.remove('reset-show');
 }
 
 // get values from all targets to get notified when values change.
@@ -199,19 +160,7 @@ function getValues() {
   inputs.forEach((input) => {
     input.addEventListener('input', () => {
       getResetButton(attribute).classList.add('reset-show');
-      resetValues();
     });
   });
 }
 getValues();
-
-// Tailwind codecopy handler
-function tailwindHandler() {
-  const outputElement: HTMLElement = getOutput(attribute);
-  copyTailwindCodeToClipboard(attribute, outputElement);
-  showPopup(
-    'Tailwind Code Copied',
-    'Code has been successfully copied to clipboard',
-    'success'
-  );
-}

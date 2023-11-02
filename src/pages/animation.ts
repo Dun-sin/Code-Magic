@@ -1,7 +1,5 @@
-import copy from 'copy-to-clipboard';
 import {
   getAllFields,
-  getCopyCodeButton,
   getDegreeSpanElement,
   getInputSpinner,
   getOutput,
@@ -11,15 +9,11 @@ import {
   getResetButton,
   getResultPage,
   getStyleSheet,
-  getTailwindButton,
-  getCssOrTailwindButton,
-  getCssOrTailwindDropdown,
 } from '../lib/getElements';
 import {
   setGradientDegreeValue,
-  showPopup,
   slideIn,
-  closeDropdown,
+  stateManager,
 } from '../lib/packages/utils';
 
 let initial_length = 0;
@@ -35,30 +29,16 @@ type Values = {
 };
 
 const attribute = 'animation';
-const getCodeButtonElement = getCopyCodeButton(attribute);
-const getTailwindCodeButtonElement = getTailwindButton(attribute);
 
 const getOutputElement = getOutput(attribute);
 const getDegreeElement = getRange(attribute);
 const getRadioButtonSetElement = getRadioButtonSet(attribute);
-const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
-const showCopyClass = 'show-css-tailwind';
 
 const preview = getPreviewSlider(attribute);
 
-function getCssOrTailwind(e?: MouseEvent): void {
-  e?.stopPropagation();
-  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
-}
-
 // closes css and tailwind dropdown on outside click
-closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
 
-initialConfiguration(
-  getRadioButtonSetElement,
-  getDegreeElement,
-  getOutputElement
-);
+initialConfiguration(getOutputElement);
 
 export function animationGenerator(type: 'newResults' | 'oldResults' | null) {
   if (type === null) return;
@@ -85,26 +65,10 @@ export function animationGenerator(type: 'newResults' | 'oldResults' | null) {
     duration: duration.value,
   };
 
-  getCodeButtonElement.addEventListener('click', () => {
-    copy(css);
-    showPopup(
-      'Code Copied',
-      'Code has been successfully copied to clipboard',
-      'success'
-    );
-  });
   manageAnimation(values, getOutputElement, Stylesheet);
-  getTailwindCodeButtonElement.addEventListener('click', () => {
-    copy(tailwindCss);
-    showPopup(
-      'Tailwind Code Copied',
-      'Code has been successfully copied to clipboard',
-      'success'
-    );
-  });
+  stateManager.setState('animation-code', css);
   manageTailwindAnimation(values);
-  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
-  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
+  stateManager.setState('animation-tailwind', tailwindCss);
 }
 
 // configuring animation preview
@@ -250,74 +214,30 @@ function manageAnimation(
  * @param getDegreeElement degree element
  * @param getOutputElement output element to display result
  */
-function initialConfiguration(
-  elements: NodeListOf<HTMLInputElement>,
-  getDegreeElement: HTMLInputElement,
-  getOutputElement: HTMLElement
-): void {
+function initialConfiguration(getOutputElement: HTMLElement): void {
   if (getOutputElement === null) return;
   getOutputElement.style.display = 'flex';
   getOutputElement.style.justifyContent = 'center';
   getOutputElement.style.alignItems = 'center';
   getOutputElement.style.fontSize = '1.1em';
   getOutputElement.style.fontWeight = '700';
-
   getOutputElement.innerText = 'Lorem Ipsum';
-
-  // get the unit display element for animator
-  const unitDisplayElement = document.querySelector(
-    '.unit-display.animation'
-  ) as HTMLElement;
-
-  const titleDisplayElement = document.querySelector(
-    '.title-display'
-  ) as HTMLElement;
-
-  elements.forEach((el) =>
-    el.addEventListener('click', () => {
-      const type = el.value;
-      if (type === 'skew' || type === 'flip') {
-        getDegreeElement.min = '-90';
-        getDegreeElement.max = '90';
-        getDegreeElement.step = '1';
-        getDegreeElement.value = '50';
-        unitDisplayElement.innerText = `${getDegreeElement.value}deg`;
-        titleDisplayElement.innerText = 'Angle';
-      } else if (type === 'rotate') {
-        getDegreeElement.min = '0';
-        getDegreeElement.max = '360';
-        getDegreeElement.step = '1';
-        getDegreeElement.value = '45';
-        unitDisplayElement.innerText = `${getDegreeElement.value}deg`;
-        titleDisplayElement.innerText = 'Degrees';
-      } else {
-        getDegreeElement.min = '0';
-        getDegreeElement.max = '1';
-        getDegreeElement.step = '.1';
-        getDegreeElement.value = '.5';
-        unitDisplayElement.innerText = `${getDegreeElement.value}`;
-        titleDisplayElement.innerText = 'Opacity';
-      }
-    })
-  );
 }
 
 export function addAnimationListener() {
   setGradientDegreeValue(getDegreeElement);
 }
 
-function resetValues() {
+export function resetAnimationValues() {
   const {inputs} = getAllFields(attribute);
 
-  getResetButton(attribute).addEventListener('click', () => {
-    inputs.forEach((input) => {
-      input.value = input.defaultValue;
-      input.checked = input.defaultChecked;
-    });
-
-    getDegreeSpanElement(attribute).innerHTML = 'deg';
-    getResetButton(attribute).classList.remove('reset-show');
+  inputs.forEach((input) => {
+    input.value = input.defaultValue;
+    input.checked = input.defaultChecked;
   });
+
+  getDegreeSpanElement(attribute).innerHTML = 'deg';
+  getResetButton(attribute).classList.remove('reset-show');
 }
 
 // get values from all targets to get notified when values change.
@@ -333,7 +253,6 @@ function getValues() {
         inputs[5].value !== inputs[5].defaultValue
       ) {
         getResetButton(attribute).classList.add('reset-show');
-        resetValues();
       }
     });
   });
