@@ -1,29 +1,15 @@
 import {
   getAllInputElements,
-  getCopyCodeButton,
   getInputText,
-  getNewColorButton,
   getOutput,
-  getPNGButton,
   getRange,
-  getRemoveNewColorButton,
   getResultPage,
-  getSVGButton,
   getResetButton,
   getDegreeSpanElement,
   getGradientPreview,
-  getTailwindButton,
-  getCssOrTailwindButton,
-  getCssOrTailwindDropdown,
-  getPngOrSvgButton,
-  getPngOrSvgDropdown,
   getOpenSideBarButton,
 } from '../lib/getElements';
 import {
-  copyCSSCodeToClipboard,
-  showPopup,
-  downloadPNG,
-  downloadSVG,
   triggerEmptyAnimation,
   whatColorButtonShouldShow,
   addNewColorPicker,
@@ -31,8 +17,6 @@ import {
   setGradientDegreeValue,
   createGradientPreview,
   getColorsValue,
-  copyTailwindCodeToClipboard,
-  closeDropdown,
 } from '../lib/packages/utils';
 
 type Values = {
@@ -43,51 +27,8 @@ const attribute = 'gradient-text';
 
 let gradientTextInputs = getAllInputElements(attribute);
 
-const getNewColorButtonElement = getNewColorButton(attribute);
-const getRemoveColorButtonElement = getRemoveNewColorButton(attribute);
-
 const getDegreeElement = getRange(attribute);
 const resetButton = getResetButton(attribute);
-const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
-const getPngOrSvgDropdownElement = getPngOrSvgDropdown(attribute);
-const showCopyClass = 'show-css-tailwind';
-const showPngOrSvgClass = 'show-png-svg';
-
-function copyHandler() {
-  const outputElement = getOutput(attribute);
-  copyCSSCodeToClipboard(attribute, outputElement);
-  showPopup(
-    'Code Copied',
-    'Code has been successfully copied to clipboard',
-    'success'
-  );
-}
-
-function getCssOrTailwind(e?: MouseEvent): void {
-  e?.stopPropagation();
-  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
-}
-
-function getPngOrSvg(e?: MouseEvent) {
-  e?.stopPropagation();
-  getPngOrSvgDropdownElement.classList.toggle(showPngOrSvgClass);
-}
-
-// closes css and tailwind dropdown on outside click
-closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
-
-// closes png and css dropdown outside click
-closeDropdown(getPngOrSvg, getPngOrSvgDropdownElement, showPngOrSvgClass);
-
-function pngDownloadHandler() {
-  const outputElement = getOutput(attribute);
-  downloadPNG(attribute, outputElement);
-}
-
-function svgDownloadHanlder() {
-  const outputElement = getOutput(attribute);
-  downloadSVG(attribute, outputElement);
-}
 
 export function gradientTextGenerator(
   type: 'newResults' | 'oldResults' | null
@@ -150,49 +91,28 @@ function getGradientTextResult(
     return wordElement;
   };
 
-  const getCodeButtonElement = getCopyCodeButton(attribute);
-  const getPNGButtonElement = getPNGButton(attribute);
-  const getSVGButtonElement = getSVGButton(attribute);
-  const getTailwindCodeButtonElement = getTailwindButton(attribute);
-  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
-  const getPngOrSvgButtonElement = getPngOrSvgButton(attribute);
-
   if (outputElement.childElementCount >= 1) {
     outputElement.innerHTML = '';
     outputElement.appendChild(createTextElement());
   } else {
     outputElement.appendChild(createTextElement());
   }
-
-  getPNGButtonElement.addEventListener('click', pngDownloadHandler);
-
-  getSVGButtonElement.addEventListener('click', svgDownloadHanlder);
-
-  getCodeButtonElement.addEventListener('click', copyHandler);
-
-  getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
-
-  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
-
-  getPngOrSvgButtonElement.addEventListener('click', getPngOrSvg);
 }
 
 export function addGradientTextListener() {
   whatColorButtonShouldShow(attribute);
-
-  getNewColorButtonElement.addEventListener('click', () => {
-    addNewColorPicker(attribute);
-    addEventListenerToTheNewColorPicker();
-  });
-
-  getRemoveColorButtonElement.addEventListener('click', () => {
-    removeColorPicker(attribute);
-    addEventListenerToTheNewColorPicker();
-  });
-
   inputEventListner();
 
   setGradientDegreeValue(getDegreeElement);
+}
+
+export function addOrRemoveGradientText(action: string) {
+  if (action === 'addColor') {
+    addNewColorPicker(attribute);
+  } else if (action === 'removeColor') {
+    removeColorPicker(attribute);
+  }
+  addEventListenerToTheNewColorPicker();
 }
 
 function addEventListenerToTheNewColorPicker() {
@@ -211,29 +131,27 @@ function inputEventListner() {
 }
 
 // reset the values of all target fields
-function resetValues() {
+export function resetGradientTextValues() {
   const colorInput: HTMLInputElement[] = [...new Set([])];
 
-  resetButton.addEventListener('click', () => {
-    resetButton.classList.remove('reset-show');
-    getDegreeSpanElement(attribute).innerHTML = 'deg';
+  resetButton.classList.remove('reset-show');
+  getDegreeSpanElement(attribute).innerHTML = 'deg';
 
-    getGradientPreview(attribute).style.background = '';
+  getGradientPreview(attribute).style.background = '';
 
-    gradientTextInputs.forEach((input) => {
-      input.value = input.defaultValue;
+  gradientTextInputs.forEach((input) => {
+    input.value = input.defaultValue;
 
-      if (input.id.includes('color')) {
-        colorInput.push(input);
-      }
-    });
-
-    if (colorInput.length > 2) {
-      for (let i = 2; i < colorInput.length; i++) {
-        removeColorPicker(attribute);
-      }
+    if (input.id.includes('color')) {
+      colorInput.push(input);
     }
   });
+
+  if (colorInput.length > 2) {
+    for (let i = 2; i < colorInput.length; i++) {
+      removeColorPicker(attribute);
+    }
+  }
 }
 
 // get values from all targets to get notified when values change.
@@ -250,16 +168,4 @@ function getValues() {
     });
   });
 }
-resetValues();
 getValues();
-
-// Tailwind codecopy handler
-function tailwindHandler() {
-  const outputElement = getOutput(attribute);
-  copyTailwindCodeToClipboard(attribute, outputElement);
-  showPopup(
-    'Tailwind Code Copied',
-    'Code has been successfully copied to clipboard',
-    'success'
-  );
-}

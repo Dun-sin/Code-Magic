@@ -1,4 +1,3 @@
-import copy from 'copy-to-clipboard';
 import {
   getAllFields,
   getCopyCodeButton,
@@ -8,11 +7,8 @@ import {
   getRange,
   getResetButton,
   getResultPage,
-  getTailwindButton,
-  getCssOrTailwindButton,
-  getCssOrTailwindDropdown,
 } from '../lib/getElements';
-import {showPopup, slideIn, closeDropdown} from '../lib/packages/utils';
+import {slideIn, stateManager} from '../lib/packages/utils';
 
 type Values = {
   type: string;
@@ -36,16 +32,6 @@ let isSliderOpen = false;
 const preview = getPreviewSlider(attribute);
 const getDegreeElement = getRange(attribute);
 const getRadioButtonSetElement = getRadioButtonSet(attribute);
-const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
-const showCopyClass = 'show-css-tailwind';
-
-function getCssOrTailwind(e?: MouseEvent): void {
-  e?.stopPropagation();
-  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
-}
-
-// closes css and tailwind dropdown on outside click
-closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
 
 export function addTransformListener(): void {
   // Listen for radio button changes
@@ -174,25 +160,9 @@ function getTransformResult(outputElement: HTMLElement): void {
 
   const getCodeButtonElement = getCopyCodeButton(attribute);
   getCodeButtonElement.style.zIndex = '100';
-  getCodeButtonElement.addEventListener('click', () => {
-    copy(css);
-    showPopup(
-      'Code Copied',
-      'Code has been successfully copied to clipboard',
-      'success'
-    );
-  });
-  const getTailwindCodeButtonElement = getTailwindButton(attribute);
-  getTailwindCodeButtonElement.addEventListener('click', () => {
-    copy(tailwindCss);
-    showPopup(
-      'Tailwind Code Copied',
-      'Code has been successfully copied to clipboard',
-      'success'
-    );
-  });
-  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
-  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
+  // set states to copy generated code
+  stateManager.setState('transform-code', css);
+  stateManager.setState('transform-tailwind', tailwindCss);
 }
 
 function manageTransform(values: Values, getOutputElement: HTMLElement) {
@@ -237,17 +207,13 @@ function manageTransform(values: Values, getOutputElement: HTMLElement) {
   }
 }
 
-function resetValues() {
+export function resetTransformValues() {
   const {inputs} = getAllFields(attribute);
-
-  getResetButton(attribute).addEventListener('click', () => {
-    inputs.forEach((input) => {
-      input.value = input.defaultValue;
-      input.checked = input.defaultChecked;
-    });
-
-    getResetButton(attribute).classList.remove('reset-show');
+  inputs.forEach((input) => {
+    input.value = input.defaultValue;
+    input.checked = input.defaultChecked;
   });
+  getResetButton(attribute).classList.remove('reset-show');
 }
 
 // get values from all targets to get notified when values change.
@@ -262,7 +228,6 @@ function getValues() {
         inputs[5].value !== inputs[5].defaultValue
       ) {
         getResetButton(attribute).classList.add('reset-show');
-        resetValues();
       }
     });
   });

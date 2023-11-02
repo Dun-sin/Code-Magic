@@ -1,65 +1,6 @@
-import {
-  getOutput,
-  getResultPage,
-  getCopyCodeButton,
-  getPNGButton,
-  getSVGButton,
-  getTailwindButton,
-  getCssOrTailwindButton,
-  getCssOrTailwindDropdown,
-  getPngOrSvgButton,
-  getPngOrSvgDropdown,
-} from '../lib/getElements';
-import {
-  copyCSSCodeToClipboard,
-  showPopup,
-  downloadPNG,
-  downloadSVG,
-  copyTailwindCodeToClipboard,
-  closeDropdown,
-} from '../lib/packages/utils';
+import {getOutput, getResultPage} from '../lib/getElements';
 
 const attribute = 'pic-text';
-const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
-const getPngOrSvgDropdownElement = getPngOrSvgDropdown(attribute);
-const showCopyClass = 'show-css-tailwind';
-const showPngOrSvgClass = 'show-png-svg';
-
-function copyHandler() {
-  const outputElement = getOutput(attribute);
-  copyCSSCodeToClipboard(attribute, outputElement);
-  showPopup(
-    'Code Copied',
-    'Code has been successfully copied to clipboard',
-    'success'
-  );
-}
-
-function getCssOrTailwind(e?: MouseEvent): void {
-  e?.stopPropagation();
-  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
-}
-
-function getPngOrSvg(e?: MouseEvent) {
-  e?.stopPropagation();
-  getPngOrSvgDropdownElement.classList.toggle(showPngOrSvgClass);
-}
-
-// closes css and tailwind dropdown on outside click
-closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
-
-// closes png and css dropdown outside click
-closeDropdown(getPngOrSvg, getPngOrSvgDropdownElement, showPngOrSvgClass);
-
-function pngDownloadHandler() {
-  const outputElement = getOutput(attribute);
-  downloadPNG(attribute, outputElement);
-}
-
-function svgDownloadHanlder() {
-  const outputElement = getOutput(attribute);
-  downloadSVG(attribute, outputElement);
-}
 
 /**
  * @param image - image inputed string
@@ -118,28 +59,4 @@ function getPicTextResult(attribute: string, outputNode: HTMLElement): void {
   if (outputNode === null) {
     return;
   }
-
-  const getCodeButtonElement = getCopyCodeButton(attribute);
-  const getPNGButtonElement = getPNGButton(attribute);
-  const getSVGButtonElement = getSVGButton(attribute);
-  const getTailwindCodeButtonElement = getTailwindButton(attribute);
-  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
-  const getPngOrSvgButtonElement = getPngOrSvgButton(attribute);
-
-  getPNGButtonElement.addEventListener('click', pngDownloadHandler);
-  getSVGButtonElement.addEventListener('click', svgDownloadHanlder);
-  getCodeButtonElement.addEventListener('click', copyHandler);
-  getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
-  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
-  getPngOrSvgButtonElement.addEventListener('click', getPngOrSvg);
-}
-
-// Tailwind codecopy handler
-function tailwindHandler() {
-  copyTailwindCodeToClipboard(attribute);
-  showPopup(
-    'Tailwind Code Copied',
-    'Code has been successfully copied to clipboard',
-    'success'
-  );
 }

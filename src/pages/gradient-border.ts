@@ -1,25 +1,17 @@
 import {
-  getNewColorButton,
-  getRemoveNewColorButton,
   getRadiusInput,
   getCheckbox,
   getOutput,
   getRange,
   getAllInputElements,
   getResultPage,
-  getCopyCodeButton,
   getResetButton,
   getDegreeSpanElement,
   getGradientPreview,
-  getTailwindButton,
-  getCssOrTailwindButton,
-  getCssOrTailwindDropdown,
   getResultButton,
 } from '../lib/getElements';
 import {
   triggerEmptyAnimation,
-  copyCSSCodeToClipboard,
-  showPopup,
   addRule,
   whatColorButtonShouldShow,
   addNewColorPicker,
@@ -27,8 +19,6 @@ import {
   setGradientDegreeValue,
   createGradientPreview,
   getColorsValue,
-  copyTailwindCodeToClipboard,
-  closeDropdown,
 } from '../lib/packages/utils';
 
 type Values = {
@@ -38,36 +28,13 @@ type Values = {
 
 const attribute = 'gradient-border';
 
-const getNewColorButtonElement = getNewColorButton(attribute);
-const getRemoveColorButtonElement = getRemoveNewColorButton(attribute);
-
 const getBorderRadiusInput = getRadiusInput(attribute);
 const toggleRadiusInputForGradientBorder = getCheckbox(attribute);
 
 const getDegreeElement = getRange(attribute);
 const resetButton = getResetButton(attribute);
-const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
-const showCopyClass = 'show-css-tailwind';
 
 let gradientBorderInputs = getAllInputElements('gradient-border');
-
-function copyHandler() {
-  const outputElement = getOutput(attribute);
-  copyCSSCodeToClipboard(attribute, outputElement);
-  showPopup(
-    'Code Copied',
-    'Code has been successfully copied to clipboard',
-    'success'
-  );
-}
-
-function getCssOrTailwind(e?: MouseEvent): void {
-  e?.stopPropagation();
-  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
-}
-
-// closes css and tailwind dropdown on outside click
-closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
 
 /**
  * sets the result to the output element
@@ -91,13 +58,6 @@ function getGradientBorderResult(
 
   outputElement.style.backgroundColor = 'transparent';
   outputElement.style.visibility = 'visible';
-
-  const getCodeButtonElement = getCopyCodeButton(attribute);
-  getCodeButtonElement.addEventListener('click', copyHandler);
-  const getTailwindCodeButtonElement = getTailwindButton(attribute);
-  getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
-  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
-  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
 }
 
 export function gradientBorderGenerator(
@@ -151,19 +111,18 @@ export function addGradientBorderListener() {
     getBorderRadiusInput.style.display = this.checked ? 'inline' : 'none';
   });
 
-  getNewColorButtonElement.addEventListener('click', () => {
-    addNewColorPicker(attribute);
-    addEventListenerToTheNewColorPicker();
-  });
-
-  getRemoveColorButtonElement.addEventListener('click', () => {
-    removeColorPicker(attribute);
-    addEventListenerToTheNewColorPicker();
-  });
-
   addEventListenerToTheNewColorPicker();
 
   setGradientDegreeValue(getDegreeElement);
+}
+
+export function addOrRemoveGradientBorder(action: string) {
+  if (action === 'addColor') {
+    addNewColorPicker(attribute);
+  } else if (action === 'removeColor') {
+    removeColorPicker(attribute);
+  }
+  addEventListenerToTheNewColorPicker();
 }
 
 function addEventListenerToTheNewColorPicker() {
@@ -183,30 +142,28 @@ function inputEventListner() {
 }
 
 // reset the values of all target fields
-function resetValues() {
+export function resetGradientBorderValues() {
   const colorInput: HTMLInputElement[] = [...new Set([])];
 
-  resetButton.addEventListener('click', () => {
-    resetButton.classList.remove('reset-show');
-    getDegreeSpanElement(attribute).innerHTML = 'deg';
+  resetButton.classList.remove('reset-show');
+  getDegreeSpanElement(attribute).innerHTML = 'deg';
 
-    getGradientPreview(attribute).style.background = '';
+  getGradientPreview(attribute).style.background = '';
 
-    gradientBorderInputs.forEach((input) => {
-      input.checked = false;
-      input.value = input.defaultValue;
+  gradientBorderInputs.forEach((input) => {
+    input.checked = false;
+    input.value = input.defaultValue;
 
-      if (input.id.includes('color')) {
-        colorInput.push(input);
-      }
-    });
-
-    if (colorInput.length > 2) {
-      for (let i = 2; i < colorInput.length; i++) {
-        removeColorPicker(attribute);
-      }
+    if (input.id.includes('color')) {
+      colorInput.push(input);
     }
   });
+
+  if (colorInput.length > 2) {
+    for (let i = 2; i < colorInput.length; i++) {
+      removeColorPicker(attribute);
+    }
+  }
 }
 
 // get values from all targets to get notified when values change.
@@ -223,15 +180,4 @@ function getValues() {
     });
   });
 }
-resetValues();
 getValues();
-
-// Tailwind codecopy handler
-function tailwindHandler() {
-  copyTailwindCodeToClipboard(attribute);
-  showPopup(
-    'Tailwind Code Copied',
-    'Code has been successfully copied to clipboard',
-    'success'
-  );
-}

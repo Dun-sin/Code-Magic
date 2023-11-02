@@ -1,27 +1,16 @@
 import {
   getAllFields,
-  getCopyCodeButton,
   getGridFields,
   getGridPreview,
   getNumberOfColumns,
   getNumberOfRows,
   getResetButton,
-  getTailwindButton,
-  getCssOrTailwindDropdown,
-  getCssOrTailwindButton,
   getRowGap,
   getColumnGap,
 } from '../lib/getElements';
-import {
-  copyCSSCodeToClipboard,
-  copyTailwindCodeToClipboard,
-  showPopup,
-  closeDropdown,
-} from '../lib/packages/utils';
+import {showPopup} from '../lib/packages/utils';
 
 const attribute = 'grid-generators';
-const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
-const showCopyClass = 'show-css-tailwind';
 
 function areInputsValid() {
   const noOfColumns = getNumberOfColumns(attribute);
@@ -52,9 +41,6 @@ export function gridGenerator(): void {
   const noOfRows = getNumberOfRows(attribute);
   const rowGapValue = getRowGap(attribute);
   const columnGapValue = getColumnGap(attribute);
-
-  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
-
   const preview = getGridPreview(attribute);
 
   const allGridInputs = [noOfColumns, noOfRows, rowGapValue, columnGapValue];
@@ -86,22 +72,9 @@ export function gridGenerator(): void {
       updatePreviewElement();
     });
   });
-
-  const getCSSCodeButtonElement = getCopyCodeButton(attribute);
-  getCSSCodeButtonElement.addEventListener('click', copyCSSHandler);
-  const getTailwindCodeButtonElement = getTailwindButton(attribute);
-  getTailwindCodeButtonElement.addEventListener('click', copyTailwindHandler);
-  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
 }
 
-function getCssOrTailwind(e?: MouseEvent): void {
-  e?.stopPropagation();
-  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
-}
-
-closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
-
-function doInputExist() {
+export function doGridInputExist() {
   const noOfColumns = getNumberOfColumns(attribute);
   const noOfRows = getNumberOfRows(attribute);
 
@@ -113,40 +86,16 @@ function doInputExist() {
   return true;
 }
 
-function copyTailwindHandler() {
-  const outputElement: HTMLElement = getGridPreview(attribute);
-  if (doInputExist() === false) return;
-  copyTailwindCodeToClipboard(attribute, outputElement);
-  showPopup(
-    'Tailwind Code Copied',
-    'Code has been successfully copied to clipboard',
-    'success'
-  );
-}
-
-function copyCSSHandler() {
-  const outputElement = getGridPreview(attribute);
-  if (doInputExist() === false) return;
-  copyCSSCodeToClipboard(attribute, outputElement);
-  showPopup(
-    'Code Copied',
-    'Code has been successfully copied to clipboard',
-    'success'
-  );
-}
-
-function resetValues() {
+export function resetGridGeneratorValues() {
   const {inputs} = getAllFields(attribute);
   const preview = getGridPreview(attribute);
 
-  getResetButton(attribute).addEventListener('click', () => {
-    inputs.forEach((input) => {
-      input.value = input.defaultValue;
-    });
-    updatePreviewElement();
-    preview.setAttribute('style', '');
-    getResetButton(attribute).classList.remove('reset-show');
+  inputs.forEach((input) => {
+    input.value = input.defaultValue;
   });
+  updatePreviewElement();
+  preview.setAttribute('style', '');
+  getResetButton(attribute).classList.remove('reset-show');
 }
 
 function getValues() {
@@ -155,7 +104,6 @@ function getValues() {
   inputs.forEach((input) => {
     input.addEventListener('input', () => {
       getResetButton(attribute).classList.add('reset-show');
-      resetValues();
     });
   });
 }

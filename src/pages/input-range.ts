@@ -1,22 +1,13 @@
 import {
   getRadiusInput,
   getCheckbox,
-  getCopyCodeButton,
   getColorInput1,
   getColorInput2,
   getAllInputElements,
   getAllFields,
   getResetButton,
-  getTailwindButton,
-  getCssOrTailwindButton,
-  getCssOrTailwindDropdown,
 } from '../lib/getElements';
-import {
-  copyCSSCodeToClipboard,
-  copyTailwindCodeToClipboard,
-  showPopup,
-  closeDropdown,
-} from '../lib/packages/utils';
+import {showPopup} from '../lib/packages/utils';
 
 type RangeType = 'track' | 'thumb';
 type RangeValues = {
@@ -31,8 +22,6 @@ type Values = {
 };
 
 const attribute = 'input-range';
-const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
-const showCopyClass = 'show-css-tailwind';
 
 function setLabelValue() {
   const getThumbHeightLabel = document.getElementById(
@@ -123,7 +112,7 @@ function setPreview(values: Values): void {
   );
 }
 
-function doInputsExist() {
+export function doInputsExist() {
   const getTrackColor = getColorInput1(attribute);
   const getThumbColor = getColorInput2(attribute);
 
@@ -154,32 +143,9 @@ function doInputsExist() {
   return false;
 }
 
-function copyHandler() {
-  const previewElement = document.getElementById(
-    'preview-range'
-  ) as HTMLInputElement;
-  if (doInputsExist() === false) return;
-  copyCSSCodeToClipboard(attribute, previewElement);
-  showPopup(
-    'Code Copied',
-    'Code has been successfully copied to clipboard',
-    'success'
-  );
-}
-function getCssOrTailwind(e?: MouseEvent): void {
-  e?.stopPropagation();
-  getCssOrTailwindDropdownElement.classList.toggle(showCopyClass);
-}
-
-// closes css and tailwind dropdown on outside click
-closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
-
 export const rangeGenerator = () => {
-  const getCodeButton = getCopyCodeButton(attribute);
-  const getTailwindCodeButtonElement = getTailwindButton(attribute);
   const getTrackColor = getColorInput1(attribute);
   const getThumbColor = getColorInput2(attribute);
-  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
 
   const getTrackHeightElement = document.getElementById(
     'track-height'
@@ -229,44 +195,38 @@ export const rangeGenerator = () => {
     setBorderRadiusValue('thumb');
     getThumbRadius.style.display = thumbCheckBox.checked ? 'inline' : 'none';
   });
-
-  getCodeButton.addEventListener('click', copyHandler);
-  getTailwindCodeButtonElement.addEventListener('click', tailwindHandler);
-  getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
 };
 
-function resetValues() {
+export function resetInputRangeValues() {
   const {inputs} = getAllFields(attribute);
 
-  getResetButton(attribute).addEventListener('click', () => {
-    inputs.forEach((input) => {
-      input.value = input.defaultValue;
-      input.checked = input.defaultChecked;
-    });
-
-    (
-      document.querySelector(
-        '[data-content="input-range"] #thumb-height-label'
-      ) as HTMLElement
-    ).innerHTML = '';
-    (
-      document.querySelector(
-        '[data-content="input-range"] #track-height-label'
-      ) as HTMLElement
-    ).innerHTML = '';
-    (
-      document.querySelector(
-        '[data-content="input-range"] #thumb-width-label'
-      ) as HTMLElement
-    ).innerHTML = '';
-    (
-      document.querySelector(
-        '[data-content="input-range"] #track-width-label'
-      ) as HTMLElement
-    ).innerHTML = '';
-
-    getResetButton(attribute).classList.remove('reset-show');
+  inputs.forEach((input) => {
+    input.value = input.defaultValue;
+    input.checked = input.defaultChecked;
   });
+
+  (
+    document.querySelector(
+      '[data-content="input-range"] #thumb-height-label'
+    ) as HTMLElement
+  ).innerHTML = '';
+  (
+    document.querySelector(
+      '[data-content="input-range"] #track-height-label'
+    ) as HTMLElement
+  ).innerHTML = '';
+  (
+    document.querySelector(
+      '[data-content="input-range"] #thumb-width-label'
+    ) as HTMLElement
+  ).innerHTML = '';
+  (
+    document.querySelector(
+      '[data-content="input-range"] #track-width-label'
+    ) as HTMLElement
+  ).innerHTML = '';
+
+  getResetButton(attribute).classList.remove('reset-show');
 }
 
 // get values from all targets to get notified when values change.
@@ -277,20 +237,7 @@ function getValues() {
   inputs.forEach((input) => {
     input.addEventListener('input', () => {
       getResetButton(attribute).classList.add('reset-show');
-      resetValues();
     });
   });
 }
 getValues();
-
-// Tailwind codecopy handler
-function tailwindHandler() {
-  const element = document.querySelector('#preview-range') as HTMLInputElement;
-  if (doInputsExist() === false) return;
-  copyTailwindCodeToClipboard(attribute, element);
-  showPopup(
-    'Tailwind Code Copied',
-    'Code has been successfully copied to clipboard',
-    'success'
-  );
-}
