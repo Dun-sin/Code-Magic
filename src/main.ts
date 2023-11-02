@@ -45,6 +45,17 @@ import {
   getResultPage,
 } from './lib/getElements';
 import {addTransformListener, transformGenerator} from './pages/transform';
+import {DataGenerators, HTMLElementEvent, StyleType} from './lib/models/types';
+import {stateManager} from './lib/packages/utils';
+import {
+  addOrRemoveColorHandler,
+  animationRadioBtnHandler,
+  getCodeHandler,
+  resetHandler,
+  toggleCopyHandler,
+  toggleDownloadHandler,
+  toggleImgDownloadHandler,
+} from './lib/packages/handlers';
 
 FilePond.registerPlugin(
   FilePondPluginImagePreview,
@@ -101,15 +112,12 @@ const generators = getGeneratorsElement();
 const sidebar = getResultPage();
 const openSidePanelButton = getOpenSideBarButton();
 
-const getHeaderText = document.getElementById('head');
-const getResultsButton = document.querySelectorAll('[data-button]');
 const getHomePage = document.getElementById('home-page');
 const getGeneratorSection = document.getElementById('generator');
 const getOpenPreviousResult = document.querySelector(
   '.open > p'
 ) as HTMLElement;
 const results = document.querySelectorAll('[data-result]');
-const closeBar = document.getElementById('close-side-bar');
 const getImageEntryElement = document.getElementById(
   `pic-text-file`
 ) as HTMLInputElement;
@@ -310,48 +318,22 @@ function showOpenPreviousResultText() {
   getOpenPreviousResult.style.animationFillMode = 'backwards';
 }
 
-// clicking outside the nav bar should close the nav bar
-document.addEventListener('click', (e: Event) => {
-  const event = e.target as HTMLElement;
-
-  const areasNotAllowedToCloseNavigationBar = {
-    isNotNavigationBar: !event.matches('nav'),
-    isNotDropDownLabel: !event.matches('.dropdown'),
-    isNotMenuIcon: !event.matches('#menu-icon'),
-    isParentNotDropDownLabel:
-      !event.parentElement?.parentElement?.matches('.dropdown'),
-    doesNotHaveAClosedClass: !navBar?.classList.contains('closed-nav'),
-    isNotFooter: !event.matches('footer'),
-    isNotCategoryName: !event.matches('.dropdown > div'),
-  };
-
-  const isAllValidationTrue = Object.values(
-    areasNotAllowedToCloseNavigationBar
-  ).every((value) => value === true);
-
-  if (isAllValidationTrue) {
-    openOrCloseNavigationBar('close');
-  }
-});
-
-// Disable file opening in browser
-for (let event of events) {
-  document.addEventListener(event, (e) => {
-    e.preventDefault();
-  });
+function getResults(generatorType: string) {
+  openSidePanelButton.style.display = 'flex';
+  showResult(generatorType, 'newResults');
+  sidebar.animate(sideBarSlide, sideBarTiming);
+  sidebar.style.left = '0%';
 }
 
-// clicking on the menu icon should close the nav bar
-menuIcon?.addEventListener('click', () => {
+function breadCrumbSideBarHandler() {
   if (navBar?.classList.contains('closed-nav')) {
     openOrCloseNavigationBar('open');
   } else {
     openOrCloseNavigationBar('close');
   }
-});
+}
 
-//event listener to clear styling on generator tabs when "Code magic is clicked"
-getHeaderText?.addEventListener('click', () => {
+function codeMagicHandler() {
   if (getHomePage === null || getGeneratorSection === null) return;
   generators.forEach((item) => {
     const generatorNav = <HTMLElement>item;
@@ -362,17 +344,9 @@ getHeaderText?.addEventListener('click', () => {
   });
   getHomePage.style.display = 'flex';
   getGeneratorSection.style.display = 'none';
-});
+}
 
-// clicking on the get result icon should show the old results
-openSidePanelButton?.addEventListener('click', () => {
-  showResult(attributeValue, 'oldResults');
-  sidebar.animate(sideBarSlide, sideBarTiming);
-  sidebar.style.left = '0%';
-});
-
-// onClick event listener for the closebar icon
-closeBar?.addEventListener('click', () => {
+function closeSideBarHandler() {
   sidebar.animate(sideBarSlideOut, sideBarTiming);
   sidebar.style.left = '100%';
   showResult(null, null);
@@ -383,7 +357,224 @@ closeBar?.addEventListener('click', () => {
   setTimeout(() => {
     showOpenPreviousResultText();
   }, 200);
-});
+}
+
+function openSideBarHandler() {
+  showResult(attributeValue, 'oldResults');
+  sidebar.animate(sideBarSlide, sideBarTiming);
+  sidebar.style.left = '0%';
+}
+
+// clicking outside the nav bar should close the nav bar
+document.addEventListener(
+  'click',
+  (e: HTMLElementEvent<HTMLButtonElement | HTMLDivElement>) => {
+    const event = e.target as HTMLElement;
+
+    const areasNotAllowedToCloseNavigationBar = {
+      isNotNavigationBar: !event.matches('nav'),
+      isNotDropDownLabel: !event.matches('.dropdown'),
+      isNotMenuIcon: !event.matches('#menu-icon'),
+      isParentNotDropDownLabel:
+        !event.parentElement?.parentElement?.matches('.dropdown'),
+      doesNotHaveAClosedClass: !navBar?.classList.contains('closed-nav'),
+      isNotFooter: !event.matches('footer'),
+      isNotCategoryName: !event.matches('.dropdown > div'),
+    };
+
+    const isAllValidationTrue = Object.values(
+      areasNotAllowedToCloseNavigationBar
+    ).every((value) => value === true);
+
+    if (isAllValidationTrue) {
+      openOrCloseNavigationBar('close');
+    }
+
+    // dropdowns open or close
+    const activeCopyDropDown: HTMLElement = stateManager.getState(
+      'active-copy-dropdown'
+    );
+    const isOutsideOrChildOfCopyDropDown = activeCopyDropDown
+      ? !activeCopyDropDown?.contains(event) ||
+        activeCopyDropDown?.contains(event)
+      : false;
+    const activeDownloadDropDown: HTMLElement = stateManager.getState(
+      'active-download-dropdown'
+    );
+    const isOutsideOrChildOfDownloadDropDown = activeDownloadDropDown
+      ? !activeDownloadDropDown?.contains(event) ||
+        activeDownloadDropDown?.contains(event)
+      : false;
+    if (
+      isOutsideOrChildOfCopyDropDown &&
+      activeCopyDropDown?.classList?.contains('show-css-tailwind')
+    ) {
+      activeCopyDropDown.classList.toggle('show-css-tailwind');
+      stateManager.removeState('active-copy-dropdown');
+      console.log('executed');
+    }
+    if (
+      isOutsideOrChildOfDownloadDropDown &&
+      activeDownloadDropDown?.classList?.contains('show-png-svg')
+    ) {
+      activeDownloadDropDown.classList.toggle('show-png-svg');
+      stateManager.removeState('active-download-dropdown');
+    }
+
+    // header section
+    const toggleDropdown = event?.closest('.dropdown');
+    const dataGeneratorAttr = (event?.closest('[data-gen]') as HTMLElement)
+      ?.dataset?.gen;
+    const closestAction = event?.closest('[data-action]') as HTMLElement;
+    const action = closestAction?.dataset?.action;
+    const getResultsGenType = closestAction?.dataset?.button || '';
+
+    if (!dataGeneratorAttr && toggleDropdown) {
+      const subUList = toggleDropdown.lastElementChild as HTMLElement;
+      const iconElement =
+        subUList?.parentElement?.firstElementChild?.lastElementChild;
+      if (subUList && subUList.id === 'showList') {
+        subUList.id = '';
+
+        // Toggle arrow icon to downwards
+        if (iconElement) {
+          iconElement.setAttribute(
+            'icon',
+            'material-symbols:arrow-drop-down-rounded'
+          );
+        }
+        return;
+      }
+
+      // clear other open dropdown menus
+      dropDownElements.forEach((dropdown) => {
+        const listElement = dropdown.lastElementChild as HTMLElement;
+        listElement.id = '';
+      });
+
+      subUList.id = 'showList';
+
+      // Toggle arrow icon to upwards
+      if (iconElement) {
+        iconElement.setAttribute(
+          'icon',
+          'material-symbols:arrow-drop-up-rounded'
+        );
+      }
+    }
+
+    // handler for generator show
+    if (
+      dataGeneratorAttr &&
+      Object.values<string>(DataGenerators).includes(dataGeneratorAttr)
+    ) {
+      openSidePanelButton.style.display = 'none';
+
+      if (
+        dataGeneratorAttr === null ||
+        getHomePage === null ||
+        getGeneratorSection === null
+      )
+        return;
+
+      !navBar?.classList.contains('closed-nav') &&
+        openOrCloseNavigationBar('close');
+
+      sidebar.style.display = 'none';
+      attributeValue = dataGeneratorAttr;
+      getHomePage.style.display = 'none';
+      getGeneratorSection.style.display = 'flex';
+      showContent(attributeValue, 'flex');
+
+      let hasBorder = false;
+      if (toggleDropdown?.children.length) {
+        for (let i = 0; i < toggleDropdown.children.length; i++) {
+          const currentChild = toggleDropdown.children[i] as HTMLElement;
+          if (currentChild.style.border === '1px solid var(--tertiary-color)') {
+            hasBorder = true;
+            break;
+          }
+        }
+        if (!hasBorder) {
+          toggleDropdown.id = '';
+        }
+      }
+    }
+
+    // handler for get results
+    if (
+      action === 'result' &&
+      Object.values<string>(StyleType).includes(getResultsGenType)
+    ) {
+      getResults(getResultsGenType);
+    } else if (action) {
+      switch (action) {
+        case 'breadcrumb-sidebar': {
+          breadCrumbSideBarHandler();
+          break;
+        }
+        case 'code-magic': {
+          codeMagicHandler();
+          break;
+        }
+        case 'toggleCopy': {
+          const cssTailWindAttr = closestAction?.dataset?.cssTailwind || '';
+          toggleCopyHandler(cssTailWindAttr);
+          break;
+        }
+        case 'getCode': {
+          const getCodeType = closestAction?.dataset?.download || '';
+          getCodeHandler(getCodeType);
+          break;
+        }
+        case 'toggleDownload': {
+          const pngSvgAttr = closestAction?.dataset?.pngSvg || '';
+          toggleDownloadHandler(pngSvgAttr);
+          break;
+        }
+        case 'downloadImg': {
+          const downloadType = closestAction?.dataset?.download || '';
+          toggleImgDownloadHandler(downloadType);
+          break;
+        }
+        case 'addColor': {
+          const dataGeneratorType = closestAction?.dataset?.addColor || '';
+          addOrRemoveColorHandler(dataGeneratorType, action);
+          break;
+        }
+        case 'removeColor': {
+          const dataGeneratorType = closestAction?.dataset?.removeColor || '';
+          addOrRemoveColorHandler(dataGeneratorType, action);
+          break;
+        }
+        case 'radio-animation': {
+          animationRadioBtnHandler(event as HTMLInputElement);
+          break;
+        }
+        case 'reset': {
+          const getCodeType = closestAction?.dataset?.reset || '';
+          resetHandler(getCodeType);
+          break;
+        }
+        case 'close-side-bar': {
+          closeSideBarHandler();
+          break;
+        }
+        case 'open-sidebar': {
+          openSideBarHandler();
+          break;
+        }
+      }
+    }
+  }
+);
+
+// Disable file opening in browser
+for (const event of events) {
+  document.addEventListener(event, (e) => {
+    e.preventDefault();
+  });
+}
 
 getDurationElement?.addEventListener('change', () => {
   displayAnimationPreview();
@@ -391,115 +582,10 @@ getDurationElement?.addEventListener('change', () => {
 
 getDegreeElement?.addEventListener('change', () => displayAnimationPreview());
 
-// adds event listner for which generator should show
-generators.forEach((generator) => {
-  generator?.addEventListener('click', (): void => {
-    const checking = generator.getAttribute('data-gen');
-    openSidePanelButton.style.display = 'none';
-
-    if (
-      checking === null ||
-      getHomePage === null ||
-      getGeneratorSection === null
-    )
-      return;
-
-    !navBar?.classList.contains('closed-nav') &&
-      openOrCloseNavigationBar('close');
-
-    sidebar.style.display = 'none';
-    attributeValue = checking;
-    getHomePage.style.display = 'none';
-    getGeneratorSection.style.display = 'flex';
-    showContent(attributeValue, 'flex');
-  });
-});
-
-//  event listener for get result button
-getResultsButton.forEach((getResult) => {
-  getResult?.addEventListener('click', () => {
-    openSidePanelButton.style.display = 'flex';
-
-    showResult(getResult.getAttribute('data-button'), 'newResults');
-    sidebar.animate(sideBarSlide, sideBarTiming);
-    sidebar.style.left = '0%';
-  });
-});
-
 getRadioButtonSetElement.forEach((radioButton: HTMLInputElement) => {
   radioButton.onclick = () => {
     displayAnimationPreview();
   };
-});
-
-// configuring dropdown menu
-dropDownElements.forEach((dropDown) => {
-  // add click event listener to the dropdown parent element
-  dropDown.addEventListener('click', (e) => {
-    e.stopPropagation();
-
-    const listElement = dropDown.lastElementChild as HTMLElement;
-    const iconElement =
-      listElement?.parentElement?.firstElementChild?.lastElementChild;
-    if (listElement.id === 'showList') {
-      listElement.id = '';
-
-      // Toggle arrow icon to downwards
-      if (iconElement) {
-        iconElement.setAttribute(
-          'icon',
-          'material-symbols:arrow-drop-down-rounded'
-        );
-      }
-      return;
-    }
-
-    // clear other open dropdown menus
-    dropDownElements.forEach((dropdown) => {
-      const listElement = dropdown.lastElementChild as HTMLElement;
-      listElement.id = '';
-    });
-
-    listElement.id = 'showList';
-
-    // Toggle arrow icon to upwards
-    if (iconElement) {
-      iconElement.setAttribute(
-        'icon',
-        'material-symbols:arrow-drop-up-rounded'
-      );
-    }
-  });
-
-  const listElement = dropDown.lastElementChild as HTMLElement;
-
-  // Prevent the click event on subitems from propagating to the parent dropdown
-  listElement.addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
-
-  // loop through children of dropdown and add event listener to each child
-  for (let i = 0; i < listElement.children.length; i++) {
-    const child = listElement.children[i] as HTMLElement;
-    child.addEventListener('click', () => {
-      listElement.id = 'showList';
-      // loop through all dropdown elements and check border of children
-      dropDownElements.forEach((dropDown) => {
-        const currentListElement = dropDown.lastElementChild as HTMLElement;
-        let hasBorder = false;
-        for (let i = 0; i < currentListElement.children.length; i++) {
-          const currentChild = currentListElement.children[i] as HTMLElement;
-          if (currentChild.style.border === '1px solid var(--tertiary-color)') {
-            hasBorder = true;
-            break;
-          }
-        }
-        if (!hasBorder) {
-          currentListElement.id = '';
-        }
-      });
-    });
-  }
 });
 
 showResult(null, null);
