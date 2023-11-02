@@ -1,4 +1,5 @@
 import DomToImage from 'dom-to-image';
+import copy from 'copy-to-clipboard';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -9,6 +10,8 @@ import {
   getParentElementOfColors,
   getRemoveNewColorButton,
   getAllColorInput,
+  getOutput,
+  getGridPreview,
 } from '../getElements';
 
 import {
@@ -16,6 +19,9 @@ import {
   actOnGenerator,
   actOnTailwindGenerator,
 } from './helpers';
+import {doInputsExist} from '../../pages/input-range';
+import {doGridInputExist} from '../../pages/grid-generator';
+import {DataGeneratorValues, DataGenerators} from '../models/types';
 
 export const setGradientDegreeValue = (degreeElement: HTMLElement): void =>
   degreeElement.addEventListener('input', (e) => {
@@ -221,15 +227,96 @@ export const whatColorButtonShouldShow = (attribute: string): void => {
   }
 };
 
-// close dropdown on outside click
-export function closeDropdown(
-  toggleFunction: () => void,
-  dropdown: HTMLElement,
-  classToToggle: string
-): void {
-  document.documentElement.addEventListener('click', function () {
-    if (dropdown.classList.contains(classToToggle)) {
-      toggleFunction();
-    }
-  });
+export function copyPopup() {
+  showPopup(
+    'Tailwind Code Copied',
+    'Code has been successfully copied to clipboard',
+    'success'
+  );
 }
+
+export function copyHandler(attribute: DataGeneratorValues) {
+  let outputElement = getOutput(attribute);
+  if (attribute === DataGenerators.InputRange) {
+    outputElement = document.getElementById(
+      'preview-range'
+    ) as HTMLInputElement;
+    if (doInputsExist() === false) return;
+  } else if (attribute === DataGenerators.GridGenerators) {
+    outputElement = getGridPreview(attribute);
+    if (doGridInputExist() === false) return;
+  } else if (
+    [DataGenerators.Transform, DataGenerators.Animation].includes(
+      attribute as any
+    )
+  ) {
+    const code = stateManager.getState(`${attribute}-code`);
+    copy(code);
+    showPopup(
+      'Code Copied',
+      'Code has been successfully copied to clipboard',
+      'success'
+    );
+    return;
+  }
+  copyCSSCodeToClipboard(attribute, outputElement);
+  copyPopup();
+}
+
+// Tailwind codecopy handler
+export function tailwindHandler(attribute: string) {
+  let outputElement: HTMLElement | undefined = getOutput(attribute);
+  if (attribute === DataGenerators.InputRange) {
+    outputElement = document.getElementById(
+      'preview-range'
+    ) as HTMLInputElement;
+    if (doInputsExist() === false) return;
+  } else if (attribute === DataGenerators.GridGenerators) {
+    outputElement = getGridPreview(attribute);
+    if (doGridInputExist() === false) return;
+  } else if (attribute === DataGenerators.PicText) {
+    outputElement = undefined;
+  } else if (
+    [DataGenerators.Transform, DataGenerators.Animation].includes(
+      attribute as any
+    )
+  ) {
+    const tailwindCode =
+      stateManager.getState(`${attribute}-tailwind`) ||
+      stateManager.getState(`${attribute}-code`);
+    copy(tailwindCode);
+
+    return;
+  }
+  copyTailwindCodeToClipboard(attribute, outputElement);
+  copyPopup();
+}
+
+// Generator type from string
+
+export const getGeneratorType = (input: string) =>
+  input.split('-').slice(0, -1).join('-') as DataGeneratorValues;
+
+// Store for managing state
+
+export const stateManager = (function () {
+  let state: Record<string, any> = {};
+
+  return {
+    getState: function (key: string) {
+      return state[key];
+    },
+
+    setState: function <T>(key: string, value: T) {
+      state[key] = value;
+    },
+
+    removeState: function (key: string) {
+      delete state[key];
+    },
+
+    clearState: function () {
+      state = {};
+    },
+  };
+})();
