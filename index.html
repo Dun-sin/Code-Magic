@@ -76,8 +76,8 @@
 
   <body>
     <!-- Side Bar -->
-    <header>
-      <div class="menu">
+    <header id="header">
+      <div class="menu" data-action="breadcrumb-sidebar">
         <iconify-icon
           id="menu-icon"
           inline
@@ -88,7 +88,7 @@
         ></iconify-icon>
       </div>
       <nav id="nav" class="closed-nav">
-        <h1 id="head">Code Magic</h1>
+        <h1 id="head" data-action="code-magic">Code Magic</h1>
         <ul id="category">
           <li id="gradient" class="dropdown">
             <div>
@@ -428,7 +428,7 @@
         <!-- Sign for opening result section -->
         <div class="open">
           <p>Open Previous Results➡️</p>
-          <div class="open-sidebar">
+          <div class="open-sidebar" data-action="open-sidebar">
             <iconify-icon
               inline
               icon="lucide:sidebar-open"
@@ -452,8 +452,12 @@
               <input type="file" id="pic-text-file" required />
             </label>
             <div class="btn-container">
-              <div class="reset" data-reset="pic-text">Reset</div>
-              <div class="btn" data-button="pic-text">Get Results</div>
+              <div class="reset" data-reset="pic-text" data-action="reset">
+                Reset
+              </div>
+              <div class="btn" data-button="pic-text" data-action="result">
+                Get Results
+              </div>
             </div>
           </div>
           <!-- End of Pic Text -->
@@ -491,7 +495,11 @@
             </div>
 
             <div class="add-remove-color">
-              <div class="addNewColor newColor">
+              <div
+                class="addNewColor newColor"
+                data-add-color="gradient-text"
+                data-action="addColor"
+              >
                 <iconify-icon
                   icon="material-symbols:add"
                   style="color: white"
@@ -500,7 +508,11 @@
                 <p>Add New Color</p>
               </div>
 
-              <div class="removeNewColor newColor">
+              <div
+                class="removeNewColor newColor"
+                data-remove-color="gradient-text"
+                data-action="removeColor"
+              >
                 <iconify-icon
                   icon="material-symbols:remove"
                   style="color: white"
@@ -527,8 +539,12 @@
             </label>
 
             <div class="btn-container">
-              <div class="reset" data-reset="gradient-text">Reset</div>
-              <div class="btn" data-button="gradient-text">Get Results</div>
+              <div class="reset" data-reset="gradient-text" data-action="reset">
+                Reset
+              </div>
+              <div class="btn" data-button="gradient-text" data-action="result">
+                Get Results
+              </div>
             </div>
           </div>
           <!-- End of Gradient Text -->
@@ -561,7 +577,11 @@
             </div>
 
             <div class="add-remove-color">
-              <div class="addNewColor newColor">
+              <div
+                class="addNewColor newColor"
+                data-add-color="gradient-border"
+                data-action="addColor"
+              >
                 <iconify-icon
                   icon="material-symbols:add"
                   style="color: white"
@@ -570,7 +590,11 @@
                 <p>Add New Color</p>
               </div>
 
-              <div class="removeNewColor newColor">
+              <div
+                class="removeNewColor newColor"
+                data-remove-color="gradient-border"
+                data-action="removeColor"
+              >
                 <iconify-icon
                   icon="material-symbols:remove"
                   style="color: white"
@@ -622,8 +646,20 @@
             </label>
 
             <div class="btn-container">
-              <div class="reset" data-reset="gradient-border">Reset</div>
-              <div class="btn" data-button="gradient-border">Get Result</div>
+              <div
+                class="reset"
+                data-reset="gradient-border"
+                data-action="reset"
+              >
+                Reset
+              </div>
+              <div
+                class="btn"
+                data-button="gradient-border"
+                data-action="result"
+              >
+                Get Result
+              </div>
             </div>
           </div>
           <!-- End of Gradient Border -->
@@ -656,7 +692,11 @@
             </div>
 
             <div class="add-remove-color">
-              <div class="addNewColor newColor">
+              <div
+                class="addNewColor newColor"
+                data-add-color="gradient-background"
+                data-action="addColor"
+              >
                 <iconify-icon
                   icon="material-symbols:add"
                   style="color: white"
@@ -665,7 +705,11 @@
                 <p>Add New Color</p>
               </div>
 
-              <div class="removeNewColor newColor">
+              <div
+                class="removeNewColor newColor"
+                data-remove-color="gradient-background"
+                data-action="removeColor"
+              >
                 <iconify-icon
                   icon="material-symbols:remove"
                   style="color: white"
@@ -692,11 +736,18 @@
             </label>
 
             <div class="btn-container">
-              <div class="reset" data-reset="gradient-background">Reset</div>
+              <div
+                class="reset"
+                data-reset="gradient-background"
+                data-action="reset"
+              >
+                Reset
+              </div>
               <div
                 class="btn"
                 data-button="gradient-background"
                 id="getResultBtn"
+                data-action="result"
               >
                 Get Result
               </div>
@@ -721,6 +772,7 @@
                     id="skew"
                     name="animation-radio"
                     value="skew"
+                    data-action="radio-animation"
                   />
                   <span>Skew</span>
                 </label>
@@ -730,6 +782,7 @@
                     id="fade"
                     name="animation-radio"
                     value="fade"
+                    data-action="radio-animation"
                   />
                   <span>Fade</span>
                 </label>
@@ -739,6 +792,7 @@
                     id="flip"
                     name="animation-radio"
                     value="flip"
+                    data-action="radio-animation"
                   />
                   <span>Flip</span>
                 </label>
@@ -748,6 +802,7 @@
                     id="rotate"
                     name="animation-radio"
                     value="rotate"
+                    data-action="radio-animation"
                   />
                   <span>Rotate</span>
                 </label>
@@ -783,8 +838,12 @@
             </label>
 
             <div class="btn-container">
-              <div class="reset" data-reset="animation">Reset</div>
-              <div class="btn" data-button="animation">Get Results</div>
+              <div class="reset" data-reset="animation" data-action="reset">
+                Reset
+              </div>
+              <div class="btn" data-button="animation" data-action="result">
+                Get Results
+              </div>
             </div>
           </div>
           <!-- End of Animation -->
@@ -837,8 +896,12 @@
             </div>
 
             <div class="btn-container">
-              <div class="reset" data-reset="border-radius">Reset</div>
-              <div class="btn" data-button="border-radius">Get Results</div>
+              <div class="reset" data-reset="border-radius" data-action="reset">
+                Reset
+              </div>
+              <div class="btn" data-button="border-radius" data-action="result">
+                Get Results
+              </div>
             </div>
           </div>
           <!-- End of Border Radius -->
@@ -929,8 +992,12 @@
             </div>
 
             <div class="btn-container">
-              <div class="reset" data-reset="box-shadow">Reset</div>
-              <div class="btn" data-button="box-shadow">Get Results</div>
+              <div class="reset" data-reset="box-shadow" data-action="reset">
+                Reset
+              </div>
+              <div class="btn" data-button="box-shadow" data-action="result">
+                Get Results
+              </div>
             </div>
           </div>
           <!-- End of Box Shadow -->
@@ -1011,8 +1078,12 @@
             </div>
 
             <div class="btn-container">
-              <div class="reset" data-reset="text-shadow">Reset</div>
-              <div class="btn" data-button="text-shadow">Get Results</div>
+              <div class="reset" data-reset="text-shadow" data-action="reset">
+                Reset
+              </div>
+              <div class="btn" data-button="text-shadow" data-action="result">
+                Get Results
+              </div>
             </div>
           </div>
           <!-- End of Text Shadow Generator -->
@@ -1093,8 +1164,12 @@
             </label>
 
             <div class="btn-container">
-              <div class="reset" data-reset="transform">Reset</div>
-              <div class="btn" data-button="transform">Get Results</div>
+              <div class="reset" data-reset="transform" data-action="reset">
+                Reset
+              </div>
+              <div class="btn" data-button="transform" data-action="result">
+                Get Results
+              </div>
             </div>
           </div>
           <!-- End of Transform Generator -->
@@ -1263,9 +1338,15 @@
 
             <!-- Copy Code Button -->
             <div class="btn-container">
-              <div class="reset" data-reset="input-range">Reset</div>
+              <div class="reset" data-reset="input-range" data-action="reset">
+                Reset
+              </div>
               <div class="btn-dropdown-container">
-                <button class="btn" data-css-tailwind="input-range-code">
+                <button
+                  class="btn"
+                  data-css-tailwind="input-range-code"
+                  data-action="toggleCopy"
+                >
                   Copy Code
                   <iconify-icon
                     inline
@@ -1277,7 +1358,11 @@
                 <div class="css-tailwind" data-dropdown="input-range-dropdown2">
                   <!-- dropdown elements go here -->
 
-                  <div class="dropdown-item" data-download="input-range-code">
+                  <div
+                    class="dropdown-item"
+                    data-download="input-range-code"
+                    data-action="getCode"
+                  >
                     <iconify-icon
                       inline
                       icon="skill-icons:css"
@@ -1289,6 +1374,7 @@
                   <div
                     class="dropdown-item"
                     data-download="input-range-tailwind"
+                    data-action="getCode"
                   >
                     <iconify-icon
                       inline
@@ -1351,9 +1437,15 @@
             />
           </div>
           <div class="btn-container">
-            <div class="reset" data-reset="grid-generators">Reset</div>
+            <div class="reset" data-reset="grid-generators" data-action="reset">
+              Reset
+            </div>
             <div class="btn-dropdown-container">
-              <button class="btn" data-css-tailwind="grid-generators-code">
+              <button
+                class="btn"
+                data-css-tailwind="grid-generators-code"
+                data-action="toggleCopy"
+              >
                 Copy Code
                 <iconify-icon
                   inline
@@ -1368,7 +1460,11 @@
               >
                 <!-- dropdown elements go here -->
 
-                <div class="dropdown-item" data-download="grid-generators-code">
+                <div
+                  class="dropdown-item"
+                  data-download="grid-generators-code"
+                  data-action="getCode"
+                >
                   <iconify-icon
                     inline
                     icon="skill-icons:css"
@@ -1380,6 +1476,7 @@
                 <div
                   class="dropdown-item"
                   data-download="grid-generators-tailwind"
+                  data-action="getCode"
                 >
                   <iconify-icon
                     inline
@@ -1398,7 +1495,7 @@
         <!-- Result from Generators -->
         <div class="side-results">
           <div class="header">
-            <div class="close-sideBar">
+            <div class="close-sideBar" data-action="close-side-bar">
               <iconify-icon
                 inline
                 icon="lucide:sidebar-close"
@@ -1417,7 +1514,11 @@
             <div class="output"></div>
             <div class="download-btn">
               <div class="image-download">
-                <button class="btn" data-png-svg="pic-text-image">
+                <button
+                  class="btn"
+                  data-png-svg="pic-text-image"
+                  data-action="toggleDownload"
+                >
                   Download
                   <iconify-icon
                     inline
@@ -1428,7 +1529,11 @@
                 </button>
                 <div class="png-svg" data-dropdown="pic-text-dropdown1">
                   <!-- dropdown elements go here -->
-                  <div class="dropdown-item" data-download="pic-text-PNG">
+                  <div
+                    class="dropdown-item"
+                    data-download="pic-text-PNG"
+                    data-action="downloadImg"
+                  >
                     <iconify-icon
                       inline
                       icon="bxs:download"
@@ -1437,7 +1542,11 @@
                     ></iconify-icon>
                     Download PNG
                   </div>
-                  <div class="dropdown-item" data-download="pic-text-svg">
+                  <div
+                    class="dropdown-item"
+                    data-download="pic-text-svg"
+                    data-action="downloadImg"
+                  >
                     <iconify-icon
                       inline
                       icon="bxs:download"
@@ -1449,7 +1558,11 @@
                 </div>
               </div>
               <div class="btn-dropdown-container">
-                <button class="btn" data-css-tailwind="pic-text-code">
+                <button
+                  class="btn"
+                  data-css-tailwind="pic-text-code"
+                  data-action="toggleCopy"
+                >
                   Copy Code
                   <iconify-icon
                     inline
@@ -1461,7 +1574,11 @@
                 <div class="css-tailwind" data-dropdown="pic-text-dropdown2">
                   <!-- dropdown elements -->
 
-                  <div class="dropdown-item" data-download="pic-text-code">
+                  <div
+                    class="dropdown-item"
+                    data-download="pic-text-code"
+                    data-action="getCode"
+                  >
                     <iconify-icon
                       inline
                       icon="skill-icons:css"
@@ -1470,7 +1587,11 @@
                     ></iconify-icon>
                     <span> Get CSS Code </span>
                   </div>
-                  <div class="dropdown-item" data-download="pic-text-tailwind">
+                  <div
+                    class="dropdown-item"
+                    data-download="pic-text-tailwind"
+                    data-action="getCode"
+                  >
                     <iconify-icon
                       inline
                       icon="devicon:tailwindcss"
@@ -1491,7 +1612,11 @@
 
             <div class="download-btn">
               <div class="image-download">
-                <button class="btn" data-png-svg="gradient-text-image">
+                <button
+                  class="btn"
+                  data-png-svg="gradient-text-image"
+                  data-action="toggleDownload"
+                >
                   Download
                   <iconify-icon
                     inline
@@ -1502,7 +1627,11 @@
                 </button>
                 <div class="png-svg" data-dropdown="gradient-text-dropdown1">
                   <!-- dropdown elements go here -->
-                  <div class="dropdown-item" data-download="gradient-text-PNG">
+                  <div
+                    class="dropdown-item"
+                    data-download="gradient-text-PNG"
+                    data-action="downloadImg"
+                  >
                     <iconify-icon
                       inline
                       icon="bxs:download"
@@ -1511,7 +1640,11 @@
                     ></iconify-icon>
                     Download PNG
                   </div>
-                  <div class="dropdown-item" data-download="gradient-text-svg">
+                  <div
+                    class="dropdown-item"
+                    data-download="gradient-text-svg"
+                    data-action="downloadImg"
+                  >
                     <iconify-icon
                       inline
                       icon="bxs:download"
@@ -1523,7 +1656,11 @@
                 </div>
               </div>
               <div class="btn-dropdown-container">
-                <button class="btn" data-css-tailwind="gradient-text-code">
+                <button
+                  class="btn"
+                  data-css-tailwind="gradient-text-code"
+                  data-action="toggleCopy"
+                >
                   Copy Code
                   <iconify-icon
                     inline
@@ -1538,7 +1675,11 @@
                 >
                   <!-- dropdown elements -->
 
-                  <div class="dropdown-item" data-download="gradient-text-code">
+                  <div
+                    class="dropdown-item"
+                    data-download="gradient-text-code"
+                    data-action="getCode"
+                  >
                     <iconify-icon
                       inline
                       icon="skill-icons:css"
@@ -1550,6 +1691,7 @@
                   <div
                     class="dropdown-item"
                     data-download="gradient-text-tailwind"
+                    data-action="getCode"
                   >
                     <iconify-icon
                       inline
@@ -1569,7 +1711,11 @@
           <div class="download-output" data-result="gradient-border">
             <div class="output gradient-border"></div>
             <div class="btn-dropdown-container">
-              <button class="btn" data-css-tailwind="gradient-border-code">
+              <button
+                class="btn"
+                data-css-tailwind="gradient-border-code"
+                data-action="toggleCopy"
+              >
                 Copy Code
                 <iconify-icon
                   inline
@@ -1582,7 +1728,11 @@
                 class="css-tailwind"
                 data-dropdown="gradient-border-dropdown2"
               >
-                <div class="dropdown-item" data-download="gradient-border-code">
+                <div
+                  class="dropdown-item"
+                  data-download="gradient-border-code"
+                  data-action="getCode"
+                >
                   <iconify-icon
                     inline
                     icon="skill-icons:css"
@@ -1594,6 +1744,7 @@
                 <div
                   class="dropdown-item"
                   data-download="gradient-border-tailwind"
+                  data-action="getCode"
                 >
                   <iconify-icon
                     inline
@@ -1612,7 +1763,11 @@
           <div class="download-output" data-result="gradient-background">
             <div class="output"></div>
             <div class="btn-dropdown-container">
-              <button class="btn" data-css-tailwind="gradient-background-code">
+              <button
+                class="btn"
+                data-css-tailwind="gradient-background-code"
+                data-action="toggleCopy"
+              >
                 Copy Code
                 <iconify-icon
                   inline
@@ -1630,6 +1785,7 @@
                 <div
                   class="dropdown-item"
                   data-download="gradient-background-code"
+                  data-action="getCode"
                 >
                   <iconify-icon
                     inline
@@ -1643,6 +1799,7 @@
                   <button
                     class="btn"
                     data-download="gradient-background-tailwind"
+                    data-action="getCode"
                   >
                     <iconify-icon
                       inline
@@ -1662,7 +1819,11 @@
           <div class="download-output" data-result="animation">
             <div class="output"></div>
             <div class="btn-dropdown-container">
-              <button class="btn" data-css-tailwind="animation-code">
+              <button
+                class="btn"
+                data-css-tailwind="animation-code"
+                data-action="toggleCopy"
+              >
                 Copy Code
                 <iconify-icon
                   inline
@@ -1674,7 +1835,11 @@
               <div class="css-tailwind" data-dropdown="animation-dropdown2">
                 <!-- dropdown elements -->
 
-                <div class="dropdown-item" data-download="animation-code">
+                <div
+                  class="dropdown-item"
+                  data-download="animation-code"
+                  data-action="getCode"
+                >
                   <iconify-icon
                     inline
                     icon="skill-icons:css"
@@ -1683,7 +1848,11 @@
                   ></iconify-icon>
                   <span> Get CSS Code </span>
                 </div>
-                <div class="dropdown-item" data-download="animation-tailwind">
+                <div
+                  class="dropdown-item"
+                  data-download="animation-tailwind"
+                  data-action="getCode"
+                >
                   <iconify-icon
                     inline
                     icon="devicon:tailwindcss"
@@ -1701,7 +1870,11 @@
           <div class="download-output" data-result="border-radius">
             <div class="output"></div>
             <div class="btn-dropdown-container">
-              <button class="btn" data-css-tailwind="border-radius-code">
+              <button
+                class="btn"
+                data-css-tailwind="border-radius-code"
+                data-action="toggleCopy"
+              >
                 Copy Code
                 <iconify-icon
                   inline
@@ -1713,7 +1886,11 @@
               <div class="css-tailwind" data-dropdown="border-radius-dropdown2">
                 <!-- dropdown elements -->
 
-                <div class="dropdown-item" data-download="border-radius-code">
+                <div
+                  class="dropdown-item"
+                  data-download="border-radius-code"
+                  data-action="getCode"
+                >
                   <iconify-icon
                     inline
                     icon="skill-icons:css"
@@ -1725,6 +1902,7 @@
                 <div
                   class="dropdown-item"
                   data-download="border-radius-tailwind"
+                  data-action="getCode"
                 >
                   <iconify-icon
                     inline
@@ -1743,7 +1921,11 @@
           <div class="download-output" data-result="box-shadow">
             <div class="output box-shadow"></div>
             <div class="btn-dropdown-container">
-              <button class="btn" data-css-tailwind="box-shadow-code">
+              <button
+                class="btn"
+                data-css-tailwind="box-shadow-code"
+                data-action="toggleCopy"
+              >
                 Copy Code
                 <iconify-icon
                   inline
@@ -1755,7 +1937,11 @@
               <div class="css-tailwind" data-dropdown="box-shadow-dropdown2">
                 <!-- dropdown elements -->
 
-                <div class="dropdown-item" data-download="box-shadow-code">
+                <div
+                  class="dropdown-item"
+                  data-download="box-shadow-code"
+                  data-action="getCode"
+                >
                   <iconify-icon
                     inline
                     icon="skill-icons:css"
@@ -1764,7 +1950,11 @@
                   ></iconify-icon>
                   <span> Get CSS Code </span>
                 </div>
-                <div class="dropdown-item" data-download="box-shadow-tailwind">
+                <div
+                  class="dropdown-item"
+                  data-download="box-shadow-tailwind"
+                  data-action="getCode"
+                >
                   <iconify-icon
                     inline
                     icon="devicon:tailwindcss"
@@ -1782,7 +1972,11 @@
           <div class="download-output" data-result="transform">
             <div class="output transform-output"></div>
             <div class="btn-dropdown-container">
-              <button class="btn" data-css-tailwind="transform-code">
+              <button
+                class="btn"
+                data-css-tailwind="transform-code"
+                data-action="toggleCopy"
+              >
                 Copy Code
                 <iconify-icon
                   inline
@@ -1794,7 +1988,11 @@
               <div class="css-tailwind" data-dropdown="transform-dropdown2">
                 <!-- dropdown elements -->
 
-                <div class="dropdown-item" data-download="transform-code">
+                <div
+                  class="dropdown-item"
+                  data-download="transform-code"
+                  data-action="getCode"
+                >
                   <iconify-icon
                     inline
                     icon="skill-icons:css"
@@ -1803,7 +2001,11 @@
                   ></iconify-icon>
                   <span> Get CSS Code </span>
                 </div>
-                <div class="dropdown-item" data-download="transform-tailwind">
+                <div
+                  class="dropdown-item"
+                  data-download="transform-tailwind"
+                  data-action="getCode"
+                >
                   <iconify-icon
                     inline
                     icon="devicon:tailwindcss"
@@ -1823,7 +2025,11 @@
 
             <div class="download-btn">
               <div class="image-download">
-                <button class="btn" data-png-svg="text-shadow-image">
+                <button
+                  class="btn"
+                  data-png-svg="text-shadow-image"
+                  data-action="toggleDownload"
+                >
                   Download
                   <iconify-icon
                     inline
@@ -1834,7 +2040,11 @@
                 </button>
                 <div class="png-svg" data-dropdown="text-shadow-dropdown1">
                   <!-- dropdown elements go here -->
-                  <div class="dropdown-item" data-download="text-shadow-PNG">
+                  <div
+                    class="dropdown-item"
+                    data-download="text-shadow-PNG"
+                    data-action="downloadImg"
+                  >
                     <iconify-icon
                       inline
                       icon="bxs:download"
@@ -1843,7 +2053,11 @@
                     ></iconify-icon>
                     Download PNG
                   </div>
-                  <div class="dropdown-item" data-download="text-shadow-svg">
+                  <div
+                    class="dropdown-item"
+                    data-download="text-shadow-svg"
+                    data-action="downloadImg"
+                  >
                     <iconify-icon
                       inline
                       icon="bxs:download"
@@ -1855,7 +2069,11 @@
                 </div>
               </div>
               <div class="btn-dropdown-container">
-                <button class="btn" data-css-tailwind="text-shadow-code">
+                <button
+                  class="btn"
+                  data-css-tailwind="text-shadow-code"
+                  data-action="toggleCopy"
+                >
                   Copy Code
                   <iconify-icon
                     inline
@@ -1867,7 +2085,11 @@
                 <div class="css-tailwind" data-dropdown="text-shadow-dropdown2">
                   <!-- dropdown elements -->
 
-                  <div class="dropdown-item" data-download="text-shadow-code">
+                  <div
+                    class="dropdown-item"
+                    data-download="text-shadow-code"
+                    data-action="getCode"
+                  >
                     <iconify-icon
                       inline
                       icon="skill-icons:css"
@@ -1879,6 +2101,7 @@
                   <div
                     class="dropdown-item"
                     data-download="text-shadow-tailwind"
+                    data-action="getCode"
                   >
                     <iconify-icon
                       inline
