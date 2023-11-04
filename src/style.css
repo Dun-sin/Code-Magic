@@ -522,6 +522,10 @@ input::placeholder {
 #radius-input-label {
   display: flex;
   justify-content: center;
+  ::-ms-input-placeholder {
+    color: var(--text-color);
+  }
+  caret-color: var(--text-color);
 }
 
 .toggle-radius {
@@ -642,7 +646,12 @@ input[type='number']::-webkit-outer-spin-button {
   border-radius: 5px;
   caret-color: var(--primary-color);
   color: var(--text-color);
+  caret-color: var(--text-color);
   padding: 4px;
+}
+
+.input-range-inputs[type='number']::placeholder {
+  color: var(--text-color);
 }
 
 .styled-input:focus,
