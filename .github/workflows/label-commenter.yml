@@ -34,4 +34,4 @@ jobs:
           RUNNER_DEBUG: 1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          config_file: .github/label-commenter-config.yml
+          config_file: ./label-commenter-config.yml
