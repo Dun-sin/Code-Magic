@@ -7,17 +7,6 @@ labels:
       pr:
         body: Thank you @{{ pull_request.user.login }} for suggesting this. Please follow the pull request templates.
         action: close
-    unlabeled:
-      issue:
-        body: Thank you for following the template. The repository owner will reply.
-        action: open
-  - name: forum
-    labeled:
-      issue:
-        body: |
-          Please ask questions about GitHub Actions at the following forum.
-          https://github.community/c/github-actions
-        action: close
   - name: wontfix
     labeled:
       issue:
@@ -32,75 +21,16 @@ labels:
       issue:
         body: This issue already exists.
         action: close
-  - name: good first issue
-    labeled:
-      issue:
-        body: This issue is easy for contributing. Everyone can work on this.
-  - name: proposal
-    labeled:
-      issue:
-        body: Thank you @{{ issue.user.login }} for suggesting this.
-  - name: locked (spam)
+  - name: '🚦 status: awaiting approval'
     labeled:
       issue:
         body: |
-          This issue has been **LOCKED** because of spam!
-
-          Please do not spam messages and/or issues on the issue tracker. You may get blocked from this repository for doing so.
-        action: close
+         This issue is waiting to be approved so it's locked until approved      
+         Thank you @{{ issue.user.login }} for creating an issue, while you wait for a response, consider reading the <a href="https://github.com/Dun-sin/Code-Magic/blob/main/CONTRIBUTING.md">Contributing.md file</a>, Thank you! Welcome to the community :nerd_face
         locking: lock
-        lock_reason: spam
-      pr:
-        body: |
-          This pull-request has been **LOCKED** because of spam!
-
-          Please do not spam messages and/or pull-requests on this project. You may get blocked from this repository for doing so.
-        action: close
-        locking: lock
-        lock_reason: spam
-  - name: locked (heated)
+  - name: '🏁 status: ready for dev'
     labeled:
       issue:
         body: |
-          This issue has been **LOCKED** because of heated conversation!
-
-          We appreciate exciting conversations, as long as they won't become too aggressive and/or emotional.
-        locking: lock
-        lock_reason: too heated
-      pr:
-        body: |
-          This pull-request has been **LOCKED** because of heated conversation!
-
-          We appreciate exciting conversations, as long as they won't become too aggressive and/or emotional.
-        locking: lock
-        lock_reason: too heated
-    unlabeled:
-      issue:
-        body: |
-          This issue has been unlocked now.
+         This issue is ready for dev and assigned to anyone who proper asks
         locking: unlock
-      pr:
-        body: |
-          This pull-request has been unlocked now.
-        locking: unlock
-  - name: locked (off-topic)
-    labeled:
-      issue:
-        body: |
-          This issue has been **LOCKED** because of off-topic conversations!
-
-          Please use our other means of communication for casual chats.
-        action: close
-        locking: lock
-        lock_reason: off-topic
-  - name: locked (resolved)
-    labeled:
-      issue:
-        body: |
-          This issue has been **LOCKED** because of it being resolved!
-
-          The issue has been fixed and is therefore considered resolved.
-          If you still encounter this or it has changed, open a new issue instead of responding to solved ones.
-        action: close
-        locking: lock
-        lock_reason: resolved
