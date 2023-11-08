@@ -267,6 +267,7 @@ main > section:last-of-type {
   min-height: var(--content-container);
   min-width: var(--content-container);
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -274,9 +275,8 @@ main > section:last-of-type {
 }
 
 .generator-tool-title {
-  position: fixed;
-  top: 7%;
-  left: 25%;
+  position: absolute;
+  top: 8%;
 }
 
 .generator-tool-title h1 {
