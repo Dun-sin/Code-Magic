@@ -275,8 +275,7 @@ main > section:last-of-type {
 
 .generator-tool-title {
   position: fixed;
-  top: 7%;
-  left: 25%;
+  top: 8%;
 }
 
 .generator-tool-title h1 {
@@ -525,7 +524,6 @@ input::placeholder {
   ::-ms-input-placeholder {
     color: var(--text-color);
   }
-  caret-color: var(--text-color);
 }
 
 .toggle-radius {
@@ -644,7 +642,6 @@ input[type='number']::-webkit-outer-spin-button {
   background-color: var(--secondary-color);
   border: 1px solid #010204;
   border-radius: 5px;
-  caret-color: var(--primary-color);
   color: var(--text-color);
   caret-color: var(--text-color);
   padding: 4px;
@@ -1280,10 +1277,6 @@ a {
     margin: 0.8rem auto;
   }
 
-  .generator-tool-title {
-    left: 30%;
-  }
-
   .input {
     padding: 2rem;
   }
@@ -1329,10 +1322,6 @@ a {
 
   .generator {
     margin: 0.8rem auto;
-  }
-
-  .generator-tool-title {
-    left: auto;
   }
 
   footer {
