@@ -275,8 +275,7 @@ main > section:last-of-type {
 
 .generator-tool-title {
   position: fixed;
-  top: 7%;
-  left: 25%;
+  top: 4%;
 }
 
 .generator-tool-title h1 {
@@ -1280,10 +1279,6 @@ a {
     margin: 0.8rem auto;
   }
 
-  .generator-tool-title {
-    left: 30%;
-  }
-
   .input {
     padding: 2rem;
   }
@@ -1329,10 +1324,6 @@ a {
 
   .generator {
     margin: 0.8rem auto;
-  }
-
-  .generator-tool-title {
-    left: auto;
   }
 
   footer {
