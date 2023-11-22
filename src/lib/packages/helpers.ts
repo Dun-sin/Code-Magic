@@ -402,7 +402,18 @@ export const actOnTailwindGenerator = (
       )} text-transparent bg-clip-text`;
       break;
     case 'gradient-border':
-      codeToCopy = ``;
+      element = outputElement.style;
+      const content = window.getComputedStyle(outputElement, '::before');
+
+      codeToCopy = `
+      <div class="relative">
+      <div class="before:absolute before:inset-0 before:p-6 before:mask before:mask-composite-before:border-box 
+                  before:mask-composite-xor before:exclude before:bg-[content.background] before:bg-clip-border-box
+                  @if(content.borderRadius !== '0px') before:rounded-[content.borderRadius] @endif">
+      </div>
+    </div>
+    
+      `;
       break;
     case 'gradient-background':
       codeToCopy = `${convertLinearGradientToTailwind(
