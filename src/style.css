@@ -1335,6 +1335,14 @@ a {
   .box-shadow-preview {
     --box-size: 70px;
   }
+
+  .generator-tool-title {
+    top: 5%;
+  }
+
+  .generator-tool-title h1 {
+    font-size: 1.4rem;
+  }
 }
 
 @media only screen and (max-width: 1000px) {
