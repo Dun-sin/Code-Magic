@@ -313,6 +313,7 @@
               </li>
             </ul>
           </li>
+
           <li id="random" class="dropdown">
             <div>
               <div>
@@ -346,8 +347,22 @@
                   Convert Your Image to Character Art
                 </span>
               </li>
+              <li data-gen="scroll">
+                <iconify-icon
+                  inline
+                  icon="ph:mouse-scroll"
+                  style="color: white"
+                  width="20"
+                  height="20"
+                ></iconify-icon>
+                <span>Custom ScrollBar</span>
+                <span class="tooltip"
+                  >Change the color and style of the scrollbar</span
+                >
+              </li>
             </ul>
           </li>
+
           <li id="layout-generator" class="dropdown">
             <div>
               <div>
@@ -1303,6 +1318,100 @@
             </div>
           </div>
           <!-- End of Input Type Range Generator -->
+
+          <!-- Custom Scroll Generator -->
+          <div data-content="scroll">
+            <div class="input">
+              <label for="color" class="color">
+                Track Color
+                <input
+                  type="text"
+                  data-coloris
+                  placeholder="Tap to pick a color"
+                  id="scroll-color1"
+                  class="scroll-inputs"
+                />
+              </label>
+
+              <label for="color" class="color">
+                Thumb Color
+                <input
+                  type="text"
+                  data-coloris
+                  placeholder="Tap to pick a color"
+                  id="scroll-color2"
+                  class="scroll-inputs"
+                />
+              </label>
+
+              <label for="color" class="color">
+                Thumb Color on Hover
+                <input
+                  type="text"
+                  data-coloris
+                  placeholder="Tap to pick a color"
+                  id="scroll-color3"
+                  class="scroll-inputs"
+                />
+              </label>
+
+              <label for="width">
+                Width
+                <input
+                  type="number"
+                  id="scroll-width"
+                  name="desired-radius"
+                  min="0"
+                  max="10"
+                  placeholder="Enter a number e.g. 50"
+                  class="styled-input scroll-inputs"
+                  autofocus
+                  required
+                />
+              </label>
+            </div>
+
+            <!-- Copy Code Button -->
+            <div class="btn-container">
+              <div class="reset" data-reset="scroll">Reset</div>
+              <div class="btn-dropdown-container">
+                <button class="btn" data-css-tailwind="scroll-code">
+                  Copy Code
+                  <iconify-icon
+                    inline
+                    icon="material-symbols:arrow-drop-down-rounded"
+                    style="color: white"
+                    width="20"
+                  ></iconify-icon>
+                </button>
+                <div class="css-tailwind" data-dropdown="scroll-dropdown2">
+                  <!-- dropdown elements go here -->
+
+                  <div class="dropdown-item" data-download="scroll-code">
+                    <iconify-icon
+                      inline
+                      icon="skill-icons:css"
+                      style="color: white; margin-right: 5px"
+                      width="20"
+                    ></iconify-icon>
+                    <span> Get CSS Code </span>
+                  </div>
+                  <!-- <div
+                    class="dropdown-item"
+                    data-download="scroll-tailwind"
+                  >
+                    <iconify-icon
+                      inline
+                      icon="devicon:tailwindcss"
+                      style="color: white; margin-right: 5px"
+                      width="20"
+                    ></iconify-icon>
+                    <span> Get Tailwind </span>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- End of Input for Generators -->
 

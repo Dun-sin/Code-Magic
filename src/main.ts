@@ -45,6 +45,7 @@ import {
   getResultPage,
 } from './lib/getElements';
 import {addTransformListener, transformGenerator} from './pages/transform';
+import {scrollGenerator} from './pages/scroll';
 
 FilePond.registerPlugin(
   FilePondPluginImagePreview,
@@ -263,6 +264,7 @@ function showContent(attribute: string, display: Display): void {
   attribute === 'animation' && addAnimationListener();
   attribute === 'transform' && addTransformListener();
   attribute === 'grid-generators' && gridGenerator();
+  attribute === 'scroll' && scrollGenerator();
 }
 
 /**

@@ -208,13 +208,12 @@ nav ul {
 
 main {
   width: var(--content-container);
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--secondary-color);
   position: relative;
-  outline: 2px solid red;
 }
 
 main > section {
@@ -404,7 +403,8 @@ input::placeholder {
   color: #484848;
 }
 
-.colors {
+.colors,
+[data-content='scroll'] > .input {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -443,7 +443,8 @@ input::placeholder {
   margin-left: 10px;
 }
 
-.color {
+.color,
+[data-content='scroll'] > .input label[for='width'] {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -643,7 +644,6 @@ input[type='number']::-webkit-outer-spin-button {
   background-color: var(--secondary-color);
   border: 1px solid #010204;
   border-radius: 5px;
-  caret-color: var(--primary-color);
   color: var(--text-color);
   caret-color: var(--text-color);
   padding: 4px;
@@ -1224,6 +1224,21 @@ input[type='range']:focus::-moz-range-thumb {
   gap: 10px;
   border-radius: var(--spacing);
   margin-top: calc(var(--spacing) + 10px);
+}
+
+/* SCROLL GENERATOR STYLES */
+[data-content='scroll'] > .input {
+  gap: 10px;
+}
+
+[data-content='scroll'] > .input input[type='number'] {
+  width: 100%;
+  padding: 8px;
+  border-color: var(--text-color);
+}
+
+[data-content='scroll'] > .input input[type='number']::placeholder {
+  color: var(--text-color);
 }
 
 /* FOOTER SECTION */
