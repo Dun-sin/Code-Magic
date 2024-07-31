@@ -204,6 +204,11 @@ FilePond.create(getImageEntryElement, {
   },
 });
 
+const params = new URLSearchParams(window.location.search);
+const generatorFromParams = params.get('generator');
+
+if (generatorFromParams) showContent(generatorFromParams);
+
 /**
  * sets which generator to call
  *
@@ -229,7 +234,7 @@ function generatorsFunction(attribute: string, type: openResults): void {
  * @param attribute The attribute name of the generator element
  * @param display display type
  */
-function showContent(attribute: string, display: Display): void {
+function showInputSection(attribute: string, display: Display): void {
   const generatorsContent = document.querySelectorAll(`[data-content]`);
   const showGen = document.querySelector(
     `[data-content=${attribute}]`
@@ -310,6 +315,19 @@ function showOpenPreviousResultText() {
   getOpenPreviousResult.style.animationDuration = '1500ms';
   getOpenPreviousResult.style.animationTimingFunction = 'ease-in';
   getOpenPreviousResult.style.animationFillMode = 'backwards';
+}
+
+function showContent(generatorName: string) {
+  !navBar?.classList.contains('closed-nav') &&
+    openOrCloseNavigationBar('close');
+
+  sidebar.style.display = 'none';
+
+  if (getHomePage && getGeneratorSection) {
+    getHomePage.style.display = 'none';
+    getGeneratorSection.style.display = 'flex';
+    showInputSection(generatorName, 'flex');
+  }
 }
 
 // clicking outside the nav bar should close the nav bar
@@ -396,28 +414,16 @@ getDegreeElement?.addEventListener('change', () => displayAnimationPreview());
 // adds event listner for which generator should show
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
-    const checking = generator.getAttribute('data-gen');
+    const generatorName = generator.getAttribute('data-gen');
     openSidePanelButton.style.display = 'none';
 
-    if (
-      checking === null ||
-      getHomePage === null ||
-      getGeneratorSection === null
-    )
-      return;
+    if (generatorName === null) return;
 
-    !navBar?.classList.contains('closed-nav') &&
-      openOrCloseNavigationBar('close');
-
-    sidebar.style.display = 'none';
-    attributeValue = checking;
-    getHomePage.style.display = 'none';
-    getGeneratorSection.style.display = 'flex';
-    showContent(attributeValue, 'flex');
+    showContent(generatorName);
 
     let params = new URLSearchParams(window.location.search);
     params.delete('values');
-    params.set('generator', checking);
+    params.set('generator', generatorName);
     history.replaceState(null, '', '?' + params.toString());
   });
 });
