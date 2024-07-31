@@ -414,6 +414,11 @@ generators.forEach((generator) => {
     getHomePage.style.display = 'none';
     getGeneratorSection.style.display = 'flex';
     showContent(attributeValue, 'flex');
+
+    let params = new URLSearchParams(window.location.search);
+    params.delete('values');
+    params.set('generator', checking);
+    history.replaceState(null, '', '?' + params.toString());
   });
 });
 
