@@ -7,7 +7,11 @@ on:
     branches: '*'
 
 jobs:
-  publish:
+  release:
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/main' }}
     steps: 
