@@ -182,10 +182,9 @@ function resetValues() {
       "[data-content='box-shadow'] #box-shadow-spread-field"
     )!.innerHTML = '5px';
 
+    deleteQueryParam('values');
     getResetButton(attribute).classList.remove('reset-show');
   });
-
-  deleteQueryParam('values');
 }
 
 // get values from all targets to get notified when values change.
