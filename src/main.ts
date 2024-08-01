@@ -2,13 +2,19 @@
 import {
   addAnimationListener,
   animationGenerator,
+  applyAnimationValues,
   displayAnimationPreview,
 } from './pages/animation';
 import {
   addBorderRadiusListener,
+  applyBorderRadiusValues,
   borderRadiusGenerator,
 } from './pages/border-radius';
-import {addBoxShadowListener, boxShadowGenerator} from './pages/box-shadow';
+import {
+  addBoxShadowListener,
+  applyBoxShadowValues,
+  boxShadowGenerator,
+} from './pages/box-shadow';
 import {
   addGradientBackgroundListener,
   gradientBackgroundGenerator,
@@ -21,10 +27,14 @@ import {
   addGradientTextListener,
   gradientTextGenerator,
 } from './pages/gradient-text';
-import {rangeGenerator} from './pages/input-range';
+import {applyInputRangeValues, rangeGenerator} from './pages/input-range';
 import {picTextGenerator} from './pages/pic-text';
-import {addTextShadowListener, textShadowGenerator} from './pages/text-shadow';
-import {gridGenerator} from './pages/grid-generator';
+import {
+  addTextShadowListener,
+  applyTextShadowValues,
+  textShadowGenerator,
+} from './pages/text-shadow';
+import {applyGridValues, gridGenerator} from './pages/grid-generator';
 
 // Packages
 import * as FilePond from 'filepond';
@@ -44,8 +54,18 @@ import {
   getRange,
   getResultPage,
 } from './lib/getElements';
-import {addTransformListener, transformGenerator} from './pages/transform';
+import {
+  addTransformListener,
+  applyTransformValue,
+  transformGenerator,
+} from './pages/transform';
 import {scrollGenerator} from './pages/scroll';
+import {
+  deleteQueryParam,
+  getQueryParam,
+  setQueryParam,
+} from './lib/packages/helpers';
+import {applyGradientValues} from './lib/packages/utils';
 
 FilePond.registerPlugin(
   FilePondPluginImagePreview,
@@ -204,10 +224,30 @@ FilePond.create(getImageEntryElement, {
   },
 });
 
-const params = new URLSearchParams(window.location.search);
-const generatorFromParams = params.get('generator');
+const generatorParam = getQueryParam('generator');
+const valuesParam = getQueryParam('values');
 
-if (generatorFromParams) showContent(generatorFromParams);
+if (generatorParam) {
+  showContent(generatorParam);
+
+  if (valuesParam) {
+    generatorParam === 'animation' &&
+      applyAnimationValues(JSON.parse(valuesParam));
+    generatorParam === 'border-radius' &&
+      applyBorderRadiusValues(JSON.parse(valuesParam));
+    generatorParam === 'box-shadow' && applyBoxShadowValues(valuesParam);
+    generatorParam === 'gradient-background' &&
+      applyGradientValues(valuesParam, 'gradient-background');
+    generatorParam === 'gradient-border' &&
+      applyGradientValues(valuesParam, 'gradient-border');
+    generatorParam === 'gradient-text' &&
+      applyGradientValues(valuesParam, 'gradient-text');
+    generatorParam === 'grid-generators' && applyGridValues(valuesParam);
+    generatorParam === 'input-range' && applyInputRangeValues(valuesParam);
+    generatorParam === 'text-shadow' && applyTextShadowValues(valuesParam);
+    generatorParam === 'transform' && applyTransformValue(valuesParam);
+  }
+}
 
 /**
  * sets which generator to call
@@ -382,6 +422,9 @@ getHeaderText?.addEventListener('click', () => {
   });
   getHomePage.style.display = 'flex';
   getGeneratorSection.style.display = 'none';
+
+  deleteQueryParam('generator');
+  deleteQueryParam('values');
 });
 
 // clicking on the get result icon should show the old results
@@ -421,10 +464,8 @@ generators.forEach((generator) => {
 
     showContent(generatorName);
 
-    let params = new URLSearchParams(window.location.search);
-    params.delete('values');
-    params.set('generator', generatorName);
-    history.replaceState(null, '', '?' + params.toString());
+    deleteQueryParam('values');
+    setQueryParam('generator', generatorName);
   });
 });
 

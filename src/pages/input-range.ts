@@ -1,22 +1,24 @@
 import {
-  getRadiusInput,
-  getCheckbox,
-  getCopyCodeButton,
-  getColorInput1,
-  getColorInput2,
-  getAllInputElements,
-  getAllFields,
-  getResetButton,
-  getTailwindButton,
-  getCssOrTailwindButton,
-  getCssOrTailwindDropdown,
-} from '../lib/getElements';
-import {
+  closeDropdown,
   copyCSSCodeToClipboard,
   copyTailwindCodeToClipboard,
   showPopup,
-  closeDropdown,
 } from '../lib/packages/utils';
+import {
+  getAllFields,
+  getAllInputElements,
+  getCheckbox,
+  getColorInput1,
+  getColorInput2,
+  getCopyCodeButton,
+  getCssOrTailwindButton,
+  getCssOrTailwindDropdown,
+  getRadiusInput,
+  getResetButton,
+  getTailwindButton,
+} from '../lib/getElements';
+
+import {setQueryParam} from '../lib/packages/helpers';
 
 type RangeType = 'track' | 'thumb';
 type RangeValues = {
@@ -31,8 +33,32 @@ type Values = {
 };
 
 const attribute = 'input-range';
-const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
 const showCopyClass = 'show-css-tailwind';
+
+const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
+const getCodeButton = getCopyCodeButton(attribute);
+const getTailwindCodeButtonElement = getTailwindButton(attribute);
+const getTrackColor = getColorInput1(attribute);
+const getThumbColor = getColorInput2(attribute);
+
+const trackCheckBox = getCheckbox(`${attribute}-track`);
+const thumbCheckBox = getCheckbox(`${attribute}-thumb`);
+const getTrackRadius = getRadiusInput(`${attribute}-track`);
+const getThumbRadius = getRadiusInput(`${attribute}-thumb`);
+
+const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
+const getTrackHeightElement = document.getElementById(
+  'track-height'
+) as HTMLInputElement;
+const getThumbHeightElement = document.getElementById(
+  'thumb-height'
+) as HTMLInputElement;
+const getTrackWidthElement = document.getElementById(
+  'track-width'
+) as HTMLInputElement;
+const getThumbWidthElement = document.getElementById(
+  'thumb-width'
+) as HTMLInputElement;
 
 function setLabelValue() {
   const getThumbHeightLabel = document.getElementById(
@@ -175,35 +201,11 @@ function getCssOrTailwind(e?: MouseEvent): void {
 closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
 
 export const rangeGenerator = () => {
-  const getCodeButton = getCopyCodeButton(attribute);
-  const getTailwindCodeButtonElement = getTailwindButton(attribute);
-  const getTrackColor = getColorInput1(attribute);
-  const getThumbColor = getColorInput2(attribute);
-  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
-
-  const getTrackHeightElement = document.getElementById(
-    'track-height'
-  ) as HTMLInputElement;
-  const getThumbHeightElement = document.getElementById(
-    'thumb-height'
-  ) as HTMLInputElement;
-  const getTrackWidthElement = document.getElementById(
-    'track-width'
-  ) as HTMLInputElement;
-  const getThumbWidthElement = document.getElementById(
-    'thumb-width'
-  ) as HTMLInputElement;
-
-  const trackCheckBox = getCheckbox(`${attribute}-track`);
-  const thumbCheckBox = getCheckbox(`${attribute}-thumb`);
-  const getTrackRadius = getRadiusInput(`${attribute}-track`);
-  const getThumbRadius = getRadiusInput(`${attribute}-thumb`);
-
   const allRangeInputElements = getAllInputElements(attribute);
 
   allRangeInputElements.forEach((item) => {
     item.addEventListener('input', () => {
-      setPreview({
+      const values = {
         thumb: {
           height: getThumbHeightElement.value,
           width: getThumbWidthElement.value,
@@ -216,7 +218,9 @@ export const rangeGenerator = () => {
           radius: trackCheckBox.checked ? getTrackRadius.value : 0,
           color: getTrackColor.value,
         },
-      });
+      };
+      setQueryParam('values', JSON.stringify(values));
+      setPreview(values);
       setLabelValue();
     });
   });
@@ -270,7 +274,6 @@ function resetValues() {
 }
 
 // get values from all targets to get notified when values change.
-
 function getValues() {
   const {inputs} = getAllFields(attribute);
 
@@ -294,3 +297,30 @@ function tailwindHandler() {
     'success'
   );
 }
+
+export const applyInputRangeValues = (values: string) => {
+  const parsed: Values = JSON.parse(values);
+
+  getThumbHeightElement.value = parsed.thumb.height;
+  getThumbWidthElement.value = parsed.thumb.width;
+  getThumbColor.value = parsed.thumb.color;
+
+  if (parsed.thumb.radius) {
+    thumbCheckBox.checked = true;
+    getThumbRadius.style.display = 'inline';
+    getThumbRadius.value = parsed.thumb.radius + '';
+  }
+
+  getTrackHeightElement.value = parsed.track.height;
+  getTrackWidthElement.value = parsed.track.width;
+  getTrackColor.value = parsed.track.color;
+
+  if (parsed.track.radius) {
+    trackCheckBox.checked = true;
+    getTrackRadius.style.display = 'inline';
+    getTrackRadius.value = parsed.track.radius + '';
+  }
+
+  setPreview(parsed);
+  setLabelValue();
+};

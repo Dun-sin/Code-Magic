@@ -1,27 +1,35 @@
 import {
+  closeDropdown,
+  copyCSSCodeToClipboard,
+  copyTailwindCodeToClipboard,
+  showPopup,
+} from '../lib/packages/utils';
+import {
   getAllFields,
+  getColumnGap,
   getCopyCodeButton,
+  getCssOrTailwindButton,
+  getCssOrTailwindDropdown,
   getGridFields,
   getGridPreview,
   getNumberOfColumns,
   getNumberOfRows,
   getResetButton,
-  getTailwindButton,
-  getCssOrTailwindDropdown,
-  getCssOrTailwindButton,
   getRowGap,
-  getColumnGap,
+  getTailwindButton,
 } from '../lib/getElements';
-import {
-  copyCSSCodeToClipboard,
-  copyTailwindCodeToClipboard,
-  showPopup,
-  closeDropdown,
-} from '../lib/packages/utils';
+
+import {setQueryParam} from '../lib/packages/helpers';
 
 const attribute = 'grid-generators';
-const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
 const showCopyClass = 'show-css-tailwind';
+
+const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
+const preview = getGridPreview(attribute);
+const noOfColumns = getNumberOfColumns(attribute);
+const noOfRows = getNumberOfRows(attribute);
+const rowGapValue = getRowGap(attribute);
+const columnGapValue = getColumnGap(attribute);
 
 function areInputsValid() {
   const noOfColumns = getNumberOfColumns(attribute);
@@ -48,14 +56,7 @@ function areInputsValid() {
 }
 
 export function gridGenerator(): void {
-  const noOfColumns = getNumberOfColumns(attribute);
-  const noOfRows = getNumberOfRows(attribute);
-  const rowGapValue = getRowGap(attribute);
-  const columnGapValue = getColumnGap(attribute);
-
   const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
-
-  const preview = getGridPreview(attribute);
 
   const allGridInputs = [noOfColumns, noOfRows, rowGapValue, columnGapValue];
 
@@ -83,6 +84,15 @@ export function gridGenerator(): void {
       preview.style.gridTemplateRows = getGridRowValue();
       preview.style.rowGap = getGridRowGapValue();
       preview.style.columnGap = getGridColGapValue();
+
+      const values = {
+        columns: getGridColValue(),
+        rows: getGridRowValue(),
+        rowGap: getGridRowGapValue(),
+        columnGap: getGridColGapValue(),
+      };
+
+      setQueryParam('values', JSON.stringify(values));
       updatePreviewElement();
     });
   });
@@ -186,5 +196,31 @@ function updatePreviewElement() {
         preview.appendChild(child);
       }
     }
+  }
+}
+
+export const applyGridValues = (values: string) => {
+  const parsed = JSON.parse(values);
+
+  noOfColumns.value = getFirstValue(parsed.columns);
+  noOfRows.value = getFirstValue(parsed.rows);
+  rowGapValue.value = parsed.rowGap[0];
+  columnGapValue.value = parsed.columnGap[0];
+
+  preview.style.display = 'grid';
+  preview.style.gridTemplateColumns = parsed.columns;
+  preview.style.gridTemplateRows = parsed.rows;
+  preview.style.rowGap = parsed.rowGap;
+  preview.style.columnGap = parsed.columnGap;
+
+  updatePreviewElement();
+};
+
+function getFirstValue(input: string) {
+  const match = input.match(/repeat\((\d+),\s*([^\)]+)\)/);
+  if (match) {
+    return match[1];
+  } else {
+    return '';
   }
 }

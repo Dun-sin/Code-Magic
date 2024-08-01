@@ -1,29 +1,30 @@
 import {
-  getOutput,
-  getShadowHorizontalOffset,
-  getShadowVerticalOffset,
-  getShadowBlur,
-  getShadowSpread,
-  getShadowColor,
-  getResultPage,
-  getCopyCodeButton,
-  getPreviewSlider,
-  getShadowFields,
-  getAllFields,
-  getResetButton,
-  getTailwindButton,
-  getCssOrTailwindButton,
-  getCssOrTailwindDropdown,
-  getOpenSideBarButton,
-  getAllInputElements,
-} from '../lib/getElements';
-import {
+  closeDropdown,
   copyCSSCodeToClipboard,
   copyTailwindCodeToClipboard,
   showPopup,
   slideIn,
-  closeDropdown,
 } from '../lib/packages/utils';
+import {deleteQueryParam, setQueryParam} from '../lib/packages/helpers';
+import {
+  getAllFields,
+  getAllInputElements,
+  getCopyCodeButton,
+  getCssOrTailwindButton,
+  getCssOrTailwindDropdown,
+  getOpenSideBarButton,
+  getOutput,
+  getPreviewSlider,
+  getResetButton,
+  getResultPage,
+  getShadowBlur,
+  getShadowColor,
+  getShadowFields,
+  getShadowHorizontalOffset,
+  getShadowSpread,
+  getShadowVerticalOffset,
+  getTailwindButton,
+} from '../lib/getElements';
 
 type Values = {
   hOffset: string;
@@ -38,6 +39,12 @@ let isSliderOpen = false;
 const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
 const showCopyClass = 'show-css-tailwind';
 const boxshadowInputs = getAllInputElements(attribute);
+const preview = getPreviewSlider(attribute);
+const horizontalOffset = getShadowHorizontalOffset(attribute);
+const verticalOffset = getShadowVerticalOffset(attribute);
+const blur = getShadowBlur(attribute);
+const spread = getShadowSpread(attribute);
+const color = getShadowColor(attribute);
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
@@ -62,20 +69,15 @@ export function boxShadowGenerator(
 ): void {
   if (type === null) return;
 
-  const horizontalOffset = getShadowHorizontalOffset(attribute);
-  const verticalOffset = getShadowVerticalOffset(attribute);
-  const blur = getShadowBlur(attribute);
-  const spread = getShadowSpread(attribute);
-  const color = getShadowColor(attribute);
   const getOutputElement = getOutput(attribute);
   const resultPage = getResultPage();
-  
+
   const element = boxshadowInputs[0];
   const value = element.value;
 
   if (value.length < 3) {
     getOpenSideBarButton().style.display = 'none';
-  }else{
+  } else {
     getOpenSideBarButton().style.display = 'flex';
     resultPage.style.display = 'flex';
   }
@@ -121,14 +123,6 @@ function getBoxShadowResult(values: Values, outputElement: HTMLElement): void {
 }
 
 export function addBoxShadowListener(): void {
-  const horizontalOffset = getShadowHorizontalOffset(attribute);
-  const verticalOffset = getShadowVerticalOffset(attribute);
-  const blur = getShadowBlur(attribute);
-  const spread = getShadowSpread(attribute);
-  const color = getShadowColor(attribute);
-
-  const preview = getPreviewSlider(attribute);
-
   const allBoxShadowInputs = [
     horizontalOffset,
     verticalOffset,
@@ -147,18 +141,19 @@ export function addBoxShadowListener(): void {
     `${horizontalOffset.value}px ${verticalOffset.value}px ${blur.value}px ${spread.value}px ${color.value}`;
   preview.style.boxShadow = getShadowValue();
 
-  allBoxShadowInputs.forEach((input, idx) => {
+  allBoxShadowInputs.forEach((input, index) => {
     // default
-    if (idx < 4) {
-      allBoxShadowInputsFields[idx].textContent = `${input.value}px`;
+    if (index < 4) {
+      allBoxShadowInputsFields[index].textContent = `${input.value}px`;
     }
     input.addEventListener('input', () => {
       slideIn(preview, isSliderOpen);
 
       isSliderOpen = true;
-      if (idx < 4) {
-        allBoxShadowInputsFields[idx].textContent = `${input.value}px`;
+      if (index < 4) {
+        allBoxShadowInputsFields[index].textContent = `${input.value}px`;
       }
+      setQueryParam('values', getShadowValue().trim().replaceAll(' ', ''));
       preview.style.boxShadow = getShadowValue();
     });
   });
@@ -189,6 +184,8 @@ function resetValues() {
 
     getResetButton(attribute).classList.remove('reset-show');
   });
+
+  deleteQueryParam('values');
 }
 
 // get values from all targets to get notified when values change.
@@ -215,3 +212,39 @@ function tailwindHandler() {
     'success'
   );
 }
+
+export const applyBoxShadowValues = (values: string) => {
+  values = values.replaceAll('px', ' ');
+  const [
+    horizontalOffsetValue,
+    verticalOffsetValue,
+    blurValue,
+    spreadValue,
+    colorValue,
+  ] = values.split(' ');
+
+  horizontalOffset.value = horizontalOffsetValue;
+  verticalOffset.value = verticalOffsetValue;
+  blur.value = blurValue;
+  spread.value = spreadValue;
+  color.value = colorValue;
+
+  document.querySelector(
+    "[data-content='box-shadow'] #box-shadow-h-offset-field"
+  )!.innerHTML = horizontalOffsetValue + 'px';
+  document.querySelector(
+    "[data-content='box-shadow'] #box-shadow-v-offset-field"
+  )!.innerHTML = verticalOffsetValue + 'px';
+  document.querySelector(
+    "[data-content='box-shadow'] #box-shadow-blur-field"
+  )!.innerHTML = blurValue + 'px';
+  document.querySelector(
+    "[data-content='box-shadow'] #box-shadow-spread-field"
+  )!.innerHTML = spreadValue + 'px';
+
+  slideIn(preview, isSliderOpen);
+
+  isSliderOpen = true;
+
+  preview.style.boxShadow = values.replaceAll(' ', 'px ');
+};

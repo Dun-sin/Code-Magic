@@ -1,35 +1,36 @@
 import {
-  getNewColorButton,
-  getRemoveNewColorButton,
-  getRadiusInput,
-  getCheckbox,
-  getOutput,
-  getRange,
-  getAllInputElements,
-  getResultPage,
-  getCopyCodeButton,
-  getResetButton,
-  getDegreeSpanElement,
-  getGradientPreview,
-  getTailwindButton,
-  getCssOrTailwindButton,
-  getCssOrTailwindDropdown,
-  getResultButton,
-} from '../lib/getElements';
-import {
-  triggerEmptyAnimation,
-  copyCSSCodeToClipboard,
-  showPopup,
-  addRule,
-  whatColorButtonShouldShow,
+  addEventListenerToTheNewColorPicker,
   addNewColorPicker,
+  addRule,
+  closeDropdown,
+  copyCSSCodeToClipboard,
+  copyTailwindCodeToClipboard,
+  getColorsValue,
+  inputEventListner,
   removeColorPicker,
   setGradientDegreeValue,
-  createGradientPreview,
-  getColorsValue,
-  copyTailwindCodeToClipboard,
-  closeDropdown,
+  showPopup,
+  triggerEmptyAnimation,
+  whatColorButtonShouldShow,
 } from '../lib/packages/utils';
+import {
+  getAllInputElements,
+  getCheckbox,
+  getCopyCodeButton,
+  getCssOrTailwindButton,
+  getCssOrTailwindDropdown,
+  getDegreeSpanElement,
+  getGradientPreview,
+  getNewColorButton,
+  getOutput,
+  getRadiusInput,
+  getRange,
+  getRemoveNewColorButton,
+  getResetButton,
+  getResultButton,
+  getResultPage,
+  getTailwindButton,
+} from '../lib/getElements';
 
 type Values = {
   degree: string;
@@ -153,61 +154,42 @@ export function addGradientBorderListener() {
 
   getNewColorButtonElement.addEventListener('click', () => {
     addNewColorPicker(attribute);
-    addEventListenerToTheNewColorPicker();
+    addEventListenerToTheNewColorPicker(attribute);
   });
 
   getRemoveColorButtonElement.addEventListener('click', () => {
     removeColorPicker(attribute);
-    addEventListenerToTheNewColorPicker();
+    addEventListenerToTheNewColorPicker(attribute);
   });
 
-  addEventListenerToTheNewColorPicker();
+  inputEventListner(attribute);
 
   setGradientDegreeValue(getDegreeElement);
 }
 
-function addEventListenerToTheNewColorPicker() {
-  gradientBorderInputs = getAllInputElements(attribute);
-  inputEventListner();
-  if (resetButton.classList.contains('reset-show')) return;
-  resetButton.classList.add('reset-show');
-}
-
-function inputEventListner() {
-  //set gradient border preview
-  gradientBorderInputs.forEach((input) => {
-    input.addEventListener('input', () => {
-      createGradientPreview(getDegreeElement, attribute);
-    });
-  });
-}
-
 // reset the values of all target fields
-function resetValues() {
+resetButton.addEventListener('click', () => {
   const colorInput: HTMLInputElement[] = [...new Set([])];
+  resetButton.classList.remove('reset-show');
+  getDegreeSpanElement(attribute).innerHTML = 'deg';
 
-  resetButton.addEventListener('click', () => {
-    resetButton.classList.remove('reset-show');
-    getDegreeSpanElement(attribute).innerHTML = 'deg';
+  getGradientPreview(attribute).style.background = '';
 
-    getGradientPreview(attribute).style.background = '';
+  gradientBorderInputs.forEach((input) => {
+    input.checked = false;
+    input.value = input.defaultValue;
 
-    gradientBorderInputs.forEach((input) => {
-      input.checked = false;
-      input.value = input.defaultValue;
-
-      if (input.id.includes('color')) {
-        colorInput.push(input);
-      }
-    });
-
-    if (colorInput.length > 2) {
-      for (let i = 2; i < colorInput.length; i++) {
-        removeColorPicker(attribute);
-      }
+    if (input.id.includes('color')) {
+      colorInput.push(input);
     }
   });
-}
+
+  if (colorInput.length > 2) {
+    for (let i = 2; i < colorInput.length; i++) {
+      removeColorPicker(attribute);
+    }
+  }
+});
 
 // get values from all targets to get notified when values change.
 
@@ -223,7 +205,6 @@ function getValues() {
     });
   });
 }
-resetValues();
 getValues();
 
 // Tailwind codecopy handler

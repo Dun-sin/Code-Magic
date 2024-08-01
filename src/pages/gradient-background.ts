@@ -1,32 +1,35 @@
 import {
-  getNewColorButton,
-  getAllInputElements,
-  getRange,
-  getOutput,
-  getCopyCodeButton,
-  getResultPage,
-  getRemoveNewColorButton,
-  getResetButton,
-  getDegreeSpanElement,
-  getGradientPreview,
-  getCssOrTailwindDropdown,
-  getTailwindButton,
-  getCssOrTailwindButton,
-  getOpenSideBarButton,
-} from '../lib/getElements';
-import {
-  triggerEmptyAnimation,
-  copyCSSCodeToClipboard,
-  showPopup,
-  whatColorButtonShouldShow,
+  addEventListenerToTheNewColorPicker,
   addNewColorPicker,
+  closeDropdown,
+  copyCSSCodeToClipboard,
+  copyTailwindCodeToClipboard,
+  getColorsValue,
+  inputEventListner,
   removeColorPicker,
   setGradientDegreeValue,
-  createGradientPreview,
-  getColorsValue,
-  closeDropdown,
-  copyTailwindCodeToClipboard,
+  showPopup,
+  triggerEmptyAnimation,
+  whatColorButtonShouldShow,
 } from '../lib/packages/utils';
+import {
+  getAllInputElements,
+  getCopyCodeButton,
+  getCssOrTailwindButton,
+  getCssOrTailwindDropdown,
+  getDegreeSpanElement,
+  getGradientPreview,
+  getNewColorButton,
+  getOpenSideBarButton,
+  getOutput,
+  getRange,
+  getRemoveNewColorButton,
+  getResetButton,
+  getResultPage,
+  getTailwindButton,
+} from '../lib/getElements';
+
+import {deleteQueryParam} from '../lib/packages/helpers';
 
 type Values = {
   degree: string;
@@ -49,8 +52,8 @@ export function gradientBackgroundGenerator(
 ) {
   if (type === null) return;
   // Show error when the colors are not entered.
-  var element = gradientBackgroundInputs[0];
-  var value = element.value;
+  const element = gradientBackgroundInputs[0];
+  const value = element.value;
   if (value.length < 3) {
     gradientBackgroundInputs.forEach((ele) => {
       if (getResultBtn) {
@@ -82,16 +85,15 @@ export function addGradientBackgroundListener() {
   whatColorButtonShouldShow(attribute);
   getNewColorButtonElement.addEventListener('click', () => {
     addNewColorPicker(attribute);
-    addEventListenerToTheNewColorPicker();
+    addEventListenerToTheNewColorPicker(attribute);
   });
 
   getRemoveColorButtonElement.addEventListener('click', () => {
     removeColorPicker(attribute);
-    addEventListenerToTheNewColorPicker();
+    addEventListenerToTheNewColorPicker(attribute);
   });
 
-  inputEventListner();
-
+  inputEventListner(attribute);
   setGradientDegreeValue(getDegreeElement);
 }
 
@@ -136,46 +138,30 @@ function getGradientBackgroundResult(
   getCssOrTailwindButtonElement.addEventListener('click', getCssOrTailwind);
 }
 
-function addEventListenerToTheNewColorPicker() {
-  gradientBackgroundInputs = getAllInputElements(attribute);
-  inputEventListner();
-  if (resetButton.classList.contains('reset-show')) return;
-  resetButton.classList.add('reset-show');
-}
-
-function inputEventListner() {
-  gradientBackgroundInputs.forEach((inputElement) => {
-    inputElement.addEventListener('input', () => {
-      createGradientPreview(getDegreeElement, attribute);
-    });
-  });
-}
-
 // reset the values of all target fields
-function resetValues() {
+resetButton.addEventListener('click', () => {
   const colorInput: HTMLInputElement[] = [...new Set([])];
+  resetButton.classList.remove('reset-show');
+  getDegreeSpanElement(attribute).innerHTML = 'deg';
 
-  resetButton.addEventListener('click', () => {
-    resetButton.classList.remove('reset-show');
-    getDegreeSpanElement(attribute).innerHTML = 'deg';
+  getGradientPreview(attribute).style.background = '';
 
-    getGradientPreview(attribute).style.background = '';
+  gradientBackgroundInputs.forEach((input) => {
+    input.value = input.defaultValue;
 
-    gradientBackgroundInputs.forEach((input) => {
-      input.value = input.defaultValue;
-
-      if (input.id.includes('color')) {
-        colorInput.push(input);
-      }
-    });
-
-    if (colorInput.length > 2) {
-      for (let i = 2; i < colorInput.length; i++) {
-        removeColorPicker(attribute);
-      }
+    if (input.id.includes('color')) {
+      colorInput.push(input);
     }
   });
-}
+
+  if (colorInput.length > 2) {
+    for (let i = 2; i < colorInput.length; i++) {
+      removeColorPicker(attribute);
+    }
+  }
+
+  deleteQueryParam('values');
+});
 
 // get values from all targets to get notified when values change.
 function getValues() {
@@ -203,5 +189,4 @@ function tailwindHandler() {
 
 closeDropdown(getCssOrTailwind, getCssOrTailwindDropdownElement, showCopyClass);
 
-resetValues();
 getValues();
