@@ -1,7 +1,10 @@
-import copy from 'copy-to-clipboard';
+import {closeDropdown, showPopup, slideIn} from '../lib/packages/utils';
+import {deleteQueryParam, setQueryParam} from '../lib/packages/helpers';
 import {
   getAllFields,
   getCopyCodeButton,
+  getCssOrTailwindButton,
+  getCssOrTailwindDropdown,
   getOutput,
   getPreviewSlider,
   getRadioButtonSet,
@@ -9,10 +12,9 @@ import {
   getResetButton,
   getResultPage,
   getTailwindButton,
-  getCssOrTailwindButton,
-  getCssOrTailwindDropdown,
 } from '../lib/getElements';
-import {showPopup, slideIn, closeDropdown} from '../lib/packages/utils';
+
+import copy from 'copy-to-clipboard';
 
 type Values = {
   type: string;
@@ -74,6 +76,13 @@ export function addTransformListener(): void {
     const selectedOption = document.querySelector(
       'input[name="transform-radio"]:checked'
     ) as HTMLInputElement;
+    setQueryParam(
+      'values',
+      JSON.stringify({
+        type: selectedOption.value,
+        degree: getDegreeElement.value,
+      })
+    );
     updatePreviewAndRange(selectedOption.value, getDegreeElement.valueAsNumber);
   });
 }
@@ -248,6 +257,8 @@ function resetValues() {
 
     getResetButton(attribute).classList.remove('reset-show');
   });
+
+  deleteQueryParam('values');
 }
 
 // get values from all targets to get notified when values change.
@@ -291,3 +302,18 @@ function manageTailwindTransform(values: Values) {
       break;
   }
 }
+
+export const applyTransformValue = (values: string) => {
+  const {degree, type}: Values = JSON.parse(values);
+
+  getRadioButtonSetElement.forEach((item) => {
+    if (item.value === type) {
+      item.checked = true;
+    }
+  });
+
+  slideIn(preview, isSliderOpen);
+  isSliderOpen = true;
+  updatePreviewAndRange(type, Number(degree));
+  getDegreeElement.value = degree;
+};

@@ -1,21 +1,26 @@
-import DomToImage from 'dom-to-image';
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import {Eggy} from '@s-r0/eggy-js';
 import {
+  actOnGenerator,
+  actOnTailwindGenerator,
+  createDownloadLink,
+  setQueryParam,
+} from './helpers';
+import {
+  getAllColorInput,
+  getAllInputElements,
+  getDegreeSpanElement,
   getGradientPreview,
   getNewColorButton,
   getParentElementOfColors,
+  getRange,
   getRemoveNewColorButton,
-  getAllColorInput,
+  getResetButton,
 } from '../getElements';
 
-import {
-  createDownloadLink,
-  actOnGenerator,
-  actOnTailwindGenerator,
-} from './helpers';
+import DomToImage from 'dom-to-image';
+import {Eggy} from '@s-r0/eggy-js';
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 
 export const setGradientDegreeValue = (degreeElement: HTMLElement): void =>
   degreeElement.addEventListener('input', (e) => {
@@ -54,6 +59,11 @@ export const createGradientPreview = (
   ).style.background = `linear-gradient(${fill}deg, ${getColorsValue(
     attribute
   ).join(', ')})`;
+
+  setQueryParam(
+    'values',
+    `linear-gradient(${fill}deg, ${getColorsValue(attribute).join(', ')})`
+  );
 };
 
 /**
@@ -192,6 +202,15 @@ export function getColorsValue(attribute: string): Array<string> {
   return colorValues;
 }
 
+export function setColorsValue(colors: string[] | null, attribute: string) {
+  if (!colors) return;
+  const colorInputs = getAllColorInput(attribute);
+
+  colorInputs.forEach(
+    (colorInput, index) => (colorInput.value = colors[index])
+  );
+}
+
 export function removeColorPicker(attribute: string): void {
   const getParentElementToRemoveFrom = getParentElementOfColors(attribute);
   const numberOfChildren = getParentElementToRemoveFrom?.childElementCount;
@@ -199,6 +218,7 @@ export function removeColorPicker(attribute: string): void {
   if (numberOfChildren === undefined || numberOfChildren === 2) return;
   getParentElementToRemoveFrom?.lastChild?.remove();
 
+  createGradientPreview(getRange(attribute), attribute);
   whatColorButtonShouldShow(attribute);
 }
 
@@ -232,4 +252,56 @@ export function closeDropdown(
       toggleFunction();
     }
   });
+}
+
+export function inputEventListner(attribute: string) {
+  const gradientInputs = getAllInputElements(attribute);
+
+  gradientInputs.forEach((inputElement) => {
+    inputElement.addEventListener('input', () => {
+      createGradientPreview(getRange(attribute), attribute);
+    });
+  });
+}
+
+export function addEventListenerToTheNewColorPicker(attribute: string) {
+  const resetButton = getResetButton(attribute);
+
+  inputEventListner(attribute);
+  if (resetButton.classList.contains('reset-show')) return;
+  resetButton.classList.add('reset-show');
+}
+
+export function applyGradientValues(values: string, attribute: string) {
+  const colors = values.match(/#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})\b/g) as
+    | string[]
+    | null;
+  const degreeValueReg = values.match(/linear-gradient\((\d+)deg/) as
+    | string[]
+    | null;
+
+  if (degreeValueReg) {
+    const degreeValue = degreeValueReg[1];
+    const degreeSpanElement = getDegreeSpanElement(attribute);
+    const rangeElement = getRange(attribute);
+
+    degreeSpanElement.innerHTML = `${degreeValue}deg`;
+    rangeElement.value = degreeValue;
+  }
+
+  if (colors) {
+    const colorLength = colors.length;
+
+    if (colorLength > 2) {
+      for (let index = 2; index < colorLength; index++) {
+        addNewColorPicker(attribute);
+        addEventListenerToTheNewColorPicker(attribute);
+      }
+      whatColorButtonShouldShow(attribute);
+    }
+
+    setColorsValue(colors, attribute);
+  }
+
+  createGradientPreview(getRange(attribute), attribute);
 }

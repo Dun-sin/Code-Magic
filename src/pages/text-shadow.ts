@@ -1,35 +1,36 @@
 import {
-  getOutput,
-  getInputText,
-  getShadowHorizontalOffset,
-  getShadowVerticalOffset,
-  getShadowBlur,
-  getShadowColor,
-  getResultPage,
-  getCopyCodeButton,
-  getPNGButton,
-  getSVGButton,
-  getPreviewSlider,
-  getShadowFields,
-  getAllFields,
-  getResetButton,
-  getTailwindButton,
-  getCssOrTailwindButton,
-  getCssOrTailwindDropdown,
-  getPngOrSvgButton,
-  getPngOrSvgDropdown,
-  getOpenSideBarButton,
-} from '../lib/getElements';
-import {
+  closeDropdown,
   copyCSSCodeToClipboard,
-  showPopup,
+  copyTailwindCodeToClipboard,
   downloadPNG,
   downloadSVG,
-  triggerEmptyAnimation,
+  showPopup,
   slideIn,
-  copyTailwindCodeToClipboard,
-  closeDropdown,
+  triggerEmptyAnimation,
 } from '../lib/packages/utils';
+import {deleteQueryParam, setQueryParam} from '../lib/packages/helpers';
+import {
+  getAllFields,
+  getCopyCodeButton,
+  getCssOrTailwindButton,
+  getCssOrTailwindDropdown,
+  getInputText,
+  getOpenSideBarButton,
+  getOutput,
+  getPNGButton,
+  getPngOrSvgButton,
+  getPngOrSvgDropdown,
+  getPreviewSlider,
+  getResetButton,
+  getResultPage,
+  getSVGButton,
+  getShadowBlur,
+  getShadowColor,
+  getShadowFields,
+  getShadowHorizontalOffset,
+  getShadowVerticalOffset,
+  getTailwindButton,
+} from '../lib/getElements';
 
 type Values = {
   hOffset: string;
@@ -41,10 +42,17 @@ type Values = {
 
 let isSliderOpen = false;
 const attribute = 'text-shadow';
-const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
-const getPngOrSvgDropdownElement = getPngOrSvgDropdown(attribute);
 const showCopyClass = 'show-css-tailwind';
 const showPngOrSvgClass = 'show-png-svg';
+
+const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
+const getPngOrSvgDropdownElement = getPngOrSvgDropdown(attribute);
+const horizontalOffset = getShadowHorizontalOffset(attribute);
+const verticalOffset = getShadowVerticalOffset(attribute);
+const blur = getShadowBlur(attribute);
+const color = getShadowColor(attribute);
+const preview = getPreviewSlider(attribute);
+const getInputElement = getInputText(attribute);
 
 function copyHandler() {
   const outputElement = getOutput(attribute);
@@ -87,12 +95,6 @@ export function textShadowGenerator(
 ): void {
   if (type === null) return;
 
-  const getInputElement = getInputText(attribute);
-
-  const horizontalOffset = getShadowHorizontalOffset(attribute);
-  const verticalOffset = getShadowVerticalOffset(attribute);
-  const blur = getShadowBlur(attribute);
-  const color = getShadowColor(attribute);
   const getOutputElement = getOutput(attribute);
   const resultPage = getResultPage();
 
@@ -150,7 +152,6 @@ export function addTextShadowListener(): void {
   const getInputElement = getInputText(attribute);
   const getPNGButtonElement = getPNGButton(attribute);
   const getSVGButtonElement = getSVGButton(attribute);
-  const preview = getPreviewSlider(attribute);
 
   const allTextShadowInputs = [horizontalOffset, verticalOffset, blur, color];
   const allTextShadowInputsFields = getShadowFields(attribute, [
@@ -186,6 +187,8 @@ export function addTextShadowListener(): void {
       if (idx < 3) {
         allTextShadowInputsFields[idx].textContent = `${input.value}px`;
       }
+
+      setQueryParam('values', getShadowValue().trim().replaceAll(' ', ''));
       preview.style.textShadow = getShadowValue();
     });
 
@@ -218,6 +221,8 @@ function resetValues() {
     )!.innerHTML = '4px';
 
     getResetButton(attribute).classList.remove('reset-show');
+
+    deleteQueryParam('values');
   });
 }
 
@@ -254,3 +259,37 @@ function tailwindHandler() {
     'success'
   );
 }
+
+export const applyTextShadowValues = (values: string) => {
+  values = values.replaceAll('px', ' ');
+  const [horizontalOffsetValue, verticalOffsetValue, blurValue, colorValue] =
+    values.split(' ');
+
+  const textValue = 'hello';
+
+  getInputElement.value = textValue;
+  preview.innerText = textValue;
+
+  document.querySelector(
+    "[data-content='text-shadow'] #text-shadow-h-offset-field"
+  )!.innerHTML = horizontalOffsetValue + 'px';
+  document.querySelector(
+    "[data-content='text-shadow'] #text-shadow-v-offset-field"
+  )!.innerHTML = verticalOffsetValue + 'px';
+  document.querySelector(
+    "[data-content='text-shadow'] #text-shadow-blur-field"
+  )!.innerHTML = blurValue + 'px';
+
+  horizontalOffset.value = horizontalOffsetValue;
+  verticalOffset.value = verticalOffsetValue;
+  blur.value = blurValue;
+  color.value = colorValue;
+
+  slideIn(preview, isSliderOpen);
+
+  isSliderOpen = true;
+
+  console.log({values});
+
+  preview.style.textShadow = values.replaceAll(' ', 'px ');
+};

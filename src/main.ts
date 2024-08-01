@@ -2,13 +2,19 @@
 import {
   addAnimationListener,
   animationGenerator,
+  applyAnimationValues,
   displayAnimationPreview,
 } from './pages/animation';
 import {
   addBorderRadiusListener,
+  applyBorderRadiusValues,
   borderRadiusGenerator,
 } from './pages/border-radius';
-import {addBoxShadowListener, boxShadowGenerator} from './pages/box-shadow';
+import {
+  addBoxShadowListener,
+  applyBoxShadowValues,
+  boxShadowGenerator,
+} from './pages/box-shadow';
 import {
   addGradientBackgroundListener,
   gradientBackgroundGenerator,
@@ -21,10 +27,14 @@ import {
   addGradientTextListener,
   gradientTextGenerator,
 } from './pages/gradient-text';
-import {rangeGenerator} from './pages/input-range';
+import {applyInputRangeValues, rangeGenerator} from './pages/input-range';
 import {picTextGenerator} from './pages/pic-text';
-import {addTextShadowListener, textShadowGenerator} from './pages/text-shadow';
-import {gridGenerator} from './pages/grid-generator';
+import {
+  addTextShadowListener,
+  applyTextShadowValues,
+  textShadowGenerator,
+} from './pages/text-shadow';
+import {applyGridValues, gridGenerator} from './pages/grid-generator';
 
 // Packages
 import * as FilePond from 'filepond';
@@ -44,8 +54,18 @@ import {
   getRange,
   getResultPage,
 } from './lib/getElements';
-import {addTransformListener, transformGenerator} from './pages/transform';
+import {
+  addTransformListener,
+  applyTransformValue,
+  transformGenerator,
+} from './pages/transform';
 import {scrollGenerator} from './pages/scroll';
+import {
+  deleteQueryParam,
+  getQueryParam,
+  setQueryParam,
+} from './lib/packages/helpers';
+import {applyGradientValues} from './lib/packages/utils';
 
 FilePond.registerPlugin(
   FilePondPluginImagePreview,
@@ -204,6 +224,31 @@ FilePond.create(getImageEntryElement, {
   },
 });
 
+const generatorParam = getQueryParam('generator');
+const valuesParam = getQueryParam('values');
+
+if (generatorParam) {
+  showContent(generatorParam);
+
+  if (valuesParam) {
+    generatorParam === 'animation' &&
+      applyAnimationValues(JSON.parse(valuesParam));
+    generatorParam === 'border-radius' &&
+      applyBorderRadiusValues(JSON.parse(valuesParam));
+    generatorParam === 'box-shadow' && applyBoxShadowValues(valuesParam);
+    generatorParam === 'gradient-background' &&
+      applyGradientValues(valuesParam, 'gradient-background');
+    generatorParam === 'gradient-border' &&
+      applyGradientValues(valuesParam, 'gradient-border');
+    generatorParam === 'gradient-text' &&
+      applyGradientValues(valuesParam, 'gradient-text');
+    generatorParam === 'grid-generators' && applyGridValues(valuesParam);
+    generatorParam === 'input-range' && applyInputRangeValues(valuesParam);
+    generatorParam === 'text-shadow' && applyTextShadowValues(valuesParam);
+    generatorParam === 'transform' && applyTransformValue(valuesParam);
+  }
+}
+
 /**
  * sets which generator to call
  *
@@ -229,7 +274,7 @@ function generatorsFunction(attribute: string, type: openResults): void {
  * @param attribute The attribute name of the generator element
  * @param display display type
  */
-function showContent(attribute: string, display: Display): void {
+function showInputSection(attribute: string, display: Display): void {
   const generatorsContent = document.querySelectorAll(`[data-content]`);
   const showGen = document.querySelector(
     `[data-content=${attribute}]`
@@ -312,6 +357,19 @@ function showOpenPreviousResultText() {
   getOpenPreviousResult.style.animationFillMode = 'backwards';
 }
 
+function showContent(generatorName: string) {
+  !navBar?.classList.contains('closed-nav') &&
+    openOrCloseNavigationBar('close');
+
+  sidebar.style.display = 'none';
+
+  if (getHomePage && getGeneratorSection) {
+    getHomePage.style.display = 'none';
+    getGeneratorSection.style.display = 'flex';
+    showInputSection(generatorName, 'flex');
+  }
+}
+
 // clicking outside the nav bar should close the nav bar
 document.addEventListener('click', (e: Event) => {
   const event = e.target as HTMLElement;
@@ -364,6 +422,9 @@ getHeaderText?.addEventListener('click', () => {
   });
   getHomePage.style.display = 'flex';
   getGeneratorSection.style.display = 'none';
+
+  deleteQueryParam('generator');
+  deleteQueryParam('values');
 });
 
 // clicking on the get result icon should show the old results
@@ -396,24 +457,15 @@ getDegreeElement?.addEventListener('change', () => displayAnimationPreview());
 // adds event listner for which generator should show
 generators.forEach((generator) => {
   generator?.addEventListener('click', (): void => {
-    const checking = generator.getAttribute('data-gen');
+    const generatorName = generator.getAttribute('data-gen');
     openSidePanelButton.style.display = 'none';
 
-    if (
-      checking === null ||
-      getHomePage === null ||
-      getGeneratorSection === null
-    )
-      return;
+    if (generatorName === null) return;
 
-    !navBar?.classList.contains('closed-nav') &&
-      openOrCloseNavigationBar('close');
+    showContent(generatorName);
 
-    sidebar.style.display = 'none';
-    attributeValue = checking;
-    getHomePage.style.display = 'none';
-    getGeneratorSection.style.display = 'flex';
-    showContent(attributeValue, 'flex');
+    deleteQueryParam('values');
+    setQueryParam('generator', generatorName);
   });
 });
 

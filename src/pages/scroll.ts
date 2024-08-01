@@ -16,8 +16,16 @@ type Values = {
 };
 
 const attribute = 'scroll';
-const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
 const showCopyClass = 'show-css-tailwind';
+
+const [trackColor, thumbColor, hoverColor] = Array.from(
+  getAllColorInput(attribute)
+);
+const width = document.querySelector('#scroll-width') as HTMLInputElement;
+
+const getCodeButton = getCopyCodeButton(attribute);
+const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
+const getCssOrTailwindDropdownElement = getCssOrTailwindDropdown(attribute);
 
 function getCssOrTailwind(e?: MouseEvent): void {
   e?.stopPropagation();
@@ -75,14 +83,6 @@ function copyHandler(values: Values) {
 }
 
 export function scrollGenerator() {
-  const [trackColor, thumbColor, hoverColor] = Array.from(
-    getAllColorInput(attribute)
-  );
-  const width = document.querySelector('#scroll-width') as HTMLInputElement;
-
-  const getCodeButton = getCopyCodeButton(attribute);
-  const getCssOrTailwindButtonElement = getCssOrTailwindButton(attribute);
-
   getCodeButton?.addEventListener('click', () =>
     copyHandler({
       trackColor: trackColor.value,

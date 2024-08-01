@@ -1,26 +1,27 @@
 import {
-  getBorderTop,
-  getBorderRight,
-  getBorderLeft,
-  getBorderBottom,
-  getOutput,
-  getCopyCodeButton,
-  getResultPage,
+  closeDropdown,
+  copyCSSCodeToClipboard,
+  copyTailwindCodeToClipboard,
+  showPopup,
+} from '../lib/packages/utils';
+import {deleteQueryParam, setQueryParam} from '../lib/packages/helpers';
+import {
   getAllFields,
-  getResetButton,
-  getTailwindButton,
+  getBorderBottom,
+  getBorderLeft,
+  getBorderRight,
+  getBorderTop,
+  getCopyCodeButton,
   getCssOrTailwindButton,
   getCssOrTailwindDropdown,
+  getOutput,
+  getResetButton,
+  getResultPage,
+  getTailwindButton,
 } from '../lib/getElements';
-import {
-  copyCSSCodeToClipboard,
-  showPopup,
-  copyTailwindCodeToClipboard,
-  closeDropdown,
-} from '../lib/packages/utils';
 
 type Values = {
-  BorderTop: string;
+  borderTop: string;
   borderLeft: string;
   borderRight: string;
   borderBottom: string;
@@ -65,8 +66,8 @@ function getBorderRadiusResult(
 ): void {
   outputElement.style.width = '250px';
   outputElement.style.height = '250px';
-  outputElement.style.borderRadius = `${values.BorderTop}% ${
-    100 - Number(values.BorderTop)
+  outputElement.style.borderRadius = `${values.borderTop}% ${
+    100 - Number(values.borderTop)
   }%
   ${values.borderBottom}% ${100 - Number(values.borderBottom)}% /
   ${values.borderLeft}% ${values.borderRight}%
@@ -94,7 +95,7 @@ export function borderRadiusGenerator(
   getOutputElement.style.placeItems = 'center';
 
   const values = {
-    BorderTop: borderTop.value,
+    borderTop: borderTop.value,
     borderLeft: borderLeft.value,
     borderRight: borderRight.value,
     borderBottom: borderBottom.value,
@@ -104,12 +105,11 @@ export function borderRadiusGenerator(
 }
 
 export function addBorderRadiusListener() {
-  const borderRadiusGenerator = (
+  const setBorderRadiusPreview = (
     borderTop: HTMLInputElement,
-    borderLeft: HTMLInputElement,
     borderBottom: HTMLInputElement,
-    borderRight: HTMLInputElement,
-    borderRadiusPreview: HTMLElement
+    borderLeft: HTMLInputElement,
+    borderRight: HTMLInputElement
   ) => {
     borderRadiusPreview.style.borderRadius = `
     ${borderTop.value}% ${100 - Number(borderTop.value)}%
@@ -119,20 +119,21 @@ export function addBorderRadiusListener() {
   };
 
   borderRadiusInputs.forEach((inputElement) => {
-    inputElement.addEventListener('input', () =>
-      borderRadiusGenerator(
-        borderTop,
-        borderLeft,
-        borderBottom,
-        borderRight,
-        borderRadiusPreview
-      )
-    );
+    inputElement.addEventListener('input', () => {
+      const values = {
+        borderTop: borderTop.value,
+        borderLeft: borderLeft.value,
+        borderRight: borderRight.value,
+        borderBottom: borderBottom.value,
+      };
+      setBorderRadiusPreview(borderTop, borderBottom, borderLeft, borderRight);
+
+      setQueryParam('values', JSON.stringify(values));
+    });
   });
 }
 
 // reset the values of all target fields
-
 function resetValues() {
   const {inputs} = getAllFields(attribute);
 
@@ -145,10 +146,11 @@ function resetValues() {
 
     getResetButton(attribute).classList.remove('reset-show');
   });
+
+  deleteQueryParam('values');
 }
 
 // get values from all targets to get notified when values change.
-
 function getValues() {
   const {inputs} = getAllFields(attribute);
 
@@ -171,3 +173,16 @@ function tailwindHandler() {
     'success'
   );
 }
+
+export const applyBorderRadiusValues = (values: Values) => {
+  borderTop.value = values.borderTop;
+  borderLeft.value = values.borderLeft;
+  borderRight.value = values.borderRight;
+  borderBottom.value = values.borderBottom;
+
+  borderRadiusPreview.style.borderRadius = `
+    ${borderTop.value}% ${100 - Number(borderTop.value)}%
+    ${borderBottom.value}% ${100 - Number(borderBottom.value)}% /
+    ${borderLeft.value}% ${borderRight.value}%
+    ${100 - Number(borderRight.value)}% ${100 - Number(borderLeft.value)}%`;
+};

@@ -1,39 +1,40 @@
 import {
-  getAllInputElements,
-  getCopyCodeButton,
-  getInputText,
-  getNewColorButton,
-  getOutput,
-  getPNGButton,
-  getRange,
-  getRemoveNewColorButton,
-  getResultPage,
-  getSVGButton,
-  getResetButton,
-  getDegreeSpanElement,
-  getGradientPreview,
-  getTailwindButton,
-  getCssOrTailwindButton,
-  getCssOrTailwindDropdown,
-  getPngOrSvgButton,
-  getPngOrSvgDropdown,
-  getOpenSideBarButton,
-} from '../lib/getElements';
-import {
+  addEventListenerToTheNewColorPicker,
+  addNewColorPicker,
+  closeDropdown,
   copyCSSCodeToClipboard,
-  showPopup,
+  copyTailwindCodeToClipboard,
   downloadPNG,
   downloadSVG,
-  triggerEmptyAnimation,
-  whatColorButtonShouldShow,
-  addNewColorPicker,
+  getColorsValue,
+  inputEventListner,
   removeColorPicker,
   setGradientDegreeValue,
-  createGradientPreview,
-  getColorsValue,
-  copyTailwindCodeToClipboard,
-  closeDropdown,
+  showPopup,
+  triggerEmptyAnimation,
+  whatColorButtonShouldShow,
 } from '../lib/packages/utils';
+import {
+  getAllInputElements,
+  getCopyCodeButton,
+  getCssOrTailwindButton,
+  getCssOrTailwindDropdown,
+  getDegreeSpanElement,
+  getGradientPreview,
+  getInputText,
+  getNewColorButton,
+  getOpenSideBarButton,
+  getOutput,
+  getPNGButton,
+  getPngOrSvgButton,
+  getPngOrSvgDropdown,
+  getRange,
+  getRemoveNewColorButton,
+  getResetButton,
+  getResultPage,
+  getSVGButton,
+  getTailwindButton,
+} from '../lib/getElements';
 
 type Values = {
   degree: string;
@@ -41,7 +42,7 @@ type Values = {
 
 const attribute = 'gradient-text';
 
-let gradientTextInputs = getAllInputElements(attribute);
+const gradientTextInputs = getAllInputElements(attribute);
 
 const getNewColorButtonElement = getNewColorButton(attribute);
 const getRemoveColorButtonElement = getRemoveNewColorButton(attribute);
@@ -182,59 +183,42 @@ export function addGradientTextListener() {
 
   getNewColorButtonElement.addEventListener('click', () => {
     addNewColorPicker(attribute);
-    addEventListenerToTheNewColorPicker();
+    addEventListenerToTheNewColorPicker(attribute);
   });
 
   getRemoveColorButtonElement.addEventListener('click', () => {
     removeColorPicker(attribute);
-    addEventListenerToTheNewColorPicker();
+    addEventListenerToTheNewColorPicker(attribute);
   });
 
-  inputEventListner();
+  inputEventListner(attribute);
 
   setGradientDegreeValue(getDegreeElement);
 }
 
-function addEventListenerToTheNewColorPicker() {
-  gradientTextInputs = getAllInputElements(attribute);
-  inputEventListner();
-  if (resetButton.classList.contains('reset-show')) return;
-  resetButton.classList.add('reset-show');
-}
-
-function inputEventListner() {
-  gradientTextInputs.forEach((inputElement) => {
-    inputElement.addEventListener('input', () => {
-      createGradientPreview(getDegreeElement, attribute);
-    });
-  });
-}
-
 // reset the values of all target fields
-function resetValues() {
+
+resetButton.addEventListener('click', () => {
   const colorInput: HTMLInputElement[] = [...new Set([])];
+  resetButton.classList.remove('reset-show');
+  getDegreeSpanElement(attribute).innerHTML = 'deg';
 
-  resetButton.addEventListener('click', () => {
-    resetButton.classList.remove('reset-show');
-    getDegreeSpanElement(attribute).innerHTML = 'deg';
+  getGradientPreview(attribute).style.background = '';
 
-    getGradientPreview(attribute).style.background = '';
+  gradientTextInputs.forEach((input) => {
+    input.value = input.defaultValue;
 
-    gradientTextInputs.forEach((input) => {
-      input.value = input.defaultValue;
-
-      if (input.id.includes('color')) {
-        colorInput.push(input);
-      }
-    });
-
-    if (colorInput.length > 2) {
-      for (let i = 2; i < colorInput.length; i++) {
-        removeColorPicker(attribute);
-      }
+    if (input.id.includes('color')) {
+      colorInput.push(input);
     }
   });
-}
+
+  if (colorInput.length > 2) {
+    for (let i = 2; i < colorInput.length; i++) {
+      removeColorPicker(attribute);
+    }
+  }
+});
 
 // get values from all targets to get notified when values change.
 
@@ -250,7 +234,6 @@ function getValues() {
     });
   });
 }
-resetValues();
 getValues();
 
 // Tailwind codecopy handler

@@ -1,7 +1,15 @@
-import copy from 'copy-to-clipboard';
+import {
+  closeDropdown,
+  setGradientDegreeValue,
+  showPopup,
+  slideIn,
+} from '../lib/packages/utils';
+import {deleteQueryParam, setQueryParam} from '../lib/packages/helpers';
 import {
   getAllFields,
   getCopyCodeButton,
+  getCssOrTailwindButton,
+  getCssOrTailwindDropdown,
   getDegreeSpanElement,
   getInputSpinner,
   getOutput,
@@ -12,15 +20,9 @@ import {
   getResultPage,
   getStyleSheet,
   getTailwindButton,
-  getCssOrTailwindButton,
-  getCssOrTailwindDropdown,
 } from '../lib/getElements';
-import {
-  setGradientDegreeValue,
-  showPopup,
-  slideIn,
-  closeDropdown,
-} from '../lib/packages/utils';
+
+import copy from 'copy-to-clipboard';
 
 let initial_length = 0;
 // let rule_added = false;
@@ -74,13 +76,17 @@ export function animationGenerator(type: 'newResults' | 'oldResults' | null) {
 
   if (getOutputElement === null || type === 'oldResults') return;
 
-  let i = 0;
+  let selectedIndex = 0;
 
-  for (i = 0; i < getRadioButtonSetElement.length; i++)
-    if (getRadioButtonSetElement[i].checked) break;
+  for (let i = 0; i < getRadioButtonSetElement.length; i++) {
+    if (getRadioButtonSetElement[i].checked) {
+      selectedIndex = i;
+      break;
+    }
+  }
 
   const values: Values = {
-    type: getRadioButtonSetElement[i].value,
+    type: getRadioButtonSetElement[selectedIndex].value,
     degree: getDegreeElement.value,
     duration: duration.value,
   };
@@ -127,6 +133,8 @@ export function displayAnimationPreview() {
       degree: getDegreeElement.value,
       duration: duration.value,
     };
+
+    setQueryParam('values', JSON.stringify(values));
 
     // only updating preview animation if no current animation is running
     preview.onanimationend = () => {
@@ -318,6 +326,8 @@ function resetValues() {
     getDegreeSpanElement(attribute).innerHTML = 'deg';
     getResetButton(attribute).classList.remove('reset-show');
   });
+
+  deleteQueryParam('values');
 }
 
 // get values from all targets to get notified when values change.
@@ -358,3 +368,24 @@ function manageTailwindAnimation(values: Values) {
     tailwindCss = ``;
   }
 }
+
+export const applyAnimationValues = (values: Values) => {
+  const duration = getInputSpinner(attribute);
+  const unitDisplayElement = document.querySelector(
+    '.unit-display.animation'
+  ) as HTMLElement;
+
+  for (let i = 0; i < getRadioButtonSetElement.length; i++) {
+    const selectedRadioElemeent = getRadioButtonSetElement[i];
+    if (selectedRadioElemeent.value === values.type) {
+      selectedRadioElemeent.checked = true;
+      break;
+    }
+  }
+
+  getDegreeElement.value = values.degree;
+  unitDisplayElement.innerText = `${values.degree}deg`;
+  duration.value = values.duration;
+
+  displayAnimationPreview();
+};
