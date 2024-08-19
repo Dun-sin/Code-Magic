@@ -83,6 +83,63 @@ function copyHandler(values: Values) {
 }
 
 export function scrollGenerator() {
+  const previewElement = document.getElementById(
+    'scroll-preview'
+  ) as HTMLElement;
+
+  function applyPreviewStyles(values: Values) {
+    if (!previewElement) return;
+
+    // Apply styles directly to the preview element
+    previewElement.style.setProperty('--scrollbar-width', `${values.width}px`);
+    previewElement.style.setProperty(
+      '--scrollbar-track-color',
+      values.trackColor
+    );
+    previewElement.style.setProperty(
+      '--scrollbar-thumb-color',
+      values.thumbColor
+    );
+    previewElement.style.setProperty(
+      '--scrollbar-thumb-hover-color',
+      values.hoverColor
+    );
+
+    const styleTag = document.createElement('style');
+    styleTag.id = 'scroll-preview-style';
+    styleTag.innerHTML = `
+      #scroll-preview::-webkit-scrollbar {
+        width: var(--scrollbar-width);
+      }
+      #scroll-preview::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px var(--scrollbar-track-color);
+      }
+      #scroll-preview::-webkit-scrollbar-thumb {
+        background: var(--scrollbar-thumb-color);
+      }
+      #scroll-preview::-webkit-scrollbar-thumb:hover {
+        background: var(--scrollbar-thumb-hover-color);
+      }
+    `;
+
+    document.head.appendChild(styleTag);
+  }
+
+  function updatePreview() {
+    applyPreviewStyles({
+      trackColor: trackColor.value,
+      thumbColor: thumbColor.value,
+      hoverColor: hoverColor.value,
+      width: width.value,
+    });
+  }
+
+  [trackColor, thumbColor, hoverColor, width].forEach((input) => {
+    input?.addEventListener('input', updatePreview);
+  });
+
+  updatePreview();
+
   getCodeButton?.addEventListener('click', () =>
     copyHandler({
       trackColor: trackColor.value,

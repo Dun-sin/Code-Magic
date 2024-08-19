@@ -1241,6 +1241,14 @@ input[type='range']:focus::-moz-range-thumb {
   color: var(--text-color);
 }
 
+#scroll-preview {
+  width: 300px;
+  height: 200px;
+  overflow-y: scroll;
+  border: 1px solid var(--text-color);
+  padding: 12px;
+}
+
 /* FOOTER SECTION */
 
 footer {
