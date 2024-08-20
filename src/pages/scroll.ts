@@ -5,6 +5,7 @@ import {
   getCopyCodeButton,
   getCssOrTailwindButton,
   getCssOrTailwindDropdown,
+  getScrollPreview,
 } from '../lib/getElements';
 import {closeDropdown, showPopup} from '../lib/packages/utils';
 
@@ -83,9 +84,7 @@ function copyHandler(values: Values) {
 }
 
 export function scrollGenerator() {
-  const previewElement = document.getElementById(
-    'scroll-preview'
-  ) as HTMLElement;
+  const previewElement = getScrollPreview();
 
   function applyPreviewStyles(values: Values) {
     if (!previewElement) return;
