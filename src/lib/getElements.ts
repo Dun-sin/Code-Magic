@@ -204,3 +204,6 @@ export const getGridFields = (
 
 export const getGridPreview = (attribute: string): HTMLElement =>
   document.getElementById(`${attribute}-preview`) as HTMLElement;
+
+export const getScrollPreview = (): HTMLElement =>
+  document.getElementById('scroll-preview') as HTMLElement;
